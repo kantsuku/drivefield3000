@@ -1,0 +1,86 @@
+[
+  {
+    "Category": "Neuro",
+    "Code": "D",
+    "Label_EN": "D",
+    "Label_JP": "ドーパミン",
+    "Description": "新規性・可能性"
+  },
+  {
+    "Category": "Neuro",
+    "Code": "S",
+    "Label_EN": "S",
+    "Label_JP": "セロトニン",
+    "Description": "理解・秩序"
+  },
+  {
+    "Category": "Neuro",
+    "Code": "O",
+    "Label_EN": "O",
+    "Label_JP": "オキシトシン",
+    "Description": "共感・接続"
+  },
+  {
+    "Category": "Neuro",
+    "Code": "N",
+    "Label_EN": "N",
+    "Label_JP": "ノルアドレナリン",
+    "Description": "緊張・集中"
+  },
+  {
+    "Category": "Neuro",
+    "Code": "E",
+    "Label_EN": "E",
+    "Label_JP": "エンドルフィン",
+    "Description": "快感・没入"
+  },
+  {
+    "Category": "Bias",
+    "Code": "Single",
+    "Label_EN": "Single",
+    "Label_JP": "Single",
+    "Description": "1位特化。トップドライブが強烈で、入れば一気に回るが外すと止まりやすい。"
+  },
+  {
+    "Category": "Bias",
+    "Code": "Dual",
+    "Label_EN": "Dual",
+    "Label_JP": "Dual",
+    "Description": "1位と2位が高い。点火と推進の掛け算で強く回る、最も“らしさ”が出やすい型。"
+  },
+  {
+    "Category": "Bias",
+    "Code": "Trinity",
+    "Label_EN": "Trinity",
+    "Label_JP": "Trinity",
+    "Description": "上位3つが高い。複雑だがハマると強い。覚醒条件が揃うと一段深い回転に入る。"
+  },
+  {
+    "Category": "Bias",
+    "Code": "Flat",
+    "Label_EN": "Flat",
+    "Label_JP": "Flat",
+    "Description": "全体が比較的近い。万能だが尖りづらい。環境適応力は高いが起動条件が曖昧になりやすい。"
+  },
+  {
+    "Category": "Output",
+    "Code": "Light",
+    "Label_EN": "Light",
+    "Label_JP": "Light",
+    "Description": "低〜中出力。小さく起動しやすく、無理なく回しやすい。"
+  },
+  {
+    "Category": "Output",
+    "Code": "Middle",
+    "Label_EN": "Middle",
+    "Label_JP": "Middle",
+    "Description": "中出力。再現性と推進力のバランスが良い。"
+  },
+  {
+    "Category": "Output",
+    "Code": "Over",
+    "Label_EN": "Over",
+    "Label_JP": "Over",
+    "Description": "高出力。ハマると強いが、外すとDrainも大きい。"
+  }
+]
