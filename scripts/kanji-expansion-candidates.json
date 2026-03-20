@@ -1,0 +1,730 @@
+[
+  {
+    "kanji": "一",
+    "reading": "いち",
+    "category": "数字・量",
+    "image": "始まりの一手、唯一無二",
+    "memo": "一虎、一閃などの組み合わせに強い"
+  },
+  {
+    "kanji": "二",
+    "reading": "に",
+    "category": "数字・量",
+    "image": "対となる力、双璧",
+    "memo": "二刃、二龍などの組み合わせに"
+  },
+  {
+    "kanji": "三",
+    "reading": "さん",
+    "category": "数字・量",
+    "image": "三位一体、完全性",
+    "memo": "三鷹、三煌などの組み合わせに"
+  },
+  {
+    "kanji": "四",
+    "reading": "し",
+    "category": "数字・量",
+    "image": "四方を統べる力",
+    "memo": "四神、四天などの組み合わせに"
+  },
+  {
+    "kanji": "五",
+    "reading": "ご",
+    "category": "数字・量",
+    "image": "五行の調和",
+    "memo": "五芒、五玄などの組み合わせに"
+  },
+  {
+    "kanji": "六",
+    "reading": "ろく",
+    "category": "数字・量",
+    "image": "六道を超越",
+    "memo": "六翼、六麟などの組み合わせに"
+  },
+  {
+    "kanji": "七",
+    "reading": "しち",
+    "category": "数字・量",
+    "image": "七つの秘術",
+    "memo": "七星、七煌などの組み合わせに"
+  },
+  {
+    "kanji": "八",
+    "reading": "はち",
+    "category": "数字・量",
+    "image": "八方への拡散",
+    "memo": "八雲、八刃などの組み合わせに"
+  },
+  {
+    "kanji": "九",
+    "reading": "きゅう",
+    "category": "数字・量",
+    "image": "極限への到達",
+    "memo": "九鳳、九煌などの組み合わせに"
+  },
+  {
+    "kanji": "十",
+    "reading": "じゅう",
+    "category": "数字・量",
+    "image": "完成された力",
+    "memo": "十字、十王などの組み合わせに"
+  },
+  {
+    "kanji": "百",
+    "reading": "ひゃく",
+    "category": "数字・量",
+    "image": "百花繚乱の威力",
+    "memo": "百鬼、百煌などの組み合わせに"
+  },
+  {
+    "kanji": "万",
+    "reading": "まん",
+    "category": "数字・量",
+    "image": "万象を包括",
+    "memo": "万雷、万炎などの組み合わせに"
+  },
+  {
+    "kanji": "無",
+    "reading": "む",
+    "category": "数字・量",
+    "image": "無限の可能性",
+    "memo": "無刃、無影などの組み合わせに"
+  },
+  {
+    "kanji": "双",
+    "reading": "そう",
+    "category": "数字・量",
+    "image": "対となる双璧",
+    "memo": "双牙、双翼などの組み合わせに"
+  },
+  {
+    "kanji": "風",
+    "reading": "ふう",
+    "category": "天候・気象",
+    "image": "疾風怒濤の勢い",
+    "memo": "風神、風刃などの組み合わせに"
+  },
+  {
+    "kanji": "雨",
+    "reading": "う",
+    "category": "天候・気象",
+    "image": "恵みと浄化の雨",
+    "memo": "雨竜、雨音などの組み合わせに"
+  },
+  {
+    "kanji": "雪",
+    "reading": "ゆき",
+    "category": "天候・気象",
+    "image": "純白の静寂",
+    "memo": "雪華、雪麟などの組み合わせに"
+  },
+  {
+    "kanji": "氷",
+    "reading": "ひょう",
+    "category": "天候・気象",
+    "image": "凍てつく絶対零度",
+    "memo": "氷刃、氷煌などの組み合わせに"
+  },
+  {
+    "kanji": "霜",
+    "reading": "しも",
+    "category": "天候・気象",
+    "image": "冷厳な美しさ",
+    "memo": "霜月、霜刃などの組み合わせに"
+  },
+  {
+    "kanji": "露",
+    "reading": "つゆ",
+    "category": "天候・気象",
+    "image": "儚く美しい瞬間",
+    "memo": "露華、露玉などの組み合わせに"
+  },
+  {
+    "kanji": "嵐",
+    "reading": "あらし",
+    "category": "天候・気象",
+    "image": "破壊と再生の嵐",
+    "memo": "嵐王、嵐牙などの組み合わせに"
+  },
+  {
+    "kanji": "雹",
+    "reading": "ひょう",
+    "category": "天候・気象",
+    "image": "激しい天の怒り",
+    "memo": "雹撃、雹煌などの組み合わせに"
+  },
+  {
+    "kanji": "虹",
+    "reading": "にじ",
+    "category": "天候・気象",
+    "image": "七色の架け橋",
+    "memo": "虹翼、虹煌などの組み合わせに"
+  },
+  {
+    "kanji": "雲",
+    "reading": "うん",
+    "category": "天候・気象",
+    "image": "天空を舞う雲海",
+    "memo": "雲龍、雲海などの組み合わせに"
+  },
+  {
+    "kanji": "春",
+    "reading": "はる",
+    "category": "時間・季節",
+    "image": "生命力溢れる季節",
+    "memo": "春嵐、春華などの組み合わせに"
+  },
+  {
+    "kanji": "夏",
+    "reading": "なつ",
+    "category": "時間・季節",
+    "image": "燃え上がる情熱",
+    "memo": "夏雷、夏炎などの組み合わせに"
+  },
+  {
+    "kanji": "秋",
+    "reading": "あき",
+    "category": "時間・季節",
+    "image": "実りと哀愁の季節",
+    "memo": "秋月、秋霞などの組み合わせに"
+  },
+  {
+    "kanji": "冬",
+    "reading": "ふゆ",
+    "category": "時間・季節",
+    "image": "静寂と純粋性",
+    "memo": "冬嵐、冬煌などの組み合わせに"
+  },
+  {
+    "kanji": "朝",
+    "reading": "あさ",
+    "category": "時間・季節",
+    "image": "希望の始まり",
+    "memo": "朝日、朝霞などの組み合わせに"
+  },
+  {
+    "kanji": "昼",
+    "reading": "ひる",
+    "category": "時間・季節",
+    "image": "陽光の頂点",
+    "memo": "昼月、昼星などの組み合わせに"
+  },
+  {
+    "kanji": "夜",
+    "reading": "よる",
+    "category": "時間・季節",
+    "image": "神秘と静寂の時",
+    "memo": "夜王、夜華などの組み合わせに"
+  },
+  {
+    "kanji": "夕",
+    "reading": "ゆう",
+    "category": "時間・季節",
+    "image": "黄昏の美しさ",
+    "memo": "夕霞、夕月などの組み合わせに"
+  },
+  {
+    "kanji": "永",
+    "reading": "えい",
+    "category": "時間・季節",
+    "image": "永遠不変の力",
+    "memo": "永劫、永煌などの組み合わせに"
+  },
+  {
+    "kanji": "瞬",
+    "reading": "しゅん",
+    "category": "時間・季節",
+    "image": "一瞬の閃光",
+    "memo": "瞬煌、瞬刃などの組み合わせに"
+  },
+  {
+    "kanji": "刻",
+    "reading": "こく",
+    "category": "時間・季節",
+    "image": "時を刻む力",
+    "memo": "刻印、刻煌などの組み合わせに"
+  },
+  {
+    "kanji": "山",
+    "reading": "やま",
+    "category": "地形・自然",
+    "image": "不動の威厳",
+    "memo": "山王、山煌などの組み合わせに"
+  },
+  {
+    "kanji": "川",
+    "reading": "かわ",
+    "category": "地形・自然",
+    "image": "流れる清らかな力",
+    "memo": "川音、川煌などの組み合わせに"
+  },
+  {
+    "kanji": "海",
+    "reading": "うみ",
+    "category": "地形・自然",
+    "image": "無限の包容力",
+    "memo": "海王、海煌などの組み合わせに"
+  },
+  {
+    "kanji": "谷",
+    "reading": "たに",
+    "category": "地形・自然",
+    "image": "深い静寂の場",
+    "memo": "谷音、谷霧などの組み合わせに"
+  },
+  {
+    "kanji": "峠",
+    "reading": "とうげ",
+    "category": "地形・自然",
+    "image": "越えるべき試練",
+    "memo": "峠風、峠雲などの組み合わせに"
+  },
+  {
+    "kanji": "野",
+    "reading": "の",
+    "category": "地形・自然",
+    "image": "広大な自由",
+    "memo": "野風、野煌などの組み合わせに"
+  },
+  {
+    "kanji": "原",
+    "reading": "はら",
+    "category": "地形・自然",
+    "image": "始原の大地",
+    "memo": "原野、原煌などの組み合わせに"
+  },
+  {
+    "kanji": "湖",
+    "reading": "こ",
+    "category": "地形・自然",
+    "image": "静謐な湖面",
+    "memo": "湖月、湖煌などの組み合わせに"
+  },
+  {
+    "kanji": "崖",
+    "reading": "がけ",
+    "category": "地形・自然",
+    "image": "断絶と決意",
+    "memo": "崖風、崖煌などの組み合わせに"
+  },
+  {
+    "kanji": "滝",
+    "reading": "たき",
+    "category": "地形・自然",
+    "image": "轟く水の力",
+    "memo": "滝音、滝煌などの組み合わせに"
+  },
+  {
+    "kanji": "桜",
+    "reading": "さくら",
+    "category": "植物",
+    "image": "散りゆく美しさ",
+    "memo": "桜花、桜煌などの組み合わせに"
+  },
+  {
+    "kanji": "梅",
+    "reading": "うめ",
+    "category": "植物",
+    "image": "寒中に咲く気品",
+    "memo": "梅花、梅煌などの組み合わせに"
+  },
+  {
+    "kanji": "竹",
+    "reading": "たけ",
+    "category": "植物",
+    "image": "しなやかな強靭さ",
+    "memo": "竹風、竹煌などの組み合わせに"
+  },
+  {
+    "kanji": "松",
+    "reading": "まつ",
+    "category": "植物",
+    "image": "不老不死の象徴",
+    "memo": "松風、松煌などの組み合わせに"
+  },
+  {
+    "kanji": "藤",
+    "reading": "ふじ",
+    "category": "植物",
+    "image": "高貴な紫の花房",
+    "memo": "藤花、藤煌などの組み合わせに"
+  },
+  {
+    "kanji": "蓮",
+    "reading": "れん",
+    "category": "植物",
+    "image": "清浄な覚醒",
+    "memo": "蓮華、蓮煌などの組み合わせに"
+  },
+  {
+    "kanji": "柳",
+    "reading": "やなぎ",
+    "category": "植物",
+    "image": "風に揺れる優雅さ",
+    "memo": "柳風、柳煌などの組み合わせに"
+  },
+  {
+    "kanji": "杉",
+    "reading": "すぎ",
+    "category": "植物",
+    "image": "天に伸びる直截",
+    "memo": "杉風、杉煌などの組み合わせに"
+  },
+  {
+    "kanji": "楓",
+    "reading": "かえで",
+    "category": "植物",
+    "image": "紅葉の炎",
+    "memo": "楓火、楓煌などの組み合わせに"
+  },
+  {
+    "kanji": "椿",
+    "reading": "つばき",
+    "category": "植物",
+    "image": "冬を彩る鮮烈",
+    "memo": "椿花、椿煌などの組み合わせに"
+  },
+  {
+    "kanji": "菊",
+    "reading": "きく",
+    "category": "植物",
+    "image": "高潔な気品",
+    "memo": "菊花、菊煌などの組み合わせに"
+  },
+  {
+    "kanji": "蘭",
+    "reading": "らん",
+    "category": "植物",
+    "image": "幽香漂う気品",
+    "memo": "蘭華、蘭煌などの組み合わせに"
+  },
+  {
+    "kanji": "金",
+    "reading": "きん",
+    "category": "金属・鉱物",
+    "image": "輝く王者の金属",
+    "memo": "金剛、金煌などの組み合わせに"
+  },
+  {
+    "kanji": "銀",
+    "reading": "ぎん",
+    "category": "金属・鉱物",
+    "image": "月光のような輝き",
+    "memo": "銀月、銀煌などの組み合わせに"
+  },
+  {
+    "kanji": "銅",
+    "reading": "どう",
+    "category": "金属・鉱物",
+    "image": "古き良き力強さ",
+    "memo": "銅鐘、銅煌などの組み合わせに"
+  },
+  {
+    "kanji": "鉄",
+    "reading": "てつ",
+    "category": "金属・鉱物",
+    "image": "不屈の強靭さ",
+    "memo": "鉄壁、鉄煌などの組み合わせに"
+  },
+  {
+    "kanji": "玉",
+    "reading": "たま",
+    "category": "金属・鉱物",
+    "image": "完璧な美しさ",
+    "memo": "玉座、玉煌などの組み合わせに"
+  },
+  {
+    "kanji": "石",
+    "reading": "いし",
+    "category": "金属・鉱物",
+    "image": "永劫不変の堅固",
+    "memo": "石柱、石煌などの組み合わせに"
+  },
+  {
+    "kanji": "珠",
+    "reading": "しゅ",
+    "category": "金属・鉱物",
+    "image": "神秘の宝珠",
+    "memo": "珠玉、珠煌などの組み合わせに"
+  },
+  {
+    "kanji": "宝",
+    "reading": "ほう",
+    "category": "金属・鉱物",
+    "image": "至高の価値",
+    "memo": "宝剣、宝煌などの組み合わせに"
+  },
+  {
+    "kanji": "白",
+    "reading": "はく",
+    "category": "色彩",
+    "image": "純白の清浄",
+    "memo": "白虎、白煌などの組み合わせに"
+  },
+  {
+    "kanji": "黒",
+    "reading": "こく",
+    "category": "色彩",
+    "image": "深淵の闇",
+    "memo": "黒龍、黒煌などの組み合わせに"
+  },
+  {
+    "kanji": "蒼",
+    "reading": "そう",
+    "category": "色彩",
+    "image": "深い青の神秘",
+    "memo": "蒼天、蒼煌などの組み合わせに"
+  },
+  {
+    "kanji": "碧",
+    "reading": "へき",
+    "category": "色彩",
+    "image": "青緑の透明感",
+    "memo": "碧海、碧煌などの組み合わせに"
+  },
+  {
+    "kanji": "朱",
+    "reading": "しゅ",
+    "category": "色彩",
+    "image": "鮮やかな赤",
+    "memo": "朱雀、朱煌などの組み合わせに"
+  },
+  {
+    "kanji": "翠",
+    "reading": "すい",
+    "category": "色彩",
+    "image": "翡翠の緑",
+    "memo": "翠玉、翠煌などの組み合わせに"
+  },
+  {
+    "kanji": "紫",
+    "reading": "し",
+    "category": "色彩",
+    "image": "高貴な紫",
+    "memo": "紫雲、紫煌などの組み合わせに"
+  },
+  {
+    "kanji": "金",
+    "reading": "きん",
+    "category": "色彩",
+    "image": "黄金の輝き",
+    "memo": "金光、金煌などの組み合わせに"
+  },
+  {
+    "kanji": "銀",
+    "reading": "ぎん",
+    "category": "色彩",
+    "image": "銀色の光沢",
+    "memo": "銀光、銀煌などの組み合わせに"
+  },
+  {
+    "kanji": "剣",
+    "reading": "けん",
+    "category": "道具・武器",
+    "image": "究極の刀剣",
+    "memo": "剣王、剣煌などの組み合わせに"
+  },
+  {
+    "kanji": "弓",
+    "reading": "きゅう",
+    "category": "道具・武器",
+    "image": "遠距離の精密",
+    "memo": "弓月、弓煌などの組み合わせに"
+  },
+  {
+    "kanji": "矢",
+    "reading": "や",
+    "category": "道具・武器",
+    "image": "一直線の意志",
+    "memo": "矢風、矢煌などの組み合わせに"
+  },
+  {
+    "kanji": "槍",
+    "reading": "そう",
+    "category": "道具・武器",
+    "image": "貫く一点突破",
+    "memo": "槍王、槍煌などの組み合わせに"
+  },
+  {
+    "kanji": "鍵",
+    "reading": "けん",
+    "category": "道具・武器",
+    "image": "秘密を開く力",
+    "memo": "鍵月、鍵煌などの組み合わせに"
+  },
+  {
+    "kanji": "笛",
+    "reading": "てき",
+    "category": "道具・武器",
+    "image": "魂を揺らす音色",
+    "memo": "笛音、笛煌などの組み合わせに"
+  },
+  {
+    "kanji": "琴",
+    "reading": "きん",
+    "category": "道具・武器",
+    "image": "天上の調べ",
+    "memo": "琴音、琴煌などの組み合わせに"
+  },
+  {
+    "kanji": "弦",
+    "reading": "げん",
+    "category": "道具・武器",
+    "image": "張り詰めた緊張",
+    "memo": "弦月、弦煌などの組み合わせに"
+  },
+  {
+    "kanji": "糸",
+    "reading": "し",
+    "category": "道具・武器",
+    "image": "繋がりの絆",
+    "memo": "糸月、糸煌などの組み合わせに"
+  },
+  {
+    "kanji": "鈴",
+    "reading": "れい",
+    "category": "道具・武器",
+    "image": "清らかな響き",
+    "memo": "鈴音、鈴煌などの組み合わせに"
+  },
+  {
+    "kanji": "子",
+    "reading": "ね",
+    "category": "干支",
+    "image": "鼠の機敏さ",
+    "memo": "子月、子煌などの組み合わせに"
+  },
+  {
+    "kanji": "丑",
+    "reading": "うし",
+    "category": "干支",
+    "image": "牛の忍耐力",
+    "memo": "丑月、丑煌などの組み合わせに"
+  },
+  {
+    "kanji": "寅",
+    "reading": "とら",
+    "category": "干支",
+    "image": "虎の威厳",
+    "memo": "寅月、寅煌などの組み合わせに"
+  },
+  {
+    "kanji": "卯",
+    "reading": "う",
+    "category": "干支",
+    "image": "兎の跳躍力",
+    "memo": "卯月、卯煌などの組み合わせに"
+  },
+  {
+    "kanji": "辰",
+    "reading": "たつ",
+    "category": "干支",
+    "image": "龍の神威",
+    "memo": "辰月、辰煌などの組み合わせに"
+  },
+  {
+    "kanji": "巳",
+    "reading": "み",
+    "category": "干支",
+    "image": "蛇の神秘",
+    "memo": "巳月、巳煌などの組み合わせに"
+  },
+  {
+    "kanji": "午",
+    "reading": "うま",
+    "category": "干支",
+    "image": "馬の駿足",
+    "memo": "午月、午煌などの組み合わせに"
+  },
+  {
+    "kanji": "未",
+    "reading": "ひつじ",
+    "category": "干支",
+    "image": "羊の温和",
+    "memo": "未月、未煌などの組み合わせに"
+  },
+  {
+    "kanji": "申",
+    "reading": "さる",
+    "category": "干支",
+    "image": "猿の知恵",
+    "memo": "申月、申煌などの組み合わせに"
+  },
+  {
+    "kanji": "酉",
+    "reading": "とり",
+    "category": "干支",
+    "image": "鶏の勤勉",
+    "memo": "酉月、酉煌などの組み合わせに"
+  },
+  {
+    "kanji": "戌",
+    "reading": "いぬ",
+    "category": "干支",
+    "image": "犬の忠義",
+    "memo": "戌月、戌煌などの組み合わせに"
+  },
+  {
+    "kanji": "亥",
+    "reading": "い",
+    "category": "干支",
+    "image": "猪の勇猛",
+    "memo": "亥月、亥煌などの組み合わせに"
+  },
+  {
+    "kanji": "角",
+    "reading": "かく",
+    "category": "形・幾何",
+    "image": "鋭い角度",
+    "memo": "角月、角煌などの組み合わせに"
+  },
+  {
+    "kanji": "弧",
+    "reading": "こ",
+    "category": "形・幾何",
+    "image": "美しい曲線",
+    "memo": "弧月、弧煌などの組み合わせに"
+  },
+  {
+    "kanji": "面",
+    "reading": "めん",
+    "category": "形・幾何",
+    "image": "平らな表面",
+    "memo": "面月、面煌などの組み合わせに"
+  },
+  {
+    "kanji": "点",
+    "reading": "てん",
+    "category": "形・幾何",
+    "image": "一点の集中",
+    "memo": "点月、点煌などの組み合わせに"
+  },
+  {
+    "kanji": "柱",
+    "reading": "ちゅう",
+    "category": "形・幾何",
+    "image": "支える柱",
+    "memo": "柱月、柱煌などの組み合わせに"
+  },
+  {
+    "kanji": "塔",
+    "reading": "とう",
+    "category": "形・幾何",
+    "image": "聳える高塔",
+    "memo": "塔月、塔煌などの組み合わせに"
+  },
+  {
+    "kanji": "球",
+    "reading": "きゅう",
+    "category": "形・幾何",
+    "image": "完全な球体",
+    "memo": "球月、球煌などの組み合わせに"
+  },
+  {
+    "kanji": "方",
+    "reading": "ほう",
+    "category": "形・幾何",
+    "image": "四角の安定",
+    "memo": "方月、方煌などの組み合わせに"
+  }
+]

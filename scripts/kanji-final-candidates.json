@@ -1,0 +1,608 @@
+[
+  {
+    "kanji": "一",
+    "reading": "いち",
+    "category": "数字・量",
+    "image": "唯一無二の一撃"
+  },
+  {
+    "kanji": "二",
+    "reading": "に",
+    "category": "数字・量",
+    "image": "双剣の二刀流"
+  },
+  {
+    "kanji": "三",
+    "reading": "さん",
+    "category": "数字・量",
+    "image": "三位一体の力"
+  },
+  {
+    "kanji": "七",
+    "reading": "しち",
+    "category": "数字・量",
+    "image": "七つの封印"
+  },
+  {
+    "kanji": "九",
+    "reading": "きゅう",
+    "category": "数字・量",
+    "image": "九天の頂"
+  },
+  {
+    "kanji": "百",
+    "reading": "ひゃく",
+    "category": "数字・量",
+    "image": "百戦錬磨"
+  },
+  {
+    "kanji": "万",
+    "reading": "まん",
+    "category": "数字・量",
+    "image": "万象を統べる"
+  },
+  {
+    "kanji": "無",
+    "reading": "む",
+    "category": "数字・量",
+    "image": "無限の可能性"
+  },
+  {
+    "kanji": "双",
+    "reading": "そう",
+    "category": "数字・量",
+    "image": "双翼の戦士"
+  },
+  {
+    "kanji": "風",
+    "reading": "かぜ",
+    "category": "天候・気象",
+    "image": "疾風のように"
+  },
+  {
+    "kanji": "雨",
+    "reading": "あめ",
+    "category": "天候・気象",
+    "image": "雨音の静寂"
+  },
+  {
+    "kanji": "雪",
+    "reading": "ゆき",
+    "category": "天候・気象",
+    "image": "雪原の白刃"
+  },
+  {
+    "kanji": "氷",
+    "reading": "こおり",
+    "category": "天候・気象",
+    "image": "氷結の監獄"
+  },
+  {
+    "kanji": "霜",
+    "reading": "しも",
+    "category": "天候・気象",
+    "image": "霜降りの剣"
+  },
+  {
+    "kanji": "露",
+    "reading": "つゆ",
+    "category": "天候・気象",
+    "image": "露滴の輝き"
+  },
+  {
+    "kanji": "春",
+    "reading": "はる",
+    "category": "時間・季節",
+    "image": "春雷の目覚め"
+  },
+  {
+    "kanji": "夏",
+    "reading": "なつ",
+    "category": "時間・季節",
+    "image": "夏陽の炎"
+  },
+  {
+    "kanji": "秋",
+    "reading": "あき",
+    "category": "時間・季節",
+    "image": "秋霞の幻"
+  },
+  {
+    "kanji": "冬",
+    "reading": "ふゆ",
+    "category": "時間・季節",
+    "image": "冬将軍の威"
+  },
+  {
+    "kanji": "朝",
+    "reading": "あさ",
+    "category": "時間・季節",
+    "image": "朝焼けの誓い"
+  },
+  {
+    "kanji": "夜",
+    "reading": "よる",
+    "category": "時間・季節",
+    "image": "夜闇の支配者"
+  },
+  {
+    "kanji": "永",
+    "reading": "えい",
+    "category": "時間・季節",
+    "image": "永劫の契約"
+  },
+  {
+    "kanji": "瞬",
+    "reading": "しゅん",
+    "category": "時間・季節",
+    "image": "瞬光の一閃"
+  },
+  {
+    "kanji": "刹",
+    "reading": "せつ",
+    "category": "時間・季節",
+    "image": "刹那の決断"
+  },
+  {
+    "kanji": "黎",
+    "reading": "れい",
+    "category": "時間・季節",
+    "image": "黎明の光"
+  },
+  {
+    "kanji": "山",
+    "reading": "やま",
+    "category": "地形・自然",
+    "image": "山岳の王者"
+  },
+  {
+    "kanji": "川",
+    "reading": "かわ",
+    "category": "地形・自然",
+    "image": "川流の導き"
+  },
+  {
+    "kanji": "海",
+    "reading": "うみ",
+    "category": "地形・自然",
+    "image": "海原の覇者"
+  },
+  {
+    "kanji": "谷",
+    "reading": "たに",
+    "category": "地形・自然",
+    "image": "谷間の秘境"
+  },
+  {
+    "kanji": "野",
+    "reading": "の",
+    "category": "地形・自然",
+    "image": "荒野の狼"
+  },
+  {
+    "kanji": "原",
+    "reading": "はら",
+    "category": "地形・自然",
+    "image": "原始の力"
+  },
+  {
+    "kanji": "湖",
+    "reading": "みずうみ",
+    "category": "地形・自然",
+    "image": "湖底の神秘"
+  },
+  {
+    "kanji": "滝",
+    "reading": "たき",
+    "category": "地形・自然",
+    "image": "滝瀑の轟き"
+  },
+  {
+    "kanji": "崖",
+    "reading": "がけ",
+    "category": "地形・自然",
+    "image": "崖際の覚悟"
+  },
+  {
+    "kanji": "桜",
+    "reading": "さくら",
+    "category": "植物",
+    "image": "桜散る美学"
+  },
+  {
+    "kanji": "梅",
+    "reading": "うめ",
+    "category": "植物",
+    "image": "梅花の凛然"
+  },
+  {
+    "kanji": "竹",
+    "reading": "たけ",
+    "category": "植物",
+    "image": "竹林の静寂"
+  },
+  {
+    "kanji": "松",
+    "reading": "まつ",
+    "category": "植物",
+    "image": "松風の調べ"
+  },
+  {
+    "kanji": "蓮",
+    "reading": "はす",
+    "category": "植物",
+    "image": "蓮華の浄化"
+  },
+  {
+    "kanji": "楓",
+    "reading": "かえで",
+    "category": "植物",
+    "image": "楓葉の舞"
+  },
+  {
+    "kanji": "椿",
+    "reading": "つばき",
+    "category": "植物",
+    "image": "椿咲く誓い"
+  },
+  {
+    "kanji": "菊",
+    "reading": "きく",
+    "category": "植物",
+    "image": "菊花の気高さ"
+  },
+  {
+    "kanji": "蘭",
+    "reading": "らん",
+    "category": "植物",
+    "image": "蘭香の気品"
+  },
+  {
+    "kanji": "藤",
+    "reading": "ふじ",
+    "category": "植物",
+    "image": "藤紫の幻想"
+  },
+  {
+    "kanji": "金",
+    "reading": "きん",
+    "category": "金属・鉱物",
+    "image": "黄金の覇道"
+  },
+  {
+    "kanji": "銀",
+    "reading": "ぎん",
+    "category": "金属・鉱物",
+    "image": "白銀の月光"
+  },
+  {
+    "kanji": "鉄",
+    "reading": "てつ",
+    "category": "金属・鉱物",
+    "image": "鋼鉄の意志"
+  },
+  {
+    "kanji": "玉",
+    "reading": "たま",
+    "category": "金属・鉱物",
+    "image": "宝玉の輝き"
+  },
+  {
+    "kanji": "石",
+    "reading": "いし",
+    "category": "金属・鉱物",
+    "image": "磐石の守り"
+  },
+  {
+    "kanji": "珠",
+    "reading": "しゅ",
+    "category": "金属・鉱物",
+    "image": "真珠の光沢"
+  },
+  {
+    "kanji": "白",
+    "reading": "はく",
+    "category": "色彩",
+    "image": "純白の正義"
+  },
+  {
+    "kanji": "黒",
+    "reading": "こく",
+    "category": "色彩",
+    "image": "漆黒の深淵"
+  },
+  {
+    "kanji": "蒼",
+    "reading": "そう",
+    "category": "色彩",
+    "image": "蒼穹の果て"
+  },
+  {
+    "kanji": "碧",
+    "reading": "へき",
+    "category": "色彩",
+    "image": "碧海の神秘"
+  },
+  {
+    "kanji": "朱",
+    "reading": "しゅ",
+    "category": "色彩",
+    "image": "朱雀の炎"
+  },
+  {
+    "kanji": "翠",
+    "reading": "すい",
+    "category": "色彩",
+    "image": "翠玉の煌き"
+  },
+  {
+    "kanji": "紫",
+    "reading": "し",
+    "category": "色彩",
+    "image": "紫電の閃光"
+  },
+  {
+    "kanji": "剣",
+    "reading": "けん",
+    "category": "道具・武器",
+    "image": "神剣の威光"
+  },
+  {
+    "kanji": "弓",
+    "reading": "ゆみ",
+    "category": "道具・武器",
+    "image": "神弓の射手"
+  },
+  {
+    "kanji": "矢",
+    "reading": "や",
+    "category": "道具・武器",
+    "image": "必中の一矢"
+  },
+  {
+    "kanji": "槍",
+    "reading": "やり",
+    "category": "道具・武器",
+    "image": "破魔の槍"
+  },
+  {
+    "kanji": "弦",
+    "reading": "げん",
+    "category": "道具・武器",
+    "image": "弦月の弓"
+  },
+  {
+    "kanji": "鈴",
+    "reading": "すず",
+    "category": "道具・武器",
+    "image": "風鈴の音色"
+  },
+  {
+    "kanji": "琴",
+    "reading": "きん",
+    "category": "道具・武器",
+    "image": "天琴の調べ"
+  },
+  {
+    "kanji": "笛",
+    "reading": "ふえ",
+    "category": "道具・武器",
+    "image": "魔笛の旋律"
+  },
+  {
+    "kanji": "鍵",
+    "reading": "かぎ",
+    "category": "道具・武器",
+    "image": "封印の鍵"
+  },
+  {
+    "kanji": "糸",
+    "reading": "いと",
+    "category": "道具・武器",
+    "image": "運命の糸"
+  },
+  {
+    "kanji": "寅",
+    "reading": "とら",
+    "category": "干支",
+    "image": "白虎の威"
+  },
+  {
+    "kanji": "卯",
+    "reading": "う",
+    "category": "干支",
+    "image": "玉兎の跳躍"
+  },
+  {
+    "kanji": "辰",
+    "reading": "たつ",
+    "category": "干支",
+    "image": "青龍の昇天"
+  },
+  {
+    "kanji": "巳",
+    "reading": "み",
+    "category": "干支",
+    "image": "白蛇の智慧"
+  },
+  {
+    "kanji": "角",
+    "reading": "かく",
+    "category": "形・幾何",
+    "image": "鬼角の力"
+  },
+  {
+    "kanji": "弧",
+    "reading": "こ",
+    "category": "形・幾何",
+    "image": "弧月の軌跡"
+  },
+  {
+    "kanji": "点",
+    "reading": "てん",
+    "category": "形・幾何",
+    "image": "一点突破"
+  },
+  {
+    "kanji": "球",
+    "reading": "きゅう",
+    "category": "形・幾何",
+    "image": "水晶球の予言"
+  },
+  {
+    "kanji": "方",
+    "reading": "ほう",
+    "category": "形・幾何",
+    "image": "四方の守護"
+  },
+  {
+    "kanji": "息",
+    "reading": "いき",
+    "category": "身体",
+    "image": "息吹の生命力"
+  },
+  {
+    "kanji": "瞳",
+    "reading": "ひとみ",
+    "category": "身体",
+    "image": "瞳術の魔眼"
+  },
+  {
+    "kanji": "眼",
+    "reading": "がん",
+    "category": "身体",
+    "image": "天眼の洞察"
+  },
+  {
+    "kanji": "城",
+    "reading": "しろ",
+    "category": "建築・空間",
+    "image": "天空の城"
+  },
+  {
+    "kanji": "橋",
+    "reading": "はし",
+    "category": "建築・空間",
+    "image": "虹の橋"
+  },
+  {
+    "kanji": "窓",
+    "reading": "まど",
+    "category": "建築・空間",
+    "image": "時空の窓"
+  },
+  {
+    "kanji": "庭",
+    "reading": "にわ",
+    "category": "建築・空間",
+    "image": "秘密の庭"
+  },
+  {
+    "kanji": "路",
+    "reading": "ろ",
+    "category": "建築・空間",
+    "image": "星路の導き"
+  },
+  {
+    "kanji": "道",
+    "reading": "どう",
+    "category": "建築・空間",
+    "image": "覇道の歩み"
+  },
+  {
+    "kanji": "堂",
+    "reading": "どう",
+    "category": "建築・空間",
+    "image": "聖堂の祈り"
+  },
+  {
+    "kanji": "殿",
+    "reading": "でん",
+    "category": "建築・空間",
+    "image": "王殿の威厳"
+  },
+  {
+    "kanji": "廊",
+    "reading": "ろう",
+    "category": "建築・空間",
+    "image": "回廊の迷宮"
+  },
+  {
+    "kanji": "煙",
+    "reading": "えん",
+    "category": "天候・気象",
+    "image": "煙霞の幻影"
+  },
+  {
+    "kanji": "鬼",
+    "reading": "き",
+    "category": "ダーク系",
+    "image": "鬼神の力"
+  },
+  {
+    "kanji": "魔",
+    "reading": "ま",
+    "category": "ダーク系",
+    "image": "魔王の威光"
+  },
+  {
+    "kanji": "闇",
+    "reading": "やみ",
+    "category": "ダーク系",
+    "image": "深淵の闇"
+  },
+  {
+    "kanji": "誓",
+    "reading": "せい",
+    "category": "誓約系",
+    "image": "不屈の誓い"
+  },
+  {
+    "kanji": "徴",
+    "reading": "ちょう",
+    "category": "誓約系",
+    "image": "勝利の徴"
+  },
+  {
+    "kanji": "舞",
+    "reading": "ぶ",
+    "category": "アクション系",
+    "image": "剣舞の美技"
+  },
+  {
+    "kanji": "武",
+    "reading": "ぶ",
+    "category": "アクション系",
+    "image": "武神の道"
+  },
+  {
+    "kanji": "拳",
+    "reading": "けん",
+    "category": "アクション系",
+    "image": "鉄拳の制裁"
+  },
+  {
+    "kanji": "地",
+    "reading": "ち",
+    "category": "根源系",
+    "image": "大地の母"
+  },
+  {
+    "kanji": "人",
+    "reading": "じん",
+    "category": "根源系",
+    "image": "人皇の覇気"
+  },
+  {
+    "kanji": "彗",
+    "reading": "すい",
+    "category": "レア映え系",
+    "image": "彗星の軌跡"
+  },
+  {
+    "kaני": "曙",
+    "reading": "しょ",
+    "category": "レア映え系",
+    "image": "曙光の希望"
+  }
+]
