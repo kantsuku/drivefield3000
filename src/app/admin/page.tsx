@@ -7,6 +7,7 @@ import interpData from "@/data/interpretations-2880.json";
 import kanjiData from "@/data/kanji-dictionary.json";
 import dictData from "@/data/dictionaries.json";
 import synonymData from "@/data/synonym-groups.json";
+import namesData from "@/data/names-2880.json";
 
 type Tab = "overview" | "patterns" | "cores" | "kanji" | "synonyms";
 
@@ -14,6 +15,12 @@ type Tab = "overview" | "patterns" | "cores" | "kanji" | "synonyms";
 const interpMap: Record<number, any> = {};
 for (const r of interpData as any[]) {
   interpMap[r.pattern_id] = r;
+}
+
+// Build names lookup
+const namesMap: Record<number, any> = {};
+for (const r of namesData as any[]) {
+  namesMap[r.pattern_id] = r;
 }
 
 export default function AdminPage() {
@@ -34,9 +41,10 @@ export default function AdminPage() {
   const dicts = dictData as any[];
   const synonyms = synonymData as any[];
   const interps = interpData as any[];
+  const names = namesData as any[];
 
   // Stats
-  const namedCount = patterns.filter((p) => p.field_name_kanji).length;
+  const namedCount = names.length;
   const interpCount = interps.length;
   const kanjiCategories = [
     ...new Set(kanji.map((k) => k.main_category)),
@@ -50,7 +58,7 @@ export default function AdminPage() {
     if (biasFilter && p.bias_type !== biasFilter) return false;
     if (ignitionFilter && p.ignition !== ignitionFilter) return false;
     if (timeFilter && p.time_character !== timeFilter) return false;
-    if (namedOnly && !p.field_name_kanji) return false;
+    if (namedOnly && !namesMap[p.pattern_id]) return false;
     if (interpOnly && !interpMap[p.pattern_id]) return false;
     return true;
   });
@@ -155,32 +163,40 @@ export default function AdminPage() {
                 命名済みパターン ({namedCount})
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
-                {patterns
-                  .filter((p) => p.field_name_kanji)
-                  .map((p) => (
+                {names.slice(0, 50).map((n: any) => {
+                  const p = patterns.find(
+                    (pat) => pat.pattern_id === n.pattern_id
+                  );
+                  return (
                     <div
-                      key={p.pattern_id}
+                      key={n.pattern_id}
                       className="bg-gray-900 rounded p-3 text-center cursor-pointer hover:bg-gray-800"
                       onClick={() => {
-                        setSelectedPattern(p.pattern_id);
+                        setSelectedPattern(n.pattern_id);
                         setTab("patterns");
                       }}
                     >
                       <div className="text-2xl font-bold">
-                        {p.field_name_kanji}
+                        {n.kanji_name}
                       </div>
                       <div className="text-xs text-gray-400">
-                        {p.field_name_reading}
+                        {n.reading}
                       </div>
                       <div className="text-xs text-gray-500">
-                        {p.field_name_en}
+                        {n.english_name}
                       </div>
                       <div className="text-xs text-gray-600 mt-1">
-                        {p.core_code} / {p.bias_type} / {p.output_level}
+                        {p?.core_code} / {p?.bias_type} / {p?.output_level}
                       </div>
                     </div>
-                  ))}
+                  );
+                })}
               </div>
+              {namedCount > 50 && (
+                <p className="text-gray-600 text-sm mt-2">
+                  ※ 最初の50件を表示中（全{namedCount}件）
+                </p>
+              )}
             </div>
           )}
 
@@ -255,10 +271,18 @@ export default function AdminPage() {
               <div className="flex justify-between items-start mb-4">
                 <div>
                   <div className="flex items-center gap-3">
-                    {selectedPat?.field_name_kanji && (
-                      <span className="text-4xl font-bold">
-                        {selectedPat.field_name_kanji}
-                      </span>
+                    {namesMap[selectedPattern!] && (
+                      <div className="text-center mr-2">
+                        <span className="text-4xl font-bold">
+                          {namesMap[selectedPattern!].kanji_name}
+                        </span>
+                        <div className="text-xs text-gray-400">
+                          {namesMap[selectedPattern!].reading}
+                        </div>
+                        <div className="text-xs text-gray-500">
+                          {namesMap[selectedPattern!].english_name}
+                        </div>
+                      </div>
                     )}
                     <div>
                       <span className="font-mono text-lg">
@@ -294,6 +318,12 @@ export default function AdminPage() {
               </div>
 
               <div className="space-y-4">
+                {namesMap[selectedPattern!] && (
+                  <div className="bg-yellow-900/20 border border-yellow-800/30 rounded p-3">
+                    <h4 className="text-xs text-yellow-600 mb-1">命名理由</h4>
+                    <p className="text-sm">{namesMap[selectedPattern!].naming_reason}</p>
+                  </div>
+                )}
                 <div>
                   <h4 className="text-xs text-gray-500 mb-1">構造解釈</h4>
                   <p className="text-sm">{selectedInterp.structural_interpretation}</p>
@@ -445,7 +475,7 @@ export default function AdminPage() {
                       <td className="p-2">{p.ignition_label}</td>
                       <td className="p-2">{p.time_character_label}</td>
                       <td className="p-2 font-bold text-lg">
-                        {p.field_name_kanji || (
+                        {namesMap[p.pattern_id]?.kanji_name || (
                           <span className="text-gray-700">—</span>
                         )}
                       </td>
