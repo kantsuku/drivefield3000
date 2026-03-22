@@ -9,7 +9,7 @@ import dictData from "@/data/dictionaries.json";
 import synonymData from "@/data/synonym-groups.json";
 import namesData from "@/data/names-2880.json";
 
-type Tab = "overview" | "patterns" | "cores" | "kanji" | "synonyms";
+type Tab = "overview" | "names" | "patterns" | "cores" | "kanji" | "synonyms";
 
 // Build interpretation lookup
 const interpMap: Record<number, any> = {};
@@ -33,6 +33,9 @@ export default function AdminPage() {
   const [interpOnly, setInterpOnly] = useState(false);
   const [kanjiCatFilter, setKanjiCatFilter] = useState("");
   const [kanjiSearch, setKanjiSearch] = useState("");
+  const [namesCoreFilter, setNamesCoreFilter] = useState("");
+  const [namesBiasFilter, setNamesBiasFilter] = useState("");
+  const [namesShowUnnamed, setNamesShowUnnamed] = useState(false);
   const [selectedPattern, setSelectedPattern] = useState<number | null>(null);
 
   const patterns = patternsData as any[];
@@ -86,7 +89,8 @@ export default function AdminPage() {
 
   const tabs: { key: Tab; label: string }[] = [
     { key: "overview", label: "概要" },
-    { key: "patterns", label: "パターン (2880)" },
+    { key: "names", label: "名前確認" },
+    { key: "patterns", label: "パターン" },
     { key: "cores", label: "骨格 (60)" },
     { key: "kanji", label: "漢字辞書" },
     { key: "synonyms", label: "類義語群" },
@@ -114,6 +118,85 @@ export default function AdminPage() {
           </button>
         ))}
       </div>
+
+      {/* Names Review */}
+      {tab === "names" && (() => {
+        const filtered = patterns.filter((p) => {
+          if (namesCoreFilter && p.core_code !== namesCoreFilter) return false;
+          if (namesBiasFilter && p.bias_type !== namesBiasFilter) return false;
+          if (!namesShowUnnamed && !namesMap[p.pattern_id]) return false;
+          return true;
+        });
+        return (
+          <div>
+            {/* Filters */}
+            <div className="flex flex-wrap gap-2 mb-4 sticky top-0 bg-gray-950 py-2 z-10">
+              <select
+                value={namesCoreFilter}
+                onChange={(e) => setNamesCoreFilter(e.target.value)}
+                className="bg-gray-900 border border-gray-700 rounded px-2 py-1 text-sm"
+              >
+                <option value="">全骨格</option>
+                {coreCodes.map((c) => (
+                  <option key={c} value={c}>{c}</option>
+                ))}
+              </select>
+              <select
+                value={namesBiasFilter}
+                onChange={(e) => setNamesBiasFilter(e.target.value)}
+                className="bg-gray-900 border border-gray-700 rounded px-2 py-1 text-sm"
+              >
+                <option value="">全偏り</option>
+                {biasTypes.map((b) => (
+                  <option key={b} value={b}>{b}</option>
+                ))}
+              </select>
+              <label className="flex items-center gap-1 text-sm bg-gray-900 border border-gray-700 rounded px-2 py-1">
+                <input
+                  type="checkbox"
+                  checked={namesShowUnnamed}
+                  onChange={(e) => setNamesShowUnnamed(e.target.checked)}
+                />
+                未命名も表示
+              </label>
+              <span className="text-gray-500 text-sm self-center">
+                {filtered.length}件
+              </span>
+            </div>
+
+            {/* Grid */}
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2">
+              {filtered.map((p) => {
+                const n = namesMap[p.pattern_id];
+                return (
+                  <div
+                    key={p.pattern_id}
+                    className={`rounded-lg p-2 text-center cursor-pointer transition-colors ${
+                      n
+                        ? "bg-gray-900 hover:bg-gray-800"
+                        : "bg-gray-950 border border-gray-800 opacity-40"
+                    }`}
+                    onClick={() => {
+                      setSelectedPattern(p.pattern_id);
+                      setTab("patterns");
+                    }}
+                  >
+                    <div className="text-3xl font-bold leading-tight">
+                      {n ? n.kanji_name : "—"}
+                    </div>
+                    <div className="text-xs text-gray-500 mt-1 leading-tight">
+                      {n ? n.reading : ""}
+                    </div>
+                    <div className="text-xs text-gray-700 mt-0.5">
+                      #{p.pattern_id}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })()}
 
       {/* Overview */}
       {tab === "overview" && (
