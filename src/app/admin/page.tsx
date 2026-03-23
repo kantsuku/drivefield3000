@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import coreData from "@/data/core-60.json";
 import patternsData from "@/data/patterns-2880.json";
 import interpData from "@/data/interpretations-2880.json";
@@ -37,6 +37,47 @@ export default function AdminPage() {
   const [namesBiasFilter, setNamesBiasFilter] = useState("");
   const [namesShowUnnamed, setNamesShowUnnamed] = useState(false);
   const [selectedPattern, setSelectedPattern] = useState<number | null>(null);
+  const [flaggedIds, setFlaggedIds] = useState<Set<number>>(new Set());
+  const [regenStatus, setRegenStatus] = useState<string>("");
+  const [namesShowFlaggedOnly, setNamesShowFlaggedOnly] = useState(false);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("df3000-flagged");
+    if (saved) setFlaggedIds(new Set(JSON.parse(saved)));
+  }, []);
+
+  const toggleFlag = (id: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setFlaggedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      localStorage.setItem("df3000-flagged", JSON.stringify([...next]));
+      return next;
+    });
+  };
+
+  const sendRegenRequest = async () => {
+    const ids = [...flaggedIds];
+    setRegenStatus("送信中...");
+    try {
+      const res = await fetch("/api/regenerate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ patternIds: ids }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setRegenStatus(`✅ ${data.removed}件削除完了。次に npx tsx scripts/fix-names.ts を実行してください`);
+        setFlaggedIds(new Set());
+        localStorage.removeItem("df3000-flagged");
+      } else {
+        setRegenStatus("❌ エラー: " + data.error);
+      }
+    } catch {
+      setRegenStatus("❌ API接続エラー（本番環境では使用不可・ローカルのみ）");
+    }
+  };
 
   const patterns = patternsData as any[];
   const cores = coreData as any[];
@@ -89,7 +130,7 @@ export default function AdminPage() {
 
   const tabs: { key: Tab; label: string }[] = [
     { key: "overview", label: "概要" },
-    { key: "names", label: "名前確認" },
+    { key: "names", label: flaggedIds.size > 0 ? `名前確認 🚩${flaggedIds.size}` : "名前確認" },
     { key: "patterns", label: "パターン" },
     { key: "cores", label: "骨格 (60)" },
     { key: "kanji", label: "漢字辞書" },
@@ -125,10 +166,49 @@ export default function AdminPage() {
           if (namesCoreFilter && p.core_code !== namesCoreFilter) return false;
           if (namesBiasFilter && p.bias_type !== namesBiasFilter) return false;
           if (!namesShowUnnamed && !namesMap[p.pattern_id]) return false;
+          if (namesShowFlaggedOnly && !flaggedIds.has(p.pattern_id)) return false;
           return true;
         });
         return (
           <div>
+            {/* Flagged panel */}
+            {flaggedIds.size > 0 && (
+              <div className="bg-orange-950/40 border border-orange-800/40 rounded-lg p-4 mb-4">
+                <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
+                  <span className="font-bold text-orange-400">🚩 再生成フラグ: {flaggedIds.size}件</span>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => { setFlaggedIds(new Set()); localStorage.removeItem("df3000-flagged"); setRegenStatus(""); }}
+                      className="text-xs text-gray-500 hover:text-gray-300 border border-gray-700 rounded px-2 py-1"
+                    >
+                      全解除
+                    </button>
+                    <button
+                      onClick={sendRegenRequest}
+                      className="bg-orange-600 hover:bg-orange-500 text-white text-sm px-4 py-1.5 rounded font-bold"
+                    >
+                      再生成リクエスト送信
+                    </button>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {[...flaggedIds].sort((a, b) => a - b).map((id) => {
+                    const n = namesMap[id];
+                    return n ? (
+                      <span key={id} className="text-sm bg-gray-900 border border-orange-900/50 px-2 py-0.5 rounded flex items-center gap-1">
+                        <span className="font-bold">{n.kanji_name}</span>
+                        <span className="text-gray-600 text-xs">#{id}</span>
+                        <button onClick={(e) => toggleFlag(id, e)} className="text-gray-600 hover:text-red-400 ml-0.5">×</button>
+                      </span>
+                    ) : null;
+                  })}
+                </div>
+                {regenStatus && (
+                  <p className="text-sm mt-3 text-gray-300 bg-gray-900 rounded p-2">{regenStatus}</p>
+                )}
+              </div>
+            )}
+
             {/* Filters */}
             <div className="flex flex-wrap gap-2 mb-4 sticky top-0 bg-gray-950 py-2 z-10">
               <select
@@ -152,12 +232,12 @@ export default function AdminPage() {
                 ))}
               </select>
               <label className="flex items-center gap-1 text-sm bg-gray-900 border border-gray-700 rounded px-2 py-1">
-                <input
-                  type="checkbox"
-                  checked={namesShowUnnamed}
-                  onChange={(e) => setNamesShowUnnamed(e.target.checked)}
-                />
+                <input type="checkbox" checked={namesShowUnnamed} onChange={(e) => setNamesShowUnnamed(e.target.checked)} />
                 未命名も表示
+              </label>
+              <label className="flex items-center gap-1 text-sm bg-gray-900 border border-orange-800/60 rounded px-2 py-1">
+                <input type="checkbox" checked={namesShowFlaggedOnly} onChange={(e) => setNamesShowFlaggedOnly(e.target.checked)} />
+                🚩のみ表示
               </label>
               <span className="text-gray-500 text-sm self-center">
                 {filtered.length}件
@@ -168,11 +248,14 @@ export default function AdminPage() {
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2">
               {filtered.map((p) => {
                 const n = namesMap[p.pattern_id];
+                const flagged = flaggedIds.has(p.pattern_id);
                 return (
                   <div
                     key={p.pattern_id}
-                    className={`rounded-lg p-2 text-center cursor-pointer transition-colors ${
-                      n
+                    className={`relative rounded-lg p-2 text-center cursor-pointer transition-colors ${
+                      flagged
+                        ? "bg-orange-950/60 border border-orange-700/60 hover:bg-orange-950/80"
+                        : n
                         ? "bg-gray-900 hover:bg-gray-800"
                         : "bg-gray-950 border border-gray-800 opacity-40"
                     }`}
@@ -181,6 +264,17 @@ export default function AdminPage() {
                       setTab("patterns");
                     }}
                   >
+                    <button
+                      className={`absolute top-1 right-1 w-5 h-5 rounded-full text-xs flex items-center justify-center leading-none transition-colors ${
+                        flagged
+                          ? "bg-orange-600 text-white"
+                          : "bg-gray-800 text-gray-600 hover:bg-gray-700 hover:text-gray-400"
+                      }`}
+                      onClick={(e) => toggleFlag(p.pattern_id, e)}
+                      title={flagged ? "フラグ解除" : "再生成フラグ"}
+                    >
+                      🚩
+                    </button>
                     <div className="text-3xl font-bold leading-tight">
                       {n ? n.kanji_name : "—"}
                     </div>
