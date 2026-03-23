@@ -10,7 +10,7 @@
  * Usage: npx tsx scripts/fix-names.ts
  */
 
-const KANJI_MAX = 35; // 1漢字あたりの最大使用回数
+const KANJI_MAX = 20; // 1漢字あたりの最大使用回数
 
 import Anthropic from "@anthropic-ai/sdk";
 import * as dotenv from "dotenv";
@@ -276,6 +276,7 @@ async function main() {
       for (const r of results) {
         if (!r.pattern_id || !r.kanji_name || typeof r.kanji_name !== 'string') continue;
         if (usedNames.has(r.kanji_name)) continue;
+        if ([...r.kanji_name].some((c: string) => boringChars.has(c))) continue; // NG漢字フィルタ
         namesMap[r.pattern_id] = r;
         usedNames.add(r.kanji_name);
         // Update kanji count with the newly accepted name
