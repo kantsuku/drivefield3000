@@ -1,5 +1,3 @@
-'use client';
-
 import namesData from '@/data/names-240.json';
 
 const NEURO: Record<string, string> = {
