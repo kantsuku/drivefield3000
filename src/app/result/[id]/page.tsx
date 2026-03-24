@@ -8,6 +8,7 @@ interface NameEntry {
   reading: string;
   english_name: string;
   naming_reason: string;
+  lead?: string;
 }
 
 const namesMap: Record<string, NameEntry> = {};
@@ -45,7 +46,13 @@ export default async function ResultPage({
         <p className="text-sm text-gray-500 mb-2">{entry.reading}</p>
         <p className="text-lg text-gray-400 mb-8">{entry.english_name}</p>
 
-        <p className="text-sm text-gray-300 mb-12 leading-relaxed">
+        {entry.lead && (
+          <p className="text-sm text-gray-200 mb-8 leading-[1.9] text-left">
+            {entry.lead}
+          </p>
+        )}
+
+        <p className="text-xs text-gray-600 mb-12 leading-relaxed text-left">
           {entry.naming_reason}
         </p>
 
