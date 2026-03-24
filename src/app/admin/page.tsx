@@ -382,7 +382,7 @@ export default function AdminPage() {
             href="/admin/names-list"
             className="text-sm text-gray-400 hover:text-white border border-gray-700 hover:border-gray-500 px-3 py-2 rounded transition-colors"
           >
-            真名一覧
+            一覧表
           </a>
           <button
             onClick={syncDeploy}
