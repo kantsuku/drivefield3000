@@ -12,7 +12,7 @@ import l4Data from "@/data/l4-types.json";
 import l4KataData from "@/data/l4-kata.json";
 import names240Data from "@/data/names-240.json";
 
-type Tab = "overview" | "names" | "patterns" | "kanji" | "l4types";
+type Tab = "overview" | "l4types";
 
 // Build interpretation lookup
 const interpMap: Record<number, any> = {};
@@ -107,12 +107,17 @@ export default function AdminPage() {
   const [editingReadingId, setEditingReadingId] = useState<number | null>(null);
   const [editingReadingValue, setEditingReadingValue] = useState("");
   const [nameOverrides, setNameOverrides] = useState<Record<number, string>>({});
+  const [names240FlaggedIds, setNames240FlaggedIds] = useState<Set<string>>(new Set());
+  const [names240RegenStatus, setNames240RegenStatus] = useState<string>("");
+  const [names240Overrides, setNames240Overrides] = useState<Record<string, string>>({});
 
   useEffect(() => {
     const saved = localStorage.getItem("df3000-flagged");
     if (saved) setFlaggedIds(new Set(JSON.parse(saved)));
     const savedL4 = localStorage.getItem("df3000-l4-flagged");
     if (savedL4) setL4FlaggedIds(new Set(JSON.parse(savedL4)));
+    const saved240 = localStorage.getItem("df3000-names240-flagged");
+    if (saved240) setNames240FlaggedIds(new Set(JSON.parse(saved240)));
   }, []);
 
   useEffect(() => {
@@ -184,6 +189,35 @@ export default function AdminPage() {
         setL4RegenStatus(`✅ ${data.removed}件の再生成を開始しました。数分後にリロードしてください。`);
       } else setL4RegenStatus("❌ " + data.error);
     } catch { setL4RegenStatus("❌ API接続エラー（ローカルのみ）"); }
+  };
+
+  const toggleNames240Flag = (id: string) => {
+    setNames240FlaggedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id); else next.add(id);
+      localStorage.setItem("df3000-names240-flagged", JSON.stringify([...next]));
+      return next;
+    });
+  };
+
+  const sendNames240RegenRequest = async () => {
+    const ids = [...names240FlaggedIds];
+    setNames240RegenStatus("送信中...");
+    try {
+      const res = await fetch("/api/update-name240", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ids }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setNames240RegenStatus(`⏳ ${data.removed}件削除完了。再選定中...`);
+        setNames240FlaggedIds(new Set());
+        localStorage.removeItem("df3000-names240-flagged");
+        await fetch("/api/run-fix-names240", { method: "POST" });
+        setNames240RegenStatus(`✅ ${data.removed}件の差し替えを開始しました。数分後にリロードしてください。`);
+      } else setNames240RegenStatus("❌ " + data.error);
+    } catch { setNames240RegenStatus("❌ API接続エラー"); }
   };
 
   const saveL4Reading = async (id: string) => {
@@ -279,10 +313,7 @@ export default function AdminPage() {
 
   const tabs: { key: Tab; label: string }[] = [
     { key: "overview", label: "概要" },
-    { key: "names", label: flaggedIds.size > 0 ? `名前確認 🚩${flaggedIds.size}` : "名前確認" },
-    { key: "patterns", label: "パターン" },
-    { key: "kanji", label: "漢字辞書" },
-    { key: "l4types", label: l4FlaggedIds.size > 0 ? `L4タイプ 🚩${l4FlaggedIds.size}` : "L4タイプ" },
+    { key: "l4types", label: names240FlaggedIds.size > 0 ? `真名管理 🚩${names240FlaggedIds.size}` : "真名管理" },
   ];
 
   // Modal state (names tab用)
@@ -1049,10 +1080,43 @@ export default function AdminPage() {
         </div>
       )}
 
-      {/* L4タイプ */}
+      {/* 真名管理 */}
       {tab === "l4types" && (
           <div>
-            {/* Flagged panel */}
+            {/* 差し替えフラグパネル */}
+            {names240FlaggedIds.size > 0 && (
+              <div className="bg-orange-950/40 border border-orange-800/40 rounded-lg p-4 mb-6">
+                <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
+                  <span className="font-bold text-orange-400">🚩 差し替え申請: {names240FlaggedIds.size}件</span>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => { setNames240FlaggedIds(new Set()); localStorage.removeItem("df3000-names240-flagged"); setNames240RegenStatus(""); }}
+                      className="text-xs text-gray-500 hover:text-gray-300 border border-gray-700 rounded px-2 py-1"
+                    >全解除</button>
+                    <button
+                      onClick={sendNames240RegenRequest}
+                      className="bg-orange-600 hover:bg-orange-500 text-white text-sm px-4 py-1.5 rounded font-bold"
+                    >差し替え申請を送信</button>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {[...names240FlaggedIds].sort().map((id) => {
+                    const entry = (names240Data as any[]).find((n: any) => n.id === id);
+                    return entry ? (
+                      <span key={id} className="text-sm bg-gray-900 border border-orange-900/50 px-2 py-0.5 rounded flex items-center gap-1">
+                        <span className="font-bold">{names240Overrides[id] ?? entry.kanji_name}</span>
+                        <span className="text-gray-600 text-xs">{id}</span>
+                        <button onClick={() => toggleNames240Flag(id)} className="text-gray-600 hover:text-red-400 ml-0.5">×</button>
+                      </span>
+                    ) : null;
+                  })}
+                </div>
+                {names240RegenStatus && (
+                  <p className="text-sm mt-3 text-gray-300 bg-gray-900 rounded p-2">{names240RegenStatus}</p>
+                )}
+              </div>
+            )}
+            {/* 旧L4フラグパネル（非表示可） */}
             {l4FlaggedIds.size > 0 && (
               <div className="bg-orange-950/40 border border-orange-800/40 rounded-lg p-4 mb-6">
                 <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
@@ -1113,16 +1177,27 @@ export default function AdminPage() {
                           </div>
                           {/* 真名12個 */}
                           <div className="p-3 grid grid-cols-3 gap-1.5">
-                            {truenames.map((n: any) => (
-                              <div
-                                key={n.id}
-                                className="bg-gray-900/60 rounded-lg p-2 text-center"
-                                title={`${n.reading} — ${n.naming_reason}`}
-                              >
-                                <div className={`text-lg font-bold ${meta.color}`}>{n.kanji_name}</div>
-                                <div className="text-xs text-gray-600">{n.reading}</div>
-                              </div>
-                            ))}
+                            {truenames.map((n: any) => {
+                              const flagged240 = names240FlaggedIds.has(n.id);
+                              return (
+                                <div
+                                  key={n.id}
+                                  className={`relative rounded-lg p-2 text-center cursor-pointer transition-colors ${
+                                    flagged240 ? "bg-orange-950/60 border border-orange-700/60" : "bg-gray-900/60 hover:bg-gray-800/60"
+                                  }`}
+                                  title={`${n.reading} — ${n.naming_reason}`}
+                                  onClick={() => toggleNames240Flag(n.id)}
+                                >
+                                  <div className={`text-lg font-bold ${flagged240 ? "text-orange-400" : meta.color}`}>
+                                    {names240Overrides[n.id] ?? n.kanji_name}
+                                  </div>
+                                  <div className="text-xs text-gray-600">{n.reading}</div>
+                                  {flagged240 && (
+                                    <div className="absolute top-0.5 right-0.5 text-xs text-orange-500">🚩</div>
+                                  )}
+                                </div>
+                              );
+                            })}
                           </div>
                         </div>
                       );
