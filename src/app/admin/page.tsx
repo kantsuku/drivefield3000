@@ -12,7 +12,7 @@ import l4Data from "@/data/l4-types.json";
 import l4KataData from "@/data/l4-kata.json";
 import names240Data from "@/data/names-240.json";
 
-type Tab = "overview" | "l4types";
+type Tab = "overview" | "l4types" | "names" | "patterns" | "kanji";
 
 // Build interpretation lookup
 const interpMap: Record<number, any> = {};
@@ -77,6 +77,7 @@ function getKata(coreCode: string, biasType: string) {
 }
 
 export default function AdminPage() {
+  const [mounted, setMounted] = useState(false);
   const [tab, setTab] = useState<Tab>("overview");
   const [coreFilter, setCoreFilter] = useState("");
   const [biasFilter, setBiasFilter] = useState("");
@@ -95,6 +96,9 @@ export default function AdminPage() {
   const [selectedPattern, setSelectedPattern] = useState<number | null>(null);
   const [flaggedIds, setFlaggedIds] = useState<Set<number>>(new Set());
   const [regenStatus, setRegenStatus] = useState<string>("");
+  const [regenPolling, setRegenPolling] = useState(false);
+  const [deployStatus, setDeployStatus] = useState<string>("");
+  const [deploying, setDeploying] = useState(false);
   const [namesShowFlaggedOnly, setNamesShowFlaggedOnly] = useState(false);
   const [l4FlaggedIds, setL4FlaggedIds] = useState<Set<string>>(new Set());
   const [l4RegenStatus, setL4RegenStatus] = useState<string>("");
@@ -111,6 +115,8 @@ export default function AdminPage() {
   const [names240RegenStatus, setNames240RegenStatus] = useState<string>("");
   const [names240Overrides, setNames240Overrides] = useState<Record<string, string>>({});
 
+  useEffect(() => { setMounted(true); }, []);
+
   useEffect(() => {
     const saved = localStorage.getItem("df3000-flagged");
     if (saved) setFlaggedIds(new Set(JSON.parse(saved)));
@@ -118,7 +124,30 @@ export default function AdminPage() {
     if (savedL4) setL4FlaggedIds(new Set(JSON.parse(savedL4)));
     const saved240 = localStorage.getItem("df3000-names240-flagged");
     if (saved240) setNames240FlaggedIds(new Set(JSON.parse(saved240)));
+    // ページロード時に生成中なら自動でポーリング再開
+    fetch("/api/fix-names-status")
+      .then((r) => r.json())
+      .then((d) => { if (d.status === "running") setRegenPolling(true); })
+      .catch(() => {});
   }, []);
+
+  useEffect(() => {
+    if (!regenPolling) return;
+    const interval = setInterval(async () => {
+      try {
+        const res = await fetch("/api/fix-names-status");
+        const data = await res.json();
+        if (data.status === "done") {
+          setRegenStatus("✅ 生成完了！ページをリロードして確認してください。");
+          setRegenPolling(false);
+        } else if (data.status === "error") {
+          setRegenStatus(`❌ エラー: ${data.message}`);
+          setRegenPolling(false);
+        }
+      } catch { /* ignore */ }
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [regenPolling]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -147,17 +176,34 @@ export default function AdminPage() {
       });
       const data = await res.json();
       if (data.success) {
-        setRegenStatus(`⏳ ${data.removed}件削除完了。再生成中...（数分かかることがあります）`);
         setFlaggedIds(new Set());
         localStorage.removeItem("df3000-flagged");
-        // 自動でfix-namesスクリプトを起動
         await fetch("/api/run-fix-names", { method: "POST" });
-        setRegenStatus(`✅ ${data.removed}件の再生成を開始しました。ページを数分後にリロードしてください。`);
+        setRegenStatus(`⏳ ${data.removed}件の再生成中...`);
+        setRegenPolling(true);
       } else {
         setRegenStatus("❌ エラー: " + data.error);
       }
     } catch {
       setRegenStatus("❌ API接続エラー（ローカルのみ）");
+    }
+  };
+
+  const syncDeploy = async () => {
+    setDeploying(true);
+    setDeployStatus("同期・デプロイ中...");
+    try {
+      const res = await fetch("/api/sync-deploy", { method: "POST" });
+      const data = await res.json();
+      if (data.success) {
+        setDeployStatus(`✅ ${data.message}`);
+      } else {
+        setDeployStatus(`❌ ${data.error}`);
+      }
+    } catch {
+      setDeployStatus("❌ API接続エラー（ローカルのみ）");
+    } finally {
+      setDeploying(false);
     }
   };
 
@@ -322,12 +368,30 @@ export default function AdminPage() {
   const modalInterp = modalPatternId ? interpMap[modalPatternId] : null;
   const modalName = modalPatternId ? namesMap[modalPatternId] : null;
 
+  if (!mounted) return <main className="min-h-screen bg-gray-950" />;
+
   return (
     <>
     <main className="min-h-screen bg-gray-950 text-white p-4 md:p-8">
-      <h1 className="text-2xl font-bold mb-6">
-        Drive Field 3000 — 管理ダッシュボード
-      </h1>
+      <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
+        <h1 className="text-2xl font-bold">
+          Drive Field 3000 — 管理ダッシュボード
+        </h1>
+        <div className="flex items-center gap-3 flex-wrap">
+          <button
+            onClick={syncDeploy}
+            disabled={deploying || regenPolling}
+            className="bg-blue-700 hover:bg-blue-600 disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm px-4 py-2 rounded font-bold"
+          >
+            {deploying ? "デプロイ中..." : "🚀 Vercelにデプロイ"}
+          </button>
+          {deployStatus && (
+            <p className={`text-sm ${deployStatus.startsWith("✅") ? "text-green-400" : "text-red-400"}`}>
+              {deployStatus}
+            </p>
+          )}
+        </div>
+      </div>
 
       {/* Tab Navigation */}
       <div className="flex gap-1 mb-6 border-b border-gray-800 overflow-x-auto">
@@ -395,10 +459,33 @@ export default function AdminPage() {
                   })}
                 </div>
                 {regenStatus && (
-                  <p className="text-sm mt-3 text-gray-300 bg-gray-900 rounded p-2">{regenStatus}</p>
+                  <p className={`text-sm mt-3 rounded p-2 flex items-center gap-2 ${
+                    regenPolling ? "bg-yellow-950/40 text-yellow-300 border border-yellow-900/50" :
+                    regenStatus.startsWith("✅") ? "bg-green-950/40 text-green-300 border border-green-900/50" :
+                    "bg-gray-900 text-gray-300"
+                  }`}>
+                    {regenPolling && <span className="inline-block w-2 h-2 rounded-full bg-yellow-400 animate-pulse shrink-0" />}
+                    {regenStatus}
+                  </p>
                 )}
               </div>
             )}
+
+            {/* Deploy */}
+            <div className="flex items-center gap-3 mb-4 flex-wrap">
+              <button
+                onClick={syncDeploy}
+                disabled={deploying || regenPolling}
+                className="bg-blue-700 hover:bg-blue-600 disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm px-4 py-1.5 rounded font-bold"
+              >
+                {deploying ? "デプロイ中..." : "🚀 Vercelにデプロイ"}
+              </button>
+              {deployStatus && (
+                <p className={`text-sm ${deployStatus.startsWith("✅") ? "text-green-400" : "text-red-400"}`}>
+                  {deployStatus}
+                </p>
+              )}
+            </div>
 
             {/* Filters */}
             <div className="flex flex-wrap gap-2 mb-4 sticky top-0 bg-gray-950 py-2 z-10">
