@@ -378,6 +378,12 @@ export default function AdminPage() {
           Drive Field 3000 — 管理ダッシュボード
         </h1>
         <div className="flex items-center gap-3 flex-wrap">
+          <a
+            href="/admin/names-list"
+            className="text-sm text-gray-400 hover:text-white border border-gray-700 hover:border-gray-500 px-3 py-2 rounded transition-colors"
+          >
+            真名一覧
+          </a>
           <button
             onClick={syncDeploy}
             disabled={deploying || regenPolling}
