@@ -15,10 +15,10 @@ import * as fs from "fs";
 dotenv.config({ path: path.resolve(__dirname, "../.env.local") });
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
-const KANJI_MAX = 4; // 240件中の1漢字あたり上限
+const KANJI_MAX = 3; // 240件中の1漢字あたり上限
 
 // 優先して使いたいかっこいい漢字（未使用 or 少ない）
-const PRIORITY_KANJI = "風桜星鷲閃霜霧滝渦暁凛翼彗蒼嵐鴉蛇矢弓槍刃剣鉄獣幽玄霞";
+const PRIORITY_KANJI = "蝶陣闇狼鷹魔蘭聖帝滅乱暗黙尽盛精賢怜呼風桜星鷲霜霧滝渦彗幽玄霞";
 
 const NEURO_LABELS: Record<string, string> = {
   D: "ドーパミン（新規・可能性）",
@@ -58,12 +58,13 @@ const kanjiCategoryStr = Object.entries(kanjiByCategory)
 async function renameBatch(
   entries: any[],
   usedNames: Set<string>,
-  kanjiCount: Record<string, number>
+  kanjiCount: Record<string, number>,
+  forceBan: string[] = []
 ): Promise<any[]> {
-  const banned = Object.entries(kanjiCount)
-    .filter(([, n]) => n >= KANJI_MAX)
-    .map(([k]) => k)
-    .join("");
+  const banned = [
+    ...Object.entries(kanjiCount).filter(([, n]) => n >= KANJI_MAX).map(([k]) => k),
+    ...forceBan,
+  ].filter((v, i, a) => a.indexOf(v) === i).join("");
 
   const freshCool = [...PRIORITY_KANJI]
     .filter((k) => allAllowedKanji.has(k) && (kanjiCount[k] || 0) < 2)
@@ -141,15 +142,20 @@ async function main() {
   const overused = Object.entries(kanjiCount).filter(([, n]) => n > KANJI_MAX).sort((a, b) => b[1] - a[1]);
   overused.forEach(([k, n]) => console.log(`  ${k}: ${n}回（上限${KANJI_MAX}）`));
 
-  // 再生成対象: KANJI_MAX超の漢字を含むエントリ
-  const overusedSet = new Set(overused.map(([k]) => k));
+  // 再生成対象: 超過分のみ（KANJI_MAX超の漢字を含むエントリから最小限だけ）
+  const excessMap: Record<string, number> = {};
+  for (const [k, n] of overused) excessMap[k] = n - KANJI_MAX;
+
   const toFix: any[] = [];
   const seen = new Map<string, string>(); // kanji_name → id (重複検出)
 
   for (const e of entries) {
     const chars = [...e.kanji_name];
-    if (chars.some((c) => overusedSet.has(c))) {
+    // 超過漢字を含み、かつまだ超過分が残っているエントリだけ対象にする
+    const overlapChars = chars.filter((c) => (excessMap[c] ?? 0) > 0);
+    if (overlapChars.length > 0) {
       toFix.push(e);
+      for (const c of overlapChars) excessMap[c]--;
     } else if (seen.has(e.kanji_name)) {
       toFix.push(e); // 重複名
     } else {
@@ -193,8 +199,16 @@ async function main() {
     const batch = toFix.slice(i, i + BATCH);
     console.log(`\nバッチ ${Math.floor(i / BATCH) + 1}: ${batch.map((e) => e.id).join(", ")}`);
 
+    // このバッチで超過漢字を含むエントリが対象の場合、その漢字を強制ban
+    const batchOverused = new Set<string>();
+    for (const e of batch) {
+      for (const c of e.kanji_name) {
+        if ((currentKanjiCount[c] ?? 0) >= KANJI_MAX) batchOverused.add(c);
+      }
+    }
+
     try {
-      const results = await renameBatch(batch, currentUsedNames, currentKanjiCount);
+      const results = await renameBatch(batch, currentUsedNames, currentKanjiCount, [...batchOverused]);
       for (const r of results) {
         if (!r.id || !r.kanji_name) continue;
         if (currentUsedNames.has(r.kanji_name)) {
