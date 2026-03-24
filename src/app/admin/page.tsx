@@ -8,8 +8,10 @@ import kanjiData from "@/data/kanji-dictionary.json";
 import dictData from "@/data/dictionaries.json";
 import synonymData from "@/data/synonym-groups.json";
 import namesData from "@/data/names-2880.json";
+import l4Data from "@/data/l4-types.json";
+import l4KataData from "@/data/l4-kata.json";
 
-type Tab = "overview" | "names" | "patterns" | "cores" | "kanji" | "synonyms";
+type Tab = "overview" | "names" | "patterns" | "kanji" | "l4types";
 
 // Build interpretation lookup
 const interpMap: Record<number, any> = {};
@@ -21,6 +23,47 @@ for (const r of interpData as any[]) {
 const namesMap: Record<number, any> = {};
 for (const r of namesData as any[]) {
   namesMap[r.pattern_id] = r;
+}
+
+const L4_RANK_META: Record<string, { jp: string; color: string; border: string; bg: string; badge: string; cardBorder: string; cardBg: string; rowLeft: string; rowBg: string }> = {
+  D: { jp: "ドーパミン主動型",       color: "text-red-400",    border: "border-red-900/50",    bg: "bg-red-950/30",    badge: "bg-red-900/40 text-red-300",    cardBorder: "border-red-900/40",    cardBg: "bg-red-950/20",    rowLeft: "border-l-2 border-l-red-600",    rowBg: "bg-red-950/10" },
+  S: { jp: "セロトニン主動型",       color: "text-blue-400",   border: "border-blue-900/50",   bg: "bg-blue-950/30",   badge: "bg-blue-900/40 text-blue-300",  cardBorder: "border-blue-900/40",   cardBg: "bg-blue-950/20",   rowLeft: "border-l-2 border-l-blue-600",   rowBg: "bg-blue-950/10" },
+  O: { jp: "オキシトシン主動型",     color: "text-green-400",  border: "border-green-900/50",  bg: "bg-green-950/30",  badge: "bg-green-900/40 text-green-300", cardBorder: "border-green-900/40",  cardBg: "bg-green-950/20",  rowLeft: "border-l-2 border-l-green-600",  rowBg: "bg-green-950/10" },
+  N: { jp: "ノルアドレナリン主動型", color: "text-yellow-400", border: "border-yellow-900/50", bg: "bg-yellow-950/30", badge: "bg-yellow-900/40 text-yellow-300", cardBorder: "border-yellow-900/40", cardBg: "bg-yellow-950/20", rowLeft: "border-l-2 border-l-yellow-600", rowBg: "bg-yellow-950/10" },
+  E: { jp: "エンドルフィン主動型",   color: "text-purple-400", border: "border-purple-900/50", bg: "bg-purple-950/30", badge: "bg-purple-900/40 text-purple-300", cardBorder: "border-purple-900/40", cardBg: "bg-purple-950/20", rowLeft: "border-l-2 border-l-purple-600", rowBg: "bg-purple-950/10" },
+};
+
+// core_code → rank1 ルックアップ
+const coreRank1Map: Record<string, string> = {};
+for (const c of coreData as any[]) {
+  coreRank1Map[c.core_code] = c.rank1;
+}
+
+// L4 id → name ルックアップ
+const l4NameMap: Record<string, string> = {};
+for (const t of l4Data as any[]) {
+  l4NameMap[t.id] = t.name;
+}
+
+const IGN_MAP: Record<string, string> = { external: "外燃", internal: "内燃" };
+const TIME_MAP: Record<string, string> = { burst: "瞬発", mature: "熟成" };
+
+function getL4Id(coreCode: string, biasType: string, ignition: string, timeChar: string) {
+  const rank1 = coreRank1Map[coreCode];
+  if (!rank1) return null;
+  return `${rank1}-${biasType}-${IGN_MAP[ignition] ?? ignition}-${TIME_MAP[timeChar] ?? timeChar}`;
+}
+
+// の型ルックアップ (rank1-bias → {name, reading})
+const kataMap: Record<string, { name: string; reading: string }> = {};
+for (const k of l4KataData as any[]) {
+  kataMap[k.id] = { name: k.name, reading: k.reading };
+}
+
+function getKata(coreCode: string, biasType: string) {
+  const rank1 = coreRank1Map[coreCode];
+  if (!rank1) return null;
+  return kataMap[`${rank1}-${biasType}`] ?? null;
 }
 
 export default function AdminPage() {
@@ -35,16 +78,37 @@ export default function AdminPage() {
   const [kanjiSearch, setKanjiSearch] = useState("");
   const [namesCoreFilter, setNamesCoreFilter] = useState("");
   const [namesBiasFilter, setNamesBiasFilter] = useState("");
+  const [namesRank1Filter, setNamesRank1Filter] = useState("");
+  const [namesIgnitionFilter, setNamesIgnitionFilter] = useState("");
+  const [namesTimeFilter, setNamesTimeFilter] = useState("");
   const [namesShowUnnamed, setNamesShowUnnamed] = useState(false);
   const [selectedPattern, setSelectedPattern] = useState<number | null>(null);
   const [flaggedIds, setFlaggedIds] = useState<Set<number>>(new Set());
   const [regenStatus, setRegenStatus] = useState<string>("");
   const [namesShowFlaggedOnly, setNamesShowFlaggedOnly] = useState(false);
+  const [l4FlaggedIds, setL4FlaggedIds] = useState<Set<string>>(new Set());
+  const [l4RegenStatus, setL4RegenStatus] = useState<string>("");
+  const [l4Overrides, setL4Overrides] = useState<Record<string, string>>({});
+  const [editingL4Id, setEditingL4Id] = useState<string | null>(null);
+  const [editingL4Value, setEditingL4Value] = useState("");
+  const [editingL4ReadingId, setEditingL4ReadingId] = useState<string | null>(null);
+  const [editingL4ReadingValue, setEditingL4ReadingValue] = useState("");
+  const [l4ReadingOverrides, setL4ReadingOverrides] = useState<Record<string, string>>({});
+  const [editingReadingId, setEditingReadingId] = useState<number | null>(null);
+  const [editingReadingValue, setEditingReadingValue] = useState("");
+  const [nameOverrides, setNameOverrides] = useState<Record<number, string>>({});
 
   useEffect(() => {
     const saved = localStorage.getItem("df3000-flagged");
     if (saved) setFlaggedIds(new Set(JSON.parse(saved)));
+    const savedL4 = localStorage.getItem("df3000-l4-flagged");
+    if (savedL4) setL4FlaggedIds(new Set(JSON.parse(savedL4)));
   }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [tab]);
+
 
   const toggleFlag = (id: number, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -68,15 +132,90 @@ export default function AdminPage() {
       });
       const data = await res.json();
       if (data.success) {
-        setRegenStatus(`✅ ${data.removed}件削除完了。次に npx tsx scripts/fix-names.ts を実行してください`);
+        setRegenStatus(`⏳ ${data.removed}件削除完了。再生成中...（数分かかることがあります）`);
         setFlaggedIds(new Set());
         localStorage.removeItem("df3000-flagged");
+        // 自動でfix-namesスクリプトを起動
+        await fetch("/api/run-fix-names", { method: "POST" });
+        setRegenStatus(`✅ ${data.removed}件の再生成を開始しました。ページを数分後にリロードしてください。`);
       } else {
         setRegenStatus("❌ エラー: " + data.error);
       }
     } catch {
-      setRegenStatus("❌ API接続エラー（本番環境では使用不可・ローカルのみ）");
+      setRegenStatus("❌ API接続エラー（ローカルのみ）");
     }
+  };
+
+  const toggleL4Flag = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setL4FlaggedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id); else next.add(id);
+      localStorage.setItem("df3000-l4-flagged", JSON.stringify([...next]));
+      return next;
+    });
+  };
+
+  const sendL4RegenRequest = async () => {
+    const ids = [...l4FlaggedIds];
+    setL4RegenStatus("送信中...");
+    try {
+      const res = await fetch("/api/update-l4type", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ids }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setL4RegenStatus(`⏳ ${data.removed}件削除完了。再生成中...`);
+        setL4FlaggedIds(new Set());
+        localStorage.removeItem("df3000-l4-flagged");
+        await fetch("/api/run-fix-l4types", { method: "POST" });
+        setL4RegenStatus(`✅ ${data.removed}件の再生成を開始しました。数分後にリロードしてください。`);
+      } else setL4RegenStatus("❌ " + data.error);
+    } catch { setL4RegenStatus("❌ API接続エラー（ローカルのみ）"); }
+  };
+
+  const saveL4Reading = async (id: string) => {
+    const newVal = editingL4ReadingValue.trim();
+    setEditingL4ReadingId(null);
+    if (!newVal) return;
+    setL4ReadingOverrides((prev) => ({ ...prev, [id]: newVal }));
+    try {
+      await fetch("/api/update-l4type", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id, field: "reading", value: newVal }),
+      });
+    } catch {}
+  };
+
+  const saveL4Name = async (id: string) => {
+    const newVal = editingL4Value.trim();
+    setEditingL4Id(null);
+    if (!newVal) return;
+    setL4Overrides((prev) => ({ ...prev, [id]: newVal }));
+    try {
+      await fetch("/api/update-l4type", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id, field: "name", value: newVal }),
+      });
+    } catch {}
+  };
+
+  const saveReading = async (patternId: number) => {
+    const newVal = editingReadingValue.trim();
+    setEditingReadingId(null);
+    if (!newVal || newVal === (nameOverrides[patternId] ?? namesMap[patternId]?.reading)) return;
+    setNameOverrides((prev) => ({ ...prev, [patternId]: newVal }));
+    try {
+      await fetch("/api/update-name", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pattern_id: patternId, field: "reading", value: newVal }),
+      });
+    } catch {}
   };
 
   const patterns = patternsData as any[];
@@ -132,12 +271,18 @@ export default function AdminPage() {
     { key: "overview", label: "概要" },
     { key: "names", label: flaggedIds.size > 0 ? `名前確認 🚩${flaggedIds.size}` : "名前確認" },
     { key: "patterns", label: "パターン" },
-    { key: "cores", label: "骨格 (60)" },
     { key: "kanji", label: "漢字辞書" },
-    { key: "synonyms", label: "類義語群" },
+    { key: "l4types", label: l4FlaggedIds.size > 0 ? `L4タイプ 🚩${l4FlaggedIds.size}` : "L4タイプ" },
   ];
 
+  // Modal state (names tab用)
+  const [modalPatternId, setModalPatternId] = useState<number | null>(null);
+  const modalPattern = modalPatternId ? patterns.find((p) => p.pattern_id === modalPatternId) : null;
+  const modalInterp = modalPatternId ? interpMap[modalPatternId] : null;
+  const modalName = modalPatternId ? namesMap[modalPatternId] : null;
+
   return (
+    <>
     <main className="min-h-screen bg-gray-950 text-white p-4 md:p-8">
       <h1 className="text-2xl font-bold mb-6">
         Drive Field 3000 — 管理ダッシュボード
@@ -148,7 +293,7 @@ export default function AdminPage() {
         {tabs.map((t) => (
           <button
             key={t.key}
-            onClick={() => setTab(t.key)}
+            onPointerDown={(e) => { e.preventDefault(); setTab(t.key); }}
             className={`px-4 py-2 text-sm font-medium whitespace-nowrap ${
               tab === t.key
                 ? "border-b-2 border-white text-white"
@@ -161,10 +306,14 @@ export default function AdminPage() {
       </div>
 
       {/* Names Review */}
-      {tab === "names" && (() => {
+      <div style={{ display: tab === "names" ? undefined : "none" }}>
+      {(() => {
         const filtered = patterns.filter((p) => {
           if (namesCoreFilter && p.core_code !== namesCoreFilter) return false;
           if (namesBiasFilter && p.bias_type !== namesBiasFilter) return false;
+          if (namesRank1Filter && coreRank1Map[p.core_code] !== namesRank1Filter) return false;
+          if (namesIgnitionFilter && p.ignition !== namesIgnitionFilter) return false;
+          if (namesTimeFilter && p.time_character !== namesTimeFilter) return false;
           if (!namesShowUnnamed && !namesMap[p.pattern_id]) return false;
           if (namesShowFlaggedOnly && !flaggedIds.has(p.pattern_id)) return false;
           return true;
@@ -211,6 +360,53 @@ export default function AdminPage() {
 
             {/* Filters */}
             <div className="flex flex-wrap gap-2 mb-4 sticky top-0 bg-gray-950 py-2 z-10">
+              {/* L4 主神経カラーボタン */}
+              <div className="flex gap-1">
+                {(["D","S","O","N","E"] as const).map((r) => {
+                  const m = L4_RANK_META[r];
+                  const active = namesRank1Filter === r;
+                  return (
+                    <button
+                      key={r}
+                      onPointerDown={(e) => { e.preventDefault(); setNamesRank1Filter(active ? "" : r); }}
+                      className={`w-7 h-7 rounded-full text-xs font-bold border transition-all ${
+                        active ? `${m.bg} ${m.border} ${m.color}` : "bg-gray-900 border-gray-700 text-gray-500 hover:border-gray-500"
+                      }`}
+                      title={m.jp}
+                    >
+                      {r}
+                    </button>
+                  );
+                })}
+              </div>
+              <select
+                value={namesBiasFilter}
+                onChange={(e) => setNamesBiasFilter(e.target.value)}
+                className="bg-gray-900 border border-gray-700 rounded px-2 py-1 text-sm"
+              >
+                <option value="">全bias</option>
+                {biasTypes.map((b) => (
+                  <option key={b} value={b}>{b}</option>
+                ))}
+              </select>
+              <select
+                value={namesIgnitionFilter}
+                onChange={(e) => setNamesIgnitionFilter(e.target.value)}
+                className="bg-gray-900 border border-gray-700 rounded px-2 py-1 text-sm"
+              >
+                <option value="">全発火</option>
+                <option value="external">外燃</option>
+                <option value="internal">内燃</option>
+              </select>
+              <select
+                value={namesTimeFilter}
+                onChange={(e) => setNamesTimeFilter(e.target.value)}
+                className="bg-gray-900 border border-gray-700 rounded px-2 py-1 text-sm"
+              >
+                <option value="">全時間</option>
+                <option value="burst">瞬発</option>
+                <option value="mature">熟成</option>
+              </select>
               <select
                 value={namesCoreFilter}
                 onChange={(e) => setNamesCoreFilter(e.target.value)}
@@ -221,16 +417,6 @@ export default function AdminPage() {
                   <option key={c} value={c}>{c}</option>
                 ))}
               </select>
-              <select
-                value={namesBiasFilter}
-                onChange={(e) => setNamesBiasFilter(e.target.value)}
-                className="bg-gray-900 border border-gray-700 rounded px-2 py-1 text-sm"
-              >
-                <option value="">全偏り</option>
-                {biasTypes.map((b) => (
-                  <option key={b} value={b}>{b}</option>
-                ))}
-              </select>
               <label className="flex items-center gap-1 text-sm bg-gray-900 border border-gray-700 rounded px-2 py-1">
                 <input type="checkbox" checked={namesShowUnnamed} onChange={(e) => setNamesShowUnnamed(e.target.checked)} />
                 未命名も表示
@@ -239,9 +425,7 @@ export default function AdminPage() {
                 <input type="checkbox" checked={namesShowFlaggedOnly} onChange={(e) => setNamesShowFlaggedOnly(e.target.checked)} />
                 🚩のみ表示
               </label>
-              <span className="text-gray-500 text-sm self-center">
-                {filtered.length}件
-              </span>
+              <span className="text-gray-500 text-sm self-center">{filtered.length}件</span>
             </div>
 
             {/* Grid */}
@@ -249,20 +433,21 @@ export default function AdminPage() {
               {filtered.map((p) => {
                 const n = namesMap[p.pattern_id];
                 const flagged = flaggedIds.has(p.pattern_id);
+                const rank1 = coreRank1Map[p.core_code];
+                const rankMeta = rank1 ? L4_RANK_META[rank1] : null;
                 return (
                   <div
                     key={p.pattern_id}
-                    className={`relative rounded-lg p-2 text-center cursor-pointer transition-colors ${
+                    className={`relative rounded-lg p-2 text-center cursor-pointer transition-colors border ${
                       flagged
-                        ? "bg-orange-950/60 border border-orange-700/60 hover:bg-orange-950/80"
+                        ? "bg-orange-950/60 border-orange-700/60 hover:bg-orange-950/80"
+                        : n && rankMeta
+                        ? `${rankMeta.cardBg} ${rankMeta.cardBorder} hover:brightness-125`
                         : n
-                        ? "bg-gray-900 hover:bg-gray-800"
-                        : "bg-gray-950 border border-gray-800 opacity-40"
+                        ? "bg-gray-900 border-gray-800 hover:bg-gray-800"
+                        : "bg-gray-950 border-gray-800 opacity-40"
                     }`}
-                    onClick={() => {
-                      setSelectedPattern(p.pattern_id);
-                      setTab("patterns");
-                    }}
+                    onClick={() => setModalPatternId(p.pattern_id)}
                   >
                     <button
                       className={`absolute top-1 right-1 w-5 h-5 rounded-full text-xs flex items-center justify-center leading-none transition-colors ${
@@ -278,9 +463,33 @@ export default function AdminPage() {
                     <div className="text-3xl font-bold leading-tight">
                       {n ? n.kanji_name : "—"}
                     </div>
-                    <div className="text-xs text-gray-500 mt-1 leading-tight">
-                      {n ? n.reading : ""}
-                    </div>
+                    {n && editingReadingId === p.pattern_id ? (
+                      <input
+                        className="text-xs w-full bg-gray-800 text-center rounded px-1 mt-1 outline-none"
+                        value={editingReadingValue}
+                        autoFocus
+                        onChange={(e) => setEditingReadingValue(e.target.value)}
+                        onBlur={() => saveReading(p.pattern_id)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") saveReading(p.pattern_id);
+                          if (e.key === "Escape") setEditingReadingId(null);
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                      />
+                    ) : (
+                      <div
+                        className="text-xs text-gray-500 mt-1 leading-tight hover:text-gray-300 cursor-text"
+                        onClick={(e) => {
+                          if (!n) return;
+                          e.stopPropagation();
+                          setEditingReadingId(p.pattern_id);
+                          setEditingReadingValue(nameOverrides[p.pattern_id] ?? n.reading ?? "");
+                        }}
+                        title="クリックで読みを編集"
+                      >
+                        {nameOverrides[p.pattern_id] ?? (n ? n.reading : "")}
+                      </div>
+                    )}
                     <div className="text-xs text-gray-700 mt-0.5">
                       #{p.pattern_id}
                     </div>
@@ -291,6 +500,7 @@ export default function AdminPage() {
           </div>
         );
       })()}
+      </div>
 
       {/* Overview */}
       {tab === "overview" && (
@@ -611,31 +821,35 @@ export default function AdminPage() {
             </span>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm border-collapse">
+          <div className="overflow-x-auto -mx-4 md:mx-0 px-4 md:px-0">
+            <table className="min-w-[720px] w-full text-sm border-collapse">
               <thead>
                 <tr className="border-b border-gray-800 text-gray-400 text-left">
-                  <th className="p-2">ID</th>
-                  <th className="p-2">骨格</th>
-                  <th className="p-2">偏り</th>
-                  <th className="p-2">出力</th>
-                  <th className="p-2">発動</th>
-                  <th className="p-2">時間</th>
-                  <th className="p-2">真名</th>
+                  <th className="p-2 w-10">ID</th>
+                  <th className="p-2 w-24">骨格</th>
+                  <th className="p-2 w-16">偏り</th>
+                  <th className="p-2 w-14">出力</th>
+                  <th className="p-2 w-14">発動</th>
+                  <th className="p-2 w-14">時間</th>
+                  <th className="p-2 w-28">流派</th>
+                  <th className="p-2 w-16">真名</th>
                   <th className="p-2">象徴イメージ</th>
-                  <th className="p-2">質感</th>
+                  <th className="p-2 w-32">質感</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredPatterns.slice(0, 200).map((p) => {
                   const interp = interpMap[p.pattern_id];
+                  const rank1 = coreRank1Map[p.core_code];
+                  const rm = rank1 ? L4_RANK_META[rank1] : null;
+                  const kata = getKata(p.core_code, p.bias_type);
                   return (
                     <tr
                       key={p.pattern_id}
-                      className={`border-b border-gray-900 hover:bg-gray-900/50 cursor-pointer ${
+                      className={`border-b border-gray-900 cursor-pointer ${
                         selectedPattern === p.pattern_id
                           ? "bg-gray-800"
-                          : ""
+                          : rm ? `${rm.rowBg} ${rm.rowLeft} hover:brightness-110` : "hover:bg-gray-900/50"
                       }`}
                       onClick={() =>
                         setSelectedPattern(
@@ -651,15 +865,25 @@ export default function AdminPage() {
                       <td className="p-2">{p.output_level}</td>
                       <td className="p-2">{p.ignition_label}</td>
                       <td className="p-2">{p.time_character_label}</td>
+                      <td className="p-2 text-xs">
+                        {kata ? (
+                          <div>
+                            <span className={`font-bold ${rm?.color ?? "text-gray-400"}`}>{kata.name}</span>
+                            <div className="text-gray-600 text-xs">{kata.reading}</div>
+                          </div>
+                        ) : <span className="text-gray-700">—</span>}
+                      </td>
                       <td className="p-2 font-bold text-lg">
                         {namesMap[p.pattern_id]?.kanji_name || (
                           <span className="text-gray-700">—</span>
                         )}
                       </td>
-                      <td className="p-2 text-gray-400 max-w-xs text-xs">
-                        {interp?.symbolic_image || (
-                          <span className="text-gray-700">—</span>
-                        )}
+                      <td className="p-2 text-gray-400 text-xs">
+                        <div className="line-clamp-3">
+                          {interp?.symbolic_image || (
+                            <span className="text-gray-700">—</span>
+                          )}
+                        </div>
                       </td>
                       <td className="p-2">
                         {interp?.texture_keywords ? (
@@ -690,49 +914,46 @@ export default function AdminPage() {
               </p>
             )}
           </div>
+
+          <h3 className="text-lg font-bold mb-3 mt-10">骨格一覧 ({cores.length})</h3>
+          <div className="overflow-x-auto -mx-4 md:mx-0 px-4 md:px-0">
+            <table className="min-w-[640px] w-full text-sm border-collapse">
+              <thead>
+                <tr className="border-b border-gray-800 text-gray-400 text-left">
+                  <th className="p-2 w-10">ID</th>
+                  <th className="p-2 w-24">骨格</th>
+                  <th className="p-2 w-14">起動</th>
+                  <th className="p-2 w-14">加速</th>
+                  <th className="p-2 w-14">持続</th>
+                  <th className="p-2">構造</th>
+                  <th className="p-2 w-32">キーワード</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cores.map((c) => {
+                  const rm = L4_RANK_META[c.rank1];
+                  return (
+                  <tr
+                    key={c.core_id}
+                    className={`border-b border-gray-900 cursor-pointer ${rm ? `${rm.rowBg} ${rm.rowLeft} hover:brightness-110` : "hover:bg-gray-900/50"}`}
+                    onClick={() => { setCoreFilter(c.core_code); window.scrollTo(0, 0); }}
+                  >
+                    <td className="p-2 text-gray-600">{c.core_id}</td>
+                    <td className="p-2 font-mono font-bold">{c.core_code}</td>
+                    <td className="p-2">{c.rank1}</td>
+                    <td className="p-2">{c.rank2}</td>
+                    <td className="p-2">{c.rank3}</td>
+                    <td className="p-2 text-gray-400"><div className="line-clamp-3">{c.drive_structure}</div></td>
+                    <td className="p-2 text-gray-500"><div className="line-clamp-3">{c.keywords}</div></td>
+                  </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 
-      {/* Cores */}
-      {tab === "cores" && (
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm border-collapse">
-            <thead>
-              <tr className="border-b border-gray-800 text-gray-400 text-left">
-                <th className="p-2">ID</th>
-                <th className="p-2">骨格</th>
-                <th className="p-2">起動(1位)</th>
-                <th className="p-2">加速(2位)</th>
-                <th className="p-2">持続(3位)</th>
-                <th className="p-2">構造</th>
-                <th className="p-2">キーワード</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cores.map((c) => (
-                <tr
-                  key={c.core_id}
-                  className="border-b border-gray-900 hover:bg-gray-900/50 cursor-pointer"
-                  onClick={() => {
-                    setCoreFilter(c.core_code);
-                    setTab("patterns");
-                  }}
-                >
-                  <td className="p-2 text-gray-600">{c.core_id}</td>
-                  <td className="p-2 font-mono font-bold">{c.core_code}</td>
-                  <td className="p-2">{c.rank1}</td>
-                  <td className="p-2">{c.rank2}</td>
-                  <td className="p-2">{c.rank3}</td>
-                  <td className="p-2 text-gray-400 max-w-md">
-                    {c.drive_structure}
-                  </td>
-                  <td className="p-2 text-gray-500">{c.keywords}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
 
       {/* Kanji Dictionary */}
       {tab === "kanji" && (
@@ -799,32 +1020,187 @@ export default function AdminPage() {
               );
             })}
           </div>
+
+          <h3 className="text-lg font-bold mb-3 mt-10">類義語群 ({synonyms.length})</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {synonyms.map((s: any, i: number) => (
+              <div key={i} className="bg-gray-900 rounded p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-lg font-bold">{s["語群"] || s.No}</span>
+                  <span className="text-xs text-gray-500 bg-gray-800 px-2 py-0.5 rounded">{s["主カテゴリ"]}</span>
+                </div>
+                <p className="text-sm text-gray-400 mb-2">{s["中核イメージ"]}</p>
+                <p className="text-sm">{s["候補漢字"]}</p>
+                <p className="text-xs text-gray-600 mt-1">{s["読み候補"]}</p>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
-      {/* Synonyms */}
-      {tab === "synonyms" && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {synonyms.map((s: any, i: number) => (
-            <div key={i} className="bg-gray-900 rounded p-4">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-lg font-bold">
-                  {s["語群"] || s.No}
-                </span>
-                <span className="text-xs text-gray-500 bg-gray-800 px-2 py-0.5 rounded">
-                  {s["主カテゴリ"]}
-                </span>
+      {/* L4タイプ */}
+      {tab === "l4types" && (
+          <div>
+            {/* Flagged panel */}
+            {l4FlaggedIds.size > 0 && (
+              <div className="bg-orange-950/40 border border-orange-800/40 rounded-lg p-4 mb-6">
+                <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
+                  <span className="font-bold text-orange-400">🚩 再生成フラグ: {l4FlaggedIds.size}件</span>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => { setL4FlaggedIds(new Set()); localStorage.removeItem("df3000-l4-flagged"); setL4RegenStatus(""); }}
+                      className="text-xs text-gray-500 hover:text-gray-300 border border-gray-700 rounded px-2 py-1"
+                    >
+                      全解除
+                    </button>
+                    <button
+                      onClick={sendL4RegenRequest}
+                      className="bg-orange-600 hover:bg-orange-500 text-white text-sm px-4 py-1.5 rounded font-bold"
+                    >
+                      再生成リクエスト送信
+                    </button>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {[...l4FlaggedIds].map((id) => {
+                    const entry = (l4Data as any[]).find((t: any) => t.id === id);
+                    return entry ? (
+                      <span key={id} className="text-sm bg-gray-900 border border-orange-900/50 px-2 py-0.5 rounded flex items-center gap-1">
+                        <span className="font-bold">{l4Overrides[id] ?? entry.name}</span>
+                        <span className="text-gray-600 text-xs">{id}</span>
+                        <button onClick={(e) => toggleL4Flag(id, e)} className="text-gray-600 hover:text-red-400 ml-0.5">×</button>
+                      </span>
+                    ) : null;
+                  })}
+                </div>
+                {l4RegenStatus && (
+                  <p className="text-sm mt-3 text-gray-300 bg-gray-900 rounded p-2">{l4RegenStatus}</p>
+                )}
               </div>
-              <p className="text-sm text-gray-400 mb-2">
-                {s["中核イメージ"]}
-              </p>
-              <p className="text-sm">{s["候補漢字"]}</p>
-              <p className="text-xs text-gray-600 mt-1">{s["読み候補"]}</p>
-            </div>
-          ))}
-        </div>
+            )}
+
+            {/* 20型グリッド: rank1 × bias */}
+            {["D", "S", "O", "N", "E"].map((rank) => {
+              const meta = L4_RANK_META[rank];
+              const kataItems = (l4KataData as any[]).filter((k: any) => k.rank1 === rank);
+              return (
+                <div key={rank} className="mb-8">
+                  <div className="flex items-center gap-3 mb-3">
+                    <h2 className={`text-xl font-bold ${meta.color}`}>{rank}</h2>
+                    <span className={`text-xs px-2 py-0.5 rounded ${meta.badge}`}>{meta.jp}</span>
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    {kataItems.map((k: any) => (
+                      <div
+                        key={k.id}
+                        className={`rounded-xl p-4 border ${meta.bg} ${meta.border}`}
+                      >
+                        <div className={`text-2xl font-bold mb-1 ${meta.color}`}>{k.name}</div>
+                        <div className="text-xs text-gray-500 mb-2">{k.reading}</div>
+                        <div className={`text-xs px-1.5 py-0.5 rounded inline-block ${meta.badge}`}>{k.bias}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
       )}
     </main>
+
+    {/* 名前詳細モーダル */}
+    {modalPatternId && modalPattern && (
+      <div
+        className="fixed inset-0 z-50 flex items-start justify-center bg-black/70 p-4 pt-16 overflow-y-auto"
+        onClick={() => setModalPatternId(null)}
+      >
+        {(() => {
+          const modalRank1 = coreRank1Map[modalPattern.core_code];
+          const modalRm = modalRank1 ? L4_RANK_META[modalRank1] : null;
+          const modalKata = getKata(modalPattern.core_code, modalPattern.bias_type);
+          return (
+        <div
+          className={`border rounded-xl p-6 w-full max-w-lg ${modalRm ? `bg-gray-900 ${modalRm.border}` : "bg-gray-900 border-gray-700"}`}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* 型バッジ */}
+          {modalKata && modalRm && (
+            <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded mb-3 ${modalRm.badge}`}>
+              <span className="font-bold text-sm">{modalKata.name}</span>
+              <span className="text-xs opacity-70">{modalKata.reading}</span>
+            </div>
+          )}
+          {/* ヘッダー */}
+          <div className="flex justify-between items-start mb-4">
+            <div className="flex items-center gap-4">
+              {modalName && (
+                <div className="text-center">
+                  <div className="text-5xl font-bold">{modalName.kanji_name}</div>
+                  <div className="text-sm text-gray-400 mt-1">{nameOverrides[modalPatternId] ?? modalName.reading}</div>
+                  <div className="text-xs text-gray-500">{modalName.english_name}</div>
+                </div>
+              )}
+              <div>
+                <div className="font-mono text-lg">{modalPattern.core_code}</div>
+                <div className="text-gray-500 text-sm">#{modalPatternId}</div>
+                <div className="flex flex-wrap gap-1 mt-1">
+                  {[modalPattern.bias_type, modalPattern.output_level, modalPattern.ignition_label, modalPattern.time_character_label].map((tag, i) => (
+                    <span key={i} className="text-xs bg-gray-800 px-2 py-0.5 rounded">{tag}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <button onClick={() => setModalPatternId(null)} className="text-gray-500 hover:text-white text-xl ml-2">✕</button>
+          </div>
+
+          <div className="space-y-3">
+            {modalName && (
+              <div className="bg-yellow-900/20 border border-yellow-800/30 rounded p-3">
+                <h4 className="text-xs text-yellow-600 mb-1">命名理由</h4>
+                <p className="text-sm">{modalName.naming_reason}</p>
+              </div>
+            )}
+            {modalInterp && (
+              <>
+                <div>
+                  <h4 className="text-xs text-gray-500 mb-1">構造解釈</h4>
+                  <p className="text-sm">{modalInterp.structural_interpretation}</p>
+                </div>
+                <div>
+                  <h4 className="text-xs text-gray-500 mb-1">象徴イメージ</h4>
+                  <p className="text-sm italic text-gray-300">{modalInterp.symbolic_image}</p>
+                </div>
+                {modalInterp.texture_keywords && (
+                  <div className="flex gap-1 flex-wrap">
+                    {modalInterp.texture_keywords.map((kw: string, i: number) => (
+                      <span key={i} className="text-xs bg-gray-800 px-2 py-1 rounded">{kw}</span>
+                    ))}
+                  </div>
+                )}
+                <div className="grid grid-cols-1 gap-2 mt-2">
+                  {[
+                    ["起動条件", modalInterp.trigger],
+                    ["加速条件", modalInterp.accelerator],
+                    ["持続条件", modalInterp.sustain],
+                    ["破綻条件", modalInterp.breakdown],
+                    ["回復条件", modalInterp.recovery],
+                    ["覚醒時の雰囲気", modalInterp.awakened_vibe],
+                  ].filter(([, v]) => v).map(([label, text]) => (
+                    <div key={label} className="bg-gray-800/50 rounded p-2">
+                      <h4 className="text-xs text-gray-500 mb-0.5">{label}</h4>
+                      <p className="text-sm">{text}</p>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+          );
+        })()}
+      </div>
+    )}
+    </>
   );
 }
 

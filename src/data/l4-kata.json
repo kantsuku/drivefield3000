@@ -1,0 +1,22 @@
+[
+  { "id": "D-Single",   "rank1": "D", "bias": "Single",   "name": "天突の型", "reading": "てんとつのかた" },
+  { "id": "D-Dual",     "rank1": "D", "bias": "Dual",     "name": "双炎の型", "reading": "そうえんのかた" },
+  { "id": "D-Trinity",  "rank1": "D", "bias": "Trinity",  "name": "鼎炎の型", "reading": "ていえんのかた" },
+  { "id": "D-Flat",     "rank1": "D", "bias": "Flat",     "name": "万炎の型", "reading": "まんえんのかた" },
+  { "id": "S-Single",   "rank1": "S", "bias": "Single",   "name": "明鏡の型", "reading": "めいきょうのかた" },
+  { "id": "S-Dual",     "rank1": "S", "bias": "Dual",     "name": "双観の型", "reading": "そうかんのかた" },
+  { "id": "S-Trinity",  "rank1": "S", "bias": "Trinity",  "name": "三光の型", "reading": "さんこうのかた" },
+  { "id": "S-Flat",     "rank1": "S", "bias": "Flat",     "name": "万理の型", "reading": "ばんりのかた" },
+  { "id": "O-Single",   "rank1": "O", "bias": "Single",   "name": "誠心の型", "reading": "せいしんのかた" },
+  { "id": "O-Dual",     "rank1": "O", "bias": "Dual",     "name": "双絆の型", "reading": "そうはんのかた" },
+  { "id": "O-Trinity",  "rank1": "O", "bias": "Trinity",  "name": "三縁の型", "reading": "さんえんのかた" },
+  { "id": "O-Flat",     "rank1": "O", "bias": "Flat",     "name": "大海の型", "reading": "たいかいのかた" },
+  { "id": "N-Single",   "rank1": "N", "bias": "Single",   "name": "一刃の型", "reading": "いちじんのかた" },
+  { "id": "N-Dual",     "rank1": "N", "bias": "Dual",     "name": "双刃の型", "reading": "そうじんのかた" },
+  { "id": "N-Trinity",  "rank1": "N", "bias": "Trinity",  "name": "三鬼の型", "reading": "さんきのかた" },
+  { "id": "N-Flat",     "rank1": "N", "bias": "Flat",     "name": "鬼迅の型", "reading": "きじんのかた" },
+  { "id": "E-Single",   "rank1": "E", "bias": "Single",   "name": "独楽の型", "reading": "どくらくのかた" },
+  { "id": "E-Dual",     "rank1": "E", "bias": "Dual",     "name": "双悦の型", "reading": "そうえつのかた" },
+  { "id": "E-Trinity",  "rank1": "E", "bias": "Trinity",  "name": "三陶の型", "reading": "さんとうのかた" },
+  { "id": "E-Flat",     "rank1": "E", "bias": "Flat",     "name": "大悦の型", "reading": "だいえつのかた" }
+]
