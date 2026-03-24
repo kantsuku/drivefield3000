@@ -10,6 +10,7 @@ import synonymData from "@/data/synonym-groups.json";
 import namesData from "@/data/names-2880.json";
 import l4Data from "@/data/l4-types.json";
 import l4KataData from "@/data/l4-kata.json";
+import names240Data from "@/data/names-240.json";
 
 type Tab = "overview" | "names" | "patterns" | "kanji" | "l4types";
 
@@ -52,6 +53,15 @@ function getL4Id(coreCode: string, biasType: string, ignition: string, timeChar:
   const rank1 = coreRank1Map[coreCode];
   if (!rank1) return null;
   return `${rank1}-${biasType}-${IGN_MAP[ignition] ?? ignition}-${TIME_MAP[timeChar] ?? timeChar}`;
+}
+
+// 240真名ルックアップ (rank1-bias → 真名リスト)
+const names240Map: Record<string, any[]> = {};
+for (const n of names240Data as any[]) {
+  const parts = n.id.split("-"); // rank1-rank2-rank3-bias
+  const kataKey = `${parts[0]}-${parts[parts.length - 1]}`; // rank1-bias
+  if (!names240Map[kataKey]) names240Map[kataKey] = [];
+  names240Map[kataKey].push(n);
 }
 
 // の型ルックアップ (rank1-bias → {name, reading})
@@ -294,6 +304,7 @@ export default function AdminPage() {
           <button
             key={t.key}
             onPointerDown={(e) => { e.preventDefault(); setTab(t.key); }}
+            style={{ touchAction: "manipulation" }}
             className={`px-4 py-2 text-sm font-medium whitespace-nowrap ${
               tab === t.key
                 ? "border-b-2 border-white text-white"
@@ -1079,27 +1090,43 @@ export default function AdminPage() {
               </div>
             )}
 
-            {/* 20型グリッド: rank1 × bias */}
+            {/* 20型 + 240真名グリッド */}
             {["D", "S", "O", "N", "E"].map((rank) => {
               const meta = L4_RANK_META[rank];
               const kataItems = (l4KataData as any[]).filter((k: any) => k.rank1 === rank);
               return (
-                <div key={rank} className="mb-8">
-                  <div className="flex items-center gap-3 mb-3">
+                <div key={rank} className="mb-10">
+                  <div className="flex items-center gap-3 mb-4">
                     <h2 className={`text-xl font-bold ${meta.color}`}>{rank}</h2>
                     <span className={`text-xs px-2 py-0.5 rounded ${meta.badge}`}>{meta.jp}</span>
                   </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    {kataItems.map((k: any) => (
-                      <div
-                        key={k.id}
-                        className={`rounded-xl p-4 border ${meta.bg} ${meta.border}`}
-                      >
-                        <div className={`text-2xl font-bold mb-1 ${meta.color}`}>{k.name}</div>
-                        <div className="text-xs text-gray-500 mb-2">{k.reading}</div>
-                        <div className={`text-xs px-1.5 py-0.5 rounded inline-block ${meta.badge}`}>{k.bias}</div>
-                      </div>
-                    ))}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    {kataItems.map((k: any) => {
+                      const truenames = names240Map[`${k.rank1}-${k.bias}`] ?? [];
+                      return (
+                        <div key={k.id} className={`rounded-xl border ${meta.bg} ${meta.border}`}>
+                          {/* 型ヘッダー */}
+                          <div className="p-4 border-b border-white/10">
+                            <div className={`text-xl font-bold ${meta.color}`}>{k.name}</div>
+                            <div className="text-xs text-gray-500">{k.reading}</div>
+                            <div className={`text-xs px-1.5 py-0.5 rounded inline-block mt-1 ${meta.badge}`}>{k.bias}</div>
+                          </div>
+                          {/* 真名12個 */}
+                          <div className="p-3 grid grid-cols-3 gap-1.5">
+                            {truenames.map((n: any) => (
+                              <div
+                                key={n.id}
+                                className="bg-gray-900/60 rounded-lg p-2 text-center"
+                                title={`${n.reading} — ${n.naming_reason}`}
+                              >
+                                <div className={`text-lg font-bold ${meta.color}`}>{n.kanji_name}</div>
+                                <div className="text-xs text-gray-600">{n.reading}</div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               );
