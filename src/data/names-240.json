@@ -1,534 +1,12 @@
 [
   {
-    "id": "1",
+    "id": "D-S-O-Single",
     "pattern_id": 1,
-    "kanji_name": "内爆",
-    "reading": "ないばく",
-    "romaji": "naibaku",
-    "english_name": "Internal Explosion",
-    "naming_reason": "内なる閃きが爆発的に創造力として発現する没入の力を表す。理解への輝きと完全没入が瞬発的に融合する構造を完璧に体現している。"
-  },
-  {
-    "id": "10",
-    "pattern_id": 10,
-    "kanji_name": "時影",
-    "reading": "じえい",
-    "romaji": "jiei",
-    "english_name": "Time Shadow",
-    "naming_reason": "時が育てた深い実力が時代に影響を与える重厚さ。理解・共感・快感の均等型による長期的影響力を時の流れと影響力で表現。"
-  },
-  {
-    "id": "11",
-    "pattern_id": 11,
-    "kanji_name": "鳳境",
-    "reading": "ほうきょう",
-    "romaji": "houkyou",
-    "english_name": "Phoenix Realm",
-    "naming_reason": "最高品質を極めた名工の神聖な境地。理解・緊張・新規性の均等型における到達すべき至高の境地を鳳凰の神聖さで表現。"
-  },
-  {
-    "id": "12",
-    "pattern_id": 12,
-    "kanji_name": "烈彩",
-    "reading": "れっさい",
-    "romaji": "ressai",
-    "english_name": "Fierce Colors",
-    "naming_reason": "花火のように内燃から爆発的に多彩な光を放つ創造奥義。共感・新規性・理解の均等型による多面的創造力を烈しい彩りで表現。"
-  },
-  {
-    "id": "13",
-    "pattern_id": 13,
-    "kanji_name": "心轟",
-    "reading": "しんごう",
-    "romaji": "shingou",
-    "english_name": "Heart Thunder",
-    "naming_reason": "救いたい決意から生まれる天才的な突破力。共感・新規性・緊張の2強拮抗における内なる決意の轟きを心の雷鳴で表現。"
-  },
-  {
-    "id": "14",
-    "pattern_id": 14,
-    "kanji_name": "千杉",
-    "reading": "せんすぎ",
-    "romaji": "sensugi",
-    "english_name": "Thousand Cedar",
-    "naming_reason": "千年杉のような時間をかけた圧倒的存在感と計り知れない深さ。共感・緊張・快感の2強拮抗による重厚な成長を表現。"
-  },
-  {
-    "id": "15",
-    "pattern_id": 15,
-    "kanji_name": "巨昇",
-    "reading": "きょしょう",
-    "romaji": "kyoshou",
-    "english_name": "Giant Ascension",
-    "naming_reason": "一生をかけた大作完成による至高への昇華。共感・快感・理解の均等型における壮大な上昇を巨大な昇華で表現。"
-  },
-  {
-    "id": "16",
-    "pattern_id": 16,
-    "kanji_name": "蒼孤",
-    "reading": "そうこ",
-    "romaji": "souko",
-    "english_name": "Azure Solitude",
-    "naming_reason": "蒼き天を見上げる孤高の天才が放つ革新の光。緊張・新規性・共感の均等型における独創的な孤高の姿を蒼空の孤独で表現。"
-  },
-  {
-    "id": "17",
-    "pattern_id": 17,
-    "kanji_name": "石殿",
-    "reading": "せきでん",
-    "romaji": "sekiden",
-    "english_name": "Stone Palace",
-    "naming_reason": "何世紀もかけて形成された鍾乳洞の荘厳な存在感。緊張特化型の1位突出における長期蓄積の重厚さを石の殿堂で表現。"
-  },
-  {
-    "id": "18",
-    "pattern_id": 18,
-    "kanji_name": "孤威",
-    "reading": "こい",
-    "romaji": "koi",
-    "english_name": "Lone Majesty",
-    "naming_reason": "孤高の意志で瞬時に圧倒的な威力を発揮する力。緊張・理解・共感の均等型における独立した威厳を孤高の威光で表現。"
-  },
-  {
-    "id": "19",
-    "pattern_id": 19,
-    "kanji_name": "霊迸",
-    "reading": "れいほう",
-    "romaji": "reihou",
-    "english_name": "Spirit Burst",
-    "naming_reason": "天才的インスピレーションが一瞬で爆発する創造の閃き。緊張・理解・快感の均等型における霊的な創造爆発を表現。"
-  },
-  {
-    "id": "2",
-    "pattern_id": 2,
-    "kanji_name": "発狂",
-    "reading": "はっきょう",
-    "romaji": "hakkyou",
-    "english_name": "Explosive Madness",
-    "naming_reason": "発明家の狂気的な集中力と圧倒的な突進力を表現。新規性追求と緊張集中が拮抗する2強型の本質を「狂」の字が見事に象徴している。"
-  },
-  {
-    "id": "20",
-    "pattern_id": 20,
-    "kanji_name": "焔共",
-    "reading": "えんきょう",
-    "romaji": "enkyou",
-    "english_name": "Flame Resonance",
-    "naming_reason": "内なる情熱が理解者との共鳴で巨大な創造の焔として燃え上がる。緊張・共感・新規性の3強均衡における情熱的共創を表現。"
-  },
-  {
-    "id": "3",
-    "pattern_id": 3,
-    "kanji_name": "岳激",
-    "reading": "がくげき",
-    "romaji": "gakugeki",
-    "english_name": "Mountain Fury",
-    "naming_reason": "心の奥底から突き上がる衝動で山を登る激烈な内なる爆発力。新規性・緊張・共感が拮抗する構造の激しさを岳の重厚さと激の爆発力で表現。"
-  },
-  {
-    "id": "4",
-    "pattern_id": 4,
-    "kanji_name": "作永",
-    "reading": "さくえい",
-    "romaji": "sakuei",
-    "english_name": "Eternal Creation",
-    "naming_reason": "何十年もの構想が大作として完成する芸術家を象徴。新規性・快感・理解の3強均衡による深層の長期熟成が永遠価値を生む力を体現。"
-  },
-  {
-    "id": "5",
-    "pattern_id": 5,
-    "kanji_name": "鷹燎",
-    "reading": "たかりょう",
-    "romaji": "takariyou",
-    "english_name": "Hawk Blaze",
-    "naming_reason": "鷹の眼光と燎原の火の如き集中の爆発。新規性・快感・緊張の2強拮抗における瞬発的創造力を鷹の鋭敏さと燎の広がりで表現。"
-  },
-  {
-    "id": "6",
-    "pattern_id": 6,
-    "kanji_name": "悟爆",
-    "reading": "ごばく",
-    "romaji": "gobaku",
-    "english_name": "Enlightenment Burst",
-    "naming_reason": "長年の修行が悟りとして爆発的に開花する瞬間。理解特化型の1位突出構造で、深い洞察が一気に開花する力強さを完璧に表現。"
-  },
-  {
-    "id": "7",
-    "pattern_id": 7,
-    "kanji_name": "狂天",
-    "reading": "きょうてん",
-    "romaji": "kyouten",
-    "english_name": "Mad Heaven",
-    "naming_reason": "深夜研究室での天啓的革命と狂気じみた独創性。理解・新規性・緊張の3強均衡による多面的な創造の激しさを天と狂で表現。"
-  },
-  {
-    "id": "8",
-    "pattern_id": 8,
-    "kanji_name": "真盟",
-    "reading": "しんめい",
-    "romaji": "shinmei",
-    "english_name": "True Alliance",
-    "naming_reason": "人生をかけた真理探求が盟友との絆で結実する力。理解・共感・緊張の2強拮抗における深い信頼関係の結実を表現。"
-  },
-  {
-    "id": "9",
-    "pattern_id": 9,
-    "kanji_name": "信牽",
-    "reading": "しんけん",
-    "romaji": "shinken",
-    "english_name": "Conviction Pull",
-    "naming_reason": "深い信念に基づく瞬時のカリスマ的牽引力と変革の炎。理解・共感・緊張の3強均衡による指導力の本質を信念の牽引力で表現。"
-  },
-  {
-    "id": "D-E-N-Flat",
-    "pattern_id": 8,
-    "kanji_name": "凰冥",
-    "reading": "おうめい",
-    "romaji": "oumei",
-    "english_name": "Phoenix Meditation",
-    "naming_reason": "均等型の深遠さと統合性を最も美しく表現。深夜研究での究極的な統合と内的完成は、全要素が調和した時の神秘的な創造境地を完璧に象徴している。"
-  },
-  {
-    "id": "D-E-N-Single",
-    "pattern_id": 5,
-    "kanji_name": "青突",
-    "reading": "せいとつ",
-    "romaji": "seitotsu",
-    "english_name": "Blue Breakthrough",
-    "naming_reason": "ドーパミン1位特化にノルアドレナリンが加わる構造の鋭さを完璧に表現。青い炎のように暗闇を突き破る内なる情熱の爆発的突破力は、集中力が加わった新規性追求の激しさを象徴している。"
-  },
-  {
-    "id": "D-E-N-Trinity",
-    "pattern_id": 7,
-    "kanji_name": "巨匠",
-    "reading": "きょしょう",
-    "romaji": "kyoshou",
-    "english_name": "Master Craftsman",
-    "naming_reason": "3強均衡型の完成度と威厳を最も端的に表現。歴史に残る傑作を生み出す大器晩成は、全神経伝達物質が高次元で調和した時の究極的な創造力を象徴している。"
-  },
-  {
-    "id": "D-E-O-Dual",
-    "pattern_id": 2,
-    "kanji_name": "完撃",
-    "reading": "かんげき",
-    "romaji": "kangeki",
-    "english_name": "Perfect Strike",
-    "naming_reason": "2強拮抗型の特性を最も的確に表現。何年も温めたアイデアが完成形として現れるマスター級の確信とインパクトは、ドーパミンとエンドルフィンが均衡する構造での熟成された爆発力を象徴している。"
-  },
-  {
-    "id": "D-E-O-Flat",
-    "pattern_id": 4,
-    "kanji_name": "永智",
-    "reading": "えいち",
-    "romaji": "eichi",
-    "english_name": "Eternal Wisdom",
-    "naming_reason": "均等型の持続性と普遍性を最も的確に捉えている。時を超えて受け継がれる知的遺産の永続的な影響力は、全要素がバランス良く機能する構造の本質を表現している。"
-  },
-  {
-    "id": "D-E-O-Single",
-    "pattern_id": 1,
-    "kanji_name": "龍迸",
-    "reading": "りゅうほう",
-    "romaji": "ryuuhou",
-    "english_name": "Dragon Surge",
-    "naming_reason": "ドーパミン圧倒的1位特化という構造に最もふさわしい。龍の内なる力が一気に迸る天才的閃きは、新規性への圧倒的な偏りと、その瞬間的な爆発力を完璧に体現している。"
-  },
-  {
-    "id": "D-E-O-Trinity",
-    "pattern_id": 3,
-    "kanji_name": "神樹",
-    "reading": "しんじゅ",
-    "romaji": "shinju",
-    "english_name": "Divine Tree",
-    "naming_reason": "3強均衡型には圧倒的な存在感と威厳が必要。千年樹のような威厳は、ドーパミン・エンドルフィン・オキシトシンが調和した時の深遠で包括的な力を完璧に表現している。"
-  },
-  {
-    "id": "D-E-S-Dual",
-    "pattern_id": 2,
-    "kanji_name": "智権",
-    "reading": "ちけん",
-    "romaji": "chiken",
-    "english_name": "Wisdom Authority",
-    "naming_reason": "2強型の拮抗バランスを「生涯をかけた探究により第一人者となった大家的権威と普遍的智慧」として表現。ドーパミンの革新性とエンドルフィンの快感・没入が拮抗しながら、セロトニンの理解・秩序で統合される構造を、智慧と権威の融合による最高の到達点として象徴している。"
-  },
-  {
-    "id": "D-E-S-Flat",
-    "pattern_id": 4,
-    "kanji_name": "仙究",
-    "reading": "せんきゅう",
-    "romaji": "senkyuu",
-    "english_name": "Sage Research",
-    "naming_reason": "均等型の全体バランスを「深遠な探究を重ねる仙人級の研究者の境地」として表現。三神経が調和的に機能する構造を、仙人という超人的な存在と究明という学究的姿勢の融合により、最も深遠で持続的な探究力として象徴している。"
-  },
-  {
-    "id": "D-E-S-Single",
-    "pattern_id": 1,
-    "kanji_name": "晶崇",
-    "reading": "しょうすう",
-    "romaji": "shousuu",
-    "english_name": "Crystal Sublime",
-    "naming_reason": "1位特化の圧倒的突出性を「地底で完璧に形成される巨大結晶の崇高な美」として表現。ドーパミンの新規性・可能性が圧倒的に主導する構造を、結晶という完璧な秩序と崇高という精神的高みの融合により、最も美しく完成度の高い創造力として体現している。"
-  },
-  {
-    "id": "D-N-E-Dual",
-    "pattern_id": 2,
-    "kanji_name": "雷噴",
-    "reading": "らいふん",
-    "romaji": "raifun",
-    "english_name": "Thunder Eruption",
-    "naming_reason": "2強型の拮抗バランスを「内部から爆発的に噴出する雷鳴の力」として表現。ドーパミンの革新性とノルアドレナリンの集中力が拮抗しながら、エンドルフィンの快感で統合される構造を、雷という瞬間的な力と噴出という持続的な力の融合として完璧に象徴している。"
-  },
-  {
-    "id": "D-N-E-Flat",
-    "pattern_id": 4,
-    "kanji_name": "噴激",
-    "reading": "ふんげき",
-    "romaji": "fungeki",
-    "english_name": "Explosive Surge",
-    "naming_reason": "均等型の全体バランスを「地下深くから一気に噴出するマグマの激しい多発的な自発力」として表現。三神経が調和的に機能する構造を、噴出という内発的エネルギーと激流という動的な力の融合により、多面的で激動的な創造力として象徴している。"
-  },
-  {
-    "id": "D-N-E-Single",
-    "pattern_id": 1,
-    "kanji_name": "熔柱",
-    "reading": "ようちゅう",
-    "romaji": "youchuu",
-    "english_name": "Molten Pillar",
-    "naming_reason": "1位特化の圧倒的突出性を「地底エネルギーが天空に向かう革新的噴出の圧巻」として表現。ドーパミンの新規性・可能性が圧倒的に主導する構造を、地底から天空への垂直的なエネルギー噴出として象徴し、最も力強く方向性の明確な変革力を体現している。"
-  },
-  {
-    "id": "D-N-E-Trinity",
-    "pattern_id": 3,
-    "kanji_name": "悟極",
-    "reading": "ごきょく",
-    "romaji": "gokyoku",
-    "english_name": "Ultimate Enlightenment",
-    "naming_reason": "3強型の均衡を「生涯をかけた探求で到達した究極の真理と深遠な洞察の完成形」として表現。ドーパミン・ノルアドレナリン・エンドルフィンの三神経が均等に機能する構造を、悟りという精神的到達点と極限という完成度の融合により、最も崇高で完璧な境地として体現している。"
-  },
-  {
-    "id": "D-N-O-Flat",
-    "pattern_id": 4,
-    "kanji_name": "創煌",
-    "reading": "そうこう",
-    "romaji": "soukou",
-    "english_name": "Creative Brilliance",
-    "naming_reason": "均等型の全体バランスを「複数事業の同時創造という破格の革新性が煌めく起業家精神」として表現。三神経が調和的に機能する構造を、創造という根本的行為と煌めきという美的表現の融合により、多面的で華麗な革新力として象徴している。"
-  },
-  {
-    "id": "D-N-O-Single",
-    "pattern_id": 1,
-    "kanji_name": "仙開",
-    "reading": "せんかい",
-    "romaji": "senkai",
-    "english_name": "Sage Awakening",
-    "naming_reason": "1位特化の圧倒的突出性を「千年を経て咲く伝説の仙花の究極的開花と世界変革の力」として表現。ドーパミンの新規性・可能性が圧倒的に主導する構造を、仙人級の長期醸成を経て到達する究極の覚醒と世界変革の瞬間として、最も崇高で力強い象徴で体現している。"
-  },
-  {
-    "id": "D-N-O-Trinity",
-    "pattern_id": 3,
-    "kanji_name": "山霊",
-    "reading": "さんれい",
-    "romaji": "sanrei",
-    "english_name": "Mountain Spirit",
-    "naming_reason": "3強型の均衡を「山奥の修行で培われた師匠の魂を変容させる深遠な霊的力」として表現。ドーパミン・ノルアドレナリン・オキシトシンの三神経が均等に機能する構造を、山という自然の象徴と霊的な力の融合により、最も深遠で神秘的な変革力として美しく体現している。"
-  },
-  {
-    "id": "D-N-S-Flat",
-    "pattern_id": 4,
-    "kanji_name": "闇炸",
-    "reading": "あんさく",
-    "romaji": "ansaku",
-    "english_name": "Dark Blast",
-    "naming_reason": "均等型の全体バランスを「暗闇を突然照らす爆発的な内燃の力」として表現。三神経が調和的に機能する構造を、闇という静寂の中から突然現れる光の爆発として象徴し、内部エネルギーが外部世界を一瞬で変革する劇的な転換力を表現している。"
-  },
-  {
-    "id": "D-N-S-Single",
-    "pattern_id": 1,
-    "kanji_name": "雷破",
-    "reading": "らいは",
-    "romaji": "raiha",
-    "english_name": "Lightning Break",
-    "naming_reason": "1位特化の圧倒的突出性を「稲妻のような内爆エネルギーが現実を一瞬で変革する圧倒的な独創力」として表現。ドーパミンの新規性が主導し、ノルアドレナリンの集中力とセロトニンの秩序性が支える構造を、雷という瞬間的な自然現象が既存の世界を根本的に変革する力として完璧に体現している。"
-  },
-  {
-    "id": "D-N-S-Trinity",
-    "pattern_id": 3,
-    "kanji_name": "燈孤",
-    "reading": "とうこ",
-    "romaji": "touko",
-    "english_name": "Lamp Solitude",
-    "naming_reason": "3強型の均衡を「孤独の中で燃え上がる内なる燈火の激情」として表現。ドーパミン・ノルアドレナリン・セロトニンの三神経が均等に機能する構造を、孤独という状況下で内なる炎が最も純粋に燃え上がる創造者の境地として美しく体現している。"
-  },
-  {
-    "id": "D-O-E-Dual",
-    "pattern_id": 2,
-    "kanji_name": "熔磁",
-    "reading": "ようじ",
-    "romaji": "youji",
-    "english_name": "Molten Magnetism",
-    "naming_reason": "2強型の拮抗バランスを「内なる溶岩が圧倒的磁力となって人々を惹きつける」力として表現。ドーパミンの革新性とオキシトシンの共感力が均衡を保ちながら、エンドルフィンの快感で統合される構造を、内部の熱エネルギーが外部への強力な引力として発現する完璧なバランスとして象徴している。"
-  },
-  {
-    "id": "D-O-E-Flat",
-    "pattern_id": 4,
-    "kanji_name": "地湧",
-    "reading": "ちゆう",
-    "romaji": "chiyuu",
-    "english_name": "Earth Surge",
-    "naming_reason": "均等型の全体バランスを「内燃熟成のマグマ湧出を、大地から湧き出る豊かな力」として表現。三神経が調和的に機能する構造を、地下深くで熟成されたエネルギーが穏やかに地表に湧出し、持続的な豊かさを生み出す自然の恵みとして美しく象徴している。"
-  },
-  {
-    "id": "D-O-E-Single",
-    "pattern_id": 1,
-    "kanji_name": "熔牙",
-    "reading": "ようが",
-    "romaji": "youga",
-    "english_name": "Molten Fang",
-    "naming_reason": "1位特化の圧倒的突出性を「地底から噴出する溶岩の鋭い牙で新大地を創る」力として表現。ドーパミンの新規性・可能性が主導する創造的破壊力を、オキシトシンの共感・接続がエンドルフィンの快感・没入で支える構造を、地底エネルギーが表面を突き破り新世界を創造する圧倒的な象徴として完璧に体現している。"
-  },
-  {
-    "id": "D-O-E-Trinity",
-    "pattern_id": 3,
-    "kanji_name": "覇創",
-    "reading": "はそう",
-    "romaji": "hasou",
-    "english_name": "Hegemonic Creation",
-    "naming_reason": "3強型の均衡を「チーム全体を動かし新事業を創造する圧倒的な牽引力と革新的エネルギー」として表現。ドーパミン・オキシトシン・エンドルフィンの三神経が均等に働く構造を、支配的なリーダーシップと創造的革新が融合した究極的な変革力として完璧に体現している。"
-  },
-  {
-    "id": "D-O-N-Dual",
-    "pattern_id": 18,
-    "kanji_name": "革炎",
-    "reading": "かくえん",
-    "romaji": "kakuen",
-    "english_name": "Revolution Flame",
-    "naming_reason": "心に秘めた社会変革への情熱を炎のように燃やしてムーブメントに変える力。ドーパミンとオキシトシンの2強構造を、革命的な炎として表現している。"
-  },
-  {
-    "id": "D-O-N-Flat",
-    "pattern_id": 20,
-    "kanji_name": "霊動",
-    "reading": "れいどう",
-    "romaji": "reidou",
-    "english_name": "Spirit Motion",
-    "naming_reason": "突然のインスピレーションが仲間を巻き込むカリスマ的な感染力。均等型のバランスを、霊的な動きによる感化力として表現している。"
-  },
-  {
-    "id": "D-O-N-Single",
-    "pattern_id": 17,
-    "kanji_name": "鬼創",
-    "reading": "きそう",
-    "romaji": "kisou",
-    "english_name": "Demon Creation",
-    "naming_reason": "革新的な創作の鬼気迫る力強さと、新しいムーブメントを生み出す創造性を表現。ドーパミン1位特化の圧倒的な創造力を表現している。"
-  },
-  {
-    "id": "D-O-N-Trinity",
-    "pattern_id": 19,
-    "kanji_name": "溶創",
-    "reading": "ようそう",
-    "romaji": "yousou",
-    "english_name": "Molten Creation",
-    "naming_reason": "内燃の溶岩が絆を通じて噴出し新たな創造を破壊的に生む力。三つの神経系の均衡を、溶岩の創造的破壊力として表現している。"
-  },
-  {
-    "id": "D-O-S-Dual",
-    "pattern_id": 14,
-    "kanji_name": "鸞運",
-    "reading": "らんうん",
-    "romaji": "ranun",
-    "english_name": "Phoenix Movement",
-    "naming_reason": "鸞鳳のようなカリスマで瞬時に全国規模のムーブメントを運び起こす引力。ドーパミンとオキシトシンの2強構造を、神鳥の壮大な影響力として表現している。"
-  },
-  {
-    "id": "D-O-S-Flat",
-    "pattern_id": 16,
-    "kanji_name": "晶永",
-    "reading": "しょうえい",
-    "romaji": "shouei",
-    "english_name": "Crystal Eternal",
-    "naming_reason": "結晶の深淵が至高の輝きで永続照射する。均等型のバランスを、結晶の完璧性と永続性として表現している。"
-  },
-  {
-    "id": "D-O-S-Single",
-    "pattern_id": 13,
-    "kanji_name": "原炸",
-    "reading": "げんさく",
-    "romaji": "gensaku",
-    "english_name": "Origin Blast",
-    "naming_reason": "白いキャンバスに最初の筆跡を描く原初的創造爆発。ドーパミン1位特化の純粋な創造衝動を、原初的な爆発として表現している。"
-  },
-  {
-    "id": "D-O-S-Trinity",
-    "pattern_id": 15,
-    "kanji_name": "核裂",
-    "reading": "かくれつ",
-    "romaji": "kakuretsu",
-    "english_name": "Nuclear Fission",
-    "naming_reason": "個人的直感が集団創造力を爆発的に分裂拡散させる力。三つの神経系の均衡を、核分裂のような連鎖的拡散として表現している。"
-  },
-  {
-    "id": "D-S-E-Flat",
-    "pattern_id": 12,
-    "kanji_name": "鯨宙",
-    "reading": "げいちゅう",
-    "romaji": "geichuu",
-    "english_name": "Whale Universe",
-    "naming_reason": "鯨が宇宙を泳ぐような広大で深遠な知的探究の究極到達点。均等型のバランスを、無限の広がりと深さとして表現している。"
-  },
-  {
-    "id": "D-S-E-Single",
-    "pattern_id": 9,
-    "kanji_name": "孤燃",
-    "reading": "こねん",
-    "romaji": "konen",
-    "english_name": "Lone Burn",
-    "naming_reason": "深夜の閃きで朝まで創作に没頭する孤高の創造炎。ドーパミン1位特化の純粋な創造衝動を、孤独な燃焼として力強く表現している。"
-  },
-  {
-    "id": "D-S-E-Trinity",
-    "pattern_id": 11,
-    "kanji_name": "天鑿",
-    "reading": "てんさく",
-    "romaji": "tensaku",
-    "english_name": "Heaven Chisel",
-    "naming_reason": "歴史を変える完成理論の突破力を表現。三つの神経系の均衡を、天を穿つような究極の完成力として表現している。"
-  },
-  {
-    "id": "D-S-N-Dual",
-    "pattern_id": 6,
-    "kanji_name": "蒼猛",
-    "reading": "そうもう",
-    "romaji": "soumou",
-    "english_name": "Blue Fierce",
-    "naming_reason": "革新の瞬発力と構築の冷静さが融合した深夜の創造爆発を象徴。ドーパミンとセロトニンの2強構造を、創造性と理性の統合として表現している。"
-  },
-  {
-    "id": "D-S-N-Flat",
-    "pattern_id": 8,
-    "kanji_name": "巨森",
-    "reading": "きょしん",
-    "romaji": "kyoshin",
-    "english_name": "Giant Forest",
-    "naming_reason": "長年温めた理論を著書にまとめ上げる深い森の巨木のような威厳完成力。均等型のバランスを、深淵で威厳ある完成形として表現している。"
-  },
-  {
-    "id": "D-S-N-Single",
-    "pattern_id": 5,
-    "kanji_name": "虎拓",
-    "reading": "こたく",
-    "romaji": "kotaku",
-    "english_name": "Tiger Pioneer",
-    "naming_reason": "長年の研鑽が結実し新領域を切り拓く猛虎の突破力。ドーパミン1位特化の爆発的な新規性開拓を、猛虎の力強さで完璧に表現している。"
-  },
-  {
-    "id": "D-S-N-Trinity",
-    "pattern_id": 7,
-    "kanji_name": "孤巨",
-    "reading": "こきょ",
-    "romaji": "kokyo",
-    "english_name": "Lone Giant",
-    "naming_reason": "山奥研究所で何年もかけ独自理論を完成させ世界の常識を覆す巨匠的深遠力。三つの神経系の均衡を、孤高でありながら巨大な影響力として表現している。"
+    "kanji_name": "閃創",
+    "reading": "せんそう",
+    "romaji": "sensou",
+    "english_name": "Flash Creation",
+    "naming_reason": "夜中の閃きから瞬時に創造が生まれる直感的な創発力。ドーパミン（新規性）の1位特化という構造を、瞬間的でありながら創造的な力として完璧に体現している。"
   },
   {
     "id": "D-S-O-Dual",
@@ -540,24 +18,6 @@
     "naming_reason": "電光石火で全体を巻き込む爆発的推進力。ドーパミンとセロトニンの2強バランスを、瞬発力と統率力の融合として表現している。"
   },
   {
-    "id": "D-S-O-Flat",
-    "pattern_id": 4,
-    "kanji_name": "使燃",
-    "reading": "しねん",
-    "romaji": "shinen",
-    "english_name": "Mission Burn",
-    "naming_reason": "人生をかけた使命が完全燃焼し社会変革を創出する力。均等型の安定したバランスを、持続的で確固とした燃焼として表現している。"
-  },
-  {
-    "id": "D-S-O-Single",
-    "pattern_id": 1,
-    "kanji_name": "閃創",
-    "reading": "せんそう",
-    "romaji": "sensou",
-    "english_name": "Flash Creation",
-    "naming_reason": "夜中の閃きから瞬時に創造が生まれる直感的な創発力。ドーパミン（新規性）の1位特化という構造を、瞬間的でありながら創造的な力として完璧に体現している。"
-  },
-  {
     "id": "D-S-O-Trinity",
     "pattern_id": 3,
     "kanji_name": "煌散",
@@ -567,58 +27,1741 @@
     "naming_reason": "閃きの光が周囲に伝播していく連鎖反応の美しさ。三つの神経系が均衡した構造を、光の拡散という調和的な現象で表現している。"
   },
   {
-    "id": "E-D-N-Dual",
-    "pattern_id": 2,
-    "kanji_name": "深燃",
-    "reading": "しんねん",
-    "romaji": "shinnen",
-    "english_name": "Deep Burning",
-    "naming_reason": "深夜の確信が翌朝から爆発する変革の炎という描写が、没入する快感と新規性・集中のバランスを見事に表現。「深」で内面への没入を、「燃」で情熱的な行動力を示し、2強型の特徴を完璧に捉えている。"
-  },
-  {
-    "id": "E-D-N-Flat",
+    "id": "D-S-O-Flat",
     "pattern_id": 4,
-    "kanji_name": "哲煙",
-    "reading": "てつえん",
-    "romaji": "tetsuen",
-    "english_name": "Philosophical Smoke",
-    "naming_reason": "長年の思索が煙のように世界に広がり浸透する理知の力という表現が、バランス型の特徴である多面的な影響力を完璧に表現している。「哲」の深い思索と「煙」の拡散性が、このドライブ構造の本質を見事に体現している。"
+    "kanji_name": "使燃",
+    "reading": "しねん",
+    "romaji": "shinen",
+    "english_name": "Mission Burn",
+    "naming_reason": "人生をかけた使命が完全燃焼し社会変革を創出する力。均等型の安定したバランスを、持続的で確固とした燃焼として表現している。"
   },
   {
-    "id": "E-D-N-Single",
+    "id": "D-S-N-Single",
+    "pattern_id": 5,
+    "kanji_name": "虎拓",
+    "reading": "こたく",
+    "romaji": "kotaku",
+    "english_name": "Tiger Pioneer",
+    "naming_reason": "長年の研鑽が結実し新領域を切り拓く猛虎の突破力。ドーパミン1位特化の爆発的な新規性開拓を、猛虎の力強さで完璧に表現している。"
+  },
+  {
+    "id": "D-S-N-Dual",
+    "pattern_id": 6,
+    "kanji_name": "蒼猛",
+    "reading": "そうもう",
+    "romaji": "soumou",
+    "english_name": "Blue Fierce",
+    "naming_reason": "革新の瞬発力と構築の冷静さが融合した深夜の創造爆発を象徴。ドーパミンとセロトニンの2強構造を、創造性と理性の統合として表現している。"
+  },
+  {
+    "id": "D-S-N-Trinity",
+    "pattern_id": 7,
+    "kanji_name": "孤巨",
+    "reading": "こきょ",
+    "romaji": "kokyo",
+    "english_name": "Lone Giant",
+    "naming_reason": "山奥研究所で何年もかけ独自理論を完成させ世界の常識を覆す巨匠的深遠力。三つの神経系の均衡を、孤高でありながら巨大な影響力として表現している。"
+  },
+  {
+    "id": "D-S-N-Flat",
+    "pattern_id": 8,
+    "kanji_name": "巨森",
+    "reading": "きょしん",
+    "romaji": "kyoshin",
+    "english_name": "Giant Forest",
+    "naming_reason": "長年温めた理論を著書にまとめ上げる深い森の巨木のような威厳完成力。均等型のバランスを、深淵で威厳ある完成形として表現している。"
+  },
+  {
+    "id": "D-S-E-Single",
+    "pattern_id": 9,
+    "kanji_name": "孤燃",
+    "reading": "こねん",
+    "romaji": "konen",
+    "english_name": "Lone Burn",
+    "naming_reason": "深夜の閃きで朝まで創作に没頭する孤高の創造炎。ドーパミン1位特化の純粋な創造衝動を、孤独な燃焼として力強く表現している。"
+  },
+  {
+    "id": "D-S-E-Dual",
     "pattern_id": 1,
-    "kanji_name": "炬創",
-    "reading": "きょそう",
-    "romaji": "kyosou",
-    "english_name": "Torch Creation",
-    "naming_reason": "内側の炬火が瞬時に創造の手を動かす芸術的瞬発力という表現が、快感による没入と新規性への志向、そして集中の緊張感を最も的確に表現している。「炬」の力強い音韻と「創」の創造性が、このドライブ構造の本質を完璧に体現している。"
+    "kanji_name": "疾析",
+    "reading": "しつせき",
+    "romaji": "shitsuseki",
+    "english_name": "Swift Analysis",
+    "naming_reason": "瞬時に本質を見抜く体系的思考の疾走。ドーパミンの新規性追求、セロトニンの理解・秩序、エンドルフィンの没入快感が融合し、発見の瞬間に生まれる知的興奮を「疾走する分析力」として完璧に表現。"
   },
   {
-    "id": "E-D-N-Trinity",
-    "pattern_id": 3,
-    "kanji_name": "炎嶺",
-    "reading": "えんれい",
-    "romaji": "enrei",
-    "english_name": "Flame Peak",
-    "naming_reason": "地底の圧倒的なマグマが長い年月を経て巨大な山脈を創造する究極の変革力という壮大な表現が、3つの神経系が均衡した究極的な創造力を象徴している。「炎」と「嶺」の組み合わせが圧倒的な存在感を放つ。"
+    "id": "D-S-E-Trinity",
+    "pattern_id": 11,
+    "kanji_name": "天鑿",
+    "reading": "てんさく",
+    "romaji": "tensaku",
+    "english_name": "Heaven Chisel",
+    "naming_reason": "歴史を変える完成理論の突破力を表現。三つの神経系の均衡を、天を穿つような究極の完成力として表現している。"
   },
   {
-    "id": "E-D-O-Dual",
+    "id": "D-S-E-Flat",
+    "pattern_id": 12,
+    "kanji_name": "鯨宙",
+    "reading": "げいちゅう",
+    "romaji": "geichuu",
+    "english_name": "Whale Universe",
+    "naming_reason": "鯨が宇宙を泳ぐような広大で深遠な知的探究の究極到達点。均等型のバランスを、無限の広がりと深さとして表現している。"
+  },
+  {
+    "id": "D-O-S-Single",
+    "pattern_id": 13,
+    "kanji_name": "原炸",
+    "reading": "げんさく",
+    "romaji": "gensaku",
+    "english_name": "Origin Blast",
+    "naming_reason": "白いキャンバスに最初の筆跡を描く原初的創造爆発。ドーパミン1位特化の純粋な創造衝動を、原初的な爆発として表現している。"
+  },
+  {
+    "id": "D-O-S-Dual",
+    "pattern_id": 14,
+    "kanji_name": "鸞運",
+    "reading": "らんうん",
+    "romaji": "ranun",
+    "english_name": "Phoenix Movement",
+    "naming_reason": "鸞鳳のようなカリスマで瞬時に全国規模のムーブメントを運び起こす引力。ドーパミンとオキシトシンの2強構造を、神鳥の壮大な影響力として表現している。"
+  },
+  {
+    "id": "D-O-S-Trinity",
+    "pattern_id": 15,
+    "kanji_name": "核裂",
+    "reading": "かくれつ",
+    "romaji": "kakuretsu",
+    "english_name": "Nuclear Fission",
+    "naming_reason": "個人的直感が集団創造力を爆発的に分裂拡散させる力。三つの神経系の均衡を、核分裂のような連鎖的拡散として表現している。"
+  },
+  {
+    "id": "D-O-S-Flat",
+    "pattern_id": 16,
+    "kanji_name": "晶永",
+    "reading": "しょうえい",
+    "romaji": "shouei",
+    "english_name": "Crystal Eternal",
+    "naming_reason": "結晶の深淵が至高の輝きで永続照射する。均等型のバランスを、結晶の完璧性と永続性として表現している。"
+  },
+  {
+    "id": "D-O-N-Single",
+    "pattern_id": 17,
+    "kanji_name": "鬼創",
+    "reading": "きそう",
+    "romaji": "kisou",
+    "english_name": "Demon Creation",
+    "naming_reason": "革新的な創作の鬼気迫る力強さと、新しいムーブメントを生み出す創造性を表現。ドーパミン1位特化の圧倒的な創造力を表現している。"
+  },
+  {
+    "id": "D-O-N-Dual",
     "pattern_id": 18,
-    "kanji_name": "龍覚",
-    "reading": "りゅうかく",
-    "romaji": "ryuukaku",
-    "english_name": "Dragon Awakening",
-    "naming_reason": "長年の理想が結晶化し世界を変革する運命的な確信。快感と新規性の拮抗に共感が調和する構造を、威力の「龍」と覚醒の「覚」で表現。"
+    "kanji_name": "革炎",
+    "reading": "かくえん",
+    "romaji": "kakuen",
+    "english_name": "Revolution Flame",
+    "naming_reason": "心に秘めた社会変革への情熱を炎のように燃やしてムーブメントに変える力。ドーパミンとオキシトシンの2強構造を、革命的な炎として表現している。"
   },
   {
-    "id": "E-D-O-Flat",
+    "id": "D-O-N-Trinity",
+    "pattern_id": 19,
+    "kanji_name": "溶創",
+    "reading": "ようそう",
+    "romaji": "yousou",
+    "english_name": "Molten Creation",
+    "naming_reason": "内燃の溶岩が絆を通じて噴出し新たな創造を破壊的に生む力。三つの神経系の均衡を、溶岩の創造的破壊力として表現している。"
+  },
+  {
+    "id": "D-O-N-Flat",
+    "pattern_id": 20,
+    "kanji_name": "霊動",
+    "reading": "れいどう",
+    "romaji": "reidou",
+    "english_name": "Spirit Motion",
+    "naming_reason": "突然のインスピレーションが仲間を巻き込むカリスマ的な感染力。均等型のバランスを、霊的な動きによる感化力として表現している。"
+  },
+  {
+    "id": "D-O-E-Single",
+    "pattern_id": 1,
+    "kanji_name": "熔牙",
+    "reading": "ようが",
+    "romaji": "youga",
+    "english_name": "Molten Fang",
+    "naming_reason": "1位特化の圧倒的突出性を「地底から噴出する溶岩の鋭い牙で新大地を創る」力として表現。ドーパミンの新規性・可能性が主導する創造的破壊力を、オキシトシンの共感・接続がエンドルフィンの快感・没入で支える構造を、地底エネルギーが表面を突き破り新世界を創造する圧倒的な象徴として完璧に体現している。"
+  },
+  {
+    "id": "D-O-E-Dual",
+    "pattern_id": 2,
+    "kanji_name": "熔磁",
+    "reading": "ようじ",
+    "romaji": "youji",
+    "english_name": "Molten Magnetism",
+    "naming_reason": "2強型の拮抗バランスを「内なる溶岩が圧倒的磁力となって人々を惹きつける」力として表現。ドーパミンの革新性とオキシトシンの共感力が均衡を保ちながら、エンドルフィンの快感で統合される構造を、内部の熱エネルギーが外部への強力な引力として発現する完璧なバランスとして象徴している。"
+  },
+  {
+    "id": "D-O-E-Trinity",
+    "pattern_id": 3,
+    "kanji_name": "覇創",
+    "reading": "はそう",
+    "romaji": "hasou",
+    "english_name": "Hegemonic Creation",
+    "naming_reason": "3強型の均衡を「チーム全体を動かし新事業を創造する圧倒的な牽引力と革新的エネルギー」として表現。ドーパミン・オキシトシン・エンドルフィンの三神経が均等に働く構造を、支配的なリーダーシップと創造的革新が融合した究極的な変革力として完璧に体現している。"
+  },
+  {
+    "id": "D-O-E-Flat",
     "pattern_id": 4,
-    "kanji_name": "迸鳴",
-    "reading": "ほうめい",
-    "romaji": "houmei",
-    "english_name": "Bursting Resonance",
-    "naming_reason": "深夜ライブで観客と電流のような共鳴を生む爆発力を表現。エンドルフィン、ドーパミン、オキシトシンが均等に作用し、没入・新規性・共感が一体となって爆発的に響き合う構造を「迸鳴」として命名。力の迸りと共鳴の美しさを兼ね備えている。"
+    "kanji_name": "地湧",
+    "reading": "ちゆう",
+    "romaji": "chiyuu",
+    "english_name": "Earth Surge",
+    "naming_reason": "均等型の全体バランスを「内燃熟成のマグマ湧出を、大地から湧き出る豊かな力」として表現。三神経が調和的に機能する構造を、地下深くで熟成されたエネルギーが穏やかに地表に湧出し、持続的な豊かさを生み出す自然の恵みとして美しく象徴している。"
+  },
+  {
+    "id": "D-N-S-Single",
+    "pattern_id": 1,
+    "kanji_name": "雷破",
+    "reading": "らいは",
+    "romaji": "raiha",
+    "english_name": "Lightning Break",
+    "naming_reason": "1位特化の圧倒的突出性を「稲妻のような内爆エネルギーが現実を一瞬で変革する圧倒的な独創力」として表現。ドーパミンの新規性が主導し、ノルアドレナリンの集中力とセロトニンの秩序性が支える構造を、雷という瞬間的な自然現象が既存の世界を根本的に変革する力として完璧に体現している。"
+  },
+  {
+    "id": "D-N-S-Dual",
+    "pattern_id": 2,
+    "kanji_name": "企炎",
+    "reading": "きえん",
+    "romaji": "kien",
+    "english_name": "Enterprise Flame",
+    "naming_reason": "新しいプロジェクトの話で目を輝かせて炎のような集中力を発揮する爆発力。ドーパミンの可能性探求とノルアドレナリンの集中力が拮抗し、セロトニンの理解が支える創造的実行力を力強く象徴。"
+  },
+  {
+    "id": "D-N-S-Trinity",
+    "pattern_id": 3,
+    "kanji_name": "燈孤",
+    "reading": "とうこ",
+    "romaji": "touko",
+    "english_name": "Lamp Solitude",
+    "naming_reason": "3強型の均衡を「孤独の中で燃え上がる内なる燈火の激情」として表現。ドーパミン・ノルアドレナリン・セロトニンの三神経が均等に機能する構造を、孤独という状況下で内なる炎が最も純粋に燃え上がる創造者の境地として美しく体現している。"
+  },
+  {
+    "id": "D-N-S-Flat",
+    "pattern_id": 4,
+    "kanji_name": "闇炸",
+    "reading": "あんさく",
+    "romaji": "ansaku",
+    "english_name": "Dark Blast",
+    "naming_reason": "均等型の全体バランスを「暗闇を突然照らす爆発的な内燃の力」として表現。三神経が調和的に機能する構造を、闇という静寂の中から突然現れる光の爆発として象徴し、内部エネルギーが外部世界を一瞬で変革する劇的な転換力を表現している。"
+  },
+  {
+    "id": "D-N-O-Single",
+    "pattern_id": 1,
+    "kanji_name": "仙開",
+    "reading": "せんかい",
+    "romaji": "senkai",
+    "english_name": "Sage Awakening",
+    "naming_reason": "1位特化の圧倒的突出性を「千年を経て咲く伝説の仙花の究極的開花と世界変革の力」として表現。ドーパミンの新規性・可能性が圧倒的に主導する構造を、仙人級の長期醸成を経て到達する究極の覚醒と世界変革の瞬間として、最も崇高で力強い象徴で体現している。"
+  },
+  {
+    "id": "D-N-O-Dual",
+    "pattern_id": 3,
+    "kanji_name": "電迅",
+    "reading": "でんじん",
+    "romaji": "denjin",
+    "english_name": "Lightning Swift",
+    "naming_reason": "電光石火の速さで周囲を圧倒する瞬発的な突進力。ドーパミンの新規性とノルアドレナリンの緊張が拮抗する中、オキシトシンの接続力が加わって生まれる圧倒的な瞬発エネルギーを表現。"
+  },
+  {
+    "id": "D-N-O-Trinity",
+    "pattern_id": 3,
+    "kanji_name": "山霊",
+    "reading": "さんれい",
+    "romaji": "sanrei",
+    "english_name": "Mountain Spirit",
+    "naming_reason": "3強型の均衡を「山奥の修行で培われた師匠の魂を変容させる深遠な霊的力」として表現。ドーパミン・ノルアドレナリン・オキシトシンの三神経が均等に機能する構造を、山という自然の象徴と霊的な力の融合により、最も深遠で神秘的な変革力として美しく体現している。"
+  },
+  {
+    "id": "D-N-O-Flat",
+    "pattern_id": 4,
+    "kanji_name": "創煌",
+    "reading": "そうこう",
+    "romaji": "soukou",
+    "english_name": "Creative Brilliance",
+    "naming_reason": "均等型の全体バランスを「複数事業の同時創造という破格の革新性が煌めく起業家精神」として表現。三神経が調和的に機能する構造を、創造という根本的行為と煌めきという美的表現の融合により、多面的で華麗な革新力として象徴している。"
+  },
+  {
+    "id": "D-N-E-Single",
+    "pattern_id": 1,
+    "kanji_name": "熔柱",
+    "reading": "ようちゅう",
+    "romaji": "youchuu",
+    "english_name": "Molten Pillar",
+    "naming_reason": "1位特化の圧倒的突出性を「地底エネルギーが天空に向かう革新的噴出の圧巻」として表現。ドーパミンの新規性・可能性が圧倒的に主導する構造を、地底から天空への垂直的なエネルギー噴出として象徴し、最も力強く方向性の明確な変革力を体現している。"
+  },
+  {
+    "id": "D-N-E-Dual",
+    "pattern_id": 2,
+    "kanji_name": "雷噴",
+    "reading": "らいふん",
+    "romaji": "raifun",
+    "english_name": "Thunder Eruption",
+    "naming_reason": "2強型の拮抗バランスを「内部から爆発的に噴出する雷鳴の力」として表現。ドーパミンの革新性とノルアドレナリンの集中力が拮抗しながら、エンドルフィンの快感で統合される構造を、雷という瞬間的な力と噴出という持続的な力の融合として完璧に象徴している。"
+  },
+  {
+    "id": "D-N-E-Trinity",
+    "pattern_id": 3,
+    "kanji_name": "悟極",
+    "reading": "ごきょく",
+    "romaji": "gokyoku",
+    "english_name": "Ultimate Enlightenment",
+    "naming_reason": "3強型の均衡を「生涯をかけた探求で到達した究極の真理と深遠な洞察の完成形」として表現。ドーパミン・ノルアドレナリン・エンドルフィンの三神経が均等に機能する構造を、悟りという精神的到達点と極限という完成度の融合により、最も崇高で完璧な境地として体現している。"
+  },
+  {
+    "id": "D-N-E-Flat",
+    "pattern_id": 4,
+    "kanji_name": "噴激",
+    "reading": "ふんげき",
+    "romaji": "fungeki",
+    "english_name": "Explosive Surge",
+    "naming_reason": "均等型の全体バランスを「地下深くから一気に噴出するマグマの激しい多発的な自発力」として表現。三神経が調和的に機能する構造を、噴出という内発的エネルギーと激流という動的な力の融合により、多面的で激動的な創造力として象徴している。"
+  },
+  {
+    "id": "D-E-S-Single",
+    "pattern_id": 1,
+    "kanji_name": "晶崇",
+    "reading": "しょうすう",
+    "romaji": "shousuu",
+    "english_name": "Crystal Sublime",
+    "naming_reason": "1位特化の圧倒的突出性を「地底で完璧に形成される巨大結晶の崇高な美」として表現。ドーパミンの新規性・可能性が圧倒的に主導する構造を、結晶という完璧な秩序と崇高という精神的高みの融合により、最も美しく完成度の高い創造力として体現している。"
+  },
+  {
+    "id": "D-E-S-Dual",
+    "pattern_id": 2,
+    "kanji_name": "智権",
+    "reading": "ちけん",
+    "romaji": "chiken",
+    "english_name": "Wisdom Authority",
+    "naming_reason": "2強型の拮抗バランスを「生涯をかけた探究により第一人者となった大家的権威と普遍的智慧」として表現。ドーパミンの革新性とエンドルフィンの快感・没入が拮抗しながら、セロトニンの理解・秩序で統合される構造を、智慧と権威の融合による最高の到達点として象徴している。"
+  },
+  {
+    "id": "D-E-S-Trinity",
+    "pattern_id": 4,
+    "kanji_name": "創衝",
+    "reading": "そうしょう",
+    "romaji": "sosho",
+    "english_name": "Creative Impact",
+    "naming_reason": "内なるビジョンが創造衝動となって作品を具現化する持続的な創造力。3つの神経伝達物質が均衡し、新規性・快感・理解が統合された創造の瞬間を力強く表現。"
+  },
+  {
+    "id": "D-E-S-Flat",
+    "pattern_id": 4,
+    "kanji_name": "仙究",
+    "reading": "せんきゅう",
+    "romaji": "senkyuu",
+    "english_name": "Sage Research",
+    "naming_reason": "均等型の全体バランスを「深遠な探究を重ねる仙人級の研究者の境地」として表現。三神経が調和的に機能する構造を、仙人という超人的な存在と究明という学究的姿勢の融合により、最も深遠で持続的な探究力として象徴している。"
+  },
+  {
+    "id": "D-E-O-Single",
+    "pattern_id": 1,
+    "kanji_name": "龍迸",
+    "reading": "りゅうほう",
+    "romaji": "ryuuhou",
+    "english_name": "Dragon Surge",
+    "naming_reason": "ドーパミン圧倒的1位特化という構造に最もふさわしい。龍の内なる力が一気に迸る天才的閃きは、新規性への圧倒的な偏りと、その瞬間的な爆発力を完璧に体現している。"
+  },
+  {
+    "id": "D-E-O-Dual",
+    "pattern_id": 2,
+    "kanji_name": "完撃",
+    "reading": "かんげき",
+    "romaji": "kangeki",
+    "english_name": "Perfect Strike",
+    "naming_reason": "2強拮抗型の特性を最も的確に表現。何年も温めたアイデアが完成形として現れるマスター級の確信とインパクトは、ドーパミンとエンドルフィンが均衡する構造での熟成された爆発力を象徴している。"
+  },
+  {
+    "id": "D-E-O-Trinity",
+    "pattern_id": 3,
+    "kanji_name": "神樹",
+    "reading": "しんじゅ",
+    "romaji": "shinju",
+    "english_name": "Divine Tree",
+    "naming_reason": "3強均衡型には圧倒的な存在感と威厳が必要。千年樹のような威厳は、ドーパミン・エンドルフィン・オキシトシンが調和した時の深遠で包括的な力を完璧に表現している。"
+  },
+  {
+    "id": "D-E-O-Flat",
+    "pattern_id": 4,
+    "kanji_name": "永智",
+    "reading": "えいち",
+    "romaji": "eichi",
+    "english_name": "Eternal Wisdom",
+    "naming_reason": "均等型の持続性と普遍性を最も的確に捉えている。時を超えて受け継がれる知的遺産の永続的な影響力は、全要素がバランス良く機能する構造の本質を表現している。"
+  },
+  {
+    "id": "D-E-N-Single",
+    "pattern_id": 5,
+    "kanji_name": "青突",
+    "reading": "せいとつ",
+    "romaji": "seitotsu",
+    "english_name": "Blue Breakthrough",
+    "naming_reason": "ドーパミン1位特化にノルアドレナリンが加わる構造の鋭さを完璧に表現。青い炎のように暗闇を突き破る内なる情熱の爆発的突破力は、集中力が加わった新規性追求の激しさを象徴している。"
+  },
+  {
+    "id": "D-E-N-Dual",
+    "pattern_id": 5,
+    "kanji_name": "創湧",
+    "reading": "そうゆう",
+    "romaji": "soyu",
+    "english_name": "Creative Surge",
+    "naming_reason": "内なるアイデアが瞬発的に湧き出る創造の瞬間。ドーパミンとエンドルフィンが拮抗し、ノルアドレナリンが支える中で生まれる創造エネルギーの「湧出」を表現。"
+  },
+  {
+    "id": "D-E-N-Trinity",
+    "pattern_id": 7,
+    "kanji_name": "巨匠",
+    "reading": "きょしょう",
+    "romaji": "kyoshou",
+    "english_name": "Master Craftsman",
+    "naming_reason": "3強均衡型の完成度と威厳を最も端的に表現。歴史に残る傑作を生み出す大器晩成は、全神経伝達物質が高次元で調和した時の究極的な創造力を象徴している。"
+  },
+  {
+    "id": "D-E-N-Flat",
+    "pattern_id": 8,
+    "kanji_name": "凰冥",
+    "reading": "おうめい",
+    "romaji": "oumei",
+    "english_name": "Phoenix Meditation",
+    "naming_reason": "均等型の深遠さと統合性を最も美しく表現。深夜研究での究極的な統合と内的完成は、全要素が調和した時の神秘的な創造境地を完璧に象徴している。"
+  },
+  {
+    "id": "S-D-O-Single",
+    "pattern_id": 6,
+    "kanji_name": "澄灯",
+    "reading": "ちょうとう",
+    "romaji": "choto",
+    "english_name": "Clear Light",
+    "naming_reason": "朝の図書館に差し込む澄んだ理解の光。セロトニンが圧倒的に突出し、理解と秩序の本質を「澄んだ灯火」として美しく表現。知的探求の純粋さを象徴。"
+  },
+  {
+    "id": "S-D-O-Dual",
+    "pattern_id": 10,
+    "kanji_name": "魂昇",
+    "reading": "こんしょう",
+    "romaji": "konshou",
+    "english_name": "Soul Ascension",
+    "naming_reason": "2強型の深い熟成と昇華を最も崇高に表現。長年の熟成により内なる魂が昇華し傑作として立ち現れる究極の境地は、理解力と新規性が拮抗した時の至高の創造を象徴している。"
+  },
+  {
+    "id": "S-D-O-Trinity",
+    "pattern_id": 11,
+    "kanji_name": "導不",
+    "reading": "どうふ",
+    "romaji": "doufu",
+    "english_name": "Unwavering Guide",
+    "naming_reason": "3強均衡型の深遠な指導力を最も力強く表現。人生をかけたビジョンを示す深い内なる太陽の放射による不動の導力は、全要素が調和した時の絶対的な指導性を完璧に象徴している。"
+  },
+  {
+    "id": "S-D-O-Flat",
+    "pattern_id": 12,
+    "kanji_name": "杉威",
+    "reading": "すぎい",
+    "romaji": "sugii",
+    "english_name": "Cedar Majesty",
+    "naming_reason": "均等型の威厳と包容力を自然の象徴で美しく表現。千年杉のような威厳と包含する変革の力は、全要素がバランス良く機能した時の深い包容力と持続的影響力を象徴している。"
+  },
+  {
+    "id": "S-D-N-Single",
+    "pattern_id": 13,
+    "kanji_name": "至構",
+    "reading": "しこう",
+    "romaji": "shikou",
+    "english_name": "Ultimate Construction",
+    "naming_reason": "セロトニン1位特化に集中力が加わった構造の完璧性を表現。何年も温めた構想が完全な形で世に出る至高で絶対的な完成の境地は、理解力の圧倒的優位性を象徴している。"
+  },
+  {
+    "id": "S-D-N-Dual",
+    "pattern_id": 14,
+    "kanji_name": "修到",
+    "reading": "しゅうとう",
+    "romaji": "shutou",
+    "english_name": "Mastery Achievement",
+    "naming_reason": "2強型の修練と到達を最も力強く表現。何十年の修行で極意に到達する確信と圧倒的存在感は、理解力と新規性の拮抗に集中力が加わった時の究極的達成を象徴している。"
+  },
+  {
+    "id": "S-D-N-Trinity",
+    "pattern_id": 7,
+    "kanji_name": "雅迸",
+    "reading": "がほう",
+    "romaji": "gaho",
+    "english_name": "Elegant Burst",
+    "naming_reason": "雅な心境から迸る情熱的な閃き。3つの神経伝達物質が均衡し、理解・新規性・集中が統合された知的創造の瞬間を「雅やかな迸り」として表現。"
+  },
+  {
+    "id": "S-D-N-Flat",
+    "pattern_id": 16,
+    "kanji_name": "源湧",
+    "reading": "げんゆう",
+    "romaji": "genyuu",
+    "english_name": "Source Spring",
+    "naming_reason": "均等型の根源的な力を最も自然に表現。地底深くから力強く湧き出る源泉の力は、全要素がバランス良く機能した時の根源的で持続的なエネルギーを完璧に象徴している。"
+  },
+  {
+    "id": "S-D-E-Single",
+    "pattern_id": 17,
+    "kanji_name": "電奔",
+    "reading": "でんぽん",
+    "romaji": "denpon",
+    "english_name": "Lightning Rush",
+    "naming_reason": "セロトニン1位特化の理解力が瞬発的に疾走する力を表現。内なる洞察の閃光が瞬発的疾走を生み出す破壊的瞬発力は、理解の圧倒的優位性による突破力を象徴している。"
+  },
+  {
+    "id": "S-D-E-Dual",
+    "pattern_id": 18,
+    "kanji_name": "冥錬",
+    "reading": "めいれん",
+    "romaji": "meiren",
+    "english_name": "Mystic Refinement",
+    "naming_reason": "2強型の深遠な錬成を最も神秘的に表現。幽玄な深奥で何十年もかけて錬成された究極の知恵の力は、理解力と新規性が拮抗し没入が加わった時の神秘的な完成を象徴している。"
+  },
+  {
+    "id": "S-D-E-Trinity",
+    "pattern_id": 19,
+    "kanji_name": "仙識",
+    "reading": "せんしき",
+    "romaji": "senshiki",
+    "english_name": "Immortal Wisdom",
+    "naming_reason": "3強均衡型の超越性を最も崇高に表現。超越した知性が不朽の思想体系として永続する偉大な境界は、全要素が最高次元で調和した時の不滅の創造力を完璧に象徴している。"
+  },
+  {
+    "id": "S-D-E-Flat",
+    "pattern_id": 20,
+    "kanji_name": "荘核",
+    "reading": "そうかく",
+    "romaji": "soukaku",
+    "english_name": "Grand Core",
+    "naming_reason": "均等型の壮大さと核心性を最も力強く表現。長期間の取り組みから生まれる壮大で深淵な構想の核は、全要素がバランス良く機能した時の包括的で根源的な創造力を象徴している。"
+  },
+  {
+    "id": "S-O-D-Single",
+    "pattern_id": 1,
+    "kanji_name": "光悟",
+    "reading": "こうご",
+    "romaji": "kougo",
+    "english_name": "Light Enlightenment",
+    "naming_reason": "セロトニンの理解・秩序が圧倒的に突出する構造において、窓からの光に照らされる思考の明晰な納得の瞬間を表現した「光悟」が最もふさわしい。理知的で静謐でありながら、確かな洞察力を持つこの真名は、1位特化型の本質を完璧に体現している。"
+  },
+  {
+    "id": "S-O-D-Dual",
+    "pattern_id": 2,
+    "kanji_name": "基盟",
+    "reading": "きめい",
+    "romaji": "kimei",
+    "english_name": "Foundation Alliance",
+    "naming_reason": "セロトニンとオキシトシンが拮抗する構造において、継続的な信頼関係が築く安定した基盤力を表す「基盟」が理想的。理解と共感の2強バランスを、確固たる基盤と盟約の絆で象徴し、持続的な協働力を体現している。"
+  },
+  {
+    "id": "S-O-D-Trinity",
+    "pattern_id": 3,
+    "kanji_name": "環奏",
+    "reading": "かんそう",
+    "romaji": "kansou",
+    "english_name": "Cyclical Symphony",
+    "naming_reason": "3つの神経が均衡する構造において、循環する協働が創造の協奏曲を奏でる「環奏」が最適。理解、共感、新規性が調和的に循環し、美しい協奏を生み出す様子は、Trinity型の本質を音楽的に表現している。"
+  },
+  {
+    "id": "S-O-D-Flat",
+    "pattern_id": 4,
+    "kanji_name": "深和",
+    "reading": "しんわ",
+    "romaji": "shinwa",
+    "English_name": "Deep Harmony",
+    "naming_reason": "全体的にバランスの取れた構造において、内省から生まれる深い調和と成熟を表す「深和」が相応しい。均等型の安定感と、内なる深みから生まれる調和を二字熟語で簡潔に表現している。"
+  },
+  {
+    "id": "S-O-N-Single",
+    "pattern_id": 9,
+    "kanji_name": "匠澄",
+    "reading": "しょうちょう",
+    "romaji": "shouchou",
+    "english_name": "Master's Clarity",
+    "naming_reason": "セロトニンが突出する構造において、長年の経験が澄んだ専門性として結晶化した職人の境地を表す「匠澄」が最適。理解の深化と技の結晶化を、匠の技と澄明さで格調高く表現している。"
+  },
+  {
+    "id": "S-O-N-Dual",
+    "pattern_id": 8,
+    "kanji_name": "暁策",
+    "reading": "ぎょうさく",
+    "romaji": "gyosaku",
+    "english_name": "Dawn Strategy",
+    "naming_reason": "夜中のひらめきを朝一番で同僚に話し具体的行動計画を練る直感共創。セロトニンとオキシトシンが拮抗し、理解と共感が融合した実践的知恵を「暁の策略」として表現。"
+  },
+  {
+    "id": "S-O-N-Trinity",
+    "pattern_id": 9,
+    "kanji_name": "指轟",
+    "reading": "しごう",
+    "romaji": "shigo",
+    "english_name": "Command Thunder",
+    "naming_reason": "緊急時の瞬時判断と迅速指揮を指揮の轟音で表現。3つの神経伝達物質が均衡し、理解・共感・集中が統合された統率力を「指揮の轟き」として力強く象徴。"
+  },
+  {
+    "id": "S-O-N-Flat",
+    "pattern_id": 12,
+    "kanji_name": "静紡",
+    "reading": "せいぼう",
+    "romaji": "seibou",
+    "english_name": "Quiet Spinning",
+    "naming_reason": "均等型バランスにおいて、時をかけて内なるテーマを丁寧に紡ぐ創作の境地を表す「静紡」が相応しい。穏やかで持続的な創造過程を、静寂と紡織の象徴で美しく表現している。"
+  },
+  {
+    "id": "S-O-E-Single",
+    "pattern_id": 13,
+    "kanji_name": "内豊",
+    "reading": "ないほう",
+    "romaji": "naihou",
+    "english_name": "Inner Abundance",
+    "naming_reason": "セロトニンが突出する構造において、内観で熟成された理解が対話で豊かに花開く様子を表す「内豊」が最適。内なる充実感と外への展開を、簡潔で力強い二字で表現している。"
+  },
+  {
+    "id": "S-O-E-Dual",
+    "pattern_id": 14,
+    "kanji_name": "往豊",
+    "reading": "おうほう",
+    "romaji": "ouhou",
+    "english_name": "Reciprocal Abundance",
+    "naming_reason": "セロトニンとオキシトシンが拮抗する構造において、内なる世界と外なる世界を豊かに往復する人生を表す「往豊」が理想的。理解と共感の循環が生む豊かさを、往復の動きで表現している。"
+  },
+  {
+    "id": "S-O-E-Trinity",
+    "pattern_id": 15,
+    "kanji_name": "鍛契",
+    "reading": "たんけい",
+    "romaji": "tankei",
+    "english_name": "Forged Contract",
+    "naming_reason": "3神経均衡構造において、長年の修行と信頼関係により技と絆を同時に鍛え上げる職人の魂を込めた持続型の技を表す「鍛契」が最適。理解、共感、没入の融合を、鍛錬と契りの深い絆で表現している。"
+  },
+  {
+    "id": "S-O-E-Flat",
+    "pattern_id": 10,
+    "kanji_name": "季絆",
+    "reading": "きはん",
+    "romaji": "kihan",
+    "english_name": "Seasonal Bond",
+    "naming_reason": "季節ごとに深まる仲間との継続的な絆。全神経伝達物質がバランスし、理解・共感・快感が調和した持続的な人間関係を「季節と共に深まる絆」として表現。"
+  },
+  {
+    "id": "S-N-D-Single",
+    "pattern_id": 5,
+    "kanji_name": "翠沈",
+    "reading": "すいちん",
+    "romaji": "suichin",
+    "english_name": "Verdant Immersion",
+    "naming_reason": "セロトニンが圧倒的に突出する構造において、内なる学習欲が深層で静かに熟成する知的探求を表す「翠沈」が最適。翠の清新さと沈潜の深さが、理解への純粋な没入を美しく象徴している。"
+  },
+  {
+    "id": "S-N-D-Dual",
+    "pattern_id": 6,
+    "kanji_name": "琥蒼",
+    "reading": "こそう",
+    "romaji": "kosou",
+    "english_name": "Amber Azure",
+    "naming_reason": "セロトニンとノルアドレナリンが拮抗する構造において、内燃で熟成する深い知性を琥珀の温かみと蒼天の広がりで表現した「琥蒼」が理想的。理解と集中の2強バランスを、温かさと広がりの対比で詩的に描いている。"
+  },
+  {
+    "id": "S-N-D-Trinity",
+    "pattern_id": 7,
+    "kanji_name": "瞑炭",
+    "reading": "めいたん",
+    "romaji": "meitan",
+    "english_name": "Meditative Charcoal",
+    "naming_reason": "3神経が均衡する構造において、季節の変わり目に内側で静かに燃え続ける炭火のような瞑想的持続力を表す「瞑炭」が最適。静かな持続力と内なる燃焼を、瞑想と炭火の象徴で表現している。"
+  },
+  {
+    "id": "S-N-D-Flat",
+    "pattern_id": 11,
+    "kanji_name": "鬼眼",
+    "reading": "きがん",
+    "romaji": "kigan",
+    "english_name": "Demon Eye",
+    "naming_reason": "内なる衝動が革新的な洞察力として一点に集中する瞬間の象徴。全神経伝達物質がバランスし、理解・集中・新規性が統合された鋭い洞察力を「鬼の眼」として表現。"
+  },
+  {
+    "id": "S-N-O-Single",
+    "pattern_id": 17,
+    "kanji_name": "賢超",
+    "reading": "けんちょう",
+    "romaji": "kenchou",
+    "english_name": "Sage Transcendence",
+    "naming_reason": "セロトニンが突出する構造において、賢者の叡智が世界観を超越する境地を表す「賢超」が最適。理解の極致と超越的な洞察力を、賢者の格調と超越の崇高さで表現している。"
+  },
+  {
+    "id": "S-N-O-Dual",
+    "pattern_id": 18,
+    "kanji_name": "至宙",
+    "reading": "しちゅう",
+    "romaji": "shichuu",
+    "english_name": "Ultimate Universe",
+    "naming_reason": "セロトニンとノルアドレナリンが拮抗する構造において、長年の理論が宇宙的な完成へと至る永続の深遠を表す「至宙」が理想的。理解と集中の究極的融合を、至高と宇宙の壮大さで表現している。"
+  },
+  {
+    "id": "S-N-O-Trinity",
+    "pattern_id": 19,
+    "kanji_name": "紺王",
+    "reading": "こんおう",
+    "romaji": "kon'ou",
+    "english_name": "Indigo King",
+    "naming_reason": "3神経均衡構造において、深紫の洞察で世界を変える思想王を表す「紺王」が最適。理解、集中、共感の融合が生む深遠な洞察力と王者の威厳を、紺碧の深さと王の権威で表現している。"
+  },
+  {
+    "id": "S-N-O-Flat",
+    "pattern_id": 20,
+    "kanji_name": "思王",
+    "reading": "しおう",
+    "romaji": "shiou",
+    "english_name": "Thought King",
+    "naming_reason": "均等型バランスにおいて、思想的王者による根本的持続変革を表す「思王」が相応しい。バランスの取れた思考力と変革への意志を、思想と王者の威厳で力強く表現している。"
+  },
+  {
+    "id": "S-N-E-Single",
+    "pattern_id": 1,
+    "kanji_name": "内光",
+    "reading": "ないこう",
+    "romaji": "naikou",
+    "english_name": "Inner Light",
+    "naming_reason": "セロトニンの理解・秩序が主神経として圧倒的に突出する特性を、内なる理解が閃光のように瞬発する「内光」で表現。一位特化の力強さと、知的洞察の本質を二字熟語で完結させた。"
+  },
+  {
+    "id": "S-N-E-Dual",
+    "pattern_id": 2,
+    "kanji_name": "析完",
+    "reading": "せきかん",
+    "romaji": "sekikan",
+    "english_name": "Perfect Analysis",
+    "naming_reason": "セロトニンとノルアドレナリンが拮抗する2強型の特性を、丁寧な分析（セロトニン）と高品質な完成（ノルアドレナリン）の融合で表現。職人的な集中力の本質を捉えた力強い二字熟語。"
+  },
+  {
+    "id": "S-N-E-Trinity",
+    "pattern_id": 3,
+    "kanji_name": "神宙",
+    "reading": "しんちゅう",
+    "romaji": "shinchuu",
+    "english_name": "Divine Universe",
+    "naming_reason": "3つの神経が均衡する Trinity の壮大さを、神的な構想力で宇宙規模の価値を創造する「神宙」で表現。三位一体の調和と創造の極致を示す最も力強い命名。"
+  },
+  {
+    "id": "S-N-E-Flat",
+    "pattern_id": 4,
+    "kanji_name": "幽冥",
+    "reading": "ゆうめい",
+    "romaji": "yuumei",
+    "english_name": "Profound Mystery",
+    "naming_reason": "全体的にバランスの取れた Flat 型の深遠さを、隠遁の境地から生まれる普遍的真理として「幽冥」で表現。均等型の奥深い調和と神秘性を二字で完結させた。"
+  },
+  {
+    "id": "S-E-D-Single",
+    "pattern_id": 1,
+    "kanji_name": "破天",
+    "reading": "はてん",
+    "romaji": "haten",
+    "english_name": "Heaven Breaker",
+    "naming_reason": "セロトニンが圧倒的に突出する一位特化の革新力を、革命的直感が天を破り山を動かす「破天」で表現。Single型の圧倒的な力と突破力を最も力強く象徴する命名。"
+  },
+  {
+    "id": "S-E-D-Dual",
+    "pattern_id": 2,
+    "kanji_name": "煌裂",
+    "reading": "こうれつ",
+    "romaji": "kouretsu",
+    "english_name": "Brilliant Rupture",
+    "naming_reason": "セロトニンとエンドルフィンが拮抗する2強型の創造力を、革新的創造が光となって炸裂し常識を破る「煌裂」で表現。理解と没入の融合による爆発的創造を象徴。"
+  },
+  {
+    "id": "S-E-D-Trinity",
+    "pattern_id": 3,
+    "kanji_name": "麟覇",
+    "reading": "りんは",
+    "romaji": "rinba",
+    "english_name": "Kirin Supremacy",
+    "naming_reason": "3つの神経が均衡するTrinity型の圧倒的創造力を、千年の蓄積が生み出す創造の王者として「麟覇」で表現。麒麟の神聖性と覇者の力で三位一体の極致を象徴。"
+  },
+  {
+    "id": "S-E-D-Flat",
+    "pattern_id": 4,
+    "kanji_name": "荘結",
+    "reading": "そうけつ",
+    "romaji": "souketsu",
+    "english_name": "Grand Culmination",
+    "naming_reason": "均等型のバランスの取れた充実感を、複数分野を極めながら長年の情熱が結実する満足として「荘結」で表現。山荘の静寂と結実の完成度でFlat型の本質を捉えた。"
+  },
+  {
+    "id": "S-E-O-Single",
+    "pattern_id": 1,
+    "kanji_name": "隠偉",
+    "reading": "いんい",
+    "romaji": "in'i",
+    "english_name": "Hidden Greatness",
+    "naming_reason": "セロトニンが圧倒的に突出するSingle型の深遠さを、隠者的生活から生まれる偉大な発見として「隠偉」で表現。一位特化の内向的な力と偉大な成果を簡潔に象徴。"
+  },
+  {
+    "id": "S-E-O-Dual",
+    "pattern_id": 2,
+    "kanji_name": "賢遺",
+    "reading": "けんい",
+    "romaji": "ken'i",
+    "english_name": "Sage's Legacy",
+    "naming_reason": "セロトニンとエンドルフィンが拮抗するDual型の深い洞察を、長年の研究が後世への遺産となる賢者の深遠さとして「賢遺」で表現。理解と没入の融合による永続的価値を象徴。"
+  },
+  {
+    "id": "S-E-O-Trinity",
+    "pattern_id": 3,
+    "kanji_name": "鯨永",
+    "reading": "くじらえい",
+    "romaji": "kujiraei",
+    "english_name": "Whale Eternity",
+    "naming_reason": "3つの神経が均衡するTrinity型の壮大さを、世代を超越した深遠探究による本質的永続性として「鯨永」で表現。鯨の巨大さと永遠性で三位一体の包容力を象徴。"
+  },
+  {
+    "id": "S-E-O-Flat",
+    "pattern_id": 4,
+    "kanji_name": "賢遥",
+    "reading": "けんよう",
+    "romaji": "ken'you",
+    "english_name": "Sage's Distance",
+    "naming_reason": "均等型のバランスを、深遠な知恵が時を越えて未来まで継承される「賢遥」で表現。Flat型の調和と遠大な影響力を賢者の遥かな視野として象徴した力強い命名。"
+  },
+  {
+    "id": "S-E-N-Single",
+    "pattern_id": 1,
+    "kanji_name": "洞極",
+    "reading": "どうきょく",
+    "romaji": "doukyoku",
+    "english_name": "Cave Extreme",
+    "naming_reason": "セロトニンが圧倒的に突出するSingle型の探求力を、生涯の探求が極致に達し重要発見を生む洞察力として「洞極」で表現。一位特化の深い洞察と究極到達を象徴。"
+  },
+  {
+    "id": "S-E-N-Dual",
+    "pattern_id": 2,
+    "kanji_name": "核晶",
+    "reading": "かくしょう",
+    "romaji": "kakushou",
+    "english_name": "Core Crystal",
+    "naming_reason": "セロトニンとエンドルフィンが拮抗するDual型の深化を、地球核で億年かけて形成されるダイヤの永遠性として「核晶」で表現。理解と没入の融合による結晶化した完成度を象徴。"
+  },
+  {
+    "id": "S-E-N-Trinity",
+    "pattern_id": 3,
+    "kanji_name": "天覧",
+    "reading": "てんらん",
+    "romaji": "tenran",
+    "english_name": "Heavenly View",
+    "naming_reason": "3つの神経が均衡するTrinity型の洞察を、山頂天文台で宇宙を観測する天文学者の孤高な洞察として「天覧」で表現。三位一体の調和による天的な視野を象徴。"
+  },
+  {
+    "id": "S-E-N-Flat",
+    "pattern_id": 4,
+    "kanji_name": "麟権",
+    "reading": "りんけん",
+    "romaji": "rinken",
+    "english_name": "Kirin Authority",
+    "naming_reason": "均等型のバランスを、大家の風格を示す究極の権威と最高品質として「麟権」で表現。麒麟の神聖性と権威でFlat型の調和的完成度を象徴した力強い命名。"
+  },
+  {
+    "id": "O-D-S-Single",
+    "pattern_id": 1,
+    "kanji_name": "海轟",
+    "reading": "かいごう",
+    "romaji": "kaigou",
+    "english_name": "Ocean Roar",
+    "naming_reason": "オキシトシンが圧倒的に突出するSingle型の爆発力を、深海から湧き上がる持続的な爆発力として「海轟」で表現。共感・接続の深い源泉からの轟音的な力を象徴。"
+  },
+  {
+    "id": "O-D-S-Dual",
+    "pattern_id": 2,
+    "kanji_name": "威霊",
+    "reading": "いれい",
+    "romaji": "irei",
+    "english_name": "Majestic Spirit",
+    "naming_reason": "オキシトシンとドーパミンが拮抗するDual型の影響力を、威厳ある霊的な力が時を超えて巨大な影響力を発揮する「威霊」で表現。共感と新規性の融合による霊的権威を象徴。"
+  },
+  {
+    "id": "O-D-S-Trinity",
+    "pattern_id": 3,
+    "kanji_name": "叡究",
+    "reading": "えいきゅう",
+    "romaji": "eikyuu",
+    "english_name": "Wise Pursuit",
+    "naming_reason": "3つの神経が均衡するTrinity型の叡智を、隠遁生活で追求した真理が人類の未来を変える叡智として「叡究」で表現。三位一体の調和による究極的な知的追求を象徴。"
+  },
+  {
+    "id": "O-D-S-Flat",
+    "pattern_id": 12,
+    "kanji_name": "鐘房",
+    "reading": "しょうぼう",
+    "romaji": "shobo",
+    "english_name": "Bell Chamber",
+    "naming_reason": "複数作品を同時に手がける創造的な内発衝動。共感・新規性・理解がバランスし、多面的創造活動を「鐘の響く工房」として表現。"
+  },
+  {
+    "id": "O-D-N-Single",
+    "pattern_id": 1,
+    "kanji_name": "電結",
+    "reading": "でんけつ",
+    "romaji": "denketsu",
+    "english_name": "Lightning Bond",
+    "naming_reason": "オキシトシンの圧倒的突出を「電光石火の瞬間結合」として表現。共感による接続の瞬発性と強力さを電の字で、結合の本質を結の字で捉えた力強い真名"
+  },
+  {
+    "id": "O-D-N-Dual",
+    "pattern_id": 13,
+    "kanji_name": "孤煉",
+    "reading": "これん",
+    "romaji": "koren",
+    "english_name": "Solitary Refining",
+    "naming_reason": "一人で長期間練り上げる革新的創造力を象徴。オキシトシンとドーパミンが拮抗し、共感と新規性が統合された孤独な創造過程を「孤独な煉成」として表現。"
+  },
+  {
+    "id": "O-D-N-Trinity",
+    "pattern_id": 3,
+    "kanji_name": "勇烈",
+    "reading": "ゆうれつ",
+    "romaji": "yuuretsu",
+    "english_name": "Brave Flame",
+    "naming_reason": "3つの神経の均衡を「信念に従って困難に立ち向かう勇者を、勇気の激しい炎として象徴」で表現。共感・新規性・集中の三要素が勇気という統一概念で結実した力強い真名"
+  },
+  {
+    "id": "O-D-N-Flat",
+    "pattern_id": 4,
+    "kanji_name": "情綻",
+    "reading": "じょうたん",
+    "romaji": "joutan",
+    "english_name": "Emotional Bloom",
+    "naming_reason": "均等型の多面性を「内なる情熱が爆発的に多様な作品で花開く」として表現。情感の深さと綻びる表現力の多様性を捉えた、バランス型にふさわしい真名"
+  },
+  {
+    "id": "O-D-E-Single",
+    "pattern_id": 5,
+    "kanji_name": "神泉",
+    "reading": "しんせん",
+    "romaji": "shinsen",
+    "english_name": "Divine Spring",
+    "naming_reason": "オキシトシン特化の究極性を「千年樹の根と深海の永遠泉が示す究極の神秘」として表現。共感の神聖性と永続性を神と泉の字で捉えた圧倒的な真名"
+  },
+  {
+    "id": "O-D-E-Dual",
+    "pattern_id": 6,
+    "kanji_name": "熱孔",
+    "reading": "ねっこう",
+    "romaji": "nekkou",
+    "english_name": "Heat Vent",
+    "naming_reason": "オキシトシンとドーパミンの拮抗を「深海熱水噴出孔のような核心エネルギーが独自生態系を長期支配」として表現。共感と新規性の核心的な熱量を孔から噴出するエネルギーとして捉えた力強い真名"
+  },
+  {
+    "id": "O-D-E-Trinity",
+    "pattern_id": 7,
+    "kanji_name": "賢冠",
+    "reading": "けんかん",
+    "romaji": "kenkan",
+    "english_name": "Wise Crown",
+    "naming_reason": "3要素の均衡を「長年の研究で完成した偉大な業績の深遠な変革力」として表現。賢明さと頂点を示す冠によって、三神経の調和から生まれる最高の到達点を表した真名"
+  },
+  {
+    "id": "O-D-E-Flat",
+    "pattern_id": 8,
+    "kanji_name": "聖鎮",
+    "reading": "せいちん",
+    "romaji": "seichin",
+    "english_name": "Sacred Calm",
+    "naming_reason": "均等型の普遍性を「長年の理想追求が神聖な変革力として現れる普遍的な力」として表現。聖なる力と鎮座する安定感で、バランス型の深遠さを捉えた真名"
+  },
+  {
+    "id": "O-S-D-Single",
+    "pattern_id": 9,
+    "kanji_name": "樹王",
+    "reading": "じゅおう",
+    "romaji": "juou",
+    "english_name": "Tree King",
+    "naming_reason": "オキシトシン特化を「長年育った大木が豊かな実をつけて潤し続ける内発的王者」として表現。共感の成長力と王者としての威厳を樹木の比喩で捉えた雄大な真名"
+  },
+  {
+    "id": "O-S-D-Dual",
+    "pattern_id": 10,
+    "kanji_name": "龍志",
+    "reading": "りゅうし",
+    "romaji": "ryuushi",
+    "english_name": "Dragon Will",
+    "naming_reason": "オキシトシンとセロトニンの拮抗を「内なる炎が壮大なビジョンとなって世界を変革する」として表現。龍の力強さと意志の強固さで二つの神経の協調を表した壮大な真名"
+  },
+  {
+    "id": "O-S-D-Trinity",
+    "pattern_id": 11,
+    "kanji_name": "彗遺",
+    "reading": "すいい",
+    "romaji": "suii",
+    "english_name": "Comet Legacy",
+    "naming_reason": "3要素の均衡を「生涯をかけた研究が人類に永遠の遺産をもたらす」として表現。彗星の輝きと永続する遺産によって、三神経の調和から生まれる偉大な業績を表した真名"
+  },
+  {
+    "id": "O-S-D-Flat",
+    "pattern_id": 12,
+    "kanji_name": "館叡",
+    "reading": "かんえい",
+    "romaji": "kan'ei",
+    "english_name": "Hall Wisdom",
+    "naming_reason": "均等型の深遠さを「古い図書館の館長室に蓄積された深い叡智と静かな権威の持続的影響」として表現。館の安定感と叡智の深さで、バランス型の知性を捉えた真名"
+  },
+  {
+    "id": "O-S-N-Single",
+    "pattern_id": 13,
+    "kanji_name": "幹永",
+    "reading": "かんえい",
+    "romaji": "kan'ei",
+    "english_name": "Trunk Eternal",
+    "naming_reason": "オキシトシン特化を「千年樹の太き幹を通じて永続的に流れる神聖なる生命力」として表現。共感の根本性を幹で、永続性を永で捉えた神聖で力強い真名"
+  },
+  {
+    "id": "O-S-N-Dual",
+    "pattern_id": 14,
+    "kanji_name": "哲永",
+    "reading": "てつえい",
+    "romaji": "tetsuei",
+    "english_name": "Philosophy Eternal",
+    "naming_reason": "オキシトシンとセロトニンの拮抗を「一冊の本が数十年かけて社会を根本変革する力」として表現。哲学の深さと永続的な影響力で二つの神経の協調による変革力を表した真名"
+  },
+  {
+    "id": "O-S-N-Trinity",
+    "pattern_id": 15,
+    "kanji_name": "遺産",
+    "reading": "いさん",
+    "romaji": "isan",
+    "english_name": "Legacy",
+    "naming_reason": "3要素の均衡を「人生をかけて熟成させた究極の成果が遺産として結実する技術」として表現。人生の集大成としての遺産により、三神経の調和から生まれる最高の到達点を表した真名"
+  },
+  {
+    "id": "O-S-N-Flat",
+    "pattern_id": 16,
+    "kanji_name": "杉影",
+    "reading": "すぎかげ",
+    "romaji": "sugikage",
+    "english_name": "Cedar Shadow",
+    "naming_reason": "均等型の深遠さを「千年杉が森全体を支える深遠で持続的な本質変革」として表現。杉の長寿と影の静かな力で、バランス型の根本的で持続的な影響力を捉えた真名"
+  },
+  {
+    "id": "O-S-E-Single",
+    "pattern_id": 17,
+    "kanji_name": "神愛",
+    "reading": "しんあい",
+    "romaji": "shin'ai",
+    "english_name": "Divine Love",
+    "naming_reason": "オキシトシン特化を「何十年もかけて完成された究極で神聖な愛の境地」として表現。共感の究極形態を神聖な愛として捉え、神と愛の組み合わせで最高の境地を表した真名"
+  },
+  {
+    "id": "O-S-E-Dual",
+    "pattern_id": 18,
+    "kanji_name": "鯨王",
+    "reading": "げいおう",
+    "romaji": "geiou",
+    "english_name": "Whale King",
+    "naming_reason": "オキシトシンとセロトニンの拮抗を「深海から立ち上がる巨大な力で社会を変革する王者」として表現。鯨の巨大さと王の威厳で二つの神経の協調による圧倒的な変革力を表した真名"
+  },
+  {
+    "id": "O-S-E-Trinity",
+    "pattern_id": 19,
+    "kanji_name": "賢真",
+    "reading": "けんしん",
+    "romaji": "kenshin",
+    "english_name": "Wise Truth",
+    "naming_reason": "3要素の均衡を「生涯の理論完成が賢者の真理として宇宙に至福をもたらす永続」として表現。賢明さと真理の到達によって、三神経の調和から生まれる究極の叡智を表した真名"
+  },
+  {
+    "id": "O-S-E-Flat",
+    "pattern_id": 20,
+    "kanji_name": "海皇",
+    "reading": "かいおう",
+    "romaji": "kaiou",
+    "english_name": "Ocean Emperor",
+    "naming_reason": "均等型の壮大さを「深海から立ち上がる皇帝の力、人生をかけた変革」として表現。海の無限性と皇帝の絶対的権威で、バランス型の圧倒的な変革力を捉えた真名"
+  },
+  {
+    "id": "O-N-D-Single",
+    "pattern_id": 1,
+    "kanji_name": "烈心",
+    "reading": "れっしん",
+    "romaji": "resshin",
+    "english_name": "Fierce Heart",
+    "naming_reason": "オキシトシン特化の共感・接続の力が「内側の確信から生まれる即決の炎と一貫した明快さ」として表現され、1位特化の圧倒的突出感を完璧に体現している"
+  },
+  {
+    "id": "O-N-D-Dual",
+    "pattern_id": 2,
+    "kanji_name": "鋼劇",
+    "reading": "こうげき",
+    "romaji": "kougeki",
+    "english_name": "Steel Drama",
+    "naming_reason": "オキシトシン+ノルアドレナリンの2強拮抗が「緊急時に発動する鋼鉄の劇的集中、瞬間最大出力」として表現され、2つの神経系の均衡した協働を象徴している"
+  },
+  {
+    "id": "O-N-D-Trinity",
+    "pattern_id": 3,
+    "kanji_name": "月狂",
+    "reading": "げっきょう",
+    "romaji": "gekkyou",
+    "english_name": "Moon Madness",
+    "naming_reason": "3つの神経系が均衡する中で「月光の下で内発的に爆発する孤高の革新力」として表現され、共感・集中・革新の三位一体が生む神秘的な力を体現している"
+  },
+  {
+    "id": "O-N-D-Flat",
+    "pattern_id": 4,
+    "kanji_name": "構界",
+    "reading": "こうかい",
+    "romaji": "koukai",
+    "english_name": "World Construction",
+    "naming_reason": "全体的バランスを持つ均等型が「長年の構想が静かに世界を変革する深遠な力」として表現され、持続的で包括的な影響力を象徴している"
+  },
+  {
+    "id": "O-N-S-Single",
+    "pattern_id": 5,
+    "kanji_name": "巨包",
+    "reading": "きょほう",
+    "romaji": "kyohou",
+    "english_name": "Giant Embrace",
+    "naming_reason": "オキシトシン特化の共感・接続が「長年蓄積した愛の力が最後に圧倒的な包容力として現れる」として表現され、1位特化の圧倒的な愛の力を体現している"
+  },
+  {
+    "id": "O-N-S-Dual",
+    "pattern_id": 6,
+    "kanji_name": "地恵",
+    "reading": "ちけい",
+    "romaji": "chikei",
+    "english_name": "Earth's Blessing",
+    "naming_reason": "オキシトシン+ノルアドレナリンの2強が「地熱の如き深厚な力が永続的な恵みとなって不屈の源泉となる技」として表現され、安定した持続力を象徴している"
+  },
+  {
+    "id": "O-N-S-Trinity",
+    "pattern_id": 7,
+    "kanji_name": "地殻",
+    "reading": "ちかく",
+    "romaji": "chikaku",
+    "english_name": "Earth's Crust",
+    "naming_reason": "3つの神経系の均衡が「地殻変動のような見えない深部での長い準備を経た巨大な変革力」として表現され、根本的な変革の力を体現している"
+  },
+  {
+    "id": "O-N-S-Flat",
+    "pattern_id": 8,
+    "kanji_name": "永詩",
+    "reading": "えいし",
+    "romaji": "eishi",
+    "english_name": "Eternal Poetry",
+    "naming_reason": "均等型のバランスが「古木の永続的統合力を象徴する荘厳な奥義」として表現され、永続性と美しさを両立した力を体現している"
+  },
+  {
+    "id": "O-N-E-Single",
+    "pattern_id": 9,
+    "kanji_name": "孤焔",
+    "reading": "こえん",
+    "romaji": "koen",
+    "english_name": "Solitary Flame",
+    "naming_reason": "オキシトシン特化の共感・接続が「孤独の中で燃え上がる純粋で圧倒的な炎」として表現され、内なる純粋な情熱の圧倒的な力を体現している"
+  },
+  {
+    "id": "O-N-E-Dual",
+    "pattern_id": 14,
+    "kanji_name": "噴鯨",
+    "reading": "ふんげい",
+    "romaji": "fungei",
+    "english_name": "Whale Spout",
+    "naming_reason": "内部で蓄積された巨大エネルギーの瞬間噴出。オキシトシンとノルアドレナリンが拮抗し、共感と集中が融合した巨大な爆発力を「鯨の潮吹き」として表現。"
+  },
+  {
+    "id": "O-N-E-Trinity",
+    "pattern_id": 11,
+    "kanji_name": "神淵",
+    "reading": "しんえん",
+    "romaji": "shin'en",
+    "english_name": "Divine Abyss",
+    "naming_reason": "3つの神経系の均衡が「山奥隠れ家での究極的創造と神秘的な深淵なる集中」として表現され、超越的な創造力の深淵を体現している"
+  },
+  {
+    "id": "O-N-E-Flat",
+    "pattern_id": 12,
+    "kanji_name": "千樹",
+    "reading": "せんじゅ",
+    "romaji": "senju",
+    "english_name": "Thousand Trees",
+    "naming_reason": "均等型のバランスが「森の生態系を支配する千年大樹の永続的深層力」として表現され、生態系全体を支える根源的な力を体現している"
+  },
+  {
+    "id": "O-E-D-Single",
+    "pattern_id": 13,
+    "kanji_name": "皇牙",
+    "reading": "おうが",
+    "romaji": "ouga",
+    "english_name": "Imperial Fang",
+    "naming_reason": "オキシトシン特化の共感・接続が「皇帝の牙のように純粋で圧倒的な瞬発力」として表現され、1位特化の純粋で圧倒的な力を体現している"
+  },
+  {
+    "id": "O-E-D-Dual",
+    "pattern_id": 14,
+    "kanji_name": "神業",
+    "reading": "しんぎょう",
+    "romaji": "shingyou",
+    "english_name": "Divine Craft",
+    "naming_reason": "オキシトシン+エンドルフィンの2強が「人生を捧げたライフワークが社会に与える神業級の影響」として表現され、人生をかけた究極の技術を象徴している"
+  },
+  {
+    "id": "O-E-D-Trinity",
+    "pattern_id": 15,
+    "kanji_name": "窟創",
+    "reading": "くつそう",
+    "romaji": "kutsusou",
+    "english_name": "Cave Creation",
+    "naming_reason": "3つの神経系の均衡が「山奥の工房で長年燃え続ける創造の大炉」として表現され、孤高の創造者の究極的な創造力を体現している"
+  },
+  {
+    "id": "O-E-D-Flat",
+    "pattern_id": 16,
+    "kanji_name": "故愛",
+    "reading": "こあい",
+    "romaji": "koai",
+    "english_name": "Hometown Love",
+    "naming_reason": "均等型のバランスが「故郷への深愛で十年がかりの大作を完成させる熟練」として表現され、深い愛情に基づく長期的な創造力を体現している"
+  },
+  {
+    "id": "O-E-S-Single",
+    "pattern_id": 17,
+    "kanji_name": "冥貫",
+    "reading": "めいかん",
+    "romaji": "meikan",
+    "english_name": "Dark Penetration",
+    "naming_reason": "オキシトシン特化の共感・接続が「深い決意が長い時間をかけて現実を貫通していく」として表現され、1位特化の持続的で確実な貫通力を体現している"
+  },
+  {
+    "id": "O-E-S-Dual",
+    "pattern_id": 18,
+    "kanji_name": "業火",
+    "reading": "ごうか",
+    "romaji": "gouka",
+    "english_name": "Karma Fire",
+    "naming_reason": "オキシトシン+エンドルフィンの2強が「心の深淵で長時間育てられた強大な業の炎」として表現され、深い感情の蓄積による圧倒的な力を象徴している"
+  },
+  {
+    "id": "O-E-S-Trinity",
+    "pattern_id": 19,
+    "kanji_name": "千愛",
+    "reading": "せんあい",
+    "romaji": "sen'ai",
+    "english_name": "Thousand Loves",
+    "naming_reason": "3つの神経系の均衡が「千年杉のような悠久の愛を、永遠に続く深い愛情で表現」として表現され、時を超えた愛の究極形を体現している"
+  },
+  {
+    "id": "O-E-S-Flat",
+    "pattern_id": 15,
+    "kanji_name": "球先",
+    "reading": "きゅうせん",
+    "romaji": "kyusen",
+    "english_name": "Sphere Tip",
+    "naming_reason": "雷鳴の夜にインスピレーションが爆発的に創造される。全神経伝達物質がバランスし、共感・快感・理解が調和した創造の瞬間を「球体の先端」として表現。"
+  },
+  {
+    "id": "O-E-N-Single",
+    "pattern_id": 1,
+    "kanji_name": "一瞳",
+    "reading": "いちどう",
+    "romaji": "ichidou",
+    "english_name": "Single Eye",
+    "naming_reason": "街角での純粋な一瞬の行動、真っ直ぐな心の炎という説明が、1位特化の圧倒的突出を完璧に表現している。「一」が単一性を、「瞳」が直視する集中力を象徴し、共感を核とした瞬発的な力を的確に表現"
+  },
+  {
+    "id": "O-E-N-Dual",
+    "pattern_id": 2,
+    "kanji_name": "好奇",
+    "reading": "こうき",
+    "romaji": "kouki",
+    "english_name": "Curiosity",
+    "naming_reason": "雨宿りでの弾む会話で内側から湧く好奇心の暖かい煌めきという表現が、共感と快感の2強型バランスを見事に体現。好奇心という普遍的でありながら力強い概念が記憶に残りやすい"
+  },
+  {
+    "id": "O-E-N-Trinity",
+    "pattern_id": 3,
+    "kanji_name": "翼和",
+    "reading": "よくわ",
+    "romaji": "yokuwa",
+    "english_name": "Wing Harmony",
+    "naming_reason": "翼を広げて場全体に調和をもたらす飛翔の配慮術という説明が、3つの神経伝達物質が均衡した状態を完璧に表現。「翼」の飛翔力と「和」の調和が trinity の本質を捉えている"
+  },
+  {
+    "id": "O-E-N-Flat",
+    "pattern_id": 4,
+    "kanji_name": "森織",
+    "reading": "しんしょく",
+    "romaji": "shinshoku",
+    "english_name": "Forest Weaving",
+    "naming_reason": "森の木々が織りなすように関係性を深く編み上げる熟成技という表現が、均等型の全体バランスを自然の比喩で美しく表現。「森」の複雑性と「織」の統合力が印象的"
+  },
+  {
+    "id": "N-D-S-Single",
+    "pattern_id": 5,
+    "kanji_name": "孤極",
+    "reading": "こきょく",
+    "romaji": "kokyoku",
+    "english_name": "Solitary Extreme",
+    "naming_reason": "一人で到達する究極の完成度を表す孤高の境地という説明が、1位特化の極端な突出を見事に表現。「孤」の独立性と「極」の極限性が、ノルアドレナリン主導の集中力を的確に象徴"
+  },
+  {
+    "id": "N-D-S-Dual",
+    "pattern_id": 6,
+    "kanji_name": "古王",
+    "reading": "こおう",
+    "romaji": "koou",
+    "english_name": "Ancient King",
+    "naming_reason": "古の王の圧倒的な持続力で象徴という表現が、2強型の重厚さを見事に表現。「古」の歴史性と「王」の威厳が、緊張と理解の拮抗する力を格調高く体現している"
+  },
+  {
+    "id": "N-D-S-Trinity",
+    "pattern_id": 7,
+    "kanji_name": "統悟",
+    "reading": "とうご",
+    "romaji": "tougo",
+    "english_name": "Unified Enlightenment",
+    "naming_reason": "長年の熟考が散歩中に統合され新理論骨格が見える深層理解という説明が、3つの神経の均衡による統合的洞察を完璧に表現。「統」の統合力と「悟」の覚醒が trinity の本質を捉えている"
+  },
+  {
+    "id": "N-D-S-Flat",
+    "pattern_id": 8,
+    "kanji_name": "仙紡",
+    "reading": "せんぼう",
+    "romaji": "senbou",
+    "english_name": "Immortal Spinning",
+    "naming_reason": "何十年の道のりで全てが統合され最高傑作を生む静かな偉大さという表現が、均等型の長期的バランスを神秘的に表現。「仙」の超越性と「紡」の創造性が印象深い"
+  },
+  {
+    "id": "N-D-O-Single",
+    "pattern_id": 9,
+    "kanji_name": "隠超",
+    "reading": "いんちょう",
+    "romaji": "inchou",
+    "english_name": "Hidden Transcendence",
+    "naming_reason": "隠遁の中で到達する創作の極致を表す超越的な力という説明が、1位特化の究極性を神秘的に表現。「隠」の内向性と「超」の超越性が、集中による突出を完璧に象徴"
+  },
+  {
+    "id": "N-D-O-Dual",
+    "pattern_id": 10,
+    "kanji_name": "千蛇",
+    "reading": "せんじゃ",
+    "romaji": "senja",
+    "english_name": "Thousand Serpent",
+    "naming_reason": "千年杉の深根から得る無尽蔵エネルギーの根源という表現が、2強型の持続的な力を自然の壮大さで表現。「千」の豊穣性と「蛇」の生命力が記憶に残りやすく力強い"
+  },
+  {
+    "id": "N-D-O-Trinity",
+    "pattern_id": 11,
+    "kanji_name": "庵賢",
+    "reading": "あんけん",
+    "romaji": "anken",
+    "english_name": "Hermitage Sage",
+    "naming_reason": "山奥の庵で長年思索を重ね弟子と深い対話を交わす賢者という説明が、3つの神経の調和による深い知恵を美しく表現。「庵」の静寂性と「賢」の智慧が trinity の本質を体現"
+  },
+  {
+    "id": "N-D-O-Flat",
+    "pattern_id": 16,
+    "kanji_name": "生使",
+    "reading": "せいし",
+    "romaji": "seishi",
+    "english_name": "Life Mission",
+    "naming_reason": "人生をかけて追求した理念が多くの人に影響を与える使命昇華。集中・新規性・共感がバランスし、人生を賭けた使命を「生命の使者」として表現。"
+  },
+  {
+    "id": "N-D-E-Single",
+    "pattern_id": 17,
+    "kanji_name": "鶏光",
+    "reading": "けいこう",
+    "romaji": "keiko",
+    "english_name": "Rooster Light",
+    "naming_reason": "夜明けを告げる鶏の鳴き声のような内側からの圧倒的生命力。ノルアドレナリンが圧倒的に突出し、集中力の本質を「鶏の光」として表現。新たな始まりを告げる力強さを象徴。"
+  },
+  {
+    "id": "N-D-E-Dual",
+    "pattern_id": 14,
+    "kanji_name": "芸神",
+    "reading": "げいしん",
+    "romaji": "geishin",
+    "english_name": "Art God",
+    "naming_reason": "人生をかけた大プロジェクトに取り組む芸術家の神的な使命感という表現が、2強型の創造的情熱を崇高に表現。「芸」の創造性と「神」の神性が、芸術的突出を完璧に体現"
+  },
+  {
+    "id": "N-D-E-Trinity",
+    "pattern_id": 15,
+    "kanji_name": "仙殿",
+    "reading": "せんでん",
+    "romaji": "senden",
+    "english_name": "Immortal Hall",
+    "naming_reason": "長年の修行により到達した仙人の域で、静寂な殿堂にて至高の革新を創造する境地という説明が、3つの神経の調和による超越的境地を神秘的に表現。「仙」の超越性と「殿」の荘厳さが trinity の本質を見事に体現"
+  },
+  {
+    "id": "N-D-E-Flat",
+    "pattern_id": 16,
+    "kanji_name": "巌継",
+    "reading": "がんけい",
+    "romaji": "gankei",
+    "english_name": "Rock Succession",
+    "naming_reason": "世代を超えて受け継がれる不動の継承力という表現が、均等型の持続的バランスを壮大に表現。「巌」の不動性と「継」の継承性が、長期的な安定した力の伝承を力強く象徴"
+  },
+  {
+    "id": "N-S-D-Single",
+    "pattern_id": 17,
+    "kanji_name": "求峯",
+    "reading": "きゅうほう",
+    "romaji": "kyuuhou",
+    "english_name": "Seeking Peak",
+    "naming_reason": "山頂での瞑想から生まれる超越的な深化と完成という説明が、1位特化の究極的到達を崇高に表現。「求」の探求心と「峯」の頂点が、理解を核とした超越的完成を見事に象徴"
+  },
+  {
+    "id": "N-S-D-Dual",
+    "pattern_id": 18,
+    "kanji_name": "哲献",
+    "reading": "てつけん",
+    "romaji": "tetsuken",
+    "english_name": "Philosophical Dedication",
+    "naming_reason": "人里離れた研究所での哲学的な献身という表現が、2強型の深い探求を崇高に表現。「哲」の智慧と「献」の献身が、理解と集中の拮抗による深化を格調高く体現"
+  },
+  {
+    "id": "N-S-D-Trinity",
+    "pattern_id": 19,
+    "kanji_name": "仙岳",
+    "reading": "せんがく",
+    "romaji": "sengaku",
+    "english_name": "Immortal Peak",
+    "naming_reason": "仙人のような境地に達し、霊峰の如き不動の洞察を体現という説明が、3つの神経の調和による超越的洞察を神秘的に表現。「仙」の超越性と「岳」の威厳が trinity の本質を完璧に捉えている"
+  },
+  {
+    "id": "N-S-D-Flat",
+    "pattern_id": 20,
+    "kanji_name": "凰遥",
+    "reading": "おうよう",
+    "romaji": "ouyou",
+    "english_name": "Phoenix Distance",
+    "naming_reason": "長い蓄積を経て複数の領域で同時に開花する叡智という表現が、均等型の全方位的バランスを神話的に表現。「凰」の再生力と「遥」の遠大さが、長期的な多面開花を美しく象徴"
+  },
+  {
+    "id": "N-S-O-Single",
+    "pattern_id": 1,
+    "kanji_name": "弧刃",
+    "reading": "こじん",
+    "romaji": "kojin",
+    "english_name": "Arc Blade",
+    "naming_reason": "鋭い弧を描く刃のように即応し持続する信頼の実行力という表現が、ノルアドレナリンの瞬発性とセロトニンの持続性、オキシトシンの信頼関係を完璧に統合している。Single型の突出した集中力を「弧刃」という力強い二字熟語で象徴的に表現している。"
+  },
+  {
+    "id": "N-S-O-Dual",
+    "pattern_id": 2,
+    "kanji_name": "双炎",
+    "reading": "そうえん",
+    "romaji": "souen",
+    "english_name": "Twin Flames",
+    "naming_reason": "理想と信頼が共鳴して生まれる静かで力強い炎という表現が、Dual型の2強バランスを完璧に表現している。ノルアドレナリンの集中力とセロトニンの理解力が拮抗しながら、オキシトシンの信頼で統合される構造を「双炎」という美しい対称性で表している。"
+  },
+  {
+    "id": "N-S-O-Trinity",
+    "pattern_id": 3,
+    "kanji_name": "鉄律",
+    "reading": "てつりつ",
+    "romaji": "tetsuritsu",
+    "english_name": "Iron Discipline",
+    "naming_reason": "内側から湧く責任感で自らを律し確実に実行する鋼の意志という表現が、Trinity型の3要素均衡を体現している。ノルアドレナリンの緊張、セロトニンの秩序、オキシトシンの責任感が統合された強固な自律性を「鉄律」という不動の力で表現している。"
+  },
+  {
+    "id": "N-S-O-Flat",
+    "pattern_id": 18,
+    "kanji_name": "橡慕",
+    "reading": "とちぼ",
+    "romaji": "tochibo",
+    "english_name": "Oak Yearning",
+    "naming_reason": "橡の巨木のように長年の構想が深く成熟し、創造への憧憬で大成を果たす象徴。集中・理解・共感がバランスし、巨木の成長のような壮大な憧憬を表現。"
+  },
+  {
+    "id": "N-S-E-Single",
+    "pattern_id": 5,
+    "kanji_name": "弦志",
+    "reading": "げんし",
+    "romaji": "genshi",
+    "english_name": "String Will",
+    "naming_reason": "内燃瞬発の自律集中を、張り詰めた弦に込められた意志として表現しているのが秀逸。ノルアドレナリンの緊張感とエンドルフィンの内燃的没入感が、セロトニンの自律性で統合される構造を、楽器の弦の張力と意志の強さで見事に表現している。"
+  },
+  {
+    "id": "N-S-E-Dual",
+    "pattern_id": 6,
+    "kanji_name": "双策",
+    "reading": "そうさく",
+    "romaji": "sousaku",
+    "english_name": "Twin Strategy",
+    "naming_reason": "内なる情熱で瞬時に立案し実行する二重の戦略という表現が、Dual型の特徴を完璧に捉えている。ノルアドレナリンの瞬発性とセロトニンの体系性が拮抗し、エンドルフィンの内燃的情熱で統合される構造を「双策」という戦略的二元性で表現している。"
+  },
+  {
+    "id": "N-S-E-Trinity",
+    "pattern_id": 7,
+    "kanji_name": "凪刃",
+    "reading": "なぎば",
+    "romaji": "nagiba",
+    "english_name": "Calm Blade",
+    "naming_reason": "内なる決意による一刀両断の整理モードという表現が、Trinity型の3要素均衡を見事に表現している。ノルアドレナリンの鋭さ、セロトニンの整理力、エンドルフィンの内的決意が統合された静かで決定的な力を「凪刃」という対照的な組み合わせで表現している。"
+  },
+  {
+    "id": "N-S-E-Flat",
+    "pattern_id": 19,
+    "kanji_name": "玄鎚",
+    "reading": "げんつい",
+    "romaji": "gentsui",
+    "english_name": "Mystic Hammer",
+    "naming_reason": "長年の研究で歴史を変える理論を鍛造する玄妙な鎚。集中・理解・快感がバランスし、職人的な研究の深さを「玄妙な鎚」として表現。歴史を変える力を象徴。"
+  },
+  {
+    "id": "N-O-D-Single",
+    "pattern_id": 9,
+    "kanji_name": "玄駈",
+    "reading": "げんく",
+    "romaji": "genku",
+    "english_name": "Mystic Drive",
+    "naming_reason": "内側から湧く確実な意志による自己完結的な力という表現が、Single型の突出した特性を完璧に表現している。ノルアドレナリンの意志力、オキシトシンの内的確実性、ドーパミンの駆動力が統合された神秘的で自律的な力を「玄駈」という深遠な表現で象徴している。"
+  },
+  {
+    "id": "N-O-D-Dual",
+    "pattern_id": 10,
+    "kanji_name": "共感",
+    "reading": "きょうかん",
+    "romaji": "kyoukan",
+    "english_name": "Empathy",
+    "naming_reason": "患者の言葉に心を動かされた医師の共感駆動力という表現が、Dual型の特徴を最も直接的に表現している。ノルアドレナリンの瞬発性とオキシトシンの共感性が拮抗し、ドーパミンの駆動力で統合される構造を、シンプルで力強い「共感」で表現している。"
+  },
+  {
+    "id": "N-O-D-Trinity",
+    "pattern_id": 20,
+    "kanji_name": "朧誠",
+    "reading": "おぼろせい",
+    "romaji": "borosei",
+    "english_name": "Hazy Sincerity",
+    "naming_reason": "長い沈黙の修行で培われた朧げな智恵が真の誠実さと合体し、静寂から爆発する創造力を表現。3つの神経伝達物質が均衡し、修行の果てに得られる深い境地を「朧な誠実さ」として表現。"
+  },
+  {
+    "id": "N-O-D-Flat",
+    "pattern_id": 12,
+    "kanji_name": "師承",
+    "reading": "ししょう",
+    "romaji": "shishou",
+    "english_name": "Master's Legacy",
+    "naming_reason": "師から弟子へ受け継がれる技の瞬発的伝承という表現が、Flat型の全体バランスを最も適切に表現している。ノルアドレナリンの瞬発性、オキシトシンの継承関係、ドーパミンの技術革新が均等に統合された伝承的な力を「師承」で表現している。"
+  },
+  {
+    "id": "N-O-S-Single",
+    "pattern_id": 13,
+    "kanji_name": "誠駈",
+    "reading": "せいく",
+    "romaji": "seiku",
+    "english_name": "Sincere Drive",
+    "naming_reason": "真心をもって駆け抜ける確信の力という表現が、Single型の突出した特性を最も美しく表現している。ノルアドレナリンの駆動力、オキシトシンの真心、セロトニンの確信が統合された純粋で力強い実行力を「誠駈」という誠実な疾走で表現している。"
+  },
+  {
+    "id": "N-O-S-Dual",
+    "pattern_id": 14,
+    "kanji_name": "誓鎖",
+    "reading": "せいさ",
+    "romaji": "seisa",
+    "english_name": "Oath Chain",
+    "naming_reason": "信念による誓いが同志との連携を鎖のように強固に結ぶ力という表現が、Dual型の2強バランスを完璧に表現している。ノルアドレナリンの信念とオキシトシンの連携が拮抗し、セロトニンの秩序で統合される構造を「誓鎖」という強固な結束で表現している。"
+  },
+  {
+    "id": "N-O-S-Trinity",
+    "pattern_id": 15,
+    "kanji_name": "契鳴",
+    "reading": "けいめい",
+    "romaji": "keimei",
+    "english_name": "Covenant Resonance",
+    "naming_reason": "夜中の閃きが信頼の契約として鳴り響き、仲間との深層共鳴で使命を果たすという表現が、Trinity型の3要素均衡を音響的に美しく表現している。ノルアドレナリンの閃き、オキシトシンの信頼、セロトニンの使命感が共鳴する構造を「契鳴」で表現している。"
+  },
+  {
+    "id": "N-O-S-Flat",
+    "pattern_id": 16,
+    "kanji_name": "光拓",
+    "reading": "こうたく",
+    "romaji": "koutaku",
+    "english_name": "Light Pioneer",
+    "naming_reason": "内なる光が外に向かって新しい道を切り拓く瞬発力という表現が、Flat型の全体バランスを最も力強く表現している。ノルアドレナリンの瞬発力、オキシトシンの外向性、セロトニンの開拓精神が均等に統合された創造的な力を「光拓」で表現している。"
+  },
+  {
+    "id": "N-O-E-Single",
+    "pattern_id": 17,
+    "kanji_name": "燐呼",
+    "reading": "りんこ",
+    "romaji": "rinko",
+    "english_name": "Phosphor Call",
+    "naming_reason": "内なる燐光が瞬いて同志を呼び寄せ、共鳴の中で実践を重ねるという表現が、Single型の突出した特性を神秘的に表現している。ノルアドレナリンの瞬き、オキシトシンの呼び寄せ、エンドルフィンの内的燃焼が統合された幻想的な力を「燐呼」で表現している。"
+  },
+  {
+    "id": "N-O-E-Dual",
+    "pattern_id": 18,
+    "kanji_name": "朱誓",
+    "reading": "しゅせい",
+    "romaji": "shusei",
+    "english_name": "Crimson Oath",
+    "naming_reason": "夜明け前の内なる炎と外なる連帯が織りなす使命という表現が、Dual型の2強バランスを美しく表現している。ノルアドレナリンの内なる炎とオキシトシンの外なる連帯が拮抗し、エンドルフィンの使命感で統合される構造を「朱誓」という赤い誓いで表現している。"
+  },
+  {
+    "id": "N-O-E-Trinity",
+    "pattern_id": 19,
+    "kanji_name": "志橋",
+    "reading": "しばし",
+    "romaji": "shibashi",
+    "english_name": "Will Bridge",
+    "naming_reason": "信念に基づいたアイデアを仲間と共に形にする理念的創造という表現が、Trinity型の3要素均衡を建設的に表現している。ノルアドレナリンの信念、オキシトシンの協働、エンドルフィンの創造性が統合された架け橋的な力を「志橋」で表現している。"
+  },
+  {
+    "id": "N-O-E-Flat",
+    "pattern_id": 20,
+    "kanji_name": "波網",
+    "reading": "なみもう",
+    "romaji": "namimou",
+    "english_name": "Wave Network",
+    "naming_reason": "波のように機動的に広がる多面的で活発な社交ネットワークという表現が、Flat型の全体バランスを最も動的に表現している。ノルアドレナリンの機動性、オキシトシンの社交性、エンドルフィンの活発さが均等に統合された拡張的な力を「波網」で表現している。"
+  },
+  {
+    "id": "N-E-D-Single",
+    "pattern_id": 1,
+    "kanji_name": "凛駆",
+    "reading": "りんく",
+    "romaji": "rinku",
+    "english_name": "Sharp Rush",
+    "naming_reason": "鋭敏な直感が凛とした速度で駆け抜ける瞬発力。ノルアドレナリン主導で一点突出する構造を、緊張感のある「凛」と瞬発的な「駆」で完璧に表現。"
+  },
+  {
+    "id": "N-E-D-Dual",
+    "pattern_id": 1,
+    "kanji_name": "沁醒",
+    "reading": "しんせい",
+    "romaji": "shinsei",
+    "english_name": "Deep Awakening",
+    "naming_reason": "深夜の自室で内なる炎がゆっくりと醸成される感覚を表現。ノルアドレナリンとエンドルフィンの拮抗による緊張と快感の融合、そしてドーパミンによる新たな可能性への覚醒を「沁醒」として命名。内的覚醒の静謐さと力強さを兼ね備えている。"
+  },
+  {
+    "id": "N-E-D-Trinity",
+    "pattern_id": 3,
+    "kanji_name": "蒼穹",
+    "reading": "そうきゅう",
+    "romaji": "soukyuu",
+    "english_name": "Azure Sky",
+    "naming_reason": "指揮者が練習を重ね完璧な演奏を創り上げる構築的集中。3つの神経の均衡を、深く広がる「蒼」と無限に続く「穹」で壮大に表現。"
+  },
+  {
+    "id": "N-E-D-Flat",
+    "pattern_id": 4,
+    "kanji_name": "境開",
+    "reading": "きょうかい",
+    "romaji": "kyoukai",
+    "english_name": "Boundary Opening",
+    "naming_reason": "山奥研究施設での究極完成と人類未踏領域の開拓。全要素の均等バランスを、限界を表す「境」と新たな領域を切り拓く「開」で表現。"
+  },
+  {
+    "id": "N-E-S-Single",
+    "pattern_id": 5,
+    "kanji_name": "繊貫",
+    "reading": "せんかん",
+    "romaji": "senkan",
+    "english_name": "Delicate Penetration",
+    "naming_reason": "巨大な力が大地を貫通する持続エネルギー。緊張・快感・秩序の融合を、繊細さと貫通力という対照的な力の統合で表現。"
+  },
+  {
+    "id": "N-E-S-Dual",
+    "pattern_id": 2,
+    "kanji_name": "銀律",
+    "reading": "ぎんりつ",
+    "romaji": "ginritsu",
+    "english_name": "Silver Law",
+    "naming_reason": "適度な制御とバランスを保つ実用的な安定力を表現。ノルアドレナリンの緊張とエンドルフィンの快感がセロトニンの秩序で調和される構造を「銀律」として命名。銀の輝きのような美しい規律性と実用性を持つドライブ構造。"
+  },
+  {
+    "id": "N-E-S-Trinity",
+    "pattern_id": 7,
+    "kanji_name": "霊鋼",
+    "reading": "れいこう",
+    "romaji": "reikou",
+    "english_name": "Spirit Steel",
+    "naming_reason": "内なる創造魂が鋼のように鍛え上げられ、不朽の作品として結実する巨匠の境地。3神経の均衡を、精神性の「霊」と不屈の「鋼」で表現。"
+  },
+  {
+    "id": "N-E-S-Flat",
+    "pattern_id": 8,
+    "kanji_name": "祈鮮",
+    "reading": "きせん",
+    "romaji": "kisen",
+    "english_name": "Praying Freshness",
+    "naming_reason": "長年の研究が実を結ぶ荘厳な発見の瞬間を統合と覇気で表現。全要素のバランスを、神聖な「祈」と新鮮な「鮮」で表現。"
+  },
+  {
+    "id": "N-E-O-Single",
+    "pattern_id": 9,
+    "kanji_name": "瑞使",
+    "reading": "ずいし",
+    "romaji": "zuishi",
+    "english_name": "Auspicious Messenger",
+    "naming_reason": "内なる表現欲求が爆発するアーティストの情熱的使命感。緊張主導に共感が加わる構造を、吉兆の「瑞」と使命の「使」で表現。"
+  },
+  {
+    "id": "N-E-O-Dual",
+    "pattern_id": 10,
+    "kanji_name": "樫完",
+    "reading": "かしかん",
+    "romaji": "kashikan",
+    "english_name": "Oak Completion",
+    "naming_reason": "樫の木が何十年もかけて深い根を張り完璧な実を結ぶ内的結実。緊張と快感の拮抗に共感が調和する構造を、堅固な「樫」と完成の「完」で表現。"
+  },
+  {
+    "id": "N-E-O-Trinity",
+    "pattern_id": 11,
+    "kanji_name": "叡伝",
+    "reading": "えいでん",
+    "romaji": "eiden",
+    "english_name": "Wisdom Transmission",
+    "naming_reason": "長年の修行で深い境地に達した師匠の叡智と伝承の力。3神経の均衡を、深い知恵の「叡」と継承の「伝」で崇高に表現。"
+  },
+  {
+    "id": "N-E-O-Flat",
+    "pattern_id": 12,
+    "kanji_name": "算宙",
+    "reading": "さんちゅう",
+    "romaji": "sanchuu",
+    "english_name": "Calculation Universe",
+    "naming_reason": "深海熱水噴出孔のような深淵から創造される多次元宇宙。全要素の均等バランスを、計算の「算」と無限の「宙」で表現。"
+  },
+  {
+    "id": "E-D-S-Single",
+    "pattern_id": 13,
+    "kanji_name": "至膳",
+    "reading": "しぜん",
+    "romaji": "shizen",
+    "english_name": "Ultimate Feast",
+    "naming_reason": "高級レストランで積み上げられた快感が最高潮で開花する。快感主導の一点突出を、極致の「至」と美食の「膳」で贅沢に表現。"
+  },
+  {
+    "id": "E-D-S-Dual",
+    "pattern_id": 14,
+    "kanji_name": "千嶺",
+    "reading": "せんれい",
+    "romaji": "senrei",
+    "english_name": "Thousand Peaks",
+    "naming_reason": "千年の時を重ねた巨大な存在感を峰々の威容で表現。快感と新規性の拮抗を、数の多さの「千」と高峻な「嶺」で壮大に表現。"
+  },
+  {
+    "id": "E-D-S-Trinity",
+    "pattern_id": 15,
+    "kanji_name": "山著",
+    "reading": "さんちょ",
+    "romaji": "sancho",
+    "english_name": "Mountain Masterpiece",
+    "naming_reason": "人里離れた山荘で数十年かけて完成させた大作を世に送り出す巨匠の至宝を表現。3神経の均衡を、不動の「山」と大作の「著」で表現。"
+  },
+  {
+    "id": "E-D-S-Flat",
+    "pattern_id": 16,
+    "kanji_name": "天究",
+    "reading": "てんきゅう",
+    "romaji": "tenkyuu",
+    "english_name": "Heaven Research",
+    "naming_reason": "孤高の観測から生まれる偉大な発見の力。全要素の均等バランスを、至高の「天」と探求の「究」で学術的な崇高さを表現。"
   },
   {
     "id": "E-D-O-Single",
@@ -631,6 +1774,15 @@
     "naming_reason": "地底深く蓄積されたマグマの圧倒的な噴火力を表現。エンドルフィン特化による没入の快感が、問いかけるような探究心と共に爆発的な創造力として発現する構造を「問火」として命名。内なる疑問が燃え上がる力強さを象徴。"
   },
   {
+    "id": "E-D-O-Dual",
+    "pattern_id": 18,
+    "kanji_name": "龍覚",
+    "reading": "りゅうかく",
+    "romaji": "ryuukaku",
+    "english_name": "Dragon Awakening",
+    "naming_reason": "長年の理想が結晶化し世界を変革する運命的な確信。快感と新規性の拮抗に共感が調和する構造を、威力の「龍」と覚醒の「覚」で表現。"
+  },
+  {
     "id": "E-D-O-Trinity",
     "pattern_id": 19,
     "kanji_name": "仙抱",
@@ -640,274 +1792,49 @@
     "naming_reason": "人生をかけたテーマが実を結ぶ深遠で統合的な力。3神経の均衡を、超越的な「仙」と包容の「抱」で人生の究極的統合を表現。"
   },
   {
-    "id": "E-D-S-Dual",
-    "pattern_id": 14,
-    "kanji_name": "千嶺",
-    "reading": "せんれい",
-    "romaji": "senrei",
-    "english_name": "Thousand Peaks",
-    "naming_reason": "千年の時を重ねた巨大な存在感を峰々の威容で表現。快感と新規性の拮抗を、数の多さの「千」と高峻な「嶺」で壮大に表現。"
+    "id": "E-D-O-Flat",
+    "pattern_id": 4,
+    "kanji_name": "迸鳴",
+    "reading": "ほうめい",
+    "romaji": "houmei",
+    "english_name": "Bursting Resonance",
+    "naming_reason": "深夜ライブで観客と電流のような共鳴を生む爆発力を表現。エンドルフィン、ドーパミン、オキシトシンが均等に作用し、没入・新規性・共感が一体となって爆発的に響き合う構造を「迸鳴」として命名。力の迸りと共鳴の美しさを兼ね備えている。"
   },
   {
-    "id": "E-D-S-Flat",
-    "pattern_id": 16,
-    "kanji_name": "天究",
-    "reading": "てんきゅう",
-    "romaji": "tenkyuu",
-    "english_name": "Heaven Research",
-    "naming_reason": "孤高の観測から生まれる偉大な発見の力。全要素の均等バランスを、至高の「天」と探求の「究」で学術的な崇高さを表現。"
-  },
-  {
-    "id": "E-D-S-Single",
-    "pattern_id": 13,
-    "kanji_name": "至膳",
-    "reading": "しぜん",
-    "romaji": "shizen",
-    "english_name": "Ultimate Feast",
-    "naming_reason": "高級レストランで積み上げられた快感が最高潮で開花する。快感主導の一点突出を、極致の「至」と美食の「膳」で贅沢に表現。"
-  },
-  {
-    "id": "E-D-S-Trinity",
-    "pattern_id": 15,
-    "kanji_name": "山著",
-    "reading": "さんちょ",
-    "romaji": "sancho",
-    "english_name": "Mountain Masterpiece",
-    "naming_reason": "人里離れた山荘で数十年かけて完成させた大作を世に送り出す巨匠の至宝を表現。3神経の均衡を、不動の「山」と大作の「著」で表現。"
-  },
-  {
-    "id": "E-N-D-Dual",
-    "pattern_id": 8,
-    "kanji_name": "間欠",
-    "reading": "かんけつ",
-    "romaji": "kanketsu",
-    "english_name": "Intermittent Burst",
-    "naming_reason": "間欠泉の突発的で圧倒的な噴出力を表現。エンドルフィンとノルアドレナリンが拮抗し、没入と緊張が周期的に爆発する構造を「間欠」として命名。規則的でありながら予測不能な爆発力を象徴する力強い真名。"
-  },
-  {
-    "id": "E-N-D-Flat",
-    "pattern_id": 9,
-    "kanji_name": "噴龍",
-    "reading": "ふんりゅう",
-    "romaji": "funryuu",
-    "english_name": "Erupting Dragon",
-    "naming_reason": "火山の龍のように内なるエネルギーを爆発的に放出する力を表現。エンドルフィン、ノルアドレナリン、ドーパミンの均等な作用により、没入・緊張・新規性が龍のような威力で噴出する構造を「噴龍」として命名。圧倒的な爆発力と神秘性を兼ね備えている。"
-  },
-  {
-    "id": "E-N-D-Single",
-    "pattern_id": 9,
-    "kanji_name": "狂筆",
-    "reading": "きょうひつ",
-    "romaji": "kyouhitsu",
-    "english_name": "Mad Brush",
-    "naming_reason": "1位特化を「狂気的なインスピレーションで一気に傑作を生み出す筆」で表現。狂気と創作の筆が融合した圧倒的な創造力を象徴。"
-  },
-  {
-    "id": "E-N-D-Trinity",
-    "pattern_id": 11,
-    "kanji_name": "魔狂",
-    "reading": "まきょう",
-    "romaji": "makyou",
-    "english_name": "Demon Madness",
-    "naming_reason": "3強均衡を「内燃の狂気が孤高の独創性を爆発させる」力で表現。魔性と狂気の組み合わせが三つの神経系の調和した革新力を象徴。"
-  },
-  {
-    "id": "E-N-O-Dual",
-    "pattern_id": 18,
-    "kanji_name": "神堂",
-    "reading": "しんどう",
-    "romaji": "shindou",
-    "english_name": "Divine Hall",
-    "naming_reason": "2強型を「何年も温めた構想が神業レベルの作品として醸成される奥義」で表現。神性と堂々たる威厳が二つの力の拮抗する完成度を象徴。"
-  },
-  {
-    "id": "E-N-O-Flat",
-    "pattern_id": 20,
-    "kanji_name": "嵐誠",
-    "reading": "らんせい",
-    "romaji": "ransei",
-    "english_name": "Storm Sincerity",
-    "naming_reason": "均等型を「嵐の中心から噴出する内なる創造の核心と革新の炎」で表現。嵐の破壊力と誠実さの純粋性がバランスの取れた創造力を象徴。"
-  },
-  {
-    "id": "E-N-O-Single",
-    "pattern_id": 17,
-    "kanji_name": "技神",
-    "reading": "ぎしん",
-    "romaji": "gishin",
-    "english_name": "Skill God",
-    "naming_reason": "1位特化を「何年もかけて技術を極め誰も真似できない境地に達する職人の神域的存在感」で表現。技術の神格化が圧倒的突出性を象徴。"
-  },
-  {
-    "id": "E-N-O-Trinity",
-    "pattern_id": 19,
-    "kanji_name": "鬼迸",
-    "reading": "きほう",
-    "romaji": "kihou",
-    "english_name": "Demon Burst",
-    "naming_reason": "3強均衡を「内なる才能が爆発的に噴出し周囲を魅了する革命的な瞬間」で表現。鬼神の力と迸る爆発が三つの神経系の調和した革新力を象徴。"
-  },
-  {
-    "id": "E-N-S-Dual",
-    "pattern_id": 14,
-    "kanji_name": "魂琢",
-    "reading": "こんたく",
-    "romaji": "kontaku",
-    "english_name": "Soul Craft",
-    "naming_reason": "2強型を「魂を込めて何十年もかけて極限の作品を作る刀匠の技」で表現。魂の彫琢が二つの力の拮抗と深化を象徴。"
-  },
-  {
-    "id": "E-N-S-Flat",
-    "pattern_id": 10,
-    "kanji_name": "地熔",
-    "reading": "ちよう",
-    "romaji": "chiyou",
-    "english_name": "Earth Molten",
-    "naming_reason": "地底深くのマグマがゆっくり熱蓄積から噴火のような力強い表出を表現。エンドルフィン、ノルアドレナリン、セロトニンが均等に作用し、深い没入・集中・秩序が地底で熔融し大地を変える力として発現する構造を「地熔」として命名。内なる力の熔融と大地を動かす根源力を象徴。"
-  },
-  {
-    "id": "E-N-S-Single",
-    "pattern_id": 13,
-    "kanji_name": "満開",
-    "reading": "まんかい",
-    "romaji": "mankai",
-    "english_name": "Full Bloom",
-    "naming_reason": "1位特化を「何年もかけた樹木の満開という蓄積された情熱の究極的開花」で表現。完全な開花が圧倒的突出性を美しく象徴。"
-  },
-  {
-    "id": "E-N-S-Trinity",
-    "pattern_id": 15,
-    "kanji_name": "煌眼",
-    "reading": "こうがん",
-    "romaji": "kougan",
-    "english_name": "Brilliant Eyes",
-    "naming_reason": "3強均衡を「煌めく眼光が世界を変える革新的洞察を一瞬で捉える天才的直感」で表現。煌めきと眼光が三つの神経系の調和した洞察力を象徴。"
-  },
-  {
-    "id": "E-O-D-Dual",
-    "pattern_id": 18,
-    "kanji_name": "夢轟",
-    "reading": "むごう",
-    "romaji": "mugou",
-    "english_name": "Dream Thunder",
-    "naming_reason": "長年の夢が仲間との絆で轟音となって世界を変えるという表現が、快感・共感・新規性の2強型バランスを完璧に体現している。「夢」の理想性と「轟」の圧倒的な力が、このドライブ構造の本質を見事に表現している。"
-  },
-  {
-    "id": "E-O-D-Flat",
-    "pattern_id": 20,
-    "kanji_name": "賢紡",
-    "reading": "けんぼう",
-    "romaji": "kenbou",
-    "english_name": "Wise Weaving",
-    "naming_reason": "山奥の書斎で人類の未来を左右する普遍的洞察を複数分野に紡ぐ力という表現が、均等型の特徴である知恵の統合と多方向への影響力を完璧に表現している。「賢」の深い知恵と「紡」の創造的統合が、このドライブ構造の本質を見事に体現している。"
-  },
-  {
-    "id": "E-O-D-Single",
-    "pattern_id": 17,
-    "kanji_name": "煌遺",
-    "reading": "こうい",
-    "romaji": "koui",
-    "english_name": "Brilliant Legacy",
-    "naming_reason": "煌めく創造の結晶が世界への永続的遺産として深い感動を与え続けるという表現が、快感・共感・新規性の1位特化を完璧に表現している。「煌」の輝きと「遺」の永続性が、このドライブ構造の本質を見事に体現している。"
-  },
-  {
-    "id": "E-O-D-Trinity",
-    "pattern_id": 19,
-    "kanji_name": "巨翔",
-    "reading": "きょしょう",
-    "romaji": "kyoshou",
-    "english_name": "Giant Flight",
-    "naming_reason": "内なる巨木が一気に天空へと羽ばたく圧倒的創造力という表現が、3つの神経系の完璧な均衡による究極的な創造力を表している。「巨」の圧倒的な存在感と「翔」の飛躍力が、このドライブ構造の超越性を完璧に象徴している。"
-  },
-  {
-    "id": "E-O-N-Dual",
-    "pattern_id": 6,
-    "kanji_name": "作撃",
-    "reading": "さくげき",
-    "romaji": "sakugeki",
-    "英語名": "Creation Strike",
-    "naming_reason": "2強型の拮抗を創作への確信と観客との共鳴の爆発的衝撃で表現。作品創造と強烈な打撃が融合した力強い響きが印象的。"
-  },
-  {
-    "id": "E-O-N-Flat",
-    "pattern_id": 8,
-    "kanji_name": "噴鐘",
-    "reading": "ふんしょう",
-    "romaji": "funshou",
-    "english_name": "Eruption Bell",
-    "naming_reason": "均等型を「革新的なアイデアに突き動かされる火山の噴火のような圧倒的な迫力」で表現。噴出の瞬発力と鐘の響きがバランスの取れた力強さを象徴。"
-  },
-  {
-    "id": "E-O-N-Single",
-    "pattern_id": 5,
-    "kanji_name": "狂憧",
-    "reading": "きょうどう",
-    "romaji": "kyoudou",
-    "english_name": "Mad Longing",
-    "naming_reason": "1位特化の圧倒的突出を「突然の閃きで世界を変える狂気的天才の革新爆発力」で表現。狂気と憧憬の組み合わせが強烈な印象を残す。"
-  },
-  {
-    "id": "E-O-N-Trinity",
-    "pattern_id": 7,
-    "kanji_name": "天野",
-    "reading": "てんの",
-    "romaji": "tenno",
-    "english_name": "Heaven Field",
-    "naming_reason": "3強均衡を「天才の内なる炎が轟音となって世界を震撼させる」力で表現。天空の広がりと野生の力が三つの神経系の調和した爆発力を象徴。"
-  },
-  {
-    "id": "E-O-S-Dual",
-    "pattern_id": 2,
-    "kanji_name": "魂契",
-    "reading": "こんけい",
-    "romaji": "konkei",
-    "english_name": "Soul Contract",
-    "naming_reason": "2強型の拮抗する力を「魂の深い部分で共鳴し合う契約」として表現。エンドルフィンとオキシトシンの協調を運命的な出会いと本質的な結びつきで象徴。"
-  },
-  {
-    "id": "E-O-S-Flat",
-    "pattern_id": 7,
-    "kanji_name": "川永",
-    "reading": "かわえい",
-    "romaji": "kawaei",
-    "english_name": "River Eternity",
-    "naming_reason": "長い年月をかけて形成された大河の悠然とした力強い包容力を表現。エンドルフィン、オキシトシン、セロトニンが均等に作用し、快感・共感・秩序が大河のように流れ続ける持続力を「川永」として命名。永続的な包容力と調和を象徴。"
-  },
-  {
-    "id": "E-O-S-Single",
+    "id": "E-D-N-Single",
     "pattern_id": 1,
-    "kanji_name": "霊歌",
-    "reading": "れいか",
-    "romaji": "reika",
-    "english_name": "Spirit Song",
-    "naming_reason": "エンドルフィンの快感・没入を「霊」で、内なる魂から自然に溢れる力を「歌」で表現。1位特化という圧倒的突出性を持ちながら、純粋で神秘的な響きが記憶に残る。"
+    "kanji_name": "炬創",
+    "reading": "きょそう",
+    "romaji": "kyosou",
+    "english_name": "Torch Creation",
+    "naming_reason": "内側の炬火が瞬時に創造の手を動かす芸術的瞬発力という表現が、快感による没入と新規性への志向、そして集中の緊張感を最も的確に表現している。「炬」の力強い音韻と「創」の創造性が、このドライブ構造の本質を完璧に体現している。"
   },
   {
-    "id": "E-O-S-Trinity",
+    "id": "E-D-N-Dual",
+    "pattern_id": 2,
+    "kanji_name": "深燃",
+    "reading": "しんねん",
+    "romaji": "shinnen",
+    "english_name": "Deep Burning",
+    "naming_reason": "深夜の確信が翌朝から爆発する変革の炎という描写が、没入する快感と新規性・集中のバランスを見事に表現。「深」で内面への没入を、「燃」で情熱的な行動力を示し、2強型の特徴を完璧に捉えている。"
+  },
+  {
+    "id": "E-D-N-Trinity",
     "pattern_id": 3,
-    "kanji_name": "鳳烈",
-    "reading": "ほうれつ",
-    "romaji": "houretu",
-    "english_name": "Phoenix Storm",
-    "naming_reason": "3強均衡を鳳凰の舞い上がりと烈風で表現。内なる情熱が会場を熱狂に包む圧倒的な力強さと、三つの神経系の調和した爆発力を見事に体現。"
+    "kanji_name": "炎嶺",
+    "reading": "えんれい",
+    "romaji": "enrei",
+    "english_name": "Flame Peak",
+    "naming_reason": "地底の圧倒的なマグマが長い年月を経て巨大な山脈を創造する究極の変革力という壮大な表現が、3つの神経系が均衡した究極的な創造力を象徴している。「炎」と「嶺」の組み合わせが圧倒的な存在感を放つ。"
   },
   {
-    "id": "E-S-D-Dual",
-    "pattern_id": 6,
-    "kanji_name": "宇完",
-    "reading": "うかん",
-    "romaji": "ukan",
-    "english_name": "Universal Completion",
-    "naming_reason": "人生をかけたテーマの結実を、宇宙的な広がりと完成の境地で表現するという壮大な概念が、快感・理解・新規性の2強型バランスを完璧に体現している。「宇」の広大さと「完」の完成度が究極的な達成感を表している。"
-  },
-  {
-    "id": "E-S-D-Flat",
-    "pattern_id": 8,
-    "kanji_name": "宙統",
-    "reading": "ちゅうとう",
-    "romaji": "chutou",
-    "english_name": "Cosmic Integration",
-    "naming_reason": "宇宙的視野で複数分野を統合し永続的影響を与える完成された境地という表現が、均等型の特徴である総合的なバランスと影響力を完璧に表現している。「宙」の無限性と「統」の統合力が、このドライブ構造の本質を見事に体現している。"
+    "id": "E-D-N-Flat",
+    "pattern_id": 4,
+    "kanji_name": "哲煙",
+    "reading": "てつえん",
+    "romaji": "tetsuen",
+    "english_name": "Philosophical Smoke",
+    "naming_reason": "長年の思索が煙のように世界に広がり浸透する理知の力という表現が、バランス型の特徴である多面的な影響力を完璧に表現している。「哲」の深い思索と「煙」の拡散性が、このドライブ構造の本質を見事に体現している。"
   },
   {
     "id": "E-S-D-Single",
@@ -919,6 +1846,15 @@
     "naming_reason": "山小屋で年月をかけて大作を磨き上げる内的熟成の傑作創造を表現。エンドルフィン特化による深い没入が、山のような不動の意志で作品を琢磨し続ける構造を「山琢」として命名。時間をかけた創造の重厚さと完成度を象徴。"
   },
   {
+    "id": "E-S-D-Dual",
+    "pattern_id": 6,
+    "kanji_name": "宇完",
+    "reading": "うかん",
+    "romaji": "ukan",
+    "english_name": "Universal Completion",
+    "naming_reason": "人生をかけたテーマの結実を、宇宙的な広がりと完成の境地で表現するという壮大な概念が、快感・理解・新規性の2強型バランスを完璧に体現している。「宇」の広大さと「完」の完成度が究極的な達成感を表している。"
+  },
+  {
     "id": "E-S-D-Trinity",
     "pattern_id": 7,
     "kanji_name": "炎嶺",
@@ -928,58 +1864,13 @@
     "naming_reason": "地底の圧倒的なマグマが長い年月を経て巨大な山脈を創造する究極の変革力という表現が、3つの神経系の完璧な均衡を表している。内なる情熱（炎）が最高峰（嶺）に到達する様は、このドライブ構造の本質を完璧に象徴している。"
   },
   {
-    "id": "E-S-N-Dual",
-    "pattern_id": 14,
-    "kanji_name": "山究",
-    "reading": "さんきゅう",
-    "romaji": "sankyu",
-    "english_name": "Mountain Quest",
-    "naming_reason": "孤高の探求が究極の完成に至る深遠な洞察力という表現が、快感・理解・集中の2強型バランスを完璧に体現している。「山」の孤高さと「究」の探求の深さが、このドライブ構造の本質を見事に表現している。"
-  },
-  {
-    "id": "E-S-N-Flat",
-    "pattern_id": 6,
-    "kanji_name": "古枝",
-    "reading": "こし",
-    "romaji": "koshi",
-    "english_name": "Ancient Branch",
-    "naming_reason": "古い樹木が太い枝で独自の世界観を空に展開する大成の技を表現。エンドルフィン、セロトニン、ノルアドレナリンの均等な作用により、長年培った経験と技術が多方向に展開する構造を「古枝」として命名。成熟した創造力の広がりを象徴。"
-  },
-  {
-    "id": "E-S-N-Single",
-    "pattern_id": 13,
-    "kanji_name": "航火",
-    "reading": "こうか",
-    "romaji": "kouka",
-    "english_name": "Eternal Flame",
-    "naming_reason": "何千年も燃え続ける聖火の神聖で不滅の力を象徴。内側で培った情熱の究極的な持続という表現が、快感・理解・緊張集中の1位特化を完璧に表現している。「航」の持続性と「火」の情熱が、このドライブ構造の本質を見事に体現している。"
-  },
-  {
-    "id": "E-S-N-Trinity",
-    "pattern_id": 15,
-    "kanji_name": "洞悟",
-    "reading": "どうご",
-    "romaji": "dougo",
-    "english_name": "Cave Enlightenment",
-    "naming_reason": "深山の洞窟で到達する超越的な悟りの境地という表現が、3つの神経系の完璧な均衡による究極的な境地を表している。「洞」の深遠さと「悟」の悟りが、このドライブ構造の超越性を完璧に象徴している。"
-  },
-  {
-    "id": "E-S-O-Dual",
-    "pattern_id": 10,
-    "kanji_name": "巌伝",
-    "reading": "がんでん",
-    "romaji": "ganden",
-    "english_name": "Rock Transmission",
-    "naming_reason": "巨岩のように不動の巨匠が弟子へと深遠な教えを伝承する重厚な存在感という表現が、快感・理解・共感の2強型バランスを完璧に体現している。「巌」の重厚さと「伝」の継承性が、このドライブ構造の本質を見事に表現している。"
-  },
-  {
-    "id": "E-S-O-Flat",
-    "pattern_id": 12,
-    "kanji_name": "叡循",
-    "reading": "えいじゅん",
-    "romaji": "eijun",
-    "english_name": "Wise Circulation",
-    "naming_reason": "叡智が統合され次世代に循環継承されるという表現が、均等型の特徴である総合的な影響力と継承性を完璧に表現している。「叡」の深い知恵と「循」の循環性が、このドライブ構造の本質を見事に体現している。"
+    "id": "E-S-D-Flat",
+    "pattern_id": 8,
+    "kanji_name": "宙統",
+    "reading": "ちゅうとう",
+    "romaji": "chutou",
+    "english_name": "Cosmic Integration",
+    "naming_reason": "宇宙的視野で複数分野を統合し永続的影響を与える完成された境地という表現が、均等型の特徴である総合的なバランスと影響力を完璧に表現している。「宙」の無限性と「統」の統合力が、このドライブ構造の本質を見事に体現している。"
   },
   {
     "id": "E-S-O-Single",
@@ -991,6 +1882,15 @@
     "naming_reason": "長年構想した大作が文学界に波紋を起こす、大器晩成の本質追求力という表現が、快感への没入、理解による秩序、共感による接続の1位特化を完璧に表現している。「文」の深い教養と「波」の影響力の拡散が見事に調和している。"
   },
   {
+    "id": "E-S-O-Dual",
+    "pattern_id": 10,
+    "kanji_name": "巌伝",
+    "reading": "がんでん",
+    "romaji": "ganden",
+    "english_name": "Rock Transmission",
+    "naming_reason": "巨岩のように不動の巨匠が弟子へと深遠な教えを伝承する重厚な存在感という表現が、快感・理解・共感の2強型バランスを完璧に体現している。「巌」の重厚さと「伝」の継承性が、このドライブ構造の本質を見事に表現している。"
+  },
+  {
     "id": "E-S-O-Trinity",
     "pattern_id": 11,
     "kanji_name": "鯨遺",
@@ -1000,1164 +1900,264 @@
     "naming_reason": "鯨のように巨大な内省の結実が後世への不朽の遺産として深海に眠るという壮大な表現が、3つの神経系の完璧な均衡を表している。「鯨」の巨大さと「遺」の永続性が、このドライブ構造の究極的な境地を象徴している。"
   },
   {
-    "id": "N-D-E-Dual",
+    "id": "E-S-O-Flat",
+    "pattern_id": 12,
+    "kanji_name": "叡循",
+    "reading": "えいじゅん",
+    "romaji": "eijun",
+    "english_name": "Wise Circulation",
+    "naming_reason": "叡智が統合され次世代に循環継承されるという表現が、均等型の特徴である総合的な影響力と継承性を完璧に表現している。「叡」の深い知恵と「循」の循環性が、このドライブ構造の本質を見事に体現している。"
+  },
+  {
+    "id": "E-S-N-Single",
+    "pattern_id": 13,
+    "kanji_name": "航火",
+    "reading": "こうか",
+    "romaji": "kouka",
+    "english_name": "Eternal Flame",
+    "naming_reason": "何千年も燃え続ける聖火の神聖で不滅の力を象徴。内側で培った情熱の究極的な持続という表現が、快感・理解・緊張集中の1位特化を完璧に表現している。「航」の持続性と「火」の情熱が、このドライブ構造の本質を見事に体現している。"
+  },
+  {
+    "id": "E-S-N-Dual",
     "pattern_id": 14,
-    "kanji_name": "芸神",
-    "reading": "げいしん",
-    "romaji": "geishin",
-    "english_name": "Art God",
-    "naming_reason": "人生をかけた大プロジェクトに取り組む芸術家の神的な使命感という表現が、2強型の創造的情熱を崇高に表現。「芸」の創造性と「神」の神性が、芸術的突出を完璧に体現"
+    "kanji_name": "山究",
+    "reading": "さんきゅう",
+    "romaji": "sankyu",
+    "english_name": "Mountain Quest",
+    "naming_reason": "孤高の探求が究極の完成に至る深遠な洞察力という表現が、快感・理解・集中の2強型バランスを完璧に体現している。「山」の孤高さと「究」の探求の深さが、このドライブ構造の本質を見事に表現している。"
   },
   {
-    "id": "N-D-E-Flat",
-    "pattern_id": 16,
-    "kanji_name": "巌継",
-    "reading": "がんけい",
-    "romaji": "gankei",
-    "english_name": "Rock Succession",
-    "naming_reason": "世代を超えて受け継がれる不動の継承力という表現が、均等型の持続的バランスを壮大に表現。「巌」の不動性と「継」の継承性が、長期的な安定した力の伝承を力強く象徴"
-  },
-  {
-    "id": "N-D-E-Trinity",
+    "id": "E-S-N-Trinity",
     "pattern_id": 15,
-    "kanji_name": "仙殿",
-    "reading": "せんでん",
-    "romaji": "senden",
-    "english_name": "Immortal Hall",
-    "naming_reason": "長年の修行により到達した仙人の域で、静寂な殿堂にて至高の革新を創造する境地という説明が、3つの神経の調和による超越的境地を神秘的に表現。「仙」の超越性と「殿」の荘厳さが trinity の本質を見事に体現"
+    "kanji_name": "洞悟",
+    "reading": "どうご",
+    "romaji": "dougo",
+    "english_name": "Cave Enlightenment",
+    "naming_reason": "深山の洞窟で到達する超越的な悟りの境地という表現が、3つの神経系の完璧な均衡による究極的な境地を表している。「洞」の深遠さと「悟」の悟りが、このドライブ構造の超越性を完璧に象徴している。"
   },
   {
-    "id": "N-D-O-Dual",
-    "pattern_id": 10,
-    "kanji_name": "千蛇",
-    "reading": "せんじゃ",
-    "romaji": "senja",
-    "english_name": "Thousand Serpent",
-    "naming_reason": "千年杉の深根から得る無尽蔵エネルギーの根源という表現が、2強型の持続的な力を自然の壮大さで表現。「千」の豊穣性と「蛇」の生命力が記憶に残りやすく力強い"
-  },
-  {
-    "id": "N-D-O-Single",
-    "pattern_id": 9,
-    "kanji_name": "隠超",
-    "reading": "いんちょう",
-    "romaji": "inchou",
-    "english_name": "Hidden Transcendence",
-    "naming_reason": "隠遁の中で到達する創作の極致を表す超越的な力という説明が、1位特化の究極性を神秘的に表現。「隠」の内向性と「超」の超越性が、集中による突出を完璧に象徴"
-  },
-  {
-    "id": "N-D-O-Trinity",
-    "pattern_id": 11,
-    "kanji_name": "庵賢",
-    "reading": "あんけん",
-    "romaji": "anken",
-    "english_name": "Hermitage Sage",
-    "naming_reason": "山奥の庵で長年思索を重ね弟子と深い対話を交わす賢者という説明が、3つの神経の調和による深い知恵を美しく表現。「庵」の静寂性と「賢」の智慧が trinity の本質を体現"
-  },
-  {
-    "id": "N-D-S-Dual",
+    "id": "E-S-N-Flat",
     "pattern_id": 6,
-    "kanji_name": "古王",
-    "reading": "こおう",
-    "romaji": "koou",
-    "english_name": "Ancient King",
-    "naming_reason": "古の王の圧倒的な持続力で象徴という表現が、2強型の重厚さを見事に表現。「古」の歴史性と「王」の威厳が、緊張と理解の拮抗する力を格調高く体現している"
+    "kanji_name": "古枝",
+    "reading": "こし",
+    "romaji": "koshi",
+    "english_name": "Ancient Branch",
+    "naming_reason": "古い樹木が太い枝で独自の世界観を空に展開する大成の技を表現。エンドルフィン、セロトニン、ノルアドレナリンの均等な作用により、長年培った経験と技術が多方向に展開する構造を「古枝」として命名。成熟した創造力の広がりを象徴。"
   },
   {
-    "id": "N-D-S-Flat",
+    "id": "E-O-D-Single",
+    "pattern_id": 17,
+    "kanji_name": "煌遺",
+    "reading": "こうい",
+    "romaji": "koui",
+    "english_name": "Brilliant Legacy",
+    "naming_reason": "煌めく創造の結晶が世界への永続的遺産として深い感動を与え続けるという表現が、快感・共感・新規性の1位特化を完璧に表現している。「煌」の輝きと「遺」の永続性が、このドライブ構造の本質を見事に体現している。"
+  },
+  {
+    "id": "E-O-D-Dual",
+    "pattern_id": 18,
+    "kanji_name": "夢轟",
+    "reading": "むごう",
+    "romaji": "mugou",
+    "english_name": "Dream Thunder",
+    "naming_reason": "長年の夢が仲間との絆で轟音となって世界を変えるという表現が、快感・共感・新規性の2強型バランスを完璧に体現している。「夢」の理想性と「轟」の圧倒的な力が、このドライブ構造の本質を見事に表現している。"
+  },
+  {
+    "id": "E-O-D-Trinity",
+    "pattern_id": 19,
+    "kanji_name": "巨翔",
+    "reading": "きょしょう",
+    "romaji": "kyoshou",
+    "english_name": "Giant Flight",
+    "naming_reason": "内なる巨木が一気に天空へと羽ばたく圧倒的創造力という表現が、3つの神経系の完璧な均衡による究極的な創造力を表している。「巨」の圧倒的な存在感と「翔」の飛躍力が、このドライブ構造の超越性を完璧に象徴している。"
+  },
+  {
+    "id": "E-O-D-Flat",
+    "pattern_id": 20,
+    "kanji_name": "賢紡",
+    "reading": "けんぼう",
+    "romaji": "kenbou",
+    "english_name": "Wise Weaving",
+    "naming_reason": "山奥の書斎で人類の未来を左右する普遍的洞察を複数分野に紡ぐ力という表現が、均等型の特徴である知恵の統合と多方向への影響力を完璧に表現している。「賢」の深い知恵と「紡」の創造的統合が、このドライブ構造の本質を見事に体現している。"
+  },
+  {
+    "id": "E-O-S-Single",
+    "pattern_id": 1,
+    "kanji_name": "霊歌",
+    "reading": "れいか",
+    "romaji": "reika",
+    "english_name": "Spirit Song",
+    "naming_reason": "エンドルフィンの快感・没入を「霊」で、内なる魂から自然に溢れる力を「歌」で表現。1位特化という圧倒的突出性を持ちながら、純粋で神秘的な響きが記憶に残る。"
+  },
+  {
+    "id": "E-O-S-Dual",
+    "pattern_id": 2,
+    "kanji_name": "魂契",
+    "reading": "こんけい",
+    "romaji": "konkei",
+    "english_name": "Soul Contract",
+    "naming_reason": "2強型の拮抗する力を「魂の深い部分で共鳴し合う契約」として表現。エンドルフィンとオキシトシンの協調を運命的な出会いと本質的な結びつきで象徴。"
+  },
+  {
+    "id": "E-O-S-Trinity",
+    "pattern_id": 3,
+    "kanji_name": "鳳烈",
+    "reading": "ほうれつ",
+    "romaji": "houretu",
+    "english_name": "Phoenix Storm",
+    "naming_reason": "3強均衡を鳳凰の舞い上がりと烈風で表現。内なる情熱が会場を熱狂に包む圧倒的な力強さと、三つの神経系の調和した爆発力を見事に体現。"
+  },
+  {
+    "id": "E-O-S-Flat",
+    "pattern_id": 7,
+    "kanji_name": "川永",
+    "reading": "かわえい",
+    "romaji": "kawaei",
+    "english_name": "River Eternity",
+    "naming_reason": "長い年月をかけて形成された大河の悠然とした力強い包容力を表現。エンドルフィン、オキシトシン、セロトニンが均等に作用し、快感・共感・秩序が大河のように流れ続ける持続力を「川永」として命名。永続的な包容力と調和を象徴。"
+  },
+  {
+    "id": "E-O-N-Single",
+    "pattern_id": 5,
+    "kanji_name": "狂憧",
+    "reading": "きょうどう",
+    "romaji": "kyoudou",
+    "english_name": "Mad Longing",
+    "naming_reason": "1位特化の圧倒的突出を「突然の閃きで世界を変える狂気的天才の革新爆発力」で表現。狂気と憧憬の組み合わせが強烈な印象を残す。"
+  },
+  {
+    "id": "E-O-N-Dual",
+    "pattern_id": 6,
+    "kanji_name": "作撃",
+    "reading": "さくげき",
+    "romaji": "sakugeki",
+    "英語名": "Creation Strike",
+    "naming_reason": "2強型の拮抗を創作への確信と観客との共鳴の爆発的衝撃で表現。作品創造と強烈な打撃が融合した力強い響きが印象的。"
+  },
+  {
+    "id": "E-O-N-Trinity",
+    "pattern_id": 7,
+    "kanji_name": "天野",
+    "reading": "てんの",
+    "romaji": "tenno",
+    "english_name": "Heaven Field",
+    "naming_reason": "3強均衡を「天才の内なる炎が轟音となって世界を震撼させる」力で表現。天空の広がりと野生の力が三つの神経系の調和した爆発力を象徴。"
+  },
+  {
+    "id": "E-O-N-Flat",
     "pattern_id": 8,
-    "kanji_name": "仙紡",
-    "reading": "せんぼう",
-    "romaji": "senbou",
-    "english_name": "Immortal Spinning",
-    "naming_reason": "何十年の道のりで全てが統合され最高傑作を生む静かな偉大さという表現が、均等型の長期的バランスを神秘的に表現。「仙」の超越性と「紡」の創造性が印象深い"
+    "kanji_name": "噴鐘",
+    "reading": "ふんしょう",
+    "romaji": "funshou",
+    "english_name": "Eruption Bell",
+    "naming_reason": "均等型を「革新的なアイデアに突き動かされる火山の噴火のような圧倒的な迫力」で表現。噴出の瞬発力と鐘の響きがバランスの取れた力強さを象徴。"
   },
   {
-    "id": "N-D-S-Single",
-    "pattern_id": 5,
-    "kanji_name": "孤極",
-    "reading": "こきょく",
-    "romaji": "kokyoku",
-    "english_name": "Solitary Extreme",
-    "naming_reason": "一人で到達する究極の完成度を表す孤高の境地という説明が、1位特化の極端な突出を見事に表現。「孤」の独立性と「極」の極限性が、ノルアドレナリン主導の集中力を的確に象徴"
-  },
-  {
-    "id": "N-D-S-Trinity",
-    "pattern_id": 7,
-    "kanji_name": "統悟",
-    "reading": "とうご",
-    "romaji": "tougo",
-    "english_name": "Unified Enlightenment",
-    "naming_reason": "長年の熟考が散歩中に統合され新理論骨格が見える深層理解という説明が、3つの神経の均衡による統合的洞察を完璧に表現。「統」の統合力と「悟」の覚醒が trinity の本質を捉えている"
-  },
-  {
-    "id": "N-E-D-Dual",
-    "pattern_id": 1,
-    "kanji_name": "沁醒",
-    "reading": "しんせい",
-    "romaji": "shinsei",
-    "english_name": "Deep Awakening",
-    "naming_reason": "深夜の自室で内なる炎がゆっくりと醸成される感覚を表現。ノルアドレナリンとエンドルフィンの拮抗による緊張と快感の融合、そしてドーパミンによる新たな可能性への覚醒を「沁醒」として命名。内的覚醒の静謐さと力強さを兼ね備えている。"
-  },
-  {
-    "id": "N-E-D-Flat",
-    "pattern_id": 4,
-    "kanji_name": "境開",
-    "reading": "きょうかい",
-    "romaji": "kyoukai",
-    "english_name": "Boundary Opening",
-    "naming_reason": "山奥研究施設での究極完成と人類未踏領域の開拓。全要素の均等バランスを、限界を表す「境」と新たな領域を切り拓く「開」で表現。"
-  },
-  {
-    "id": "N-E-D-Single",
-    "pattern_id": 1,
-    "kanji_name": "凛駆",
-    "reading": "りんく",
-    "romaji": "rinku",
-    "english_name": "Sharp Rush",
-    "naming_reason": "鋭敏な直感が凛とした速度で駆け抜ける瞬発力。ノルアドレナリン主導で一点突出する構造を、緊張感のある「凛」と瞬発的な「駆」で完璧に表現。"
-  },
-  {
-    "id": "N-E-D-Trinity",
-    "pattern_id": 3,
-    "kanji_name": "蒼穹",
-    "reading": "そうきゅう",
-    "romaji": "soukyuu",
-    "english_name": "Azure Sky",
-    "naming_reason": "指揮者が練習を重ね完璧な演奏を創り上げる構築的集中。3つの神経の均衡を、深く広がる「蒼」と無限に続く「穹」で壮大に表現。"
-  },
-  {
-    "id": "N-E-O-Dual",
-    "pattern_id": 10,
-    "kanji_name": "樫完",
-    "reading": "かしかん",
-    "romaji": "kashikan",
-    "english_name": "Oak Completion",
-    "naming_reason": "樫の木が何十年もかけて深い根を張り完璧な実を結ぶ内的結実。緊張と快感の拮抗に共感が調和する構造を、堅固な「樫」と完成の「完」で表現。"
-  },
-  {
-    "id": "N-E-O-Flat",
-    "pattern_id": 12,
-    "kanji_name": "算宙",
-    "reading": "さんちゅう",
-    "romaji": "sanchuu",
-    "english_name": "Calculation Universe",
-    "naming_reason": "深海熱水噴出孔のような深淵から創造される多次元宇宙。全要素の均等バランスを、計算の「算」と無限の「宙」で表現。"
-  },
-  {
-    "id": "N-E-O-Single",
+    "id": "E-N-D-Single",
     "pattern_id": 9,
-    "kanji_name": "瑞使",
-    "reading": "ずいし",
-    "romaji": "zuishi",
-    "english_name": "Auspicious Messenger",
-    "naming_reason": "内なる表現欲求が爆発するアーティストの情熱的使命感。緊張主導に共感が加わる構造を、吉兆の「瑞」と使命の「使」で表現。"
+    "kanji_name": "狂筆",
+    "reading": "きょうひつ",
+    "romaji": "kyouhitsu",
+    "english_name": "Mad Brush",
+    "naming_reason": "1位特化を「狂気的なインスピレーションで一気に傑作を生み出す筆」で表現。狂気と創作の筆が融合した圧倒的な創造力を象徴。"
   },
   {
-    "id": "N-E-O-Trinity",
-    "pattern_id": 11,
-    "kanji_name": "叡伝",
-    "reading": "えいでん",
-    "romaji": "eiden",
-    "english_name": "Wisdom Transmission",
-    "naming_reason": "長年の修行で深い境地に達した師匠の叡智と伝承の力。3神経の均衡を、深い知恵の「叡」と継承の「伝」で崇高に表現。"
-  },
-  {
-    "id": "N-E-S-Dual",
-    "pattern_id": 2,
-    "kanji_name": "銀律",
-    "reading": "ぎんりつ",
-    "romaji": "ginritsu",
-    "english_name": "Silver Law",
-    "naming_reason": "適度な制御とバランスを保つ実用的な安定力を表現。ノルアドレナリンの緊張とエンドルフィンの快感がセロトニンの秩序で調和される構造を「銀律」として命名。銀の輝きのような美しい規律性と実用性を持つドライブ構造。"
-  },
-  {
-    "id": "N-E-S-Flat",
+    "id": "E-N-D-Dual",
     "pattern_id": 8,
-    "kanji_name": "祈鮮",
-    "reading": "きせん",
-    "romaji": "kisen",
-    "english_name": "Praying Freshness",
-    "naming_reason": "長年の研究が実を結ぶ荘厳な発見の瞬間を統合と覇気で表現。全要素のバランスを、神聖な「祈」と新鮮な「鮮」で表現。"
+    "kanji_name": "間欠",
+    "reading": "かんけつ",
+    "romaji": "kanketsu",
+    "english_name": "Intermittent Burst",
+    "naming_reason": "間欠泉の突発的で圧倒的な噴出力を表現。エンドルフィンとノルアドレナリンが拮抗し、没入と緊張が周期的に爆発する構造を「間欠」として命名。規則的でありながら予測不能な爆発力を象徴する力強い真名。"
   },
   {
-    "id": "N-E-S-Single",
-    "pattern_id": 5,
-    "kanji_name": "繊貫",
-    "reading": "せんかん",
-    "romaji": "senkan",
-    "english_name": "Delicate Penetration",
-    "naming_reason": "巨大な力が大地を貫通する持続エネルギー。緊張・快感・秩序の融合を、繊細さと貫通力という対照的な力の統合で表現。"
-  },
-  {
-    "id": "N-E-S-Trinity",
-    "pattern_id": 7,
-    "kanji_name": "霊鋼",
-    "reading": "れいこう",
-    "romaji": "reikou",
-    "english_name": "Spirit Steel",
-    "naming_reason": "内なる創造魂が鋼のように鍛え上げられ、不朽の作品として結実する巨匠の境地。3神経の均衡を、精神性の「霊」と不屈の「鋼」で表現。"
-  },
-  {
-    "id": "N-O-D-Dual",
-    "pattern_id": 10,
-    "kanji_name": "共感",
-    "reading": "きょうかん",
-    "romaji": "kyoukan",
-    "english_name": "Empathy",
-    "naming_reason": "患者の言葉に心を動かされた医師の共感駆動力という表現が、Dual型の特徴を最も直接的に表現している。ノルアドレナリンの瞬発性とオキシトシンの共感性が拮抗し、ドーパミンの駆動力で統合される構造を、シンプルで力強い「共感」で表現している。"
-  },
-  {
-    "id": "N-O-D-Flat",
-    "pattern_id": 12,
-    "kanji_name": "師承",
-    "reading": "ししょう",
-    "romaji": "shishou",
-    "english_name": "Master's Legacy",
-    "naming_reason": "師から弟子へ受け継がれる技の瞬発的伝承という表現が、Flat型の全体バランスを最も適切に表現している。ノルアドレナリンの瞬発性、オキシトシンの継承関係、ドーパミンの技術革新が均等に統合された伝承的な力を「師承」で表現している。"
-  },
-  {
-    "id": "N-O-D-Single",
-    "pattern_id": 9,
-    "kanji_name": "玄駈",
-    "reading": "げんく",
-    "romaji": "genku",
-    "english_name": "Mystic Drive",
-    "naming_reason": "内側から湧く確実な意志による自己完結的な力という表現が、Single型の突出した特性を完璧に表現している。ノルアドレナリンの意志力、オキシトシンの内的確実性、ドーパミンの駆動力が統合された神秘的で自律的な力を「玄駈」という深遠な表現で象徴している。"
-  },
-  {
-    "id": "N-O-E-Dual",
-    "pattern_id": 18,
-    "kanji_name": "朱誓",
-    "reading": "しゅせい",
-    "romaji": "shusei",
-    "english_name": "Crimson Oath",
-    "naming_reason": "夜明け前の内なる炎と外なる連帯が織りなす使命という表現が、Dual型の2強バランスを美しく表現している。ノルアドレナリンの内なる炎とオキシトシンの外なる連帯が拮抗し、エンドルフィンの使命感で統合される構造を「朱誓」という赤い誓いで表現している。"
-  },
-  {
-    "id": "N-O-E-Flat",
-    "pattern_id": 20,
-    "kanji_name": "波網",
-    "reading": "なみもう",
-    "romaji": "namimou",
-    "english_name": "Wave Network",
-    "naming_reason": "波のように機動的に広がる多面的で活発な社交ネットワークという表現が、Flat型の全体バランスを最も動的に表現している。ノルアドレナリンの機動性、オキシトシンの社交性、エンドルフィンの活発さが均等に統合された拡張的な力を「波網」で表現している。"
-  },
-  {
-    "id": "N-O-E-Single",
-    "pattern_id": 17,
-    "kanji_name": "燐呼",
-    "reading": "りんこ",
-    "romaji": "rinko",
-    "english_name": "Phosphor Call",
-    "naming_reason": "内なる燐光が瞬いて同志を呼び寄せ、共鳴の中で実践を重ねるという表現が、Single型の突出した特性を神秘的に表現している。ノルアドレナリンの瞬き、オキシトシンの呼び寄せ、エンドルフィンの内的燃焼が統合された幻想的な力を「燐呼」で表現している。"
-  },
-  {
-    "id": "N-O-E-Trinity",
-    "pattern_id": 19,
-    "kanji_name": "志橋",
-    "reading": "しばし",
-    "romaji": "shibashi",
-    "english_name": "Will Bridge",
-    "naming_reason": "信念に基づいたアイデアを仲間と共に形にする理念的創造という表現が、Trinity型の3要素均衡を建設的に表現している。ノルアドレナリンの信念、オキシトシンの協働、エンドルフィンの創造性が統合された架け橋的な力を「志橋」で表現している。"
-  },
-  {
-    "id": "N-O-S-Dual",
-    "pattern_id": 14,
-    "kanji_name": "誓鎖",
-    "reading": "せいさ",
-    "romaji": "seisa",
-    "english_name": "Oath Chain",
-    "naming_reason": "信念による誓いが同志との連携を鎖のように強固に結ぶ力という表現が、Dual型の2強バランスを完璧に表現している。ノルアドレナリンの信念とオキシトシンの連携が拮抗し、セロトニンの秩序で統合される構造を「誓鎖」という強固な結束で表現している。"
-  },
-  {
-    "id": "N-O-S-Flat",
-    "pattern_id": 16,
-    "kanji_name": "光拓",
-    "reading": "こうたく",
-    "romaji": "koutaku",
-    "english_name": "Light Pioneer",
-    "naming_reason": "内なる光が外に向かって新しい道を切り拓く瞬発力という表現が、Flat型の全体バランスを最も力強く表現している。ノルアドレナリンの瞬発力、オキシトシンの外向性、セロトニンの開拓精神が均等に統合された創造的な力を「光拓」で表現している。"
-  },
-  {
-    "id": "N-O-S-Single",
-    "pattern_id": 13,
-    "kanji_name": "誠駈",
-    "reading": "せいく",
-    "romaji": "seiku",
-    "english_name": "Sincere Drive",
-    "naming_reason": "真心をもって駆け抜ける確信の力という表現が、Single型の突出した特性を最も美しく表現している。ノルアドレナリンの駆動力、オキシトシンの真心、セロトニンの確信が統合された純粋で力強い実行力を「誠駈」という誠実な疾走で表現している。"
-  },
-  {
-    "id": "N-O-S-Trinity",
-    "pattern_id": 15,
-    "kanji_name": "契鳴",
-    "reading": "けいめい",
-    "romaji": "keimei",
-    "english_name": "Covenant Resonance",
-    "naming_reason": "夜中の閃きが信頼の契約として鳴り響き、仲間との深層共鳴で使命を果たすという表現が、Trinity型の3要素均衡を音響的に美しく表現している。ノルアドレナリンの閃き、オキシトシンの信頼、セロトニンの使命感が共鳴する構造を「契鳴」で表現している。"
-  },
-  {
-    "id": "N-S-D-Dual",
-    "pattern_id": 18,
-    "kanji_name": "哲献",
-    "reading": "てつけん",
-    "romaji": "tetsuken",
-    "english_name": "Philosophical Dedication",
-    "naming_reason": "人里離れた研究所での哲学的な献身という表現が、2強型の深い探求を崇高に表現。「哲」の智慧と「献」の献身が、理解と集中の拮抗による深化を格調高く体現"
-  },
-  {
-    "id": "N-S-D-Flat",
-    "pattern_id": 20,
-    "kanji_name": "凰遥",
-    "reading": "おうよう",
-    "romaji": "ouyou",
-    "english_name": "Phoenix Distance",
-    "naming_reason": "長い蓄積を経て複数の領域で同時に開花する叡智という表現が、均等型の全方位的バランスを神話的に表現。「凰」の再生力と「遥」の遠大さが、長期的な多面開花を美しく象徴"
-  },
-  {
-    "id": "N-S-D-Single",
-    "pattern_id": 17,
-    "kanji_name": "求峯",
-    "reading": "きゅうほう",
-    "romaji": "kyuuhou",
-    "english_name": "Seeking Peak",
-    "naming_reason": "山頂での瞑想から生まれる超越的な深化と完成という説明が、1位特化の究極的到達を崇高に表現。「求」の探求心と「峯」の頂点が、理解を核とした超越的完成を見事に象徴"
-  },
-  {
-    "id": "N-S-D-Trinity",
-    "pattern_id": 19,
-    "kanji_name": "仙岳",
-    "reading": "せんがく",
-    "romaji": "sengaku",
-    "english_name": "Immortal Peak",
-    "naming_reason": "仙人のような境地に達し、霊峰の如き不動の洞察を体現という説明が、3つの神経の調和による超越的洞察を神秘的に表現。「仙」の超越性と「岳」の威厳が trinity の本質を完璧に捉えている"
-  },
-  {
-    "id": "N-S-E-Dual",
-    "pattern_id": 6,
-    "kanji_name": "双策",
-    "reading": "そうさく",
-    "romaji": "sousaku",
-    "english_name": "Twin Strategy",
-    "naming_reason": "内なる情熱で瞬時に立案し実行する二重の戦略という表現が、Dual型の特徴を完璧に捉えている。ノルアドレナリンの瞬発性とセロトニンの体系性が拮抗し、エンドルフィンの内燃的情熱で統合される構造を「双策」という戦略的二元性で表現している。"
-  },
-  {
-    "id": "N-S-E-Single",
-    "pattern_id": 5,
-    "kanji_name": "弦志",
-    "reading": "げんし",
-    "romaji": "genshi",
-    "english_name": "String Will",
-    "naming_reason": "内燃瞬発の自律集中を、張り詰めた弦に込められた意志として表現しているのが秀逸。ノルアドレナリンの緊張感とエンドルフィンの内燃的没入感が、セロトニンの自律性で統合される構造を、楽器の弦の張力と意志の強さで見事に表現している。"
-  },
-  {
-    "id": "N-S-E-Trinity",
-    "pattern_id": 7,
-    "kanji_name": "凪刃",
-    "reading": "なぎば",
-    "romaji": "nagiba",
-    "english_name": "Calm Blade",
-    "naming_reason": "内なる決意による一刀両断の整理モードという表現が、Trinity型の3要素均衡を見事に表現している。ノルアドレナリンの鋭さ、セロトニンの整理力、エンドルフィンの内的決意が統合された静かで決定的な力を「凪刃」という対照的な組み合わせで表現している。"
-  },
-  {
-    "id": "N-S-O-Dual",
-    "pattern_id": 2,
-    "kanji_name": "双炎",
-    "reading": "そうえん",
-    "romaji": "souen",
-    "english_name": "Twin Flames",
-    "naming_reason": "理想と信頼が共鳴して生まれる静かで力強い炎という表現が、Dual型の2強バランスを完璧に表現している。ノルアドレナリンの集中力とセロトニンの理解力が拮抗しながら、オキシトシンの信頼で統合される構造を「双炎」という美しい対称性で表している。"
-  },
-  {
-    "id": "N-S-O-Single",
-    "pattern_id": 1,
-    "kanji_name": "弧刃",
-    "reading": "こじん",
-    "romaji": "kojin",
-    "english_name": "Arc Blade",
-    "naming_reason": "鋭い弧を描く刃のように即応し持続する信頼の実行力という表現が、ノルアドレナリンの瞬発性とセロトニンの持続性、オキシトシンの信頼関係を完璧に統合している。Single型の突出した集中力を「弧刃」という力強い二字熟語で象徴的に表現している。"
-  },
-  {
-    "id": "N-S-O-Trinity",
-    "pattern_id": 3,
-    "kanji_name": "鉄律",
-    "reading": "てつりつ",
-    "romaji": "tetsuritsu",
-    "english_name": "Iron Discipline",
-    "naming_reason": "内側から湧く責任感で自らを律し確実に実行する鋼の意志という表現が、Trinity型の3要素均衡を体現している。ノルアドレナリンの緊張、セロトニンの秩序、オキシトシンの責任感が統合された強固な自律性を「鉄律」という不動の力で表現している。"
-  },
-  {
-    "id": "O-D-E-Dual",
-    "pattern_id": 6,
-    "kanji_name": "熱孔",
-    "reading": "ねっこう",
-    "romaji": "nekkou",
-    "english_name": "Heat Vent",
-    "naming_reason": "オキシトシンとドーパミンの拮抗を「深海熱水噴出孔のような核心エネルギーが独自生態系を長期支配」として表現。共感と新規性の核心的な熱量を孔から噴出するエネルギーとして捉えた力強い真名"
-  },
-  {
-    "id": "O-D-E-Flat",
-    "pattern_id": 8,
-    "kanji_name": "聖鎮",
-    "reading": "せいちん",
-    "romaji": "seichin",
-    "english_name": "Sacred Calm",
-    "naming_reason": "均等型の普遍性を「長年の理想追求が神聖な変革力として現れる普遍的な力」として表現。聖なる力と鎮座する安定感で、バランス型の深遠さを捉えた真名"
-  },
-  {
-    "id": "O-D-E-Single",
-    "pattern_id": 5,
-    "kanji_name": "神泉",
-    "reading": "しんせん",
-    "romaji": "shinsen",
-    "english_name": "Divine Spring",
-    "naming_reason": "オキシトシン特化の究極性を「千年樹の根と深海の永遠泉が示す究極の神秘」として表現。共感の神聖性と永続性を神と泉の字で捉えた圧倒的な真名"
-  },
-  {
-    "id": "O-D-E-Trinity",
-    "pattern_id": 7,
-    "kanji_name": "賢冠",
-    "reading": "けんかん",
-    "romaji": "kenkan",
-    "english_name": "Wise Crown",
-    "naming_reason": "3要素の均衡を「長年の研究で完成した偉大な業績の深遠な変革力」として表現。賢明さと頂点を示す冠によって、三神経の調和から生まれる最高の到達点を表した真名"
-  },
-  {
-    "id": "O-D-N-Flat",
-    "pattern_id": 4,
-    "kanji_name": "情綻",
-    "reading": "じょうたん",
-    "romaji": "joutan",
-    "english_name": "Emotional Bloom",
-    "naming_reason": "均等型の多面性を「内なる情熱が爆発的に多様な作品で花開く」として表現。情感の深さと綻びる表現力の多様性を捉えた、バランス型にふさわしい真名"
-  },
-  {
-    "id": "O-D-N-Single",
-    "pattern_id": 1,
-    "kanji_name": "電結",
-    "reading": "でんけつ",
-    "romaji": "denketsu",
-    "english_name": "Lightning Bond",
-    "naming_reason": "オキシトシンの圧倒的突出を「電光石火の瞬間結合」として表現。共感による接続の瞬発性と強力さを電の字で、結合の本質を結の字で捉えた力強い真名"
-  },
-  {
-    "id": "O-D-N-Trinity",
-    "pattern_id": 3,
-    "kanji_name": "勇烈",
-    "reading": "ゆうれつ",
-    "romaji": "yuuretsu",
-    "english_name": "Brave Flame",
-    "naming_reason": "3つの神経の均衡を「信念に従って困難に立ち向かう勇者を、勇気の激しい炎として象徴」で表現。共感・新規性・集中の三要素が勇気という統一概念で結実した力強い真名"
-  },
-  {
-    "id": "O-D-S-Dual",
-    "pattern_id": 2,
-    "kanji_name": "威霊",
-    "reading": "いれい",
-    "romaji": "irei",
-    "english_name": "Majestic Spirit",
-    "naming_reason": "オキシトシンとドーパミンが拮抗するDual型の影響力を、威厳ある霊的な力が時を超えて巨大な影響力を発揮する「威霊」で表現。共感と新規性の融合による霊的権威を象徴。"
-  },
-  {
-    "id": "O-D-S-Single",
-    "pattern_id": 1,
-    "kanji_name": "海轟",
-    "reading": "かいごう",
-    "romaji": "kaigou",
-    "english_name": "Ocean Roar",
-    "naming_reason": "オキシトシンが圧倒的に突出するSingle型の爆発力を、深海から湧き上がる持続的な爆発力として「海轟」で表現。共感・接続の深い源泉からの轟音的な力を象徴。"
-  },
-  {
-    "id": "O-D-S-Trinity",
-    "pattern_id": 3,
-    "kanji_name": "叡究",
-    "reading": "えいきゅう",
-    "romaji": "eikyuu",
-    "english_name": "Wise Pursuit",
-    "naming_reason": "3つの神経が均衡するTrinity型の叡智を、隠遁生活で追求した真理が人類の未来を変える叡智として「叡究」で表現。三位一体の調和による究極的な知的追求を象徴。"
-  },
-  {
-    "id": "O-E-D-Dual",
-    "pattern_id": 14,
-    "kanji_name": "神業",
-    "reading": "しんぎょう",
-    "romaji": "shingyou",
-    "english_name": "Divine Craft",
-    "naming_reason": "オキシトシン+エンドルフィンの2強が「人生を捧げたライフワークが社会に与える神業級の影響」として表現され、人生をかけた究極の技術を象徴している"
-  },
-  {
-    "id": "O-E-D-Flat",
-    "pattern_id": 16,
-    "kanji_name": "故愛",
-    "reading": "こあい",
-    "romaji": "koai",
-    "english_name": "Hometown Love",
-    "naming_reason": "均等型のバランスが「故郷への深愛で十年がかりの大作を完成させる熟練」として表現され、深い愛情に基づく長期的な創造力を体現している"
-  },
-  {
-    "id": "O-E-D-Single",
-    "pattern_id": 13,
-    "kanji_name": "皇牙",
-    "reading": "おうが",
-    "romaji": "ouga",
-    "english_name": "Imperial Fang",
-    "naming_reason": "オキシトシン特化の共感・接続が「皇帝の牙のように純粋で圧倒的な瞬発力」として表現され、1位特化の純粋で圧倒的な力を体現している"
-  },
-  {
-    "id": "O-E-D-Trinity",
-    "pattern_id": 15,
-    "kanji_name": "窟創",
-    "reading": "くつそう",
-    "romaji": "kutsusou",
-    "english_name": "Cave Creation",
-    "naming_reason": "3つの神経系の均衡が「山奥の工房で長年燃え続ける創造の大炉」として表現され、孤高の創造者の究極的な創造力を体現している"
-  },
-  {
-    "id": "O-E-N-Dual",
-    "pattern_id": 2,
-    "kanji_name": "好奇",
-    "reading": "こうき",
-    "romaji": "kouki",
-    "english_name": "Curiosity",
-    "naming_reason": "雨宿りでの弾む会話で内側から湧く好奇心の暖かい煌めきという表現が、共感と快感の2強型バランスを見事に体現。好奇心という普遍的でありながら力強い概念が記憶に残りやすい"
-  },
-  {
-    "id": "O-E-N-Flat",
-    "pattern_id": 4,
-    "kanji_name": "森織",
-    "reading": "しんしょく",
-    "romaji": "shinshoku",
-    "english_name": "Forest Weaving",
-    "naming_reason": "森の木々が織りなすように関係性を深く編み上げる熟成技という表現が、均等型の全体バランスを自然の比喩で美しく表現。「森」の複雑性と「織」の統合力が印象的"
-  },
-  {
-    "id": "O-E-N-Single",
-    "pattern_id": 1,
-    "kanji_name": "一瞳",
-    "reading": "いちどう",
-    "romaji": "ichidou",
-    "english_name": "Single Eye",
-    "naming_reason": "街角での純粋な一瞬の行動、真っ直ぐな心の炎という説明が、1位特化の圧倒的突出を完璧に表現している。「一」が単一性を、「瞳」が直視する集中力を象徴し、共感を核とした瞬発的な力を的確に表現"
-  },
-  {
-    "id": "O-E-N-Trinity",
-    "pattern_id": 3,
-    "kanji_name": "翼和",
-    "reading": "よくわ",
-    "romaji": "yokuwa",
-    "english_name": "Wing Harmony",
-    "naming_reason": "翼を広げて場全体に調和をもたらす飛翔の配慮術という説明が、3つの神経伝達物質が均衡した状態を完璧に表現。「翼」の飛翔力と「和」の調和が trinity の本質を捉えている"
-  },
-  {
-    "id": "O-E-S-Dual",
-    "pattern_id": 18,
-    "kanji_name": "業火",
-    "reading": "ごうか",
-    "romaji": "gouka",
-    "english_name": "Karma Fire",
-    "naming_reason": "オキシトシン+エンドルフィンの2強が「心の深淵で長時間育てられた強大な業の炎」として表現され、深い感情の蓄積による圧倒的な力を象徴している"
-  },
-  {
-    "id": "O-E-S-Single",
-    "pattern_id": 17,
-    "kanji_name": "冥貫",
-    "reading": "めいかん",
-    "romaji": "meikan",
-    "english_name": "Dark Penetration",
-    "naming_reason": "オキシトシン特化の共感・接続が「深い決意が長い時間をかけて現実を貫通していく」として表現され、1位特化の持続的で確実な貫通力を体現している"
-  },
-  {
-    "id": "O-E-S-Trinity",
-    "pattern_id": 19,
-    "kanji_name": "千愛",
-    "reading": "せんあい",
-    "romaji": "sen'ai",
-    "english_name": "Thousand Loves",
-    "naming_reason": "3つの神経系の均衡が「千年杉のような悠久の愛を、永遠に続く深い愛情で表現」として表現され、時を超えた愛の究極形を体現している"
-  },
-  {
-    "id": "O-N-D-Dual",
-    "pattern_id": 2,
-    "kanji_name": "鋼劇",
-    "reading": "こうげき",
-    "romaji": "kougeki",
-    "english_name": "Steel Drama",
-    "naming_reason": "オキシトシン+ノルアドレナリンの2強拮抗が「緊急時に発動する鋼鉄の劇的集中、瞬間最大出力」として表現され、2つの神経系の均衡した協働を象徴している"
-  },
-  {
-    "id": "O-N-D-Flat",
-    "pattern_id": 4,
-    "kanji_name": "構界",
-    "reading": "こうかい",
-    "romaji": "koukai",
-    "english_name": "World Construction",
-    "naming_reason": "全体的バランスを持つ均等型が「長年の構想が静かに世界を変革する深遠な力」として表現され、持続的で包括的な影響力を象徴している"
-  },
-  {
-    "id": "O-N-D-Single",
-    "pattern_id": 1,
-    "kanji_name": "烈心",
-    "reading": "れっしん",
-    "romaji": "resshin",
-    "english_name": "Fierce Heart",
-    "naming_reason": "オキシトシン特化の共感・接続の力が「内側の確信から生まれる即決の炎と一貫した明快さ」として表現され、1位特化の圧倒的突出感を完璧に体現している"
-  },
-  {
-    "id": "O-N-D-Trinity",
-    "pattern_id": 3,
-    "kanji_name": "月狂",
-    "reading": "げっきょう",
-    "romaji": "gekkyou",
-    "english_name": "Moon Madness",
-    "naming_reason": "3つの神経系が均衡する中で「月光の下で内発的に爆発する孤高の革新力」として表現され、共感・集中・革新の三位一体が生む神秘的な力を体現している"
-  },
-  {
-    "id": "O-N-E-Flat",
-    "pattern_id": 12,
-    "kanji_name": "千樹",
-    "reading": "せんじゅ",
-    "romaji": "senju",
-    "english_name": "Thousand Trees",
-    "naming_reason": "均等型のバランスが「森の生態系を支配する千年大樹の永続的深層力」として表現され、生態系全体を支える根源的な力を体現している"
-  },
-  {
-    "id": "O-N-E-Single",
-    "pattern_id": 9,
-    "kanji_name": "孤焔",
-    "reading": "こえん",
-    "romaji": "koen",
-    "english_name": "Solitary Flame",
-    "naming_reason": "オキシトシン特化の共感・接続が「孤独の中で燃え上がる純粋で圧倒的な炎」として表現され、内なる純粋な情熱の圧倒的な力を体現している"
-  },
-  {
-    "id": "O-N-E-Trinity",
+    "id": "E-N-D-Trinity",
     "pattern_id": 11,
-    "kanji_name": "神淵",
-    "reading": "しんえん",
-    "romaji": "shin'en",
-    "english_name": "Divine Abyss",
-    "naming_reason": "3つの神経系の均衡が「山奥隠れ家での究極的創造と神秘的な深淵なる集中」として表現され、超越的な創造力の深淵を体現している"
+    "kanji_name": "魔狂",
+    "reading": "まきょう",
+    "romaji": "makyou",
+    "english_name": "Demon Madness",
+    "naming_reason": "3強均衡を「内燃の狂気が孤高の独創性を爆発させる」力で表現。魔性と狂気の組み合わせが三つの神経系の調和した革新力を象徴。"
   },
   {
-    "id": "O-N-S-Dual",
-    "pattern_id": 6,
-    "kanji_name": "地恵",
-    "reading": "ちけい",
-    "romaji": "chikei",
-    "english_name": "Earth's Blessing",
-    "naming_reason": "オキシトシン+ノルアドレナリンの2強が「地熱の如き深厚な力が永続的な恵みとなって不屈の源泉となる技」として表現され、安定した持続力を象徴している"
-  },
-  {
-    "id": "O-N-S-Flat",
-    "pattern_id": 8,
-    "kanji_name": "永詩",
-    "reading": "えいし",
-    "romaji": "eishi",
-    "english_name": "Eternal Poetry",
-    "naming_reason": "均等型のバランスが「古木の永続的統合力を象徴する荘厳な奥義」として表現され、永続性と美しさを両立した力を体現している"
-  },
-  {
-    "id": "O-N-S-Single",
-    "pattern_id": 5,
-    "kanji_name": "巨包",
-    "reading": "きょほう",
-    "romaji": "kyohou",
-    "english_name": "Giant Embrace",
-    "naming_reason": "オキシトシン特化の共感・接続が「長年蓄積した愛の力が最後に圧倒的な包容力として現れる」として表現され、1位特化の圧倒的な愛の力を体現している"
-  },
-  {
-    "id": "O-N-S-Trinity",
-    "pattern_id": 7,
-    "kanji_name": "地殻",
-    "reading": "ちかく",
-    "romaji": "chikaku",
-    "english_name": "Earth's Crust",
-    "naming_reason": "3つの神経系の均衡が「地殻変動のような見えない深部での長い準備を経た巨大な変革力」として表現され、根本的な変革の力を体現している"
-  },
-  {
-    "id": "O-S-D-Dual",
-    "pattern_id": 10,
-    "kanji_name": "龍志",
-    "reading": "りゅうし",
-    "romaji": "ryuushi",
-    "english_name": "Dragon Will",
-    "naming_reason": "オキシトシンとセロトニンの拮抗を「内なる炎が壮大なビジョンとなって世界を変革する」として表現。龍の力強さと意志の強固さで二つの神経の協調を表した壮大な真名"
-  },
-  {
-    "id": "O-S-D-Flat",
-    "pattern_id": 12,
-    "kanji_name": "館叡",
-    "reading": "かんえい",
-    "romaji": "kan'ei",
-    "english_name": "Hall Wisdom",
-    "naming_reason": "均等型の深遠さを「古い図書館の館長室に蓄積された深い叡智と静かな権威の持続的影響」として表現。館の安定感と叡智の深さで、バランス型の知性を捉えた真名"
-  },
-  {
-    "id": "O-S-D-Single",
+    "id": "E-N-D-Flat",
     "pattern_id": 9,
-    "kanji_name": "樹王",
-    "reading": "じゅおう",
-    "romaji": "juou",
-    "english_name": "Tree King",
-    "naming_reason": "オキシトシン特化を「長年育った大木が豊かな実をつけて潤し続ける内発的王者」として表現。共感の成長力と王者としての威厳を樹木の比喩で捉えた雄大な真名"
+    "kanji_name": "噴龍",
+    "reading": "ふんりゅう",
+    "romaji": "funryuu",
+    "english_name": "Erupting Dragon",
+    "naming_reason": "火山の龍のように内なるエネルギーを爆発的に放出する力を表現。エンドルフィン、ノルアドレナリン、ドーパミンの均等な作用により、没入・緊張・新規性が龍のような威力で噴出する構造を「噴龍」として命名。圧倒的な爆発力と神秘性を兼ね備えている。"
   },
   {
-    "id": "O-S-D-Trinity",
-    "pattern_id": 11,
-    "kanji_name": "彗遺",
-    "reading": "すいい",
-    "romaji": "suii",
-    "english_name": "Comet Legacy",
-    "naming_reason": "3要素の均衡を「生涯をかけた研究が人類に永遠の遺産をもたらす」として表現。彗星の輝きと永続する遺産によって、三神経の調和から生まれる偉大な業績を表した真名"
-  },
-  {
-    "id": "O-S-E-Dual",
-    "pattern_id": 18,
-    "kanji_name": "鯨王",
-    "reading": "げいおう",
-    "romaji": "geiou",
-    "english_name": "Whale King",
-    "naming_reason": "オキシトシンとセロトニンの拮抗を「深海から立ち上がる巨大な力で社会を変革する王者」として表現。鯨の巨大さと王の威厳で二つの神経の協調による圧倒的な変革力を表した真名"
-  },
-  {
-    "id": "O-S-E-Flat",
-    "pattern_id": 20,
-    "kanji_name": "海皇",
-    "reading": "かいおう",
-    "romaji": "kaiou",
-    "english_name": "Ocean Emperor",
-    "naming_reason": "均等型の壮大さを「深海から立ち上がる皇帝の力、人生をかけた変革」として表現。海の無限性と皇帝の絶対的権威で、バランス型の圧倒的な変革力を捉えた真名"
-  },
-  {
-    "id": "O-S-E-Single",
-    "pattern_id": 17,
-    "kanji_name": "神愛",
-    "reading": "しんあい",
-    "romaji": "shin'ai",
-    "english_name": "Divine Love",
-    "naming_reason": "オキシトシン特化を「何十年もかけて完成された究極で神聖な愛の境地」として表現。共感の究極形態を神聖な愛として捉え、神と愛の組み合わせで最高の境地を表した真名"
-  },
-  {
-    "id": "O-S-E-Trinity",
-    "pattern_id": 19,
-    "kanji_name": "賢真",
-    "reading": "けんしん",
-    "romaji": "kenshin",
-    "english_name": "Wise Truth",
-    "naming_reason": "3要素の均衡を「生涯の理論完成が賢者の真理として宇宙に至福をもたらす永続」として表現。賢明さと真理の到達によって、三神経の調和から生まれる究極の叡智を表した真名"
-  },
-  {
-    "id": "O-S-N-Dual",
-    "pattern_id": 14,
-    "kanji_name": "哲永",
-    "reading": "てつえい",
-    "romaji": "tetsuei",
-    "english_name": "Philosophy Eternal",
-    "naming_reason": "オキシトシンとセロトニンの拮抗を「一冊の本が数十年かけて社会を根本変革する力」として表現。哲学の深さと永続的な影響力で二つの神経の協調による変革力を表した真名"
-  },
-  {
-    "id": "O-S-N-Flat",
-    "pattern_id": 16,
-    "kanji_name": "杉影",
-    "reading": "すぎかげ",
-    "romaji": "sugikage",
-    "english_name": "Cedar Shadow",
-    "naming_reason": "均等型の深遠さを「千年杉が森全体を支える深遠で持続的な本質変革」として表現。杉の長寿と影の静かな力で、バランス型の根本的で持続的な影響力を捉えた真名"
-  },
-  {
-    "id": "O-S-N-Single",
+    "id": "E-N-S-Single",
     "pattern_id": 13,
-    "kanji_name": "幹永",
-    "reading": "かんえい",
-    "romaji": "kan'ei",
-    "english_name": "Trunk Eternal",
-    "naming_reason": "オキシトシン特化を「千年樹の太き幹を通じて永続的に流れる神聖なる生命力」として表現。共感の根本性を幹で、永続性を永で捉えた神聖で力強い真名"
+    "kanji_name": "満開",
+    "reading": "まんかい",
+    "romaji": "mankai",
+    "english_name": "Full Bloom",
+    "naming_reason": "1位特化を「何年もかけた樹木の満開という蓄積された情熱の究極的開花」で表現。完全な開花が圧倒的突出性を美しく象徴。"
   },
   {
-    "id": "O-S-N-Trinity",
+    "id": "E-N-S-Dual",
+    "pattern_id": 14,
+    "kanji_name": "魂琢",
+    "reading": "こんたく",
+    "romaji": "kontaku",
+    "english_name": "Soul Craft",
+    "naming_reason": "2強型を「魂を込めて何十年もかけて極限の作品を作る刀匠の技」で表現。魂の彫琢が二つの力の拮抗と深化を象徴。"
+  },
+  {
+    "id": "E-N-S-Trinity",
     "pattern_id": 15,
-    "kanji_name": "遺産",
-    "reading": "いさん",
-    "romaji": "isan",
-    "english_name": "Legacy",
-    "naming_reason": "3要素の均衡を「人生をかけて熟成させた究極の成果が遺産として結実する技術」として表現。人生の集大成としての遺産により、三神経の調和から生まれる最高の到達点を表した真名"
+    "kanji_name": "煌眼",
+    "reading": "こうがん",
+    "romaji": "kougan",
+    "english_name": "Brilliant Eyes",
+    "naming_reason": "3強均衡を「煌めく眼光が世界を変える革新的洞察を一瞬で捉える天才的直感」で表現。煌めきと眼光が三つの神経系の調和した洞察力を象徴。"
   },
   {
-    "id": "S-D-E-Dual",
-    "pattern_id": 18,
-    "kanji_name": "冥錬",
-    "reading": "めいれん",
-    "romaji": "meiren",
-    "english_name": "Mystic Refinement",
-    "naming_reason": "2強型の深遠な錬成を最も神秘的に表現。幽玄な深奥で何十年もかけて錬成された究極の知恵の力は、理解力と新規性が拮抗し没入が加わった時の神秘的な完成を象徴している。"
-  },
-  {
-    "id": "S-D-E-Flat",
-    "pattern_id": 20,
-    "kanji_name": "荘核",
-    "reading": "そうかく",
-    "romaji": "soukaku",
-    "english_name": "Grand Core",
-    "naming_reason": "均等型の壮大さと核心性を最も力強く表現。長期間の取り組みから生まれる壮大で深淵な構想の核は、全要素がバランス良く機能した時の包括的で根源的な創造力を象徴している。"
-  },
-  {
-    "id": "S-D-E-Single",
-    "pattern_id": 17,
-    "kanji_name": "電奔",
-    "reading": "でんぽん",
-    "romaji": "denpon",
-    "english_name": "Lightning Rush",
-    "naming_reason": "セロトニン1位特化の理解力が瞬発的に疾走する力を表現。内なる洞察の閃光が瞬発的疾走を生み出す破壊的瞬発力は、理解の圧倒的優位性による突破力を象徴している。"
-  },
-  {
-    "id": "S-D-E-Trinity",
-    "pattern_id": 19,
-    "kanji_name": "仙識",
-    "reading": "せんしき",
-    "romaji": "senshiki",
-    "english_name": "Immortal Wisdom",
-    "naming_reason": "3強均衡型の超越性を最も崇高に表現。超越した知性が不朽の思想体系として永続する偉大な境界は、全要素が最高次元で調和した時の不滅の創造力を完璧に象徴している。"
-  },
-  {
-    "id": "S-D-N-Dual",
-    "pattern_id": 14,
-    "kanji_name": "修到",
-    "reading": "しゅうとう",
-    "romaji": "shutou",
-    "english_name": "Mastery Achievement",
-    "naming_reason": "2強型の修練と到達を最も力強く表現。何十年の修行で極意に到達する確信と圧倒的存在感は、理解力と新規性の拮抗に集中力が加わった時の究極的達成を象徴している。"
-  },
-  {
-    "id": "S-D-N-Flat",
-    "pattern_id": 16,
-    "kanji_name": "源湧",
-    "reading": "げんゆう",
-    "romaji": "genyuu",
-    "english_name": "Source Spring",
-    "naming_reason": "均等型の根源的な力を最も自然に表現。地底深くから力強く湧き出る源泉の力は、全要素がバランス良く機能した時の根源的で持続的なエネルギーを完璧に象徴している。"
-  },
-  {
-    "id": "S-D-N-Single",
-    "pattern_id": 13,
-    "kanji_name": "至構",
-    "reading": "しこう",
-    "romaji": "shikou",
-    "english_name": "Ultimate Construction",
-    "naming_reason": "セロトニン1位特化に集中力が加わった構造の完璧性を表現。何年も温めた構想が完全な形で世に出る至高で絶対的な完成の境地は、理解力の圧倒的優位性を象徴している。"
-  },
-  {
-    "id": "S-D-O-Dual",
+    "id": "E-N-S-Flat",
     "pattern_id": 10,
-    "kanji_name": "魂昇",
-    "reading": "こんしょう",
-    "romaji": "konshou",
-    "english_name": "Soul Ascension",
-    "naming_reason": "2強型の深い熟成と昇華を最も崇高に表現。長年の熟成により内なる魂が昇華し傑作として立ち現れる究極の境地は、理解力と新規性が拮抗した時の至高の創造を象徴している。"
+    "kanji_name": "地熔",
+    "reading": "ちよう",
+    "romaji": "chiyou",
+    "english_name": "Earth Molten",
+    "naming_reason": "地底深くのマグマがゆっくり熱蓄積から噴火のような力強い表出を表現。エンドルフィン、ノルアドレナリン、セロトニンが均等に作用し、深い没入・集中・秩序が地底で熔融し大地を変える力として発現する構造を「地熔」として命名。内なる力の熔融と大地を動かす根源力を象徴。"
   },
   {
-    "id": "S-D-O-Flat",
-    "pattern_id": 12,
-    "kanji_name": "杉威",
-    "reading": "すぎい",
-    "romaji": "sugii",
-    "english_name": "Cedar Majesty",
-    "naming_reason": "均等型の威厳と包容力を自然の象徴で美しく表現。千年杉のような威厳と包含する変革の力は、全要素がバランス良く機能した時の深い包容力と持続的影響力を象徴している。"
-  },
-  {
-    "id": "S-D-O-Trinity",
-    "pattern_id": 11,
-    "kanji_name": "導不",
-    "reading": "どうふ",
-    "romaji": "doufu",
-    "english_name": "Unwavering Guide",
-    "naming_reason": "3強均衡型の深遠な指導力を最も力強く表現。人生をかけたビジョンを示す深い内なる太陽の放射による不動の導力は、全要素が調和した時の絶対的な指導性を完璧に象徴している。"
-  },
-  {
-    "id": "S-E-D-Dual",
-    "pattern_id": 2,
-    "kanji_name": "煌裂",
-    "reading": "こうれつ",
-    "romaji": "kouretsu",
-    "english_name": "Brilliant Rupture",
-    "naming_reason": "セロトニンとエンドルフィンが拮抗する2強型の創造力を、革新的創造が光となって炸裂し常識を破る「煌裂」で表現。理解と没入の融合による爆発的創造を象徴。"
-  },
-  {
-    "id": "S-E-D-Flat",
-    "pattern_id": 4,
-    "kanji_name": "荘結",
-    "reading": "そうけつ",
-    "romaji": "souketsu",
-    "english_name": "Grand Culmination",
-    "naming_reason": "均等型のバランスの取れた充実感を、複数分野を極めながら長年の情熱が結実する満足として「荘結」で表現。山荘の静寂と結実の完成度でFlat型の本質を捉えた。"
-  },
-  {
-    "id": "S-E-D-Single",
-    "pattern_id": 1,
-    "kanji_name": "破天",
-    "reading": "はてん",
-    "romaji": "haten",
-    "english_name": "Heaven Breaker",
-    "naming_reason": "セロトニンが圧倒的に突出する一位特化の革新力を、革命的直感が天を破り山を動かす「破天」で表現。Single型の圧倒的な力と突破力を最も力強く象徴する命名。"
-  },
-  {
-    "id": "S-E-D-Trinity",
-    "pattern_id": 3,
-    "kanji_name": "麟覇",
-    "reading": "りんは",
-    "romaji": "rinba",
-    "english_name": "Kirin Supremacy",
-    "naming_reason": "3つの神経が均衡するTrinity型の圧倒的創造力を、千年の蓄積が生み出す創造の王者として「麟覇」で表現。麒麟の神聖性と覇者の力で三位一体の極致を象徴。"
-  },
-  {
-    "id": "S-E-N-Dual",
-    "pattern_id": 2,
-    "kanji_name": "核晶",
-    "reading": "かくしょう",
-    "romaji": "kakushou",
-    "english_name": "Core Crystal",
-    "naming_reason": "セロトニンとエンドルフィンが拮抗するDual型の深化を、地球核で億年かけて形成されるダイヤの永遠性として「核晶」で表現。理解と没入の融合による結晶化した完成度を象徴。"
-  },
-  {
-    "id": "S-E-N-Flat",
-    "pattern_id": 4,
-    "kanji_name": "麟権",
-    "reading": "りんけん",
-    "romaji": "rinken",
-    "english_name": "Kirin Authority",
-    "naming_reason": "均等型のバランスを、大家の風格を示す究極の権威と最高品質として「麟権」で表現。麒麟の神聖性と権威でFlat型の調和的完成度を象徴した力強い命名。"
-  },
-  {
-    "id": "S-E-N-Single",
-    "pattern_id": 1,
-    "kanji_name": "洞極",
-    "reading": "どうきょく",
-    "romaji": "doukyoku",
-    "english_name": "Cave Extreme",
-    "naming_reason": "セロトニンが圧倒的に突出するSingle型の探求力を、生涯の探求が極致に達し重要発見を生む洞察力として「洞極」で表現。一位特化の深い洞察と究極到達を象徴。"
-  },
-  {
-    "id": "S-E-N-Trinity",
-    "pattern_id": 3,
-    "kanji_name": "天覧",
-    "reading": "てんらん",
-    "romaji": "tenran",
-    "english_name": "Heavenly View",
-    "naming_reason": "3つの神経が均衡するTrinity型の洞察を、山頂天文台で宇宙を観測する天文学者の孤高な洞察として「天覧」で表現。三位一体の調和による天的な視野を象徴。"
-  },
-  {
-    "id": "S-E-O-Dual",
-    "pattern_id": 2,
-    "kanji_name": "賢遺",
-    "reading": "けんい",
-    "romaji": "ken'i",
-    "english_name": "Sage's Legacy",
-    "naming_reason": "セロトニンとエンドルフィンが拮抗するDual型の深い洞察を、長年の研究が後世への遺産となる賢者の深遠さとして「賢遺」で表現。理解と没入の融合による永続的価値を象徴。"
-  },
-  {
-    "id": "S-E-O-Flat",
-    "pattern_id": 4,
-    "kanji_name": "賢遥",
-    "reading": "けんよう",
-    "romaji": "ken'you",
-    "english_name": "Sage's Distance",
-    "naming_reason": "均等型のバランスを、深遠な知恵が時を越えて未来まで継承される「賢遥」で表現。Flat型の調和と遠大な影響力を賢者の遥かな視野として象徴した力強い命名。"
-  },
-  {
-    "id": "S-E-O-Single",
-    "pattern_id": 1,
-    "kanji_name": "隠偉",
-    "reading": "いんい",
-    "romaji": "in'i",
-    "english_name": "Hidden Greatness",
-    "naming_reason": "セロトニンが圧倒的に突出するSingle型の深遠さを、隠者的生活から生まれる偉大な発見として「隠偉」で表現。一位特化の内向的な力と偉大な成果を簡潔に象徴。"
-  },
-  {
-    "id": "S-E-O-Trinity",
-    "pattern_id": 3,
-    "kanji_name": "鯨永",
-    "reading": "くじらえい",
-    "romaji": "kujiraei",
-    "english_name": "Whale Eternity",
-    "naming_reason": "3つの神経が均衡するTrinity型の壮大さを、世代を超越した深遠探究による本質的永続性として「鯨永」で表現。鯨の巨大さと永遠性で三位一体の包容力を象徴。"
-  },
-  {
-    "id": "S-N-D-Dual",
-    "pattern_id": 6,
-    "kanji_name": "琥蒼",
-    "reading": "こそう",
-    "romaji": "kosou",
-    "english_name": "Amber Azure",
-    "naming_reason": "セロトニンとノルアドレナリンが拮抗する構造において、内燃で熟成する深い知性を琥珀の温かみと蒼天の広がりで表現した「琥蒼」が理想的。理解と集中の2強バランスを、温かさと広がりの対比で詩的に描いている。"
-  },
-  {
-    "id": "S-N-D-Single",
-    "pattern_id": 5,
-    "kanji_name": "翠沈",
-    "reading": "すいちん",
-    "romaji": "suichin",
-    "english_name": "Verdant Immersion",
-    "naming_reason": "セロトニンが圧倒的に突出する構造において、内なる学習欲が深層で静かに熟成する知的探求を表す「翠沈」が最適。翠の清新さと沈潜の深さが、理解への純粋な没入を美しく象徴している。"
-  },
-  {
-    "id": "S-N-D-Trinity",
-    "pattern_id": 7,
-    "kanji_name": "瞑炭",
-    "reading": "めいたん",
-    "romaji": "meitan",
-    "english_name": "Meditative Charcoal",
-    "naming_reason": "3神経が均衡する構造において、季節の変わり目に内側で静かに燃え続ける炭火のような瞑想的持続力を表す「瞑炭」が最適。静かな持続力と内なる燃焼を、瞑想と炭火の象徴で表現している。"
-  },
-  {
-    "id": "S-N-E-Dual",
-    "pattern_id": 2,
-    "kanji_name": "析完",
-    "reading": "せきかん",
-    "romaji": "sekikan",
-    "english_name": "Perfect Analysis",
-    "naming_reason": "セロトニンとノルアドレナリンが拮抗する2強型の特性を、丁寧な分析（セロトニン）と高品質な完成（ノルアドレナリン）の融合で表現。職人的な集中力の本質を捉えた力強い二字熟語。"
-  },
-  {
-    "id": "S-N-E-Flat",
-    "pattern_id": 4,
-    "kanji_name": "幽冥",
-    "reading": "ゆうめい",
-    "romaji": "yuumei",
-    "english_name": "Profound Mystery",
-    "naming_reason": "全体的にバランスの取れた Flat 型の深遠さを、隠遁の境地から生まれる普遍的真理として「幽冥」で表現。均等型の奥深い調和と神秘性を二字で完結させた。"
-  },
-  {
-    "id": "S-N-E-Single",
-    "pattern_id": 1,
-    "kanji_name": "内光",
-    "reading": "ないこう",
-    "romaji": "naikou",
-    "english_name": "Inner Light",
-    "naming_reason": "セロトニンの理解・秩序が主神経として圧倒的に突出する特性を、内なる理解が閃光のように瞬発する「内光」で表現。一位特化の力強さと、知的洞察の本質を二字熟語で完結させた。"
-  },
-  {
-    "id": "S-N-E-Trinity",
-    "pattern_id": 3,
-    "kanji_name": "神宙",
-    "reading": "しんちゅう",
-    "romaji": "shinchuu",
-    "english_name": "Divine Universe",
-    "naming_reason": "3つの神経が均衡する Trinity の壮大さを、神的な構想力で宇宙規模の価値を創造する「神宙」で表現。三位一体の調和と創造の極致を示す最も力強い命名。"
-  },
-  {
-    "id": "S-N-O-Dual",
-    "pattern_id": 18,
-    "kanji_name": "至宙",
-    "reading": "しちゅう",
-    "romaji": "shichuu",
-    "english_name": "Ultimate Universe",
-    "naming_reason": "セロトニンとノルアドレナリンが拮抗する構造において、長年の理論が宇宙的な完成へと至る永続の深遠を表す「至宙」が理想的。理解と集中の究極的融合を、至高と宇宙の壮大さで表現している。"
-  },
-  {
-    "id": "S-N-O-Flat",
-    "pattern_id": 20,
-    "kanji_name": "思王",
-    "reading": "しおう",
-    "romaji": "shiou",
-    "english_name": "Thought King",
-    "naming_reason": "均等型バランスにおいて、思想的王者による根本的持続変革を表す「思王」が相応しい。バランスの取れた思考力と変革への意志を、思想と王者の威厳で力強く表現している。"
-  },
-  {
-    "id": "S-N-O-Single",
+    "id": "E-N-O-Single",
     "pattern_id": 17,
-    "kanji_name": "賢超",
-    "reading": "けんちょう",
-    "romaji": "kenchou",
-    "english_name": "Sage Transcendence",
-    "naming_reason": "セロトニンが突出する構造において、賢者の叡智が世界観を超越する境地を表す「賢超」が最適。理解の極致と超越的な洞察力を、賢者の格調と超越の崇高さで表現している。"
+    "kanji_name": "技神",
+    "reading": "ぎしん",
+    "romaji": "gishin",
+    "english_name": "Skill God",
+    "naming_reason": "1位特化を「何年もかけて技術を極め誰も真似できない境地に達する職人の神域的存在感」で表現。技術の神格化が圧倒的突出性を象徴。"
   },
   {
-    "id": "S-N-O-Trinity",
+    "id": "E-N-O-Dual",
+    "pattern_id": 18,
+    "kanji_name": "神堂",
+    "reading": "しんどう",
+    "romaji": "shindou",
+    "english_name": "Divine Hall",
+    "naming_reason": "2強型を「何年も温めた構想が神業レベルの作品として醸成される奥義」で表現。神性と堂々たる威厳が二つの力の拮抗する完成度を象徴。"
+  },
+  {
+    "id": "E-N-O-Trinity",
     "pattern_id": 19,
-    "kanji_name": "紺王",
-    "reading": "こんおう",
-    "romaji": "kon'ou",
-    "english_name": "Indigo King",
-    "naming_reason": "3神経均衡構造において、深紫の洞察で世界を変える思想王を表す「紺王」が最適。理解、集中、共感の融合が生む深遠な洞察力と王者の威厳を、紺碧の深さと王の権威で表現している。"
+    "kanji_name": "鬼迸",
+    "reading": "きほう",
+    "romaji": "kihou",
+    "english_name": "Demon Burst",
+    "naming_reason": "3強均衡を「内なる才能が爆発的に噴出し周囲を魅了する革命的な瞬間」で表現。鬼神の力と迸る爆発が三つの神経系の調和した革新力を象徴。"
   },
   {
-    "id": "S-O-D-Dual",
-    "pattern_id": 2,
-    "kanji_name": "基盟",
-    "reading": "きめい",
-    "romaji": "kimei",
-    "english_name": "Foundation Alliance",
-    "naming_reason": "セロトニンとオキシトシンが拮抗する構造において、継続的な信頼関係が築く安定した基盤力を表す「基盟」が理想的。理解と共感の2強バランスを、確固たる基盤と盟約の絆で象徴し、持続的な協働力を体現している。"
-  },
-  {
-    "id": "S-O-D-Flat",
-    "pattern_id": 4,
-    "kanji_name": "深和",
-    "reading": "しんわ",
-    "romaji": "shinwa",
-    "English_name": "Deep Harmony",
-    "naming_reason": "全体的にバランスの取れた構造において、内省から生まれる深い調和と成熟を表す「深和」が相応しい。均等型の安定感と、内なる深みから生まれる調和を二字熟語で簡潔に表現している。"
-  },
-  {
-    "id": "S-O-D-Single",
-    "pattern_id": 1,
-    "kanji_name": "光悟",
-    "reading": "こうご",
-    "romaji": "kougo",
-    "english_name": "Light Enlightenment",
-    "naming_reason": "セロトニンの理解・秩序が圧倒的に突出する構造において、窓からの光に照らされる思考の明晰な納得の瞬間を表現した「光悟」が最もふさわしい。理知的で静謐でありながら、確かな洞察力を持つこの真名は、1位特化型の本質を完璧に体現している。"
-  },
-  {
-    "id": "S-O-D-Trinity",
-    "pattern_id": 3,
-    "kanji_name": "環奏",
-    "reading": "かんそう",
-    "romaji": "kansou",
-    "english_name": "Cyclical Symphony",
-    "naming_reason": "3つの神経が均衡する構造において、循環する協働が創造の協奏曲を奏でる「環奏」が最適。理解、共感、新規性が調和的に循環し、美しい協奏を生み出す様子は、Trinity型の本質を音楽的に表現している。"
-  },
-  {
-    "id": "S-O-E-Dual",
-    "pattern_id": 14,
-    "kanji_name": "往豊",
-    "reading": "おうほう",
-    "romaji": "ouhou",
-    "english_name": "Reciprocal Abundance",
-    "naming_reason": "セロトニンとオキシトシンが拮抗する構造において、内なる世界と外なる世界を豊かに往復する人生を表す「往豊」が理想的。理解と共感の循環が生む豊かさを、往復の動きで表現している。"
-  },
-  {
-    "id": "S-O-E-Single",
-    "pattern_id": 13,
-    "kanji_name": "内豊",
-    "reading": "ないほう",
-    "romaji": "naihou",
-    "english_name": "Inner Abundance",
-    "naming_reason": "セロトニンが突出する構造において、内観で熟成された理解が対話で豊かに花開く様子を表す「内豊」が最適。内なる充実感と外への展開を、簡潔で力強い二字で表現している。"
-  },
-  {
-    "id": "S-O-E-Trinity",
-    "pattern_id": 15,
-    "kanji_name": "鍛契",
-    "reading": "たんけい",
-    "romaji": "tankei",
-    "english_name": "Forged Contract",
-    "naming_reason": "3神経均衡構造において、長年の修行と信頼関係により技と絆を同時に鍛え上げる職人の魂を込めた持続型の技を表す「鍛契」が最適。理解、共感、没入の融合を、鍛錬と契りの深い絆で表現している。"
-  },
-  {
-    "id": "S-O-N-Flat",
-    "pattern_id": 12,
-    "kanji_name": "静紡",
-    "reading": "せいぼう",
-    "romaji": "seibou",
-    "english_name": "Quiet Spinning",
-    "naming_reason": "均等型バランスにおいて、時をかけて内なるテーマを丁寧に紡ぐ創作の境地を表す「静紡」が相応しい。穏やかで持続的な創造過程を、静寂と紡織の象徴で美しく表現している。"
-  },
-  {
-    "id": "S-O-N-Single",
-    "pattern_id": 9,
-    "kanji_name": "匠澄",
-    "reading": "しょうちょう",
-    "romaji": "shouchou",
-    "english_name": "Master's Clarity",
-    "naming_reason": "セロトニンが突出する構造において、長年の経験が澄んだ専門性として結晶化した職人の境地を表す「匠澄」が最適。理解の深化と技の結晶化を、匠の技と澄明さで格調高く表現している。"
+    "id": "E-N-O-Flat",
+    "pattern_id": 20,
+    "kanji_name": "嵐誠",
+    "reading": "らんせい",
+    "romaji": "ransei",
+    "english_name": "Storm Sincerity",
+    "naming_reason": "均等型を「嵐の中心から噴出する内なる創造の核心と革新の炎」で表現。嵐の破壊力と誠実さの純粋性がバランスの取れた創造力を象徴。"
   }
 ]

@@ -1,32 +1,18 @@
-import patternsData from '@/data/patterns-2880.json';
-import namesData from '@/data/names-2880.json';
+import namesData from '@/data/names-240.json';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 
-interface PatternBase {
-  pattern_id: number;
-  core_code: string;
-  interpretation: string;
-  drive_structure: string;
-  awakening_condition: string;
-  drain_condition: string;
-  recovery_condition: string;
-  bias_type: string;
-  output_level: string;
-  ignition_label: string;
-  time_character_label: string;
-}
-
 interface NameEntry {
-  pattern_id: number;
+  id: string;
   kanji_name: string;
   reading: string;
   english_name: string;
+  naming_reason: string;
 }
 
-const namesMap: Record<number, NameEntry> = {};
+const namesMap: Record<string, NameEntry> = {};
 for (const n of namesData as NameEntry[]) {
-  namesMap[n.pattern_id] = n;
+  namesMap[n.id] = n;
 }
 
 export default async function ResultPage({
@@ -35,15 +21,16 @@ export default async function ResultPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const patternId = parseInt(id, 10);
-  const pattern = (patternsData as PatternBase[]).find(
-    (p) => p.pattern_id === patternId
-  );
-  const nameEntry = namesMap[patternId];
+  const decodedId = decodeURIComponent(id);
+  const entry = namesMap[decodedId];
 
-  if (!pattern || !nameEntry) {
+  if (!entry) {
     notFound();
   }
+
+  const parts = decodedId.split('-');
+  const coreCode = parts.slice(0, 3).join('-');
+  const bias = parts[3] ?? '';
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center px-6 py-16 text-center relative overflow-hidden">
@@ -53,44 +40,18 @@ export default async function ResultPage({
         <p className="text-xs text-gray-600 tracking-[0.3em] mb-10">あなたの疾走領域</p>
 
         <h1 className="text-8xl font-bold mb-3 tracking-wider">
-          {nameEntry.kanji_name}
+          {entry.kanji_name}
         </h1>
-        <p className="text-sm text-gray-500 mb-2">{nameEntry.reading}</p>
-        <p className="text-lg text-gray-400 mb-8">{nameEntry.english_name}</p>
+        <p className="text-sm text-gray-500 mb-2">{entry.reading}</p>
+        <p className="text-lg text-gray-400 mb-8">{entry.english_name}</p>
 
         <p className="text-sm text-gray-300 mb-12 leading-relaxed">
-          {pattern.interpretation}
+          {entry.naming_reason}
         </p>
 
-        <div className="text-left space-y-5 border-t border-white/10 pt-8 mb-10">
-          <div>
-            <p className="text-xs text-gray-600 tracking-widest mb-1">構造</p>
-            <p className="text-sm text-gray-300 leading-relaxed">{pattern.drive_structure}</p>
-          </div>
-          <div>
-            <p className="text-xs text-gray-600 tracking-widest mb-1">覚醒条件</p>
-            <p className="text-sm text-gray-300 leading-relaxed">{pattern.awakening_condition}</p>
-          </div>
-          <div>
-            <p className="text-xs text-gray-600 tracking-widest mb-1">ドレイン条件</p>
-            <p className="text-sm text-gray-300 leading-relaxed">{pattern.drain_condition}</p>
-          </div>
-          <div>
-            <p className="text-xs text-gray-600 tracking-widest mb-1">回復</p>
-            <p className="text-sm text-gray-300 leading-relaxed">{pattern.recovery_condition}</p>
-          </div>
-        </div>
-
         <div className="flex justify-center gap-3 text-xs text-gray-700 mb-10 flex-wrap">
-          <span>{pattern.core_code}</span>
-          <span>·</span>
-          <span>{pattern.bias_type}</span>
-          <span>·</span>
-          <span>{pattern.output_level}</span>
-          <span>·</span>
-          <span>{pattern.ignition_label}</span>
-          <span>·</span>
-          <span>{pattern.time_character_label}</span>
+          <span>{coreCode}</span>
+          {bias && <><span>·</span><span>{bias}</span></>}
         </div>
 
         <div className="space-y-3">

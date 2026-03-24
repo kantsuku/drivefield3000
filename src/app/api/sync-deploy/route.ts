@@ -17,6 +17,7 @@ export async function POST() {
 
   try {
     await run(`${tsx} scripts/sync-names.ts`, root);
+    await run(`${tsx} scripts/sync-names-240.ts`, root);
     await run(`git add src/ scripts/ package.json`, root);
 
     const staged = await run(`git diff --cached --name-only`, root);
