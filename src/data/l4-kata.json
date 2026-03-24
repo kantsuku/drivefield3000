@@ -1,7 +1,7 @@
 [
   { "id": "D-Single",   "rank1": "D", "bias": "Single",   "name": "天突の型", "reading": "てんとつのかた" },
   { "id": "D-Dual",     "rank1": "D", "bias": "Dual",     "name": "双炎の型", "reading": "そうえんのかた" },
-  { "id": "D-Trinity",  "rank1": "D", "bias": "Trinity",  "name": "鼎炎の型", "reading": "ていえんのかた" },
+  { "id": "D-Trinity",  "rank1": "D", "bias": "Trinity",  "name": "燎炎の型", "reading": "りょうえんのかた" },
   { "id": "D-Flat",     "rank1": "D", "bias": "Flat",     "name": "万炎の型", "reading": "まんえんのかた" },
   { "id": "S-Single",   "rank1": "S", "bias": "Single",   "name": "明鏡の型", "reading": "めいきょうのかた" },
   { "id": "S-Dual",     "rank1": "S", "bias": "Dual",     "name": "双観の型", "reading": "そうかんのかた" },
