@@ -176,18 +176,8 @@
     "domain": "偏り",
     "question": "自分の強さはどちらに近いか",
     "choices": [
-      { "id": "A", "text": "一点にエネルギーを集中させるときに最大値が出る", "score": { "concentration": 2 } },
-      { "id": "B", "text": "複数の軸を同時に動かすときに本領が出る", "score": { "concentration": -2 } }
-    ]
-  },
-  {
-    "id": "Q12",
-    "type": "2択",
-    "domain": "偏り",
-    "question": "エネルギーの使い方として、自然なのは",
-    "choices": [
-      { "id": "A", "text": "一方向に絞って突き抜ける", "score": { "concentration": 2 } },
-      { "id": "B", "text": "バランスよく複数の方向に分散させる", "score": { "concentration": -2 } }
+      { "id": "A", "text": "一点にエネルギーを集中させるときに最大値が出る", "score": { "concentration": 3 } },
+      { "id": "B", "text": "複数の軸を同時に動かすときに本領が出る", "score": { "concentration": -3 } }
     ]
   },
   {
@@ -196,18 +186,18 @@
     "domain": "偏り",
     "question": "得意な状況はどちらか",
     "choices": [
-      { "id": "A", "text": "「これだけ」に絞られた状況", "score": { "concentration": 2 } },
-      { "id": "B", "text": "複数の要素が絡み合う複雑な状況", "score": { "concentration": -2 } }
+      { "id": "A", "text": "役割が一つに絞られた状況", "score": { "concentration": 3 } },
+      { "id": "B", "text": "複数の役割を掛け持ちしている状況", "score": { "concentration": -3 } }
     ]
   },
   {
     "id": "Q14",
     "type": "2択",
     "domain": "偏り",
-    "question": "あなたのモチベーションの構造は",
+    "question": "趣味や関心について、あなたに近いのは",
     "choices": [
-      { "id": "A", "text": "1つか2つの核が全てを引っ張っている", "score": { "concentration": 2 } },
-      { "id": "B", "text": "3つ以上の動機が同時に動いている", "score": { "concentration": -2 } }
+      { "id": "A", "text": "ずっと同じテーマを追い続けている——浮気しない", "score": { "concentration": 3 } },
+      { "id": "B", "text": "時期によって全く違うことに夢中になる——興味が複数ある", "score": { "concentration": -3 } }
     ]
   },
   {
@@ -216,28 +206,8 @@
     "domain": "偏り",
     "question": "消耗するのはどちらか",
     "choices": [
-      { "id": "A", "text": "複数のことを同時に求められたとき", "score": { "concentration": 2 } },
-      { "id": "B", "text": "一つのことだけに縛られたとき", "score": { "concentration": -2 } }
-    ]
-  },
-  {
-    "id": "Q16",
-    "type": "2択",
-    "domain": "偏り",
-    "question": "あなたの衝動は",
-    "choices": [
-      { "id": "A", "text": "主役が一つあってこそ動ける", "score": { "concentration": 2 } },
-      { "id": "B", "text": "いくつかの衝動が絡み合いながら動く", "score": { "concentration": -2 } }
-    ]
-  },
-  {
-    "id": "Q17",
-    "type": "2択",
-    "domain": "偏り",
-    "question": "「自分らしい」と感じるのはどちらか",
-    "choices": [
-      { "id": "A", "text": "一つのことに賭けている状態", "score": { "concentration": 2 } },
-      { "id": "B", "text": "様々な要素が共鳴している状態", "score": { "concentration": -2 } }
+      { "id": "A", "text": "複数のことを同時に求められたとき", "score": { "concentration": 3 } },
+      { "id": "B", "text": "一つのことだけに縛られたとき", "score": { "concentration": -3 } }
     ]
   },
   {
@@ -246,8 +216,8 @@
     "domain": "偏り",
     "question": "「二兎追う者は一兎も得ず」という言葉に対して",
     "choices": [
-      { "id": "A", "text": "その通りだと思う——絞らないと突き抜けられない", "score": { "concentration": 2 } },
-      { "id": "B", "text": "違うと思う——複数を追うことで見える景色がある", "score": { "concentration": -2 } }
+      { "id": "A", "text": "その通りだと思う——絞らないと突き抜けられない", "score": { "concentration": 4 } },
+      { "id": "B", "text": "違うと思う——複数を追うことで見える景色がある", "score": { "concentration": -4 } }
     ]
   },
 
@@ -265,10 +235,10 @@
     "id": "Q20",
     "type": "2択",
     "domain": "発動方向",
-    "question": "最高のパフォーマンスが出るのはどちらか",
+    "question": "SNSに何かを投稿するとき、近いのは",
     "choices": [
-      { "id": "A", "text": "周囲の期待や反応を感じているとき", "score": { "ignition": 2 } },
-      { "id": "B", "text": "自分の内側から何かが溢れてくるとき", "score": { "ignition": -2 } }
+      { "id": "A", "text": "反応やコメントが来るのが楽しみで投稿する", "score": { "ignition": 2 } },
+      { "id": "B", "text": "自分の記録として残す感覚——反応はおまけ", "score": { "ignition": -2 } }
     ]
   },
   {
@@ -367,10 +337,10 @@
     "id": "Q30",
     "type": "2択",
     "domain": "出力",
-    "question": "自分のエネルギー量を正直に言うと",
+    "question": "休日の過ごし方に近いのは",
     "choices": [
-      { "id": "A", "text": "人より多い方だと思う——動き続けていないと落ち着かない", "score": { "output": 2 } },
-      { "id": "B", "text": "省エネ型——必要な時に集中して出す", "score": { "output": -2 } }
+      { "id": "A", "text": "予定を詰め込む——何もしないと落ち着かない", "score": { "output": 2 } },
+      { "id": "B", "text": "あえて空白を作る——充電の時間が必要", "score": { "output": -2 } }
     ]
   },
   {
@@ -425,20 +395,20 @@
     "id": "Q35",
     "type": "2択",
     "domain": "旅行",
-    "question": "旅の計画を立てるとき、あなたは",
+    "question": "旅先での行動に近いのは",
     "choices": [
-      { "id": "A", "text": "行き当たりばったりの方が楽しい——計画は最小限", "score": { "D": 2, "ignition": -1 } },
-      { "id": "B", "text": "完璧に調べてから行く——準備が旅の一部", "score": { "S": 2, "ignition": -1 } }
+      { "id": "A", "text": "予定にないものに惹かれて寄り道する", "score": { "D": 2, "timing": 1 } },
+      { "id": "B", "text": "事前に調べた場所を確実に回りたい", "score": { "S": 2, "timing": -1 } }
     ]
   },
   {
     "id": "Q36",
     "type": "2択",
     "domain": "旅行",
-    "question": "旅の終わりに感じるのは",
+    "question": "旅で重視するのは",
     "choices": [
-      { "id": "A", "text": "もっと先へ行きたかった——まだ終わりたくない", "score": { "D": 2 } },
-      { "id": "B", "text": "全部やり切った——帰っていい充足感がある", "score": { "S": 2, "E": 1 } }
+      { "id": "A", "text": "行ったことのない場所の数——広く浅くでもいい", "score": { "D": 2 } },
+      { "id": "B", "text": "一つの場所をじっくり味わう——深く知りたい", "score": { "E": 2 } }
     ]
   },
   {
@@ -559,10 +529,10 @@
     "id": "Q46",
     "type": "2択",
     "domain": "恋愛・愛",
-    "question": "関係が深まる瞬間はどちらか",
+    "question": "大切な人との理想の距離感は",
     "choices": [
-      { "id": "A", "text": "一緒に困難を乗り越えた後——共闘した感覚", "score": { "N": 2 } },
-      { "id": "B", "text": "感情がシンクロした瞬間——言葉がいらない共鳴", "score": { "O": 2 } }
+      { "id": "A", "text": "同じ目標に向かう戦友——背中を預け合う関係", "score": { "N": 2 } },
+      { "id": "B", "text": "何もしなくても一緒にいるだけで満たされる関係", "score": { "O": 2 } }
     ]
   },
   {
@@ -645,10 +615,10 @@
     "id": "Q53",
     "type": "2択",
     "domain": "原体験",
-    "question": "幼い頃、怒られがちだったことはどちらに近いか",
+    "question": "子どもの頃の自分に近いのは",
     "choices": [
-      { "id": "A", "text": "飽きっぽい、すぐ次のことを始める——続かない", "score": { "D": 2 } },
-      { "id": "B", "text": "一つのことに没頭しすぎて他がおろそかになる", "score": { "E": 2 } }
+      { "id": "A", "text": "次々と興味が移り変わる——おもちゃ箱をひっくり返すタイプ", "score": { "D": 2 } },
+      { "id": "B", "text": "一つのことをとことんやる——気づいたら何時間も経ってるタイプ", "score": { "E": 2 } }
     ]
   },
   {

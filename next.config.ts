@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  allowedDevOrigins: ["100.121.161.76", "100.121.161.76:3000"],
+  allowedDevOrigins: ["100.116.195.92", "100.116.195.92:3003"],
   distDir: "/tmp/df3000-next",
   experimental: {
     turbopackFileSystemCacheForDev: false,

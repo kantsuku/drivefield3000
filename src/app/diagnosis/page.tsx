@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import questionsData from '@/data/diagnosis-questions.json';
 import { calculateResult } from '@/lib/scoring';
 
@@ -13,8 +13,12 @@ const TOTAL = questions.length;
 
 export default function DiagnosisPage() {
   const router = useRouter();
-  const [phase, setPhase] = useState<Phase>('intro');
-  const [index, setIndex] = useState(0);
+  const searchParams = useSearchParams();
+  const previewPhase = searchParams.get('phase') as Phase | null;
+  const previewIndex = parseInt(searchParams.get('q') || '0');
+
+  const [phase, setPhase] = useState<Phase>(previewPhase || 'intro');
+  const [index, setIndex] = useState(previewPhase === 'questions' ? Math.min(previewIndex, TOTAL - 1) : 0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [selected, setSelected] = useState<string | null>(null);
   const [transitioning, setTransitioning] = useState(false);
@@ -29,7 +33,12 @@ export default function DiagnosisPage() {
           setPhase('loading');
           const result = calculateResult(newAnswers, questions);
           setTimeout(() => {
-            router.push(`/result/${encodeURIComponent(result.nameId)}`);
+            const s = result.scores;
+            const params = new URLSearchParams({
+              D: String(s.D), S: String(s.S), O: String(s.O), N: String(s.N), E: String(s.E),
+              ig: result.ignition, tm: result.timing, out: result.output,
+            });
+            router.push(`/result/${encodeURIComponent(result.nameId)}?${params}`);
           }, 1800);
         } else {
           setIndex((i) => i + 1);
@@ -58,8 +67,9 @@ export default function DiagnosisPage() {
 
   if (phase === 'intro') {
     return (
-      <main className="flex flex-col items-center justify-center min-h-screen px-6 text-center">
-        <p className="text-xs text-gray-600 mb-10 tracking-[0.3em]">DRIVE FIELD 3000</p>
+      <main className="flex flex-col items-center justify-center min-h-screen px-6 text-center relative">
+        <div className="wave-bg"><div className="blob-3" /></div>
+        <p className="text-xs text-gray-600 mb-10 tracking-[0.3em] relative z-10">DRIVE FIELD 3000</p>
         <h2 className="text-2xl font-bold mb-6 leading-relaxed">
           鏡は嘘をつかない。<br />
           ただ、お前が見ていなかった<br />
@@ -119,12 +129,12 @@ export default function DiagnosisPage() {
           </p>
 
           {/* 設問文 */}
-          <h2 className="text-base font-bold leading-relaxed mb-2 text-center">
+          <h2 className="text-lg font-bold leading-relaxed mb-2 text-center">
             {current.question}
           </h2>
 
           {current.instruction && (
-            <p className="text-xs text-gray-600 mb-6 text-center">{current.instruction}</p>
+            <p className="text-sm text-gray-500 mb-6 text-center">{current.instruction}</p>
           )}
 
           {!current.instruction && <div className="mb-6" />}
@@ -142,7 +152,7 @@ export default function DiagnosisPage() {
                       : 'border-white/20 hover:border-white/50 active:scale-[0.98]'
                   }`}
                 >
-                  <p className="text-sm leading-relaxed">{choice.text}</p>
+                  <p className="text-base leading-relaxed">{choice.text}</p>
                 </button>
               ))}
             </div>
@@ -168,7 +178,7 @@ export default function DiagnosisPage() {
                     >
                       {choice.id}
                     </span>
-                    <p className="text-xs leading-relaxed text-gray-200">{choice.text}</p>
+                    <p className="text-sm leading-relaxed text-gray-200">{choice.text}</p>
                   </button>
                 ))}
               </div>

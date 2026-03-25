@@ -384,6 +384,18 @@ export default function AdminPage() {
           >
             一覧表
           </a>
+          <a
+            href="/admin/questions"
+            className="text-sm text-gray-400 hover:text-white border border-gray-700 hover:border-gray-500 px-3 py-2 rounded transition-colors"
+          >
+            診断設問
+          </a>
+          <a
+            href="/admin/screens"
+            className="text-sm text-gray-400 hover:text-white border border-gray-700 hover:border-gray-500 px-3 py-2 rounded transition-colors"
+          >
+            画面プレビュー
+          </a>
           <button
             onClick={syncDeploy}
             disabled={deploying || regenPolling}

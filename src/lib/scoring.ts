@@ -25,6 +25,7 @@ export interface DiagnosisResult {
   ignition: '外燃' | '内燃';
   timing: '瞬発' | '熟成';
   output: '高' | '中' | '低';
+  scores: { D: number; S: number; O: number; N: number; E: number };
 }
 
 export function calculateResult(
@@ -56,12 +57,12 @@ export function calculateResult(
   const rank3 = neuro[2].code;
 
   // concentration スコアで偏りタイプを判定
-  // Q11-Q18: 8問 × 最大±2 = ±16 の範囲
+  // Q11-Q18: 5問（スコア±3〜±4）= 最大±16 の範囲
   const c = scores.concentration;
   let bias: BiasType;
-  if (c >= 8) bias = 'Single';
+  if (c >= 10) bias = 'Single';
   else if (c >= 2) bias = 'Dual';
-  else if (c >= -4) bias = 'Trinity';
+  else if (c >= -6) bias = 'Trinity';
   else bias = 'Flat';
 
   const ignition = scores.ignition >= 0 ? '外燃' : '内燃';
@@ -71,5 +72,8 @@ export function calculateResult(
 
   const nameId = `${rank1}-${rank2}-${rank3}-${bias}`;
 
-  return { nameId, rank1, rank2, rank3, bias, ignition, timing, output };
+  return {
+    nameId, rank1, rank2, rank3, bias, ignition, timing, output,
+    scores: { D: scores.D, S: scores.S, O: scores.O, N: scores.N, E: scores.E },
+  };
 }
