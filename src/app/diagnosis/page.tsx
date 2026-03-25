@@ -1,159 +1,190 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import namesData from '@/data/names-240.json';
+import questionsData from '@/data/diagnosis-questions.json';
+import { calculateResult } from '@/lib/scoring';
 
-type NeuroCode = 'D' | 'S' | 'O' | 'N' | 'E';
-type BiasType = 'Single' | 'Dual' | 'Trinity' | 'Flat';
+type Question = (typeof questionsData)[number];
+type Phase = 'intro' | 'questions' | 'loading';
 
-interface NameEntry {
-  id: string;
-  kanji_name: string;
-}
-
-const names = namesData as NameEntry[];
-
-const NEURO_OPTIONS = [
-  { code: 'D' as NeuroCode, label: '新規・可能性', desc: 'まだ見ぬ可能性に触れると、衝動が走る' },
-  { code: 'S' as NeuroCode, label: '理解・秩序', desc: '仕組みを解き、全体が見えたとき、力が出る' },
-  { code: 'O' as NeuroCode, label: '共感・接続', desc: '人とわかり合えたとき、循環が始まる' },
-  { code: 'N' as NeuroCode, label: '緊張・集中', desc: '追い詰められ、研ぎ澄まされるとき、本領が開く' },
-  { code: 'E' as NeuroCode, label: '快感・没入', desc: '好きなことへ溶け込むとき、止まれなくなる' },
-];
-
-const BIAS_OPTIONS = [
-  { value: 'Single' as BiasType, label: '一点突破', desc: '火がつく条件は絞られている。入れば一気に回る' },
-  { value: 'Dual' as BiasType, label: '二軸駆動', desc: '2つの核が合わさったとき、最大化する' },
-  { value: 'Trinity' as BiasType, label: '三極共鳴', desc: '3つが揃ったとき、深い回転に入る' },
-  { value: 'Flat' as BiasType, label: '万能拡散', desc: 'どこからでも起動できる。その分、尖りにくい' },
-];
-
-type Step = 'intro' | 'neuro' | 'bias' | 'loading';
+const questions = questionsData as Question[];
+const TOTAL = questions.length;
 
 export default function DiagnosisPage() {
   const router = useRouter();
-  const [step, setStep] = useState<Step>('intro');
-  const [neuro, setNeuro] = useState<NeuroCode[]>([]);
+  const [phase, setPhase] = useState<Phase>('intro');
+  const [index, setIndex] = useState(0);
+  const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [selected, setSelected] = useState<string | null>(null);
+  const [transitioning, setTransitioning] = useState(false);
 
-  const tapNeuro = (code: NeuroCode) => {
-    if (neuro.includes(code)) {
-      setNeuro(neuro.filter((c) => c !== code));
-    } else if (neuro.length < 3) {
-      setNeuro([...neuro, code]);
+  const current = questions[index];
+
+  const advance = useCallback(
+    (newAnswers: Record<string, string>) => {
+      setTransitioning(true);
+      setTimeout(() => {
+        if (index + 1 >= TOTAL) {
+          setPhase('loading');
+          const result = calculateResult(newAnswers, questions);
+          setTimeout(() => {
+            router.push(`/result/${encodeURIComponent(result.nameId)}`);
+          }, 1800);
+        } else {
+          setIndex((i) => i + 1);
+          setSelected(null);
+          setTransitioning(false);
+        }
+      }, 220);
+    },
+    [index, router]
+  );
+
+  const handleSelect = (choiceId: string) => {
+    if (transitioning) return;
+    setSelected(choiceId);
+    const newAnswers = { ...answers, [current.id]: choiceId };
+    setAnswers(newAnswers);
+    if (current.type === '2択') {
+      advance(newAnswers);
     }
   };
 
-  const findAndNavigate = (bias: BiasType) => {
-    if (neuro.length < 3) return;
-    const [r1, r2, r3] = neuro;
-    const id = `${r1}-${r2}-${r3}-${bias}`;
-    const entry = names.find((n) => n.id === id);
-    if (entry) {
-      router.push(`/result/${encodeURIComponent(id)}`);
-    }
+  const handleNext = () => {
+    if (!selected || transitioning) return;
+    advance(answers);
   };
+
+  if (phase === 'intro') {
+    return (
+      <main className="flex flex-col items-center justify-center min-h-screen px-6 text-center">
+        <p className="text-xs text-gray-600 mb-10 tracking-[0.3em]">DRIVE FIELD 3000</p>
+        <h2 className="text-2xl font-bold mb-6 leading-relaxed">
+          鏡は嘘をつかない。<br />
+          ただ、お前が見ていなかった<br />
+          領域を映すだけだ。
+        </h2>
+        <p className="text-sm text-gray-500 mb-12">
+          問いに答えよ。考えるな。感じろ。
+        </p>
+        <button
+          onClick={() => setPhase('questions')}
+          className="px-8 py-4 border border-white/30 text-white font-bold text-base hover:border-white transition-colors rounded-full"
+        >
+          鏡に触れる
+        </button>
+      </main>
+    );
+  }
+
+  if (phase === 'loading') {
+    return (
+      <main className="flex flex-col items-center justify-center min-h-screen px-6 text-center">
+        <p className="text-sm text-gray-400 animate-pulse tracking-widest">
+          疾走領域が開かれる...
+        </p>
+      </main>
+    );
+  }
+
+  const progress = (index / TOTAL) * 100;
+  const is2択 = current.type === '2択';
 
   return (
     <main className="min-h-screen flex flex-col">
-      {(step === 'neuro' || step === 'bias') && (
-        <div className="fixed top-4 right-4 text-xs text-gray-600 tracking-widest z-50">
-          {step === 'neuro' ? '1 / 2' : '2 / 2'}
-        </div>
-      )}
+      {/* プログレスバー */}
+      <div className="fixed top-0 left-0 right-0 h-[2px] bg-white/10 z-50">
+        <div
+          className="h-full bg-white transition-all duration-300"
+          style={{ width: `${progress}%` }}
+        />
+      </div>
 
-      {step === 'intro' && (
-        <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center">
-          <p className="text-xs text-gray-600 mb-10 tracking-[0.3em]">DRIVE FIELD 3000</p>
-          <h2 className="text-2xl font-bold mb-6 leading-relaxed">
-            鏡は嘘をつかない。<br />
-            ただ、お前が見ていなかった<br />
-            領域を映すだけだ。
-          </h2>
-          <p className="text-sm text-gray-500 mb-12">
-            2つの問いに答えよ。考えるな。感じろ。
+      {/* カウンター */}
+      <div className="fixed top-4 right-4 text-xs text-gray-600 tabular-nums z-50">
+        {index + 1} / {TOTAL}
+      </div>
+
+      {/* 設問エリア */}
+      <div
+        className={`flex-1 flex flex-col items-center justify-center px-6 py-16 transition-opacity duration-200 ${
+          transitioning ? 'opacity-0' : 'opacity-100'
+        }`}
+      >
+        <div className="w-full max-w-sm">
+          {/* ドメインラベル */}
+          <p className="text-[10px] text-gray-600 tracking-[0.25em] mb-4 text-center uppercase">
+            {current.domain}
           </p>
-          <button
-            onClick={() => setStep('neuro')}
-            className="px-8 py-4 border border-white/30 text-white font-bold text-base hover:border-white transition-colors rounded-full"
-          >
-            鏡に触れる
-          </button>
-        </div>
-      )}
 
-      {step === 'neuro' && (
-        <div className="flex flex-col items-center justify-center min-h-screen px-6 py-16">
-          <p className="text-xs text-gray-500 mb-2 tracking-widest text-center">あなたの衝動</p>
-          <h3 className="text-lg font-bold mb-2 text-center">強い順に、3つ選べ</h3>
-          <p className="text-xs text-gray-600 mb-8 text-center">1番目に強いものから順にタップせよ</p>
-          <div className="w-full max-w-sm space-y-3">
-            {NEURO_OPTIONS.map((opt) => {
-              const rank = neuro.indexOf(opt.code);
-              const selected = rank >= 0;
-              return (
+          {/* 設問文 */}
+          <h2 className="text-base font-bold leading-relaxed mb-2 text-center">
+            {current.question}
+          </h2>
+
+          {current.instruction && (
+            <p className="text-xs text-gray-600 mb-6 text-center">{current.instruction}</p>
+          )}
+
+          {!current.instruction && <div className="mb-6" />}
+
+          {/* 選択肢 */}
+          {is2択 ? (
+            <div className="space-y-3">
+              {current.choices.map((choice) => (
                 <button
-                  key={opt.code}
-                  onClick={() => tapNeuro(opt.code)}
-                  className={`w-full text-left px-4 py-4 rounded-lg border transition-colors ${
-                    selected ? 'border-white bg-white/10' : 'border-white/20 hover:border-white/50'
+                  key={choice.id}
+                  onClick={() => handleSelect(choice.id)}
+                  className={`w-full text-left px-5 py-5 rounded-xl border transition-all duration-150 ${
+                    selected === choice.id
+                      ? 'border-white bg-white/10 scale-[0.99]'
+                      : 'border-white/20 hover:border-white/50 active:scale-[0.98]'
                   }`}
                 >
-                  <div className="flex items-center gap-3">
+                  <p className="text-sm leading-relaxed">{choice.text}</p>
+                </button>
+              ))}
+            </div>
+          ) : (
+            <>
+              <div className="space-y-2">
+                {current.choices.map((choice) => (
+                  <button
+                    key={choice.id}
+                    onClick={() => handleSelect(choice.id)}
+                    className={`w-full text-left px-4 py-3 rounded-lg border transition-all duration-150 flex items-start gap-3 ${
+                      selected === choice.id
+                        ? 'border-white bg-white/10'
+                        : 'border-white/15 hover:border-white/40 active:scale-[0.99]'
+                    }`}
+                  >
                     <span
-                      className={`w-6 h-6 rounded-full border flex items-center justify-center text-xs font-bold shrink-0 ${
-                        selected ? 'border-white bg-white text-black' : 'border-white/30 text-gray-600'
+                      className={`mt-0.5 w-5 h-5 rounded-full border shrink-0 flex items-center justify-center text-[10px] font-bold transition-colors ${
+                        selected === choice.id
+                          ? 'border-white bg-white text-black'
+                          : 'border-white/30 text-transparent'
                       }`}
                     >
-                      {selected ? rank + 1 : ''}
+                      {choice.id}
                     </span>
-                    <div>
-                      <p className="font-bold text-sm">{opt.label}</p>
-                      <p className="text-xs text-gray-400 mt-0.5">{opt.desc}</p>
-                    </div>
-                  </div>
+                    <p className="text-xs leading-relaxed text-gray-200">{choice.text}</p>
+                  </button>
+                ))}
+              </div>
+
+              {selected && (
+                <button
+                  onClick={handleNext}
+                  className="mt-6 w-full py-3 bg-white text-black font-bold rounded-full text-sm hover:bg-gray-200 transition-colors"
+                >
+                  次へ
                 </button>
-              );
-            })}
-          </div>
-          {neuro.length === 3 && (
-            <button
-              onClick={() => setStep('bias')}
-              className="mt-8 px-8 py-3 bg-white text-black font-bold rounded-full hover:bg-gray-200 transition-colors"
-            >
-              次へ
-            </button>
+              )}
+            </>
           )}
         </div>
-      )}
-
-      {step === 'bias' && (
-        <div className="flex flex-col items-center justify-center min-h-screen px-6 py-16">
-          <p className="text-xs text-gray-500 mb-2 tracking-widest text-center">起動パターン</p>
-          <h3 className="text-lg font-bold mb-8 text-center">あなたのドライブの形は？</h3>
-          <div className="w-full max-w-sm space-y-3">
-            {BIAS_OPTIONS.map((opt) => (
-              <button
-                key={opt.value}
-                onClick={() => {
-                  setStep('loading');
-                  findAndNavigate(opt.value);
-                }}
-                className="w-full text-left px-5 py-4 rounded-lg border border-white/20 hover:border-white hover:bg-white/5 transition-colors"
-              >
-                <p className="font-bold text-sm">{opt.label}</p>
-                <p className="text-xs text-gray-400 mt-1">{opt.desc}</p>
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {step === 'loading' && (
-        <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center">
-          <p className="text-sm text-gray-400 animate-pulse">疾走領域が開かれる...</p>
-        </div>
-      )}
+      </div>
     </main>
   );
 }
