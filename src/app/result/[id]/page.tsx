@@ -371,9 +371,10 @@ function BlobBackground({ blobs, edges, baseColor }: { blobs: BlobConfig[]; edge
       {/* エッジグラデーション */}
       {edges?.map((e, i) => (
         <div key={`edge-${i}`} className="absolute inset-0" style={{
-          background: `radial-gradient(${e.size || '80vmax'} at ${e.position}, ${e.color} 0%, transparent 100%)`,
+          background: `radial-gradient(${e.size || '80vmax'} at ${e.position}, ${e.color}40 0%, transparent 70%)`,
           animation: e.animation,
-          opacity: 0.6,
+          filter: 'blur(40px)',
+          opacity: 0.4,
         }} />
       ))}
       {/* 従来のblob */}
