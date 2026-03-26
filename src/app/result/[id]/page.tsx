@@ -128,9 +128,10 @@ const WORK_ADVICE: Record<string, { trigger: string; accelerator: string; sustai
   },
 };
 
-const LIFE_ADVICE: Record<string, { trigger: string; sustain: string; awakening: string; drain: string; recovery: string }> = {
+const LIFE_ADVICE: Record<string, { trigger: string; accelerator: string; sustain: string; awakening: string; drain: string; recovery: string }> = {
   D: {
     trigger: '休日に「行ったことのない場所」「やったことのないこと」を一つ入れよ。旅行、新しい趣味、知らない店。',
+    accelerator: '興味を持ったことはすぐに試してみること。「いつかやろう」ではなく「今週末やる」。スピード感が加速の鍵。',
     sustain: '日常に小さな冒険を仕込み続けること。通勤ルートを変える、知らないジャンルの本を読む、新しい人と話す。',
     awakening: '未知の体験に飛び込み、興奮と発見が連鎖している状態。「次は何だ」と目が輝いている瞬間。',
     drain: '同じ日常の繰り返し、変化のない人間関係、新しい刺激が一切ない生活が続くと生気を失う。',
@@ -138,6 +139,7 @@ const LIFE_ADVICE: Record<string, { trigger: string; sustain: string; awakening:
   },
   S: {
     trigger: '知的好奇心を満たす時間を確保せよ。読書、学習、考察の時間が生活の質を決定的に変える。',
+    accelerator: '学んだことをノートやメモに整理する時間を作れ。「分かった」感覚を言語化することで理解が加速する。',
     sustain: '生活リズムの安定と、思考を整理する習慣を持つこと。日記、瞑想、散歩しながらの内省が燃料になる。',
     awakening: '複雑な問題の本質が見えた瞬間、知識が繋がって新しい理解が生まれる瞬間。静かで深い充実感。',
     drain: '無秩序な生活、計画が立てられない状態、理不尽な出来事の連続が続くと精神的に疲弊する。',
@@ -145,6 +147,7 @@ const LIFE_ADVICE: Record<string, { trigger: string; sustain: string; awakening:
   },
   O: {
     trigger: '大切な人との質の高い時間を優先的に確保せよ。量より深さ。心を開ける相手との対話が最大の燃料。',
+    accelerator: '誰かと一緒に何かをする体験を増やせ。一緒に料理する、散歩する、映画を観る。共有体験が加速装置になる。',
     sustain: '定期的に「一緒にいて心地いい人」と過ごす時間を仕組み化すること。月一の食事会、週末の散歩、何でもいい。',
     awakening: '深い信頼関係の中で、互いに支え合っていると実感できる瞬間。一人では到達できない温かさ。',
     drain: '孤独な時間が長すぎる、表面的な人間関係しかない、大切な人との関係が悪化している状態が続くと深刻。',
@@ -152,6 +155,7 @@ const LIFE_ADVICE: Record<string, { trigger: string; sustain: string; awakening:
   },
   N: {
     trigger: '目標を設定し、それに向かって計画的に動く時間を作れ。資格取得、トレーニング、スキルアップ。',
+    accelerator: '自分との約束を守る仕組みを作れ。締切を決める、人に宣言する、記録をつける。適度なプレッシャーが加速を生む。',
     sustain: '日々の小さな達成を記録すること。習慣トラッカー、トレーニングログ、学習記録が持続力になる。',
     awakening: '全神経を研ぎ澄まして、困難な課題に立ち向かっている瞬間。スポーツ、ゲーム、知的挑戦の最中。',
     drain: '目標のない漫然とした日常、だらだらと過ぎる時間、緊張感のない生活が続くと気力を失う。',
@@ -159,6 +163,7 @@ const LIFE_ADVICE: Record<string, { trigger: string; sustain: string; awakening:
   },
   E: {
     trigger: '「好き」「心地いい」と感じることに罪悪感なく時間を使え。趣味、芸術鑑賞、美味しい食事。',
+    accelerator: '好きなことに没頭できる「中断されない時間」を確保せよ。30分でもいい。邪魔が入らない集中タイムが没入を深める。',
     sustain: '日常の中に「味わう」時間を意識的に作ること。急がない食事、好きな音楽、丁寧な暮らし。',
     awakening: '好きなことに完全に没入し、外界が消えている瞬間。創作、鑑賞、体験の中に溶けている状態。',
     drain: '楽しみのない義務ばかりの生活、感性を否定される環境、効率だけが求められる日常が続くと枯渇する。',
@@ -906,7 +911,7 @@ export default async function ResultPage({
 
             {[
               { label: 'TRIGGER', role: '点火', neuro: parts[0], core: pattern.trigger_core, example: interp.trigger, work: workAdv?.trigger, life: lifeAdv?.trigger },
-              { label: 'ACCELERATOR', role: '加速', neuro: parts[1], core: pattern.accelerator_core, example: interp.accelerator, work: workAdv?.accelerator, life: lifeAdv?.sustain },
+              { label: 'ACCELERATOR', role: '加速', neuro: parts[1], core: pattern.accelerator_core, example: interp.accelerator, work: workAdv?.accelerator, life: lifeAdv?.accelerator },
               { label: 'SUSTAIN', role: '持続', neuro: parts[2], core: pattern.sustain_core, example: interp.sustain, work: workAdv?.sustain, life: lifeAdv?.sustain },
             ].map((step) => (
               <div key={step.label} className="border border-gray-200 rounded-xl bg-gray-50/50 p-5 mb-4">
