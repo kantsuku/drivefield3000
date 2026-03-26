@@ -300,6 +300,72 @@ function buildAwakeningAdvice(r1: string, r2: string, r3: string, bias: string, 
 
 // ─── Radar Chart ──────────────────────────────────────
 
+// ─── グラデーションblob生成（型ごとに異なる形状） ─────
+
+interface BlobConfig {
+  width: string; height: string; top?: string; bottom?: string; left?: string; right?: string;
+  gradient: string; blur: string; animation: string; opacity?: number;
+}
+
+function generateBlobs(rank1: string, bias: string, gradients: { main: string; dark: string }): BlobConfig[] {
+  const accentGradient = 'radial-gradient(circle, #b8860b, transparent 65%)';
+
+  // 速度: D=速い N=やや速い E=遅い S=中 O=やや遅い
+  const speed: Record<string, number> = { D: 8, S: 14, O: 16, N: 10, E: 20 };
+  const s = speed[rank1] || 12;
+
+  // 偏りでblob構成を変える
+  if (bias === 'Single') {
+    // 巨大な1つが支配的 + 小さいアクセント
+    return [
+      { width: '100vmax', height: '100vmax', top: '-30%', left: '-20%', gradient: gradients.main, blur: 'blur(70px)', animation: `blob-drift-1 ${s}s ease-in-out infinite` },
+      { width: '40vmax', height: '40vmax', bottom: '-10%', right: '10%', gradient: gradients.dark, blur: 'blur(100px)', animation: `blob-drift-2 ${s + 6}s ease-in-out infinite`, opacity: 0.5 },
+      { width: '30vmax', height: '30vmax', top: '20%', right: '30%', gradient: accentGradient, blur: 'blur(90px)', animation: `blob-drift-3 ${s + 10}s ease-in-out infinite reverse`, opacity: 0.4 },
+    ];
+  }
+  if (bias === 'Dual') {
+    // 2つの大きなblobが拮抗
+    return [
+      { width: '75vmax', height: '75vmax', top: '-25%', left: '-15%', gradient: gradients.main, blur: 'blur(80px)', animation: `blob-drift-1 ${s}s ease-in-out infinite` },
+      { width: '70vmax', height: '70vmax', bottom: '-20%', right: '-10%', gradient: gradients.dark, blur: 'blur(80px)', animation: `blob-drift-2 ${s + 2}s ease-in-out infinite` },
+      { width: '35vmax', height: '35vmax', top: '40%', left: '50%', gradient: accentGradient, blur: 'blur(90px)', animation: `blob-drift-3 ${s + 8}s ease-in-out infinite reverse`, opacity: 0.5 },
+    ];
+  }
+  if (bias === 'Trinity') {
+    // 3つが均等に回転
+    return [
+      { width: '60vmax', height: '60vmax', top: '-15%', left: '-10%', gradient: gradients.main, blur: 'blur(80px)', animation: `blob-drift-1 ${s}s ease-in-out infinite` },
+      { width: '55vmax', height: '55vmax', bottom: '-20%', right: '-5%', gradient: gradients.dark, blur: 'blur(85px)', animation: `blob-drift-2 ${s + 3}s ease-in-out infinite` },
+      { width: '55vmax', height: '55vmax', top: '25%', left: '35%', gradient: gradients.main.replace('transparent 65%', 'transparent 50%'), blur: 'blur(90px)', animation: `blob-drift-3 ${s + 6}s ease-in-out infinite` },
+      { width: '40vmax', height: '40vmax', top: '10%', right: '15%', gradient: accentGradient, blur: 'blur(90px)', animation: `blob-drift-1 ${s + 10}s ease-in-out infinite reverse`, opacity: 0.4 },
+    ];
+  }
+  // Flat: 小さいのが多数
+  return [
+    { width: '50vmax', height: '50vmax', top: '-15%', left: '-10%', gradient: gradients.main, blur: 'blur(90px)', animation: `blob-drift-1 ${s}s ease-in-out infinite`, opacity: 0.8 },
+    { width: '45vmax', height: '45vmax', bottom: '-15%', right: '-5%', gradient: gradients.dark, blur: 'blur(90px)', animation: `blob-drift-2 ${s + 2}s ease-in-out infinite`, opacity: 0.7 },
+    { width: '40vmax', height: '40vmax', top: '30%', left: '40%', gradient: gradients.main.replace('transparent 65%', 'transparent 55%'), blur: 'blur(95px)', animation: `blob-drift-3 ${s + 4}s ease-in-out infinite`, opacity: 0.6 },
+    { width: '35vmax', height: '35vmax', top: '60%', left: '-5%', gradient: gradients.dark, blur: 'blur(100px)', animation: `blob-drift-1 ${s + 8}s ease-in-out infinite reverse`, opacity: 0.5 },
+    { width: '30vmax', height: '30vmax', top: '5%', right: '10%', gradient: accentGradient, blur: 'blur(90px)', animation: `blob-drift-2 ${s + 10}s ease-in-out infinite reverse`, opacity: 0.4 },
+  ];
+}
+
+function BlobBackground({ blobs }: { blobs: BlobConfig[] }) {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {blobs.map((b, i) => (
+        <div key={i} className="absolute" style={{
+          width: b.width, height: b.height,
+          top: b.top, bottom: b.bottom, left: b.left, right: b.right,
+          borderRadius: '50%', background: b.gradient,
+          filter: b.blur, animation: b.animation,
+          opacity: b.opacity ?? 1,
+        }} />
+      ))}
+    </div>
+  );
+}
+
 function RadarChart({ scores }: { scores: Record<string, number> }) {
   const keys = ['D', 'S', 'O', 'N', 'E'];
   const maxScore = Math.max(...Object.values(scores), 1);
@@ -448,13 +514,8 @@ export default async function ResultPage({
 
     {/* ═══ ヒーローゾーン（黒+グラデ） ═══ */}
     <section className="noise-overlay relative overflow-hidden border-b border-gray-200" style={{ backgroundColor: '#8b2520' }}>
-      {/* 型カラーうねうねグラデ背景（演出最終画面と同じ） */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ opacity: 1 }}>
-        <div className="absolute" style={{ width: '80vmax', height: '80vmax', top: '-20%', left: '-15%', borderRadius: '50%', background: NEURO_LABELS[rank1]?.gradient, filter: 'blur(80px)', animation: 'blob-drift-1 12s ease-in-out infinite' }} />
-        <div className="absolute" style={{ width: '70vmax', height: '70vmax', bottom: '-25%', right: '-10%', borderRadius: '50%', background: NEURO_LABELS[rank1]?.gradientDark, filter: 'blur(90px)', animation: 'blob-drift-2 16s ease-in-out infinite' }} />
-        <div className="absolute" style={{ width: '60vmax', height: '60vmax', top: '30%', left: '40%', borderRadius: '50%', background: NEURO_LABELS[rank1]?.gradient.replace('transparent 65%', 'transparent 50%'), filter: 'blur(100px)', animation: 'blob-drift-3 20s ease-in-out infinite' }} />
-        <div className="absolute" style={{ width: '50vmax', height: '50vmax', top: '10%', right: '20%', borderRadius: '50%', background: 'radial-gradient(circle, #b8860b, transparent 65%)', filter: 'blur(90px)', animation: 'blob-drift-1 18s ease-in-out infinite reverse', opacity: 0.6 }} />
-      </div>
+      {/* 型カラーうねうねグラデ背景（rank1+biasで動的生成） */}
+      <BlobBackground blobs={generateBlobs(rank1, bias, { main: NEURO_LABELS[rank1]?.gradient, dark: NEURO_LABELS[rank1]?.gradientDark })} />
 
       <p
         className="absolute top-8 right-6 z-10 text-sm md:text-lg text-white font-bold tracking-[0.15em] leading-loose"
