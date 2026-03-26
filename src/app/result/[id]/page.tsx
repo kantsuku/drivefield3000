@@ -793,6 +793,48 @@ export default async function ResultPage({
             </p>
 
 
+            {/* 20型マップ */}
+            <h3 className="text-base font-bold text-gray-900 mb-3">20の型の中のあなたの位置</h3>
+            <p className="text-xs text-gray-500 mb-4">5つの主神経系 × 4つの偏りタイプで構成される全20型。あなたの型がハイライトされています。</p>
+            <div className="border border-gray-200 rounded-xl bg-gray-50/50 p-4 mb-10 overflow-x-auto">
+              <table className="w-full text-center text-xs">
+                <thead>
+                  <tr>
+                    <th className="py-2 px-1"></th>
+                    {['Single', 'Dual', 'Trinity', 'Flat'].map((b) => (
+                      <th key={b} className="py-2 px-1 text-gray-400 font-normal">{BIAS_JP[b] || b}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {['D', 'S', 'O', 'N', 'E'].map((r) => (
+                    <tr key={r}>
+                      <td className="py-1 px-1 text-left">
+                        <span className="font-bold" style={{ color: NEURO_LABELS[r]?.color }}>{r}</span>
+                        <span className="text-gray-400 ml-1 hidden md:inline">{NEURO_LABELS[r]?.jp}</span>
+                      </td>
+                      {['Single', 'Dual', 'Trinity', 'Flat'].map((b) => {
+                        const k = kataMap[`${r}-${b}`];
+                        const isMe = r === rank1 && b === bias;
+                        return (
+                          <td key={b} className="py-1 px-1">
+                            <div className={`rounded-lg py-2 px-1 transition-all ${
+                              isMe
+                                ? 'border-2 font-bold text-white'
+                                : 'border border-gray-200 text-gray-400'
+                            }`} style={isMe ? { borderColor: NEURO_LABELS[r]?.color, backgroundColor: NEURO_LABELS[r]?.color } : {}}>
+                              <div className={isMe ? 'text-sm' : 'text-[10px]'}>{k?.name || '—'}</div>
+                              {isMe && <div className="text-[9px] mt-0.5 opacity-80">{entry.kanji_name}</div>}
+                            </div>
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
             {/* 診断のプロセスフロー */}
             <h3 className="text-base font-bold text-gray-900 mb-3">診断のプロセス</h3>
             <p className="text-xs text-gray-500 leading-relaxed mb-6">
