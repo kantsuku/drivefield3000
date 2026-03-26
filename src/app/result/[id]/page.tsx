@@ -447,9 +447,9 @@ export default async function ResultPage({
 
 
     {/* ═══ ヒーローゾーン（黒+グラデ） ═══ */}
-    <section className="relative overflow-hidden border-b border-gray-200" style={{ backgroundColor: '#8b2520' }}>
+    <section className="noise-overlay relative overflow-hidden border-b border-gray-200" style={{ backgroundColor: '#8b2520' }}>
       {/* 型カラーうねうねグラデ背景（演出最終画面と同じ） */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ opacity: 0.8 }}>
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ opacity: 1 }}>
         <div className="absolute" style={{ width: '80vmax', height: '80vmax', top: '-20%', left: '-15%', borderRadius: '50%', background: NEURO_LABELS[rank1]?.gradient, filter: 'blur(80px)', animation: 'blob-drift-1 12s ease-in-out infinite' }} />
         <div className="absolute" style={{ width: '70vmax', height: '70vmax', bottom: '-25%', right: '-10%', borderRadius: '50%', background: NEURO_LABELS[rank1]?.gradientDark, filter: 'blur(90px)', animation: 'blob-drift-2 16s ease-in-out infinite' }} />
         <div className="absolute" style={{ width: '60vmax', height: '60vmax', top: '30%', left: '40%', borderRadius: '50%', background: NEURO_LABELS[rank1]?.gradient.replace('transparent 65%', 'transparent 50%'), filter: 'blur(100px)', animation: 'blob-drift-3 20s ease-in-out infinite' }} />

@@ -292,7 +292,7 @@ function DiagnosisContent() {
 
     return (
       <main
-        className="flex flex-col items-center justify-center min-h-screen px-6 text-center relative overflow-hidden"
+        className="noise-overlay flex flex-col items-center justify-center min-h-screen px-6 text-center relative overflow-hidden"
         style={{
           backgroundColor: isFinal ? '#8b2520' : '#000',
           transition: 'background-color 3s ease',
@@ -318,7 +318,7 @@ function DiagnosisContent() {
           <div
             className="fixed inset-0 overflow-hidden pointer-events-none"
             style={{
-              opacity: isFinal ? 0.8 : isTypeColor ? 0.5 : 0,
+              opacity: isFinal ? 1 : isTypeColor ? 0.7 : 0,
               transition: 'opacity 3s ease',
             }}
           >
