@@ -201,6 +201,20 @@ html {
   transition-duration: 0.1s;
 }
 
+/* === エッジグラデーション === */
+@keyframes edge-drift-1 {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  50%      { transform: translateX(15%) translateY(-10%); }
+}
+@keyframes edge-drift-2 {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  50%      { transform: translateX(-15%) translateY(10%); }
+}
+@keyframes edge-drift-3 {
+  0%, 100% { transform: translateX(0) translateY(0) scale(1); }
+  50%      { transform: translateX(10%) translateY(15%) scale(1.1); }
+}
+
 /* === うねるグラデーション背景 === */
 @keyframes blob-drift-1 {
   0%, 100% { transform: translate(0%, 0%) scale(1) rotate(0deg); }
