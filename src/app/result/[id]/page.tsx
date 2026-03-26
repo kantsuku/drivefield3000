@@ -7,7 +7,8 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { AboutMenu } from '@/components/AboutMenu';
 import { ActionMenu } from '@/components/ActionMenu';
-import { Sparkles, AlertTriangle, Wrench, Briefcase, Home, RefreshCw } from 'lucide-react';
+import { AiConsultSection } from '@/components/AiConsultSection';
+import { Sparkles, AlertTriangle, Wrench, Briefcase, Home, RefreshCw, Flame, Clock, Zap, Activity, Rocket, Users, Coffee, CheckCircle } from 'lucide-react';
 
 // ─── Types ────────────────────────────────────────────
 
@@ -39,11 +40,11 @@ for (const d of dictionariesData) {
 // ─── Helpers ──────────────────────────────────────────
 
 const NEURO_LABELS: Record<string, { jp: string; color: string; gradient: string; gradientDark: string }> = {
-  D: { jp: 'ドーパミン', color: '#f87171', gradient: 'radial-gradient(circle, #dc2626, transparent 65%)', gradientDark: 'radial-gradient(circle, #991b1b, transparent 65%)' },
-  S: { jp: 'セロトニン', color: '#60a5fa', gradient: 'radial-gradient(circle, #2563eb, transparent 65%)', gradientDark: 'radial-gradient(circle, #1e40af, transparent 65%)' },
-  O: { jp: 'オキシトシン', color: '#4ade80', gradient: 'radial-gradient(circle, #16a34a, transparent 65%)', gradientDark: 'radial-gradient(circle, #166534, transparent 65%)' },
-  N: { jp: 'ノルアドレナリン', color: '#facc15', gradient: 'radial-gradient(circle, #ca8a04, transparent 65%)', gradientDark: 'radial-gradient(circle, #a16207, transparent 65%)' },
-  E: { jp: 'エンドルフィン', color: '#c084fc', gradient: 'radial-gradient(circle, #9333ea, transparent 65%)', gradientDark: 'radial-gradient(circle, #7e22ce, transparent 65%)' },
+  D: { jp: 'ドーパミン', color: '#c0392b', gradient: 'radial-gradient(circle, #922b21, transparent 65%)', gradientDark: 'radial-gradient(circle, #641e16, transparent 65%)' },
+  S: { jp: 'セロトニン', color: '#2e6b8a', gradient: 'radial-gradient(circle, #1a4d6b, transparent 65%)', gradientDark: 'radial-gradient(circle, #0e3347, transparent 65%)' },
+  O: { jp: 'オキシトシン', color: '#27806a', gradient: 'radial-gradient(circle, #1a5c4b, transparent 65%)', gradientDark: 'radial-gradient(circle, #0f3d32, transparent 65%)' },
+  N: { jp: 'ノルアドレナリン', color: '#b8860b', gradient: 'radial-gradient(circle, #8b6914, transparent 65%)', gradientDark: 'radial-gradient(circle, #5c4510, transparent 65%)' },
+  E: { jp: 'エンドルフィン', color: '#7b5ea7', gradient: 'radial-gradient(circle, #5b3d8f, transparent 65%)', gradientDark: 'radial-gradient(circle, #3d2766, transparent 65%)' },
 };
 
 const BIAS_STYLE: Record<string, { trait: string; strength: string; risk: string }> = {
@@ -320,7 +321,7 @@ function RadarChart({ scores }: { scores: Record<string, number> }) {
   const r1Color = NEURO_LABELS[keys[0]]?.color || '#6b7280';
 
   return (
-    <svg viewBox="0 0 240 260" className="w-full max-w-[320px]">
+    <svg viewBox="-20 -10 280 280" className="w-full max-w-[240px]">
       {/* Grid */}
       {gridPaths.map((d, i) => <path key={i} d={d} fill="none" stroke="#e5e7eb" strokeWidth="1" />)}
       {/* Axes */}
@@ -403,11 +404,11 @@ export default async function ResultPage({
         const allKeys = ['D', 'S', 'O', 'N', 'E'];
         const ranks = [parts[0], parts[1], parts[2]];
         const rest = allKeys.filter((k) => !ranks.includes(k));
-        const biasScores: Record<string, number[]> = { Single: [10, 4, 2], Dual: [8, 7, 3], Trinity: [6, 5, 5], Flat: [5, 4, 4] };
-        const top = biasScores[bias] || [6, 4, 3];
+        const biasScores: Record<string, number[]> = { Single: [85, 35, 20], Dual: [70, 60, 30], Trinity: [55, 50, 45], Flat: [45, 40, 38] };
+        const top = biasScores[bias] || [55, 40, 30];
         const base: Record<string, number> = {};
         ranks.forEach((k, i) => { base[k] = top[i]; });
-        rest.forEach((k) => { base[k] = 1; });
+        rest.forEach((k, i) => { base[k] = i === 0 ? 15 : 12; });
         return base;
       })();
 
@@ -444,8 +445,9 @@ export default async function ResultPage({
     {/* ハンバーガーメニュー */}
     <AboutMenu />
 
+
     {/* ═══ ヒーローゾーン（黒+グラデ） ═══ */}
-    <section className="relative overflow-hidden" style={{ backgroundColor: '#8b2520' }}>
+    <section className="relative overflow-hidden border-b border-gray-200" style={{ backgroundColor: '#8b2520' }}>
       {/* 型カラーうねうねグラデ背景（演出最終画面と同じ） */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ opacity: 0.8 }}>
         <div className="absolute" style={{ width: '80vmax', height: '80vmax', top: '-20%', left: '-15%', borderRadius: '50%', background: NEURO_LABELS[rank1]?.gradient, filter: 'blur(80px)', animation: 'blob-drift-1 12s ease-in-out infinite' }} />
@@ -453,24 +455,42 @@ export default async function ResultPage({
         <div className="absolute" style={{ width: '60vmax', height: '60vmax', top: '30%', left: '40%', borderRadius: '50%', background: NEURO_LABELS[rank1]?.gradient.replace('transparent 65%', 'transparent 50%'), filter: 'blur(100px)', animation: 'blob-drift-3 20s ease-in-out infinite' }} />
       </div>
 
+      <p
+        className="absolute top-8 right-6 z-10 text-sm md:text-lg text-white font-bold tracking-[0.15em] leading-loose"
+        style={{ writingMode: 'vertical-rl' }}
+      >
+        疾走領域 {entry.kanji_name}
+      </p>
+
       <div className="relative z-10 w-full max-w-3xl mx-auto flex flex-col items-center px-6 py-16 text-center text-white">
-        <p className="text-xs text-gray-400 tracking-[0.3em] mb-8">あなたの疾走領域</p>
-        {kata && <p className="text-sm text-gray-300 tracking-[0.2em] mb-4" style={serif}>{kata.name}</p>}
+        {kata && <p className="text-xl text-white tracking-[0.2em] mb-4" style={serif}>{kata.name}</p>}
         <h1 className="text-8xl font-bold tracking-wider mb-3" style={{ writingMode: 'vertical-rl', ...serif, letterSpacing: '0.3em' }}>
           {entry.kanji_name}
         </h1>
-        <p className="text-sm text-gray-400 mb-1 mt-3">{entry.reading}</p>
-        <p className="text-base text-gray-300 mb-10">{entry.english_name}</p>
+        <p className="text-sm text-white mt-3 mb-10">{entry.reading} / {entry.english_name}</p>
+
+        <p className="text-xl text-white mb-8 tracking-wider leading-relaxed" style={{ fontFamily: '"Noto Serif JP", "游明朝", YuMincho, serif' }}>
+          {(() => {
+            const raw = entry.naming_reason
+              .split('。')
+              .filter((s) => !s.includes('優先漢字') && !s.includes('使用漢字'))
+              .map((s) => s.trim())
+              .filter(Boolean)[0] || '';
+            // 「〜を、〜として表現」→後半だけ抽出、なければ「〜を〜として」の後を取る
+            const match = raw.match(/[、。]([^、。]*$)/) || raw.match(/を[、]?(.+)/);
+            return match ? match[1].replace(/として表現$/, '').replace(/を象徴$/, '').trim() : raw;
+          })()}
+        </p>
 
         {entry.lead && (
-          <p className="text-sm text-gray-200 mb-6 leading-[1.9] text-left">{entry.lead}</p>
+          <p className="text-sm text-white mb-6 leading-[1.9] text-left">{entry.lead}</p>
         )}
 
       </div>
     </section>
 
     {/* ═══ アンカーメニュー（sticky） ═══ */}
-    <nav className="sticky top-0 z-40 bg-white border-b border-gray-200 shadow-sm">
+    <nav className="sticky top-0 z-40 bg-white">
       <div className="max-w-3xl mx-auto flex items-center gap-3 px-4 py-2.5">
         <span className="text-[10px] text-gray-400 tracking-wider shrink-0">目次</span>
         <div className="overflow-x-auto flex gap-2 min-w-0">
@@ -501,106 +521,59 @@ export default async function ResultPage({
 
         {/* ═══ 第二章：診断結果 ═══ */}
         <Chapter id="sec-result" num="01" title="診断結果" en="DIAGNOSIS">
-          <p className="text-sm text-gray-600 leading-[1.9] mb-8">
-            52の問いから、あなたの5つの神経系スコアと駆動特性を算出した。以下があなたの駆動パターンの全体像だ。
-          </p>
-
-          {/* 診断の構造 */}
-          <h3 className="text-sm font-bold text-gray-900 mb-2">診断の構造</h3>
-          <p className="text-xs text-gray-500 leading-relaxed mb-6">
-            Drive Field は、5つの神経系スコアから段階的にあなた固有の疾走領域を絞り込む。各段階で何が決まるかを以下に示す。
-          </p>
-
-          <div className="mb-10 space-y-0">
-            {/* Step 1 */}
-            <div className="border border-gray-200 rounded-lg px-4 py-3 mb-1">
-              <p className="text-[10px] text-gray-400 tracking-wider mb-2">STEP 1 — 5つの神経系を診断</p>
-              <div className="flex flex-wrap gap-2 mb-2">
-                {['D','S','O','N','E'].map((k) => (
-                  <span key={k} className="text-xs font-bold px-2 py-0.5 rounded" style={{ color: NEURO_LABELS[k].color, backgroundColor: `${NEURO_LABELS[k].color}15` }}>{k} {NEURO_LABELS[k].jp}</span>
-                ))}
-              </div>
-              <p className="text-[10px] text-gray-500">人間の行動を駆動する5つの神経系。診断ではそれぞれのスコアを算出する。</p>
+          {/* 神経系スコア（2カラム: 左レーダー / 右スコア） */}
+          <p className="text-[10px] text-gray-400 leading-relaxed mb-4">本診断は科学的根拠に基づくものではなく、行動パターンから神経系の傾向を推測したものです。</p>
+          <div className="grid grid-cols-[auto_1fr] gap-4 mb-6 items-start">
+            {/* 左: レーダー */}
+            <div>
+              <RadarChart scores={scores} />
             </div>
 
-            <div className="flex items-center gap-2 pl-4 py-1">
-              <span className="text-gray-400">↓</span>
-              <span className="text-[10px] text-gray-400">スコア上位3つの順列で骨格が決まる</span>
-            </div>
-
-            {/* Step 2 */}
-            <div className="border border-gray-200 rounded-lg px-4 py-3 mb-1">
-              <p className="text-[10px] text-gray-400 tracking-wider mb-2">STEP 2 — 上位3つの神経系から60の骨格に分類</p>
-              <div className="flex items-center gap-1 mb-2">
-                {[parts[0], parts[1], parts[2]].map((k, i) => (
-                  <span key={k} className="flex items-center gap-1">
-                    {i > 0 && <span className="text-gray-400 text-xs">→</span>}
-                    <span className="text-sm font-bold px-2 py-0.5 rounded" style={{ color: NEURO_LABELS[k]?.color, backgroundColor: `${NEURO_LABELS[k]?.color}15` }}>{neuroDict[k]?.jp}</span>
-                  </span>
-                ))}
-              </div>
-              <p className="text-[10px] text-gray-500">1位が点火装置、2位が加速装置、3位が持続装置。この順番が駆動の基本構造を決定する。5つから3つを選ぶ順列（5P3 = 60通り）。</p>
-            </div>
-
-            <div className="flex items-center gap-2 pl-4 py-1">
-              <span className="text-gray-400">↓</span>
-              <span className="text-[10px] text-gray-400">スコアの偏り方で型が決まる</span>
-            </div>
-
-            {/* Step 3 */}
-            <div className="border border-gray-300 bg-gray-50 rounded-lg px-4 py-3 mb-1">
-              <p className="text-[10px] text-gray-400 tracking-wider mb-2">STEP 3 — スコアの偏りから20の型に分類</p>
-              <p className="text-base font-bold text-gray-900 mb-2">{kata?.name}</p>
-              <p className="text-[10px] text-gray-500">1位の神経系（5種）に加え、5つのスコアがどれだけ偏っているかで型が分かれる。{
-                bias === 'Single' ? '1位に極端に集中している「一点突破型」' :
-                bias === 'Dual' ? '1位と2位が突出している「二軸駆動型」' :
-                bias === 'Trinity' ? '上位3つがバランスよく高い「三位一体型」' :
-                '全体的に均等に分布している「万能拡散型」'
-              }——それがあなたの偏りパターン「{BIAS_JP[bias] || bias}」だ。</p>
-            </div>
-
-            <div className="flex items-center gap-2 pl-4 py-1">
-              <span className="text-gray-400">↓</span>
-              <span className="text-[10px] text-gray-400">加速装置（{neuroDict[parts[1]]?.jp}）と持続装置（{neuroDict[parts[2]]?.jp}）の組み合わせで疾走領域が確定</span>
-            </div>
-
-            {/* Step 4 */}
-            <div className="border border-gray-300 bg-gray-50 rounded-lg px-4 py-4 text-center">
-              <p className="text-[10px] text-gray-400 tracking-wider mb-2">YOUR DRIVE FIELD</p>
-              <p className="text-2xl font-bold text-gray-900" style={{ fontFamily: '"Noto Serif JP", "游明朝", YuMincho, serif' }}>{entry.kanji_name}</p>
-              <p className="text-xs text-gray-500 mt-1">{entry.reading} / {entry.english_name}</p>
+            {/* 右: スコア縦並び（シンプル） */}
+            <div className="space-y-2 min-w-0">
+              {(['D','S','O','N','E'] as const).map((k) => {
+                const maxVal = Math.max(...Object.values(scores));
+                const pct = maxVal > 0 ? (scores[k] / maxVal) * 100 : 0;
+                return (
+                  <div key={k} className="flex items-center gap-2">
+                    <span className="text-xs font-bold w-4 shrink-0" style={{ color: NEURO_LABELS[k].color }}>{k}</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-baseline gap-1.5 mb-0.5">
+                        <span className="text-xs text-gray-900">{NEURO_LABELS[k].jp}</span>
+                        <span className="text-sm font-bold tabular-nums ml-auto" style={{ color: NEURO_LABELS[k].color }}>{scores[k]}</span>
+                      </div>
+                      <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
+                        <div className="h-full rounded-full" style={{ width: `${pct}%`, backgroundColor: NEURO_LABELS[k].color }} />
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
-          {/* レーダーチャート */}
-          <h3 className="text-sm font-bold text-gray-900 mb-3">神経系スコア</h3>
-          <p className="text-xs text-gray-500 mb-4">
-            5つの神経系の相対的な強さ。高いほどその衝動が行動の原動力になりやすい。
-          </p>
-          <div className="flex justify-center mb-6"><RadarChart scores={scores} /></div>
-
-          {/* スコア詳細（3カラム） */}
-          <div className="grid grid-cols-3 gap-3 mb-8">
-            {(['D','S','O','N','E'] as const).map((k) => {
-              const maxVal = Math.max(...Object.values(scores));
-              const pct = maxVal > 0 ? (scores[k] / maxVal) * 100 : 0;
+          {/* 神経系優先順位カード（1st/2nd/3rd + 解説） */}
+          <h3 className="text-sm font-bold text-gray-900 mb-3">あなたの神経系優先順位</h3>
+          <div className="grid grid-cols-3 gap-3 mb-6">
+            {[
+              { rank: '1st', code: parts[0], role: '点火', comment: 'あなたの最も強い駆動源。この衝動が全ての起点になります。' },
+              { rank: '2nd', code: parts[1], role: '加速', comment: '2番目に強い神経系。点火した衝動を形にし、推進力を与えます。' },
+              { rank: '3rd', code: parts[2], role: '持続', comment: '3番目の神経系。駆動を循環させ、走り続ける力を支えます。' },
+            ].map((r) => {
+              const desc = r.code === 'D' ? '新しいことへの好奇心、未知への挑戦、可能性を追い求める衝動。' :
+                r.code === 'S' ? '物事を理解し、秩序立てて整理する力。論理と計画性。' :
+                r.code === 'O' ? '人との繋がり、共感、信頼関係を築く力。' :
+                r.code === 'N' ? '集中力と緊張感。プレッシャーの中で力を発揮する。' :
+                '快感と没入。好きなことへの没頭力と感性。';
               return (
-                <div key={k} className="border border-gray-100 rounded-lg p-3">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xs font-bold" style={{ color: NEURO_LABELS[k].color }}>{k}</span>
-                    <span className="text-2xl font-bold tabular-nums ml-auto" style={{ color: NEURO_LABELS[k].color }}>{scores[k]}</span>
-                  </div>
-                  <p className="text-xs font-bold text-gray-900 mb-2">{NEURO_LABELS[k].jp}</p>
-                  <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden mb-2">
-                    <div className="h-full rounded-full" style={{ width: `${pct}%`, backgroundColor: NEURO_LABELS[k].color }} />
-                  </div>
-                  <p className="text-[10px] text-gray-500 leading-relaxed">{
-                    k === 'D' ? '新しいことへの好奇心、未知への挑戦、可能性を追い求める衝動。' :
-                    k === 'S' ? '物事を理解し、秩序立てて整理する力。論理と計画性。' :
-                    k === 'O' ? '人との繋がり、共感、信頼関係を築く力。' :
-                    k === 'N' ? '集中力と緊張感。プレッシャーの中で力を発揮する。' :
-                    '快感と没入。好きなことへの没頭力と感性。'
-                  }</p>
+                <div key={r.rank} className="border border-gray-200 rounded-xl p-4 bg-gray-50/50 text-center">
+                  <p className="text-2xl font-bold text-gray-200 mb-1">{r.rank}</p>
+                  <p className="text-lg font-bold" style={{ color: NEURO_LABELS[r.code]?.color }}>{scores[r.code]}</p>
+                  <p className="text-base font-bold mb-1" style={{ color: NEURO_LABELS[r.code]?.color }}>{neuroDict[r.code]?.jp}</p>
+                  <p className="text-[10px] text-gray-500 mb-2">{neuroDict[r.code]?.desc}</p>
+                  <span className="text-[10px] px-2 py-0.5 rounded-full mb-2 inline-block" style={{ color: NEURO_LABELS[r.code]?.color, backgroundColor: `${NEURO_LABELS[r.code]?.color}15` }}>{r.role}</span>
+                  <p className="text-[10px] text-gray-500 leading-relaxed mt-2">{desc}</p>
+                  <p className="text-[10px] font-bold leading-relaxed mt-1" style={{ color: NEURO_LABELS[r.code]?.color }}>{r.comment}</p>
                 </div>
               );
             })}
@@ -612,260 +585,405 @@ export default async function ResultPage({
             同じ骨格・同じ型でも、エンジンのかかり方と出力の大きさは人によって異なる。以下の3つの特性があなたの「走り方」を決定する。
           </p>
           <div className="grid grid-cols-3 gap-3">
-            {(ignition || pattern) && (
-              <div className="border border-gray-100 rounded-lg p-3">
-                <p className="text-[10px] text-gray-400 mb-1">発動方向</p>
-                <p className="text-lg font-bold text-gray-900 mb-2">{ignition || pattern?.ignition_label}</p>
-                <p className="text-[10px] text-gray-500 leading-relaxed">{
-                  (pattern?.ignition || 'external') === 'external'
-                    ? '外部の刺激や環境変化でエンジンがかかる。巻き込まれた方が火が点きやすい。'
-                    : '内側の納得感やビジョンでエンジンがかかる。自分で決めたら止まらない。'
-                }</p>
-              </div>
-            )}
-            {(timing || pattern) && (
-              <div className="border border-gray-100 rounded-lg p-3">
-                <p className="text-[10px] text-gray-400 mb-1">時間特性</p>
-                <p className="text-lg font-bold text-gray-900 mb-2">{timing || pattern?.time_character_label}</p>
-                <p className="text-[10px] text-gray-500 leading-relaxed">{
-                  (pattern?.time_character || 'burst') === 'burst'
-                    ? '立ち上がりが速い。短期集中で成果を出し、休んでまた走るリズム。'
-                    : 'じわじわ温まるが、回り始めると深く安定。助走期間の確保が鍵。'
-                }</p>
-              </div>
-            )}
-            {(output || pattern) && (
-              <div className="border border-gray-100 rounded-lg p-3">
-                <p className="text-[10px] text-gray-400 mb-1">出力</p>
-                <p className="text-lg font-bold text-gray-900 mb-2">{OUTPUT_JP[output || pattern?.output_level || ''] || output || pattern?.output_level}</p>
-                <p className="text-[10px] text-gray-500 leading-relaxed">{
-                  (pattern?.output_level || 'Middle') === 'Light'
-                    ? '小さく起動しやすく安定。爆発力より持続性に優れる。' :
-                  pattern?.output_level === 'Over'
-                    ? 'ハマると圧倒的だがドレインも大きい。エネルギー管理が重要。'
-                    : '再現性と推進力のバランスが良い。最もコントロールしやすい。'
-                }</p>
-              </div>
-            )}
+            {/* 発動方向 */}
+            <div className="border border-gray-200 rounded-xl p-4 bg-gray-50/50">
+              <p className="text-[10px] text-gray-400 mb-2 flex items-center gap-1"><Flame size={12} />発動方向</p>
+              {(() => {
+                const isExternal = (pattern?.ignition || 'external') === 'external';
+                return (
+                  <>
+                    <div className="flex items-baseline gap-1.5 mb-2">
+                      <span className={`text-base font-bold ${isExternal ? 'text-gray-900' : 'text-gray-300'}`}>外燃</span>
+                      <span className="text-gray-300">/</span>
+                      <span className={`text-base font-bold ${!isExternal ? 'text-gray-900' : 'text-gray-300'}`}>内燃</span>
+                    </div>
+                    <p className="text-[10px] text-gray-500 leading-relaxed">{
+                      isExternal
+                        ? '外部の刺激や環境変化でエンジンがかかる。巻き込まれた方が火が点きやすい。'
+                        : '内側の納得感やビジョンでエンジンがかかる。自分で決めたら止まらない。'
+                    }</p>
+                  </>
+                );
+              })()}
+            </div>
+
+            {/* 時間特性 */}
+            <div className="border border-gray-200 rounded-xl p-4 bg-gray-50/50">
+              <p className="text-[10px] text-gray-400 mb-2 flex items-center gap-1"><Clock size={12} />時間特性</p>
+              {(() => {
+                const isBurst = (pattern?.time_character || 'burst') === 'burst';
+                return (
+                  <>
+                    <div className="flex items-baseline gap-1.5 mb-2">
+                      <span className={`text-base font-bold ${isBurst ? 'text-gray-900' : 'text-gray-300'}`}>瞬発</span>
+                      <span className="text-gray-300">/</span>
+                      <span className={`text-base font-bold ${!isBurst ? 'text-gray-900' : 'text-gray-300'}`}>熟成</span>
+                    </div>
+                    <p className="text-[10px] text-gray-500 leading-relaxed">{
+                      isBurst
+                        ? '立ち上がりが速い。短期集中で成果を出し、休んでまた走るリズム。'
+                        : 'じわじわ温まるが、回り始めると深く安定。助走期間の確保が鍵。'
+                    }</p>
+                  </>
+                );
+              })()}
+            </div>
+
+            {/* 出力 */}
+            <div className="border border-gray-200 rounded-xl p-4 bg-gray-50/50">
+              <p className="text-[10px] text-gray-400 mb-2 flex items-center gap-1"><Zap size={12} />出力</p>
+              {(() => {
+                const level = pattern?.output_level || 'Middle';
+                return (
+                  <>
+                    <div className="flex items-baseline gap-1.5 mb-2">
+                      <span className={`text-base font-bold ${level === 'Light' ? 'text-gray-900' : 'text-gray-300'}`}>低</span>
+                      <span className="text-gray-300">/</span>
+                      <span className={`text-base font-bold ${level === 'Middle' ? 'text-gray-900' : 'text-gray-300'}`}>中</span>
+                      <span className="text-gray-300">/</span>
+                      <span className={`text-base font-bold ${level === 'Over' ? 'text-gray-900' : 'text-gray-300'}`}>高</span>
+                    </div>
+                    <p className="text-[10px] text-gray-500 leading-relaxed">{
+                      level === 'Light'
+                        ? '小さく起動しやすく安定。爆発力より持続性に優れる。' :
+                      level === 'Over'
+                        ? 'ハマると圧倒的だがドレインも大きい。エネルギー管理が重要。'
+                        : '再現性と推進力のバランスが良い。最もコントロールしやすい。'
+                    }</p>
+                  </>
+                );
+              })()}
+            </div>
           </div>
+
+          {/* 診断結果の総括 */}
+          <h3 className="text-sm font-bold text-gray-900 mt-8 mb-3">あなたの駆動構造</h3>
+          <p className="text-sm text-gray-600 leading-[1.9] mb-4">
+            あなたの診断では、{neuroDict[parts[0]]?.jp}（{neuroDict[parts[0]]?.desc}）が最も高いスコアを記録しました。これがあなたの駆動の起点——点火装置です。{neuroDict[parts[1]]?.jp}（{neuroDict[parts[1]]?.desc}）が2番目に高く加速装置として機能し、{neuroDict[parts[2]]?.jp}（{neuroDict[parts[2]]?.desc}）が3番目に続いて駆動を循環させます。
+          </p>
+          <p className="text-sm text-gray-600 leading-[1.9] mb-4">
+            偏りは「{BIAS_JP[bias] || bias}」。{BIAS_STYLE[bias]?.strength}。一方で、{BIAS_STYLE[bias]?.risk}。
+          </p>
+          <p className="text-sm text-gray-600 leading-[1.9] mb-4">
+            発動方向は{pattern?.ignition_label}——{pattern?.ignition_desc}。時間特性は{pattern?.time_character_label}で、{pattern?.time_character_desc}。出力は{OUTPUT_JP[pattern?.output_level || ''] || pattern?.output_level}。
+          </p>
+          <p className="text-sm text-gray-600 leading-[1.9]">
+            この神経系の優先順位、偏り、駆動特性の組み合わせが、あなたの「動き方の癖」そのものを形作っています。これは性格ではなく「駆動構造」——何によって火が点き、何によって走り続け、何によって止まるかの設計図です。
+          </p>
         </Chapter>
 
         {/* ═══ 第三章：あなたの型 ═══ */}
         {kata && pattern && (
           <Chapter id="sec-type" num="02" title={`${kata.name} — ${entry.kanji_name}`} en="YOUR TYPE">
-            <p className="text-sm text-gray-600 leading-[1.9] mb-4">
-              {kata.name}には12の疾走領域が存在する。同じ型でも、2位と3位に何が入るかで駆動の質が大きく変わるからだ。
+            <p className="text-lg font-bold text-gray-800 leading-relaxed mb-6 border-l-4 pl-4" style={{ borderColor: NEURO_LABELS[rank1]?.color }}>
+              {pattern?.interpretation || `${neuroDict[parts[0]]?.desc}を起点に${neuroDict[parts[1]]?.desc}で加速する${BIAS_JP[bias] || bias}ドライブ`}
             </p>
-            <p className="text-sm text-gray-600 leading-[1.9] mb-4">
-              あなたの場合、加速装置に<span className="font-bold" style={{ color: NEURO_LABELS[parts[1]]?.color }}>{neuroDict[parts[1]]?.jp}（{neuroDict[parts[1]]?.desc}）</span>、持続装置に<span className="font-bold" style={{ color: NEURO_LABELS[parts[2]]?.color }}>{neuroDict[parts[2]]?.jp}（{neuroDict[parts[2]]?.desc}）</span>が入る。つまり、{neuroDict[parts[0]]?.jp}で点火した衝動を、{neuroDict[parts[1]]?.jp}が形にし、{neuroDict[parts[2]]?.jp}が回し続ける——この固有の駆動サイクルが「{entry.kanji_name}」という疾走領域を生み出している。
-            </p>
-            <p className="text-sm text-gray-600 leading-[1.9] mb-4">
-              もし2位が{neuroDict[parts[1]]?.jp}ではなく別の神経系だったなら、加速の仕方が変わり、全く異なる疾走領域になっていた。同様に、3位が{neuroDict[parts[2]]?.jp}でなければ、持続の仕組みが変わり、走り方の質そのものが違っていた。
-            </p>
-            <p className="text-sm text-gray-500 leading-[1.9] mb-8 italic border-l-2 border-gray-200 pl-4">{
-              entry.naming_reason
-                .split('。')
-                .filter((s) => !s.includes('優先漢字') && !s.includes('使用漢字'))
-                .join('。')
-                .replace(/。$/, '') + '。'
-            }</p>
 
-            <h3 className="text-sm font-bold text-gray-900 mb-2">あなたの神経系優先順位</h3>
-            <div className="grid grid-cols-3 gap-3 mb-6">
-              {[{ rank: '1st', code: parts[0], role: '点火' }, { rank: '2nd', code: parts[1], role: '加速' }, { rank: '3rd', code: parts[2], role: '持続' }].map((r) => (
-                <div key={r.rank} className="border border-gray-100 rounded-lg p-3 text-center">
-                  <p className="text-2xl font-bold text-gray-200 mb-1">{r.rank}</p>
-                  <p className="text-base font-bold mb-1" style={{ color: NEURO_LABELS[r.code]?.color }}>{neuroDict[r.code]?.jp}</p>
-                  <p className="text-[10px] text-gray-500 mb-2">{neuroDict[r.code]?.desc}</p>
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-600">{r.role}</span>
+            <p className="text-sm text-gray-600 leading-[1.9] mb-4">
+              {kata.name}には12の疾走領域が存在します。同じ型でも、2位と3位に何が入るかで駆動の質が大きく変わるからです。
+            </p>
+            <p className="text-sm text-gray-600 leading-[1.9] mb-4">
+              あなたの場合、加速装置に<span className="font-bold" style={{ color: NEURO_LABELS[parts[1]]?.color }}>{neuroDict[parts[1]]?.jp}（{neuroDict[parts[1]]?.desc}）</span>、持続装置に<span className="font-bold" style={{ color: NEURO_LABELS[parts[2]]?.color }}>{neuroDict[parts[2]]?.jp}（{neuroDict[parts[2]]?.desc}）</span>が入ります。{neuroDict[parts[0]]?.jp}で点火した衝動を、{neuroDict[parts[1]]?.jp}が形にし、{neuroDict[parts[2]]?.jp}が回し続ける——この固有の駆動サイクルが「{entry.kanji_name}」という疾走領域を生み出しています。
+            </p>
+            <p className="text-sm text-gray-600 leading-[1.9] mb-8">
+              もし2位が{neuroDict[parts[1]]?.jp}ではなく別の神経系だったなら、加速の仕方が変わり、全く異なる疾走領域になっていました。同様に、3位が{neuroDict[parts[2]]?.jp}でなければ、持続の仕組みが変わり、走り方の質そのものが違っていたはずです。
+            </p>
+
+
+            {/* 診断のプロセスフロー */}
+            <h3 className="text-sm font-bold text-gray-900 mb-2">診断のプロセス</h3>
+            <p className="text-xs text-gray-500 leading-relaxed mb-6">
+              疾走領域（Drive Field）は、5つの神経系スコアから段階的にあなた固有の疾走領域を絞り込みます。各段階で何が決まるかを以下に示します。
+            </p>
+
+            <div className="mb-4 border border-gray-200 rounded-xl p-5 bg-gray-50/50">
+              {[
+                {
+                  num: '01', title: '5つの神経系を診断', color: '#6b7280',
+                  content: (
+                    <>
+                      <div className="flex flex-wrap gap-2 mb-2">
+                        {['D','S','O','N','E'].map((k) => (
+                          <span key={k} className="text-xs font-bold px-2 py-0.5 rounded" style={{ color: NEURO_LABELS[k].color, backgroundColor: `${NEURO_LABELS[k].color}15` }}>{k} {NEURO_LABELS[k].jp}</span>
+                        ))}
+                      </div>
+                      <p className="text-xs text-gray-500">52の問いから5つの神経系スコアを算出します。</p>
+                    </>
+                  ),
+                  connector: 'スコア上位3つの順列で骨格が決まる',
+                },
+                {
+                  num: '02', title: '全60の骨格から選定', color: NEURO_LABELS[parts[0]]?.color || '#6b7280',
+                  content: (
+                    <>
+                      <div className="flex items-center gap-3 mb-2">
+                        {[parts[0], parts[1], parts[2]].map((k, i) => (
+                          <span key={k} className="flex items-center gap-1">
+                            {i > 0 && <span className="text-gray-300">-</span>}
+                            <span className="text-base font-bold" style={{ color: NEURO_LABELS[k]?.color }}>{k}</span>
+                            <span className="text-xs text-gray-500">{neuroDict[k]?.jp}</span>
+                          </span>
+                        ))}
+                      </div>
+                      <p className="text-xs text-gray-500">1位が点火、2位が加速、3位が持続。この順番が駆動構造を決定します。</p>
+                    </>
+                  ),
+                  connector: 'スコアの偏り方で型が決まる',
+                },
+                {
+                  num: '03', title: '全20種の型から選定', color: NEURO_LABELS[parts[0]]?.color || '#6b7280',
+                  content: (
+                    <>
+                      <p className="text-base font-bold text-gray-900 mb-1">{kata?.name}</p>
+                      <p className="text-xs text-gray-500">{
+                        bias === 'Single' ? '1位に極端に集中している「一点突破型」' :
+                        bias === 'Dual' ? '1位と2位が突出している「二軸駆動型」' :
+                        bias === 'Trinity' ? '上位3つがバランスよく高い「三位一体型」' :
+                        '全体的に均等に分布している「万能拡散型」'
+                      }——偏りパターンは「{BIAS_JP[bias] || bias}」。</p>
+                    </>
+                  ),
+                  connector: `${neuroDict[parts[1]]?.jp}（加速）と${neuroDict[parts[2]]?.jp}（持続）の組み合わせで確定`,
+                },
+                {
+                  num: '04', title: 'あなたの疾走領域', color: NEURO_LABELS[parts[0]]?.color || '#6b7280',
+                  content: (
+                    <>
+                      <p className="text-base font-bold text-gray-900">{entry.kanji_name}</p>
+                      <p className="text-xs text-gray-500 mb-2">{entry.reading} / {entry.english_name}</p>
+                      <p className="text-xs text-gray-500">{neuroDict[parts[0]]?.jp}（{neuroDict[parts[0]]?.desc}）を点火に、{neuroDict[parts[1]]?.jp}（{neuroDict[parts[1]]?.desc}）で加速、{neuroDict[parts[2]]?.jp}（{neuroDict[parts[2]]?.desc}）で持続する{BIAS_JP[bias] || bias}の駆動構造から導出。</p>
+                    </>
+                  ),
+                  connector: null,
+                },
+              ].map((step, i, arr) => (
+                <div key={step.num} className="flex gap-4">
+                  <div className="flex flex-col items-center shrink-0">
+                    <div className="w-9 h-9 rounded-full border-2 flex items-center justify-center text-xs font-bold text-white" style={{ borderColor: step.color, backgroundColor: step.color }}>{step.num}</div>
+                    {i < arr.length - 1 && <div className="w-px flex-1 min-h-[24px] bg-gray-200" />}
+                  </div>
+                  <div className="flex-1 pb-6">
+                    <p className="text-sm font-bold text-gray-900 mb-2 mt-1.5">{step.title}</p>
+                    {step.content}
+                    {step.connector && <p className="text-[10px] text-gray-400 mt-3">{step.connector}</p>}
+                  </div>
                 </div>
               ))}
             </div>
-            <p className="text-sm text-gray-800 leading-[1.9] mb-6">{buildKataDescription(parts[0], parts[1], parts[2], bias)}</p>
-            <p className="text-sm text-gray-600 leading-[1.9]">偏りは「{BIAS_JP[bias] || bias}」。{pattern.bias_interpretation}</p>
           </Chapter>
         )}
 
         {/* ═══ 第四章：あなたの人物像 ═══ */}
         {interp && (
           <Chapter id="sec-profile" num="03" title="あなたの人物像" en="PROFILE">
-            <p className="text-xs text-gray-400 leading-relaxed mb-6">
-              診断結果から読み解いた、あなたの駆動構造が日常にどう現れるか。仕事、人間関係、日常生活のそれぞれについて解説する。
+            <p className="text-lg font-bold text-gray-800 leading-relaxed mb-6 border-l-4 pl-4" style={{ borderColor: NEURO_LABELS[rank1]?.color }}>
+              {interp.awakened_vibe}
             </p>
 
-            <h3 className="text-sm font-bold text-gray-900 mb-2">あなたの駆動の特徴</h3>
+            <h3 className="text-sm font-bold text-gray-900 mb-2 flex items-center gap-2"><Activity size={20} className="text-gray-400" />あなたの駆動の特徴</h3>
             <p className="text-sm text-gray-800 leading-[1.9] mb-6">{interp.structural_interpretation}</p>
 
-            <h3 className="text-sm font-bold text-gray-900 mb-2">あなたの神経系の掛け算</h3>
-            <p className="text-sm text-gray-800 leading-[1.9] mb-8">{profile.comboInsight}</p>
-
-            <h3 className="text-sm font-bold text-gray-900 mb-2">発動スタイル</h3>
+            <h3 className="text-sm font-bold text-gray-900 mb-2 flex items-center gap-2"><Rocket size={20} className="text-gray-400" />発動スタイル</h3>
             <p className="text-sm text-gray-600 leading-[1.9] mb-4">{profile.ignitionStyle}</p>
             <p className="text-sm text-gray-600 leading-[1.9] mb-8">{profile.timingStyle}</p>
 
-            <h3 className="text-sm font-bold text-gray-900 mb-2">仕事での傾向</h3>
+            <h3 className="text-sm font-bold text-gray-900 mb-2 flex items-center gap-2"><Briefcase size={20} className="text-gray-400" />仕事での傾向</h3>
             <p className="text-sm text-gray-600 leading-[1.9] mb-8">{profile.workStyle}</p>
 
-            <h3 className="text-sm font-bold text-gray-900 mb-2">人間関係の傾向</h3>
+            <h3 className="text-sm font-bold text-gray-900 mb-2 flex items-center gap-2"><Users size={20} className="text-gray-400" />人間関係の傾向</h3>
             <p className="text-sm text-gray-600 leading-[1.9] mb-8">{profile.relationship}</p>
 
-            <h3 className="text-sm font-bold text-gray-900 mb-2">日常生活の傾向</h3>
+            <h3 className="text-sm font-bold text-gray-900 mb-2 flex items-center gap-2"><Coffee size={20} className="text-gray-400" />日常生活の傾向</h3>
             <p className="text-sm text-gray-600 leading-[1.9] mb-8">{profile.daily}</p>
 
-            <h3 className="text-sm font-bold text-gray-900 mb-2">覚醒時のあなた</h3>
-            <p className="text-sm text-gray-800 leading-[1.9] italic border-l border-gray-200 pl-4">{interp.awakened_vibe}</p>
           </Chapter>
         )}
 
         {/* ═══ 第五章：起動マニュアル ═══ */}
         {pattern && interp && (
-          <Chapter id="sec-startup" num="04" title="起動マニュアル" en="IGNITION">
+          <Chapter id="sec-startup" num="04" title={`${entry.kanji_name}の起動マニュアル`} en="IGNITION">
             <p className="text-sm text-gray-600 leading-[1.9] mb-6">
               あなたの疾走領域は、{neuroDict[parts[0]]?.jp}の「{neuroDict[parts[0]]?.desc}」で点火し、{neuroDict[parts[1]]?.jp}の「{neuroDict[parts[1]]?.desc}」で加速し、{neuroDict[parts[2]]?.jp}の「{neuroDict[parts[2]]?.desc}」で持続する。この3ステップが揃ったとき、あなたの駆動は最も自然に、最も力強く回り始める。逆に言えば、どれか一つが欠けるだけで疾走領域は発動しない。
             </p>
 
-            <AdviceCard label={`TRIGGER — 点火（${neuroDict[parts[0]]?.jp}）`} color={NEURO_LABELS[parts[0]]?.color || '#f87171'}>
-              <p className="mb-3">{pattern.trigger_core}</p>
-              <p className="text-xs text-gray-500 mb-1">具体的には：</p>
-              <p className="mb-3">{interp.trigger}</p>
-              <p className="text-xs text-gray-500 mb-1">仕事で点火するには：</p>
-              <p>{workAdv?.trigger}</p>
-            </AdviceCard>
+            {[
+              { label: 'TRIGGER', role: '点火', neuro: parts[0], core: pattern.trigger_core, example: interp.trigger, work: workAdv?.trigger, life: lifeAdv?.trigger },
+              { label: 'ACCELERATOR', role: '加速', neuro: parts[1], core: pattern.accelerator_core, example: interp.accelerator, work: workAdv?.accelerator, life: lifeAdv?.sustain },
+              { label: 'SUSTAIN', role: '持続', neuro: parts[2], core: pattern.sustain_core, example: interp.sustain, work: workAdv?.sustain, life: lifeAdv?.sustain },
+            ].map((step) => (
+              <div key={step.label} className="border border-gray-200 rounded-xl bg-gray-50/50 p-5 mb-4">
+                {/* ヘッダー */}
+                <div className="flex items-center gap-2 mb-3">
+                  <CheckCircle size={22} style={{ color: NEURO_LABELS[step.neuro]?.color }} />
+                  <p className="text-sm font-bold text-gray-900">{step.label} — {step.role}（{neuroDict[step.neuro]?.jp}）</p>
+                </div>
 
-            <AdviceCard label={`ACCELERATOR — 加速（${neuroDict[parts[1]]?.jp}）`} color={NEURO_LABELS[parts[1]]?.color || '#facc15'}>
-              <p className="mb-3">{pattern.accelerator_core}</p>
-              <p className="text-xs text-gray-500 mb-1">具体的には：</p>
-              <p className="mb-3">{interp.accelerator}</p>
-              <p className="text-xs text-gray-500 mb-1">仕事で加速するには：</p>
-              <p>{workAdv?.accelerator}</p>
-            </AdviceCard>
+                {/* 概要 */}
+                <p className="text-sm text-gray-700 leading-[1.9] mb-4">{step.core}</p>
 
-            <AdviceCard label={`SUSTAIN — 持続（${neuroDict[parts[2]]?.jp}）`} color={NEURO_LABELS[parts[2]]?.color || '#60a5fa'}>
-              <p className="mb-3">{pattern.sustain_core}</p>
-              <p className="text-xs text-gray-500 mb-1">具体的には：</p>
-              <p className="mb-3">{interp.sustain}</p>
-              <p className="text-xs text-gray-500 mb-1">仕事で持続するには：</p>
-              <p>{workAdv?.sustain}</p>
-            </AdviceCard>
+                {/* 具体例 */}
+                <p className="text-xs text-gray-500 leading-relaxed mb-4 border-l-2 pl-3" style={{ borderColor: NEURO_LABELS[step.neuro]?.color }}>
+                  {step.example}
+                </p>
 
-            <p className="text-[10px] text-gray-500 tracking-wider mb-3 mt-8">発動特性</p>
-            <p className="text-sm text-gray-600 leading-[1.9] mb-4">
-              あなたは{pattern.ignition_label}（{pattern.ignition_desc}）で、{pattern.time_character_label}（{pattern.time_character_desc}）タイプ。出力は{OUTPUT_JP[pattern.output_level] || pattern.output_level}で、{pattern.output_interpretation}
-            </p>
-            <div className="grid grid-cols-2 gap-3 mb-4">
-              <div className="bg-gray-50 border border-white/[0.06] rounded-lg p-3">
-                <h3 className="text-sm font-bold text-gray-900 mb-2">発動方向</h3>
-                <p className="text-base font-bold text-gray-900">{pattern.ignition_label}</p>
+                {/* 仕事 / プライベート 2カラム */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="bg-white rounded-lg p-3">
+                    <p className="text-[10px] text-gray-400 flex items-center gap-1 mb-2"><Briefcase size={12} />仕事で{step.role}するには</p>
+                    <p className="text-xs text-gray-600 leading-relaxed">{step.work}</p>
+                  </div>
+                  <div className="bg-white rounded-lg p-3">
+                    <p className="text-[10px] text-gray-400 flex items-center gap-1 mb-2"><Home size={12} />プライベートで{step.role}するには</p>
+                    <p className="text-xs text-gray-600 leading-relaxed">{step.life}</p>
+                  </div>
+                </div>
               </div>
-              <div className="bg-gray-50 border border-white/[0.06] rounded-lg p-3">
-                <h3 className="text-sm font-bold text-gray-900 mb-2">時間特性</h3>
-                <p className="text-base font-bold text-gray-900">{pattern.time_character_label}</p>
-              </div>
-            </div>
-
-            <p className="text-xs text-gray-500 mb-1 mt-6">日常で点火するには：</p>
-            <p className="text-sm text-gray-600 leading-relaxed">{lifeAdv?.trigger}</p>
+            ))}
           </Chapter>
         )}
 
         {/* ═══ 第六章：覚醒条件 ═══ */}
         {pattern && workAdv && lifeAdv && (
-          <Chapter id="sec-awakening" num="05" title="覚醒条件" en="AWAKENING">
+          <Chapter id="sec-awakening" num="05" title={`${entry.kanji_name}の覚醒条件`} en="AWAKENING">
+            <p className="text-lg font-bold text-gray-800 leading-relaxed mb-6 border-l-4 pl-4" style={{ borderColor: NEURO_LABELS[rank1]?.color }}>
+              {pattern.awakening_condition}
+            </p>
+
             <p className="text-sm text-gray-600 leading-[1.9] mb-6">
               覚醒とは、あなたの{neuroDict[parts[0]]?.jp}・{neuroDict[parts[1]]?.jp}・{neuroDict[parts[2]]?.jp}の3つの神経系が同時に最大出力で回っている状態のことだ。この状態に入ると、あなたは普段の数倍のパフォーマンスを発揮し、時間の感覚さえ失う。問題は、この3つが同時に揃う環境を意識的に作れるかどうかだ。
             </p>
-
-            <div className="border border-gray-200 bg-gray-50 rounded-lg p-4 mb-6">
-              <p className="text-base font-bold text-gray-900 mb-2 flex items-center gap-2"><Sparkles size={18} />全てを揃えよ</p>
-              <p className="text-sm text-gray-600 leading-relaxed">{pattern.awakening_condition}</p>
-            </div>
 
             <p className="text-sm text-gray-600 leading-[1.9] mb-6">
               {neuroDict[parts[0]]?.jp}が求める「{neuroDict[parts[0]]?.desc}」、{neuroDict[parts[1]]?.jp}が求める「{neuroDict[parts[1]]?.desc}」、{neuroDict[parts[2]]?.jp}が求める「{neuroDict[parts[2]]?.desc}」——この3つが一つでも欠けると、駆動は最大出力に達しない。覚醒は偶然ではなく、環境設計で再現できる。
             </p>
 
-            <AdviceCard icon={<Briefcase size={12} />} label="仕事で覚醒するには" color="#6b7280">
-              <p>{awakeningAdvice.work}</p>
-            </AdviceCard>
-
-            <AdviceCard icon={<Home size={12} />} label="プライベートで覚醒するには" color="#6b7280">
-              <p>{awakeningAdvice.life}</p>
-            </AdviceCard>
-
-            <AdviceCard icon={<RefreshCw size={12} />} label="日常で持続させるには" color="#6b7280">
-              <p>{awakeningAdvice.daily}</p>
-            </AdviceCard>
+            {[
+              {
+                icon: <Briefcase size={20} className="text-gray-400" />,
+                title: '仕事で覚醒するには',
+                summary: `${neuroDict[parts[0]]?.desc}が満たされる環境で${pattern?.time_character_label === '瞬発' ? '短期集中' : 'じっくり没頭'}するスタイルが覚醒の鍵`,
+                body: awakeningAdvice.work,
+              },
+              {
+                icon: <Home size={20} className="text-gray-400" />,
+                title: 'プライベートで覚醒するには',
+                summary: `${pattern?.ignition_label === '外燃' ? '外に出て新しい刺激を取り入れる' : '内なる衝動に従い質の高い時間をつくる'}ことが起点`,
+                body: awakeningAdvice.life,
+              },
+              {
+                icon: <RefreshCw size={20} className="text-gray-400" />,
+                title: '日常で持続させるには',
+                summary: `${neuroDict[parts[0]]?.jp}・${neuroDict[parts[1]]?.jp}・${neuroDict[parts[2]]?.jp}を「毎日・毎週・毎月」の3層で満たす`,
+                body: awakeningAdvice.daily,
+              },
+            ].map((item) => (
+              <div key={item.title} className="border border-gray-200 rounded-xl bg-gray-50/50 p-5 mb-4">
+                <div className="flex items-center gap-2 mb-1">
+                  {item.icon}
+                  <p className="text-sm font-bold text-gray-900">{item.title}</p>
+                </div>
+                <p className="text-xs font-bold mb-3" style={{ color: NEURO_LABELS[rank1]?.color }}>{item.summary}</p>
+                <p className="text-sm text-gray-700 leading-[1.9]">{item.body}</p>
+              </div>
+            ))}
           </Chapter>
         )}
 
         {/* ═══ 第七章：ドレイン条件 ═══ */}
         {pattern && interp && workAdv && lifeAdv && (
-          <Chapter id="sec-drain" num="06" title="警告 — ドレイン条件" en="DRAIN">
+          <Chapter id="sec-drain" num="06" title={`${entry.kanji_name}のドレイン条件`} en="DRAIN">
+            <p className="text-lg font-bold text-gray-800 leading-relaxed mb-6 border-l-4 pl-4" style={{ borderColor: NEURO_LABELS[rank1]?.color }}>
+              {pattern.drain_condition}
+            </p>
+
             <p className="text-sm text-gray-600 leading-[1.9] mb-6">
               ドレインとは、あなたの{neuroDict[parts[0]]?.jp}が求めるものが長期間得られず、駆動が空回りし続ける状態のことだ。最初は「なんとなく調子が出ない」程度だが、放置すると{neuroDict[parts[1]]?.jp}と{neuroDict[parts[2]]?.jp}の機能まで連鎖的に低下し、やがて何をしても動けなくなる。以下の兆候に心当たりがあるなら、すでにドレインが始まっている可能性がある。
             </p>
 
-            <div className="border border-gray-200 bg-gray-50 rounded-lg p-4 mb-6">
-              <p className="text-base font-bold text-gray-900 mb-2 flex items-center gap-2"><AlertTriangle size={18} />これを避けよ</p>
-              <p className="text-sm text-gray-600 leading-relaxed">{pattern.drain_condition}</p>
-            </div>
-
-            <h3 className="text-sm font-bold text-gray-900 mb-2">破綻のシナリオ</h3>
+            <h3 className="text-sm font-bold text-gray-900 mb-2 flex items-center gap-2"><AlertTriangle size={20} className="text-gray-400" />破綻のシナリオ</h3>
             <p className="text-sm text-gray-600 leading-[1.9] mb-6">{interp.breakdown}</p>
 
-            <AdviceCard icon={<Briefcase size={12} />} label="仕事でのドレイン兆候と対策" color="#6b7280">
-              <p className="mb-3">{workAdv.drain}</p>
-              <p className="text-xs text-gray-500 mb-1">こんな状態が2週間以上続いたら危険信号：</p>
-              <p>朝の出勤が異常に辛い、得意だったはずの仕事に手がつかない、同僚との会話が億劫になる——これらは{neuroDict[parts[0]]?.jp}の枯渇サインだ。我慢して走り続けるのではなく、一度立ち止まって環境を見直す必要がある。</p>
-            </AdviceCard>
-
-            <AdviceCard icon={<Home size={12} />} label="プライベートでのドレイン兆候と対策" color="#6b7280">
-              <p className="mb-3">{lifeAdv.drain}</p>
-              <p className="text-xs text-gray-500 mb-1">こんな状態が続いたら要注意：</p>
-              <p>休日なのに何もする気が起きない、好きだったことに興味が持てない、人と会うのが面倒になる——これらは{neuroDict[parts[0]]?.jp}だけでなく、{neuroDict[parts[2]]?.jp}の循環も止まっているサインだ。次の回復マニュアルに従って、順番に回復させていく必要がある。</p>
-            </AdviceCard>
+            {[
+              {
+                icon: <Briefcase size={20} className="text-gray-400" />,
+                title: '仕事でのドレイン兆候と対策',
+                summary: `${neuroDict[parts[0]]?.jp}の枯渇が最初のサイン——我慢せず環境を見直せ`,
+                body: <><p className="mb-3">{workAdv.drain}</p><p className="text-xs text-gray-500 mb-1">こんな状態が2週間以上続いたら危険信号：</p><p>朝の出勤が異常に辛い、得意だったはずの仕事に手がつかない、同僚との会話が億劫になる——これらは{neuroDict[parts[0]]?.jp}の枯渇サインだ。</p></>,
+              },
+              {
+                icon: <Home size={20} className="text-gray-400" />,
+                title: 'プライベートでのドレイン兆候と対策',
+                summary: `休日に何もできない状態は${neuroDict[parts[2]]?.jp}の循環停止のサイン`,
+                body: <><p className="mb-3">{lifeAdv.drain}</p><p className="text-xs text-gray-500 mb-1">こんな状態が続いたら要注意：</p><p>休日なのに何もする気が起きない、好きだったことに興味が持てない、人と会うのが面倒になる——これらは{neuroDict[parts[0]]?.jp}だけでなく、{neuroDict[parts[2]]?.jp}の循環も止まっているサインだ。</p></>,
+              },
+            ].map((item) => (
+              <div key={item.title} className="border border-gray-200 rounded-xl bg-gray-50/50 p-5 mb-4">
+                <div className="flex items-center gap-2 mb-1">
+                  {item.icon}
+                  <p className="text-sm font-bold text-gray-900">{item.title}</p>
+                </div>
+                <p className="text-xs font-bold mb-3" style={{ color: NEURO_LABELS[rank1]?.color }}>{item.summary}</p>
+                <div className="text-sm text-gray-700 leading-[1.9]">{item.body}</div>
+              </div>
+            ))}
           </Chapter>
         )}
 
         {/* ═══ 第八章：回復マニュアル ═══ */}
         {pattern && interp && workAdv && lifeAdv && (
-          <Chapter id="sec-recovery" num="07" title="回復マニュアル" en="RECOVERY">
+          <Chapter id="sec-recovery" num="07" title={`${entry.kanji_name}の回復マニュアル`} en="RECOVERY">
+            <p className="text-lg font-bold text-gray-800 leading-relaxed mb-6 border-l-4 pl-4" style={{ borderColor: NEURO_LABELS[rank1]?.color }}>
+              {pattern.recovery_condition}
+            </p>
+
             <p className="text-sm text-gray-600 leading-[1.9] mb-6">
               ドレイン状態からの回復には順番がある。まず{neuroDict[parts[0]]?.jp}（{neuroDict[parts[0]]?.desc}）を回復させ、次に{neuroDict[parts[1]]?.jp}（{neuroDict[parts[1]]?.desc}）を立ち上げ、最後に{neuroDict[parts[2]]?.jp}（{neuroDict[parts[2]]?.desc}）を繋げる。この順番を間違えると回復が遅れる。2位や3位からいくら頑張っても、1位の{neuroDict[parts[0]]?.jp}が枯れたままでは駆動は再起動しない。
             </p>
 
-            <div className="border border-gray-200 bg-gray-50 rounded-lg p-4 mb-6">
-              <p className="text-base font-bold text-gray-900 mb-2 flex items-center gap-2"><Wrench size={18} />この順で戻せ</p>
-              <p className="text-sm text-gray-600 leading-relaxed">{pattern.recovery_condition}</p>
-            </div>
-
-            <h3 className="text-sm font-bold text-gray-900 mb-2">回復の起点</h3>
+            <h3 className="text-sm font-bold text-gray-900 mb-2 flex items-center gap-2"><Wrench size={20} className="text-gray-400" />回復の起点</h3>
             <p className="text-sm text-gray-600 leading-[1.9] mb-6">{interp.recovery}</p>
 
-            <AdviceCard label={`ステップ1：まず${neuroDict[parts[0]]?.jp}を回復させる`} color={NEURO_LABELS[parts[0]]?.color || '#60a5fa'}>
-              <p className="mb-3">{workAdv.recovery}</p>
-              <p>{lifeAdv.recovery}</p>
-            </AdviceCard>
-
-            <AdviceCard label={`ステップ2：${neuroDict[parts[1]]?.jp}を立ち上げる`} color={NEURO_LABELS[parts[1]]?.color || '#60a5fa'}>
-              <p>{neuroDict[parts[1]]?.jp}の「{neuroDict[parts[1]]?.desc}」を取り戻すには、{
-                parts[1] === 'D' ? '小さな新しい刺激を入れること。まだ本調子でなくていい。「少し面白いかも」程度の感覚で十分だ。' :
-                parts[1] === 'S' ? '身の回りの小さなことを整理すること。デスク、スケジュール、頭の中——何か一つ「整った」感覚を作れ。' :
-                parts[1] === 'O' ? '信頼できる人と短時間でも話すこと。深い話でなくていい。「人と繋がっている」感覚を取り戻せ。' :
-                parts[1] === 'N' ? '小さくてもいいから一つタスクを完了させること。「やり切った」感覚が集中力を呼び戻す。' :
-                '好きなことに短時間でも触れること。「楽しい」の感覚を少しでも取り戻すことが次のステップへの橋になる。'
-              }</p>
-            </AdviceCard>
-
-            <AdviceCard label={`ステップ3：${neuroDict[parts[2]]?.jp}で循環を繋げる`} color={NEURO_LABELS[parts[2]]?.color || '#60a5fa'}>
-              <p>1位と2位が回復してきたら、最後に{neuroDict[parts[2]]?.jp}の「{neuroDict[parts[2]]?.desc}」を加えることで駆動が循環を始める。{
-                parts[2] === 'D' ? '新しい目標や次のチャレンジを設定すること。「次はこれをやりたい」というワクワクが循環の最後のピースになる。' :
-                parts[2] === 'S' ? '回復の過程を振り返り、学びを整理すること。「なぜドレインしたか」が理解できると、次はもっと早く気づける。' :
-                parts[2] === 'O' ? '回復の過程を誰かと共有すること。「実はこんな状態だった」と話せる関係があれば、循環は自然に始まる。' :
-                parts[2] === 'N' ? '次の目標を明確にすること。「何に向かって動くか」が定まると、集中力が戻り、駆動が安定する。' :
-                '日常の中に「味わう時間」を意識的に作ること。回復を急がず、今の状態を楽しむ余裕が循環の起点になる。'
-              }</p>
-            </AdviceCard>
+            {[
+              {
+                icon: <CheckCircle size={20} style={{ color: NEURO_LABELS[parts[0]]?.color }} />,
+                title: `ステップ1：まず${neuroDict[parts[0]]?.jp}を回復させる`,
+                summary: `最優先は${neuroDict[parts[0]]?.desc}の回復——ここが全ての起点`,
+                body: <><p className="mb-3">{workAdv.recovery}</p><p>{lifeAdv.recovery}</p></>,
+              },
+              {
+                icon: <CheckCircle size={20} style={{ color: NEURO_LABELS[parts[1]]?.color }} />,
+                title: `ステップ2：${neuroDict[parts[1]]?.jp}を立ち上げる`,
+                summary: `${neuroDict[parts[1]]?.desc}を取り戻して加速装置を再起動`,
+                body: <p>{neuroDict[parts[1]]?.jp}の「{neuroDict[parts[1]]?.desc}」を取り戻すには、{
+                  parts[1] === 'D' ? '小さな新しい刺激を入れること。まだ本調子でなくていい。「少し面白いかも」程度の感覚で十分だ。' :
+                  parts[1] === 'S' ? '身の回りの小さなことを整理すること。デスク、スケジュール、頭の中——何か一つ「整った」感覚を作れ。' :
+                  parts[1] === 'O' ? '信頼できる人と短時間でも話すこと。深い話でなくていい。「人と繋がっている」感覚を取り戻せ。' :
+                  parts[1] === 'N' ? '小さくてもいいから一つタスクを完了させること。「やり切った」感覚が集中力を呼び戻す。' :
+                  '好きなことに短時間でも触れること。「楽しい」の感覚を少しでも取り戻すことが次のステップへの橋になる。'
+                }</p>,
+              },
+              {
+                icon: <CheckCircle size={20} style={{ color: NEURO_LABELS[parts[2]]?.color }} />,
+                title: `ステップ3：${neuroDict[parts[2]]?.jp}で循環を繋げる`,
+                summary: `${neuroDict[parts[2]]?.desc}を加えて駆動を完全循環させる`,
+                body: <p>1位と2位が回復してきたら、最後に{neuroDict[parts[2]]?.jp}の「{neuroDict[parts[2]]?.desc}」を加えることで駆動が循環を始める。{
+                  parts[2] === 'D' ? '新しい目標や次のチャレンジを設定すること。「次はこれをやりたい」というワクワクが循環の最後のピースになる。' :
+                  parts[2] === 'S' ? '回復の過程を振り返り、学びを整理すること。「なぜドレインしたか」が理解できると、次はもっと早く気づける。' :
+                  parts[2] === 'O' ? '回復の過程を誰かと共有すること。「実はこんな状態だった」と話せる関係があれば、循環は自然に始まる。' :
+                  parts[2] === 'N' ? '次の目標を明確にすること。「何に向かって動くか」が定まると、集中力が戻り、駆動が安定する。' :
+                  '日常の中に「味わう時間」を意識的に作ること。回復を急がず、今の状態を楽しむ余裕が循環の起点になる。'
+                }</p>,
+              },
+            ].map((item) => (
+              <div key={item.title} className="border border-gray-200 rounded-xl bg-gray-50/50 p-5 mb-4">
+                <div className="flex items-center gap-2 mb-1">
+                  {item.icon}
+                  <p className="text-sm font-bold text-gray-900">{item.title}</p>
+                </div>
+                <p className="text-xs font-bold mb-3" style={{ color: NEURO_LABELS[rank1]?.color }}>{item.summary}</p>
+                <div className="text-sm text-gray-700 leading-[1.9]">{item.body}</div>
+              </div>
+            ))}
           </Chapter>
         )}
 
@@ -890,6 +1008,43 @@ export default async function ResultPage({
           />
         )}
 
+        {/* AI相談セクション */}
+        {pattern && (
+          <AiConsultSection prompt={`あなたは「疾走領域（Drive Field）」の診断結果に基づいて、ユーザーの相談に乗るアドバイザーです。
+
+以下がこのユーザーの診断結果です。この情報を前提として、ユーザーの相談に親身に答えてください。
+
+---
+疾走領域名: ${entry.kanji_name}（${entry.reading} / ${entry.english_name}）
+型: ${kata?.name || ''}
+偏りタイプ: ${BIAS_JP[bias] || bias}
+
+神経系優先順位:
+- 1位（点火）: ${neuroDict[parts[0]]?.jp}（${neuroDict[parts[0]]?.desc}）
+- 2位（加速）: ${neuroDict[parts[1]]?.jp}（${neuroDict[parts[1]]?.desc}）
+- 3位（持続）: ${neuroDict[parts[2]]?.jp}（${neuroDict[parts[2]]?.desc}）
+
+駆動構造: ${pattern.drive_structure}
+発動方向: ${pattern.ignition_label}（${pattern.ignition_desc}）
+時間特性: ${pattern.time_character_label}（${pattern.time_character_desc}）
+出力: ${OUTPUT_JP[pattern.output_level] || pattern.output_level}
+
+起動条件: ${pattern.trigger_core}
+覚醒条件: ${pattern.awakening_condition}
+ドレイン条件: ${pattern.drain_condition}
+回復条件: ${pattern.recovery_condition}
+---
+
+このユーザーの駆動構造を深く理解した上で、以下のルールで回答してください:
+- ユーザーの疾走領域の特性に合わせた具体的なアドバイスをする
+- 一般論ではなく、この人の神経系の組み合わせに基づいた回答をする
+- 「あなたの場合は〇〇なので、△△がおすすめです」のように個別具体的に答える
+- 仕事・人間関係・人生の相談に対応する
+- 温かく、でも的確に
+
+ではユーザーの相談を聞いてください。最初に軽く自己紹介と、この人の疾走領域の特徴を簡潔に述べてから「何についてお話しましょうか？」と聞いてください。`} />
+        )}
+
         {/* ─── フッター ─── */}
         <div className="flex justify-center gap-3 text-xs text-gray-500 mb-10 flex-wrap">
           <span>{coreCode}</span>
@@ -903,6 +1058,12 @@ export default async function ResultPage({
           <Link href="/" className="btn-float block w-full py-3 text-gray-400 text-sm text-center">
             トップへ
           </Link>
+        {/* 注意書き */}
+        <div className="mt-12 pt-6 border-t border-gray-200">
+          <p className="text-[10px] text-gray-400 leading-relaxed">
+            本診断は、医学的・科学的根拠に基づくものではありません。日々の行動パターンから、5つの神経系の傾向を推測し、それを駆動特性として表現したものです。診断結果は自己理解のための参考情報としてご活用ください。医療・心理的な判断の代替となるものではありません。
+          </p>
+        </div>
         </div>
       </div>
     </main>

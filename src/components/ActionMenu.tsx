@@ -168,7 +168,7 @@ export function ActionMenu(props: ActionMenuProps) {
             onClick={a.onClick}
             onMouseEnter={() => setHoveredIdx(i)}
             onMouseLeave={() => setHoveredIdx(null)}
-            className="flex items-center gap-1.5 h-8 bg-gray-900 border border-gray-700 rounded-full shadow-lg hover:bg-gray-800 transition-all duration-300 overflow-hidden"
+            className="flex items-center gap-1.5 h-8 bg-gray-900 border border-gray-700 rounded-full shadow-lg hover:bg-gray-800 transition-all duration-300 overflow-hidden text-gray-300"
             style={{ paddingLeft: 8, paddingRight: hoveredIdx === i ? 12 : 8, width: hoveredIdx === i ? 'auto' : 32 }}
           >
             <span className="shrink-0">{a.icon}</span>

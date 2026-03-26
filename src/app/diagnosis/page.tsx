@@ -24,11 +24,11 @@ for (const k of kataData as any[]) {
 }
 
 const NEURO_META: Record<string, { jp: string; desc: string; poetry: string; color: string; gradient: string; spirit: string }> = {
-  D: { jp: 'ドーパミン', desc: '新規性・可能性', poetry: '未知への渇望', color: '#f87171', gradient: 'radial-gradient(circle, #dc2626, transparent 65%)', spirit: '未踏の焔' },
-  S: { jp: 'セロトニン', desc: '理解・秩序', poetry: '静謐なる洞察', color: '#60a5fa', gradient: 'radial-gradient(circle, #2563eb, transparent 65%)', spirit: '深淵の燈' },
-  O: { jp: 'オキシトシン', desc: '共感・接続', poetry: '魂の共鳴', color: '#4ade80', gradient: 'radial-gradient(circle, #16a34a, transparent 65%)', spirit: '共鳴の潮' },
-  N: { jp: 'ノルアドレナリン', desc: '緊張・集中', poetry: '研ぎ澄まされた覚醒', color: '#facc15', gradient: 'radial-gradient(circle, #ca8a04, transparent 65%)', spirit: '研ぎ澄まされた刃' },
-  E: { jp: 'エンドルフィン', desc: '快感・没入', poetry: '深淵への没入', color: '#c084fc', gradient: 'radial-gradient(circle, #9333ea, transparent 65%)', spirit: '溺れる悦楽' },
+  D: { jp: 'ドーパミン', desc: '新規性・可能性', poetry: '未知への渇望', color: '#c0392b', gradient: 'radial-gradient(circle, #922b21, transparent 65%)', spirit: '未踏の焔' },
+  S: { jp: 'セロトニン', desc: '理解・秩序', poetry: '静謐なる洞察', color: '#2e6b8a', gradient: 'radial-gradient(circle, #1a4d6b, transparent 65%)', spirit: '深淵の燈' },
+  O: { jp: 'オキシトシン', desc: '共感・接続', poetry: '魂の共鳴', color: '#27806a', gradient: 'radial-gradient(circle, #1a5c4b, transparent 65%)', spirit: '共鳴の潮' },
+  N: { jp: 'ノルアドレナリン', desc: '緊張・集中', poetry: '研ぎ澄まされた覚醒', color: '#b8860b', gradient: 'radial-gradient(circle, #8b6914, transparent 65%)', spirit: '研ぎ澄まされた刃' },
+  E: { jp: 'エンドルフィン', desc: '快感・没入', poetry: '深淵への没入', color: '#7b5ea7', gradient: 'radial-gradient(circle, #5b3d8f, transparent 65%)', spirit: '溺れる悦楽' },
 };
 
 export default function DiagnosisPage() {
