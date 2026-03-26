@@ -513,7 +513,13 @@ export default async function ResultPage({
 
 
     {/* ═══ ヒーローゾーン（黒+グラデ） ═══ */}
-    <section className="noise-overlay relative overflow-hidden border-b border-gray-200" style={{ backgroundColor: '#8b2520' }}>
+    <section className="noise-overlay relative overflow-hidden border-b border-gray-200" style={{ backgroundColor: {
+      D: '#8b2520',
+      S: '#1a3a4a',
+      O: '#1a3d32',
+      N: '#3d3010',
+      E: '#2d1f45',
+    }[rank1] || '#8b2520' }}>
       {/* 型カラーうねうねグラデ背景（rank1+biasで動的生成） */}
       <BlobBackground blobs={generateBlobs(rank1, bias, { main: NEURO_LABELS[rank1]?.gradient, dark: NEURO_LABELS[rank1]?.gradientDark })} />
 
