@@ -307,32 +307,34 @@ interface BlobConfig {
   gradient: string; blur: string; animation: string; opacity?: number;
 }
 
-function generateBlobs(rank1: string, bias: string, gradients: { main: string; dark: string }): { blobs: BlobConfig[]; edges: EdgeConfig[]; baseColor: string } {
-  const accentGradient = 'radial-gradient(circle, #b8860b, transparent 65%)';
+function generateBlobs(rank1: string, bias: string, gradients: { main: string; dark: string }, rank2?: string, rank3?: string): { blobs: BlobConfig[]; edges: EdgeConfig[]; baseColor: string } {
   const mainColor = NEURO_LABELS[rank1]?.color || '#c0392b';
+  const secondColor = NEURO_LABELS[rank2 || '']?.color || '#b8860b';
+  const thirdColor = NEURO_LABELS[rank3 || '']?.color || '#2e6b8a';
 
   // 速度: D=速い N=やや速い E=遅い S=中 O=やや遅い
   const speed: Record<string, number> = { D: 8, S: 14, O: 16, N: 10, E: 20 };
   const s = speed[rank1] || 12;
 
-  // エッジグラデ（角からの放射）
+  // エッジグラデ（角からの放射 — rank1/2/3の色を使い分け）
   const edges: EdgeConfig[] = [
-    { position: '0 0', color: mainColor, animation: `edge-drift-1 ${s + 2}s ease-in-out infinite`, size: '70vmax' },
-    { position: '100% 100%', color: '#b8860b', animation: `edge-drift-2 ${s + 4}s ease-in-out infinite`, size: '60vmax' },
-    { position: '100% 0', color: NEURO_LABELS[rank1]?.color || '#c0392b', animation: `edge-drift-3 ${s + 6}s ease-in-out infinite`, size: '50vmax' },
+    { position: '0 0', color: mainColor, animation: `edge-drift-1 ${s + 2}s ease-in-out infinite`, size: '80vmax' },
+    { position: '100% 100%', color: secondColor, animation: `edge-drift-2 ${s + 4}s ease-in-out infinite`, size: '70vmax' },
+    { position: '100% 0', color: thirdColor, animation: `edge-drift-3 ${s + 6}s ease-in-out infinite`, size: '50vmax' },
   ];
 
   // 偏りでblob構成を変える
   if (bias === 'Single') {
     return { baseColor: mainColor, edges, blobs: [
       { width: '100vmax', height: '100vmax', top: '-30%', left: '-20%', gradient: gradients.main, blur: 'blur(70px)', animation: `blob-drift-1 ${s}s ease-in-out infinite` },
-      { width: '40vmax', height: '40vmax', bottom: '-10%', right: '10%', gradient: gradients.dark, blur: 'blur(100px)', animation: `blob-drift-2 ${s + 6}s ease-in-out infinite`, opacity: 0.5 },
+      { width: '50vmax', height: '50vmax', bottom: '-10%', right: '10%', gradient: `radial-gradient(circle, ${secondColor}, transparent 65%)`, blur: 'blur(90px)', animation: `blob-drift-2 ${s + 6}s ease-in-out infinite`, opacity: 0.5 },
     ]};
   }
   if (bias === 'Dual') {
     return { baseColor: mainColor, edges, blobs: [
       { width: '75vmax', height: '75vmax', top: '-25%', left: '-15%', gradient: gradients.main, blur: 'blur(80px)', animation: `blob-drift-1 ${s}s ease-in-out infinite` },
-      { width: '70vmax', height: '70vmax', bottom: '-20%', right: '-10%', gradient: gradients.dark, blur: 'blur(80px)', animation: `blob-drift-2 ${s + 2}s ease-in-out infinite` },
+      { width: '70vmax', height: '70vmax', bottom: '-20%', right: '-10%', gradient: `radial-gradient(circle, ${secondColor}, transparent 65%)`, blur: 'blur(80px)', animation: `blob-drift-2 ${s + 2}s ease-in-out infinite` },
+      { width: '40vmax', height: '40vmax', top: '50%', left: '30%', gradient: `radial-gradient(circle, ${thirdColor}, transparent 65%)`, blur: 'blur(100px)', animation: `blob-drift-3 ${s + 8}s ease-in-out infinite reverse`, opacity: 0.3 },
     ]};
   }
   if (bias === 'Trinity') {
@@ -547,7 +549,7 @@ export default async function ResultPage({
     }[rank1] || '#8b2520' }}>
       {/* 型カラーうねうねグラデ背景（rank1+biasで動的生成） */}
       {(() => {
-        const bg = generateBlobs(rank1, bias, { main: NEURO_LABELS[rank1]?.gradient, dark: NEURO_LABELS[rank1]?.gradientDark });
+        const bg = generateBlobs(rank1, bias, { main: NEURO_LABELS[rank1]?.gradient, dark: NEURO_LABELS[rank1]?.gradientDark }, parts[1], parts[2]);
         return <BlobBackground blobs={bg.blobs} edges={bg.edges} baseColor={bg.baseColor} />;
       })()}
 
