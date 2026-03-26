@@ -55,7 +55,7 @@ function getL4Id(coreCode: string, biasType: string, ignition: string, timeChar:
   return `${rank1}-${biasType}-${IGN_MAP[ignition] ?? ignition}-${TIME_MAP[timeChar] ?? timeChar}`;
 }
 
-// 240真名ルックアップ (rank1-bias → 真名リスト)
+// 240疾走領域ルックアップ (rank1-bias → 領域リスト)
 const names240Map: Record<string, any[]> = {};
 for (const n of names240Data as any[]) {
   const parts = n.id.split("-"); // rank1-rank2-rank3-bias
@@ -359,7 +359,7 @@ export default function AdminPage() {
 
   const tabs: { key: Tab; label: string }[] = [
     { key: "overview", label: "概要" },
-    { key: "l4types", label: names240FlaggedIds.size > 0 ? `真名管理 🚩${names240FlaggedIds.size}` : "真名管理" },
+    { key: "l4types", label: names240FlaggedIds.size > 0 ? `疾走領域管理 🚩${names240FlaggedIds.size}` : "疾走領域管理" },
   ];
 
   // Modal state (names tab用)
@@ -375,7 +375,7 @@ export default function AdminPage() {
     <main className="min-h-screen bg-gray-950 text-white p-4 md:p-8">
       <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
         <h1 className="text-2xl font-bold">
-          Drive Field 3000 — 管理ダッシュボード
+          Drive Field — 管理ダッシュボード
         </h1>
         <div className="flex items-center gap-3 flex-wrap">
           <a
@@ -652,146 +652,46 @@ export default function AdminPage() {
       {/* Overview */}
       {tab === "overview" && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <StatCard label="総パターン数" value={patterns.length} />
-          <StatCard
-            label="命名済み"
-            value={namedCount}
-            sub={`${((namedCount / patterns.length) * 100).toFixed(1)}%`}
-          />
-          <StatCard
-            label="解釈文生成済み"
-            value={interpCount}
-            sub={`${((interpCount / patterns.length) * 100).toFixed(1)}%`}
-            highlight={interpCount >= 2880}
-          />
-          <StatCard label="骨格数" value={cores.length} />
+          {/* 構造サマリー */}
+          <StatCard label="神経系" value={5} sub="D · S · O · N · E" />
+          <StatCard label="骨格" value={cores.length} sub="上位3の順列" />
+          <StatCard label="型" value={(l4KataData as any[]).length} sub="主神経系 × 偏り" />
+          <StatCard label="疾走領域" value={(names240Data as any[]).length} sub="骨格 × 偏り" />
+
+          {/* データ資産 */}
           <StatCard label="漢字辞書" value={`${kanji.length}字`} />
           <StatCard label="類義語群" value={synonyms.length} />
           <StatCard label="カテゴリ数" value={kanjiCategories.length} />
-          <StatCard
-            label="神経系定義"
-            value={dicts.filter((d) => d.Category === "Neuro").length}
-          />
+          <StatCard label="パターンDB" value={patterns.length} sub="内部処理用" />
 
-          {/* Progress bars */}
+          {/* 疾走領域一覧 */}
           <div className="col-span-2 md:col-span-4 mt-4">
-            <h3 className="text-lg font-bold mb-3">進捗</h3>
-            <ProgressBar
-              label="解釈文生成"
-              current={interpCount}
-              total={patterns.length}
-              color="bg-green-500"
-            />
-            <ProgressBar
-              label="命名"
-              current={namedCount}
-              total={patterns.length}
-              color="bg-white"
-            />
-          </div>
-
-          {/* Named patterns list */}
-          {namedCount > 0 && (
-            <div className="col-span-2 md:col-span-4 mt-4">
-              <h3 className="text-lg font-bold mb-3">
-                命名済みパターン ({namedCount})
-              </h3>
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
-                {names.slice(0, 50).map((n: any) => {
-                  const p = patterns.find(
-                    (pat) => pat.pattern_id === n.pattern_id
-                  );
-                  return (
-                    <div
-                      key={n.pattern_id}
-                      className="bg-gray-900 rounded p-3 text-center cursor-pointer hover:bg-gray-800"
-                      onClick={() => {
-                        setSelectedPattern(n.pattern_id);
-                        setTab("patterns");
-                      }}
-                    >
-                      <div className="text-2xl font-bold">
-                        {n.kanji_name}
-                      </div>
-                      <div className="text-xs text-gray-400">
-                        {n.reading}
-                      </div>
-                      <div className="text-xs text-gray-500">
-                        {n.english_name}
-                      </div>
-                      <div className="text-xs text-gray-600 mt-1">
-                        {p?.core_code} / {p?.bias_type} / {p?.output_level}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-              {namedCount > 50 && (
-                <p className="text-gray-600 text-sm mt-2">
-                  ※ 最初の50件を表示中（全{namedCount}件）
-                </p>
-              )}
+            <h3 className="text-lg font-bold mb-3">
+              疾走領域一覧（{(names240Data as any[]).length}）
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
+              {(names240Data as any[]).slice(0, 60).map((n: any) => {
+                const nameParts = n.id.split("-");
+                const rank1 = nameParts[0];
+                const rm = rank1 ? L4_RANK_META[rank1] : null;
+                return (
+                  <div
+                    key={n.id}
+                    className={`rounded p-3 text-center border ${rm ? `${rm.cardBg} ${rm.cardBorder}` : "bg-gray-900 border-gray-800"}`}
+                  >
+                    <div className="text-2xl font-bold">{n.kanji_name}</div>
+                    <div className="text-xs text-gray-400">{n.reading}</div>
+                    <div className="text-xs text-gray-500">{n.english_name}</div>
+                    <div className="text-xs text-gray-600 mt-1">{n.id}</div>
+                  </div>
+                );
+              })}
             </div>
-          )}
-
-          {/* Sample interpretations */}
-          <div className="col-span-2 md:col-span-4 mt-4">
-            <h3 className="text-lg font-bold mb-3">解釈文サンプル（ランダム5件）</h3>
-            <div className="space-y-3">
-              {interps
-                .filter((_, i) => [0, 100, 500, 1500, 2500].includes(i))
-                .map((r: any) => {
-                  const pat = patterns.find(
-                    (p) => p.pattern_id === r.pattern_id
-                  );
-                  return (
-                    <div
-                      key={r.pattern_id}
-                      className="bg-gray-900 rounded p-4 cursor-pointer hover:bg-gray-800"
-                      onClick={() => {
-                        setSelectedPattern(r.pattern_id);
-                        setTab("patterns");
-                      }}
-                    >
-                      <div className="flex items-center gap-3 mb-2">
-                        <span className="font-mono text-sm text-gray-400">
-                          #{r.pattern_id}
-                        </span>
-                        <span className="font-bold">
-                          {pat?.core_code}
-                        </span>
-                        <span className="text-xs text-gray-500">
-                          {pat?.bias_type} / {pat?.output_level} /{" "}
-                          {pat?.ignition_label} / {pat?.time_character_label}
-                        </span>
-                        {pat?.field_name_kanji && (
-                          <span className="text-lg font-bold text-yellow-400">
-                            {pat.field_name_kanji}
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-sm text-gray-300 mb-1">
-                        {r.structural_interpretation}
-                      </p>
-                      <p className="text-xs text-gray-500 italic">
-                        {r.symbolic_image}
-                      </p>
-                      {r.texture_keywords && (
-                        <div className="flex gap-1 mt-2">
-                          {r.texture_keywords.map((kw: string, i: number) => (
-                            <span
-                              key={i}
-                              className="text-xs bg-gray-800 px-2 py-0.5 rounded"
-                            >
-                              {kw}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-            </div>
+            {(names240Data as any[]).length > 60 && (
+              <p className="text-gray-600 text-sm mt-2">
+                ※ 最初の60件を表示中（全{(names240Data as any[]).length}件）
+              </p>
+            )}
           </div>
         </div>
       )}
@@ -979,7 +879,7 @@ export default function AdminPage() {
                   <th className="p-2 w-14">発動</th>
                   <th className="p-2 w-14">時間</th>
                   <th className="p-2 w-28">流派</th>
-                  <th className="p-2 w-16">真名</th>
+                  <th className="p-2 w-16">領域名</th>
                   <th className="p-2">象徴イメージ</th>
                   <th className="p-2 w-32">質感</th>
                 </tr>
@@ -1185,7 +1085,7 @@ export default function AdminPage() {
         </div>
       )}
 
-      {/* 真名管理 */}
+      {/* 疾走領域管理 */}
       {tab === "l4types" && (
           <div>
             {/* 差し替えフラグパネル */}
@@ -1259,7 +1159,7 @@ export default function AdminPage() {
               </div>
             )}
 
-            {/* 20型 + 240真名グリッド */}
+            {/* 20型 + 240疾走領域グリッド */}
             {["D", "S", "O", "N", "E"].map((rank) => {
               const meta = L4_RANK_META[rank];
               const kataItems = (l4KataData as any[]).filter((k: any) => k.rank1 === rank);
@@ -1280,7 +1180,7 @@ export default function AdminPage() {
                             <div className="text-xs text-gray-500">{k.reading}</div>
                             <div className={`text-xs px-1.5 py-0.5 rounded inline-block mt-1 ${meta.badge}`}>{k.bias}</div>
                           </div>
-                          {/* 真名12個 */}
+                          {/* 疾走領域12個 */}
                           <div className="p-3 grid grid-cols-3 gap-1.5">
                             {truenames.map((n: any) => {
                               const flagged240 = names240FlaggedIds.has(n.id);

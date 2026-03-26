@@ -41,9 +41,9 @@ export default function NamesListPage() {
         <table className="min-w-[1100px] w-full text-sm border-collapse">
           <thead className="sticky top-0 z-20 bg-gray-900">
             <tr className="border-b border-gray-700">
-              {/* 真名：左固定 */}
+              {/* 領域名：左固定 */}
               <th className="sticky left-0 z-30 bg-gray-900 text-left px-3 py-2 text-xs text-gray-500 font-normal w-24 border-r border-gray-700">
-                真名
+                領域名
               </th>
               <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal w-48">英語名</th>
               <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal w-32">骨格</th>
@@ -62,7 +62,7 @@ export default function NamesListPage() {
                   key={e.id}
                   className={`border-b border-gray-800/50 align-top ${rowBg}`}
                 >
-                  {/* 真名：左固定 */}
+                  {/* 領域名：左固定 */}
                   <td className={`sticky left-0 z-10 px-3 py-2 border-r border-gray-800 ${rowBg}`}>
                     <div className="font-bold text-base leading-tight whitespace-nowrap">{e.kanji_name}</div>
                     <div className="text-[10px] text-gray-500 mt-0.5">{e.reading}</div>

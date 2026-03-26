@@ -1,1 +1,278 @@
 @import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* === 波紋ボタン === */
+@keyframes ripple-idle {
+  0%, 100% { transform: scale(1); border-color: rgba(255, 255, 255, 0.25); }
+  50%      { transform: scale(1.04); border-color: rgba(255, 255, 255, 0.4); }
+}
+
+@keyframes ripple-hover {
+  0%   { transform: scale(1); border-color: rgba(255, 255, 255, 0.3); }
+  30%  { transform: scale(0.92); border-color: rgba(255, 255, 255, 0.6); }
+  100% { transform: scale(1.12); border-color: rgba(255, 255, 255, 0.2); }
+}
+
+@keyframes ripple-hover-outer {
+  0%   { transform: scale(1); border-color: rgba(255, 255, 255, 0.1); }
+  30%  { transform: scale(0.88); border-color: rgba(255, 255, 255, 0.35); }
+  100% { transform: scale(1.18); border-color: rgba(255, 255, 255, 0.08); }
+}
+
+@keyframes ripple-leave {
+  0%   { transform: scale(1.12); border-color: rgba(255, 255, 255, 0.2); }
+  100% { transform: scale(1); border-color: rgba(255, 255, 255, 0.25); }
+}
+
+@keyframes ripple-leave-outer {
+  0%   { transform: scale(1.18); border-color: rgba(255, 255, 255, 0.08); }
+  100% { transform: scale(1); border-color: rgba(255, 255, 255, 0.1); }
+}
+
+@keyframes ripple-spread {
+  0%   { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+.ripple-btn {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ripple-btn::before,
+.ripple-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  pointer-events: none;
+}
+
+.ripple-btn::after {
+  inset: -15%;
+  width: auto;
+  height: auto;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* idle */
+.ripple-btn.is-idle::before {
+  animation: ripple-idle 3s ease-in-out infinite;
+}
+.ripple-btn.is-idle::after {
+  animation: ripple-idle 4s ease-in-out infinite -1.5s;
+}
+
+/* hover */
+.ripple-btn.is-hover::before {
+  animation: ripple-hover 1.8s cubic-bezier(0.25, 0, 0.2, 1) infinite;
+}
+.ripple-btn.is-hover::after {
+  animation: ripple-hover-outer 2.2s cubic-bezier(0.25, 0, 0.2, 1) infinite 0.15s;
+}
+
+/* leave — plays once then goes to idle */
+.ripple-btn.is-leave::before {
+  animation: ripple-leave 0.6s ease-out forwards;
+}
+.ripple-btn.is-leave::after {
+  animation: ripple-leave-outer 0.6s ease-out forwards;
+}
+
+/* CSS :hover fallback (for Server Components without JS state) */
+.ripple-btn.is-idle:hover::before {
+  animation: ripple-hover 1.8s cubic-bezier(0.25, 0, 0.2, 1) infinite;
+}
+.ripple-btn.is-idle:hover::after {
+  animation: ripple-hover-outer 2.2s cubic-bezier(0.25, 0, 0.2, 1) infinite 0.15s;
+}
+
+.ripple-btn .ripple-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  animation: ripple-spread 0.8s ease-out forwards;
+  pointer-events: none;
+}
+
+/* === 演出シーケンス === */
+@keyframes reveal-ripple {
+  0%   { transform: scale(0); opacity: 0.8; }
+  100% { transform: scale(8); opacity: 0; }
+}
+
+@keyframes reveal-fadein {
+  0%   { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes reveal-fadeout {
+  0%   { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-8px); }
+}
+
+@keyframes gradient-bloom {
+  0%   { opacity: 0; transform: scale(0.5); }
+  100% { opacity: 0.5; transform: scale(1); }
+}
+
+.reveal-text {
+  opacity: 0;
+  animation: reveal-fadein 1.5s ease-out forwards;
+}
+
+.reveal-text-out {
+  animation: reveal-fadeout 1s ease-in forwards;
+}
+
+.reveal-ripple-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  margin: -30px 0 0 -30px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  animation: reveal-ripple 2s ease-out forwards;
+  pointer-events: none;
+}
+
+.reveal-gradient {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+}
+
+@keyframes countdown-up {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-60px); opacity: 0.4; font-size: 2rem; }
+}
+
+@keyframes countdown-center {
+  0%   { transform: translateY(60px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* === ふわっとボタン共通 === */
+.btn-float {
+  transition: box-shadow 0.5s ease,
+              border-color 0.5s ease;
+}
+.btn-float:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.08), 0 0 4px rgba(255, 255, 255, 0.04);
+}
+.btn-float:active {
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.12);
+  transition-duration: 0.1s;
+}
+
+/* === うねるグラデーション背景 === */
+@keyframes blob-drift-1 {
+  0%, 100% { transform: translate(0%, 0%) scale(1) rotate(0deg); }
+  20%      { transform: translate(30%, -35%) scale(1.3) rotate(10deg); }
+  40%      { transform: translate(-25%, 20%) scale(0.8) rotate(-5deg); }
+  60%      { transform: translate(15%, 35%) scale(1.2) rotate(8deg); }
+  80%      { transform: translate(-35%, -15%) scale(0.9) rotate(-12deg); }
+}
+@keyframes blob-drift-2 {
+  0%, 100% { transform: translate(0%, 0%) scale(1) rotate(0deg); }
+  25%      { transform: translate(-35%, 30%) scale(1.25) rotate(-8deg); }
+  50%      { transform: translate(20%, -40%) scale(0.75) rotate(15deg); }
+  75%      { transform: translate(30%, 20%) scale(1.3) rotate(-10deg); }
+}
+@keyframes blob-drift-3 {
+  0%, 100% { transform: translate(0%, 0%) scale(1.1) rotate(0deg); }
+  30%      { transform: translate(35%, 20%) scale(0.7) rotate(12deg); }
+  60%      { transform: translate(-30%, -30%) scale(1.35) rotate(-8deg); }
+}
+
+.wave-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* ノイズテクスチャ */
+.wave-bg::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+  opacity: 0.18;
+  z-index: 1;
+  mix-blend-mode: overlay;
+  border-radius: 0;
+}
+
+.wave-bg::after,
+.wave-bg .blob-3,
+.wave-bg .blob-4,
+.wave-bg .blob-5 {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.45;
+}
+
+.wave-bg::after {
+  width: 70vmax;
+  height: 70vmax;
+  top: -25%;
+  left: -20%;
+  background: radial-gradient(circle, #e11d48, transparent 65%);
+  animation: blob-drift-1 12s ease-in-out infinite;
+}
+
+.wave-bg .blob-3 {
+  width: 65vmax;
+  height: 65vmax;
+  bottom: -30%;
+  right: -15%;
+  background: radial-gradient(circle, #7c3aed, transparent 65%);
+  animation: blob-drift-2 16s ease-in-out infinite;
+}
+
+.wave-bg .blob-4 {
+  width: 55vmax;
+  height: 55vmax;
+  top: 25%;
+  left: 35%;
+  background: radial-gradient(circle, #2563eb, transparent 65%);
+  animation: blob-drift-3 20s ease-in-out infinite;
+}
+
+.wave-bg .blob-5 {
+  width: 45vmax;
+  height: 45vmax;
+  top: 60%;
+  left: -10%;
+  background: radial-gradient(circle, #db2777, transparent 65%);
+  animation: blob-drift-1 24s ease-in-out infinite reverse;
+  opacity: 0.3;
+}
