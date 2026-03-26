@@ -6,6 +6,7 @@ import dictionariesData from '@/data/dictionaries.json';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { AboutMenu } from '@/components/AboutMenu';
+import { ActionMenu } from '@/components/ActionMenu';
 
 // ─── Types ────────────────────────────────────────────
 
@@ -862,6 +863,27 @@ export default async function ResultPage({
               }</p>
             </AdviceCard>
           </Chapter>
+        )}
+
+        {/* アクションメニュー */}
+        {pattern && (
+          <ActionMenu
+            kanjiName={entry.kanji_name}
+            reading={entry.reading}
+            englishName={entry.english_name}
+            kataName={kata?.name || ''}
+            rank1Jp={neuroDict[parts[0]]?.jp || ''}
+            rank2Jp={neuroDict[parts[1]]?.jp || ''}
+            rank3Jp={neuroDict[parts[2]]?.jp || ''}
+            bias={BIAS_JP[bias] || bias}
+            ignition={pattern.ignition_label}
+            timing={pattern.time_character_label}
+            driveStructure={pattern.drive_structure}
+            triggerCore={pattern.trigger_core}
+            awakeningCondition={pattern.awakening_condition}
+            drainCondition={pattern.drain_condition}
+            recoveryCondition={pattern.recovery_condition}
+          />
         )}
 
         {/* ─── フッター ─── */}
