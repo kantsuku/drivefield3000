@@ -835,6 +835,45 @@ export default async function ResultPage({
               </table>
             </div>
 
+            {/* 型の中の疾走領域マップ */}
+            {kata && (
+              <>
+                <h3 className="text-base font-bold text-gray-900 mb-3">{kata.name}の中のあなたの疾走領域</h3>
+                <p className="text-xs text-gray-500 mb-4">同じ型でも2位・3位の神経系の組み合わせで12の疾走領域に分かれます。</p>
+                <div className="border border-gray-200 rounded-xl bg-gray-50/50 p-4 mb-10">
+                  <div className="grid grid-cols-3 md:grid-cols-4 gap-2">
+                    {(namesData as any[])
+                      .filter((n: any) => {
+                        const p = n.id.split('-');
+                        return p[0] === rank1 && p[3] === bias;
+                      })
+                      .map((n: any) => {
+                        const isMe = n.id === decodedId;
+                        return (
+                          <div
+                            key={n.id}
+                            className={`rounded-lg py-2 px-2 text-center transition-all ${
+                              isMe
+                                ? 'border-2 text-white font-bold'
+                                : 'border border-gray-200 text-gray-500'
+                            }`}
+                            style={isMe ? { borderColor: NEURO_LABELS[rank1]?.color, backgroundColor: NEURO_LABELS[rank1]?.color } : {}}
+                          >
+                            <div className={isMe ? 'text-base' : 'text-sm'}>{n.kanji_name}</div>
+                            <div className={`text-[9px] mt-0.5 ${isMe ? 'opacity-80' : 'text-gray-400'}`}>{n.reading}</div>
+                            {!isMe && (
+                              <div className="text-[8px] text-gray-300 mt-0.5">
+                                {n.id.split('-').slice(0, 3).join('-')}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                  </div>
+                </div>
+              </>
+            )}
+
             {/* 診断のプロセスフロー */}
             <h3 className="text-base font-bold text-gray-900 mb-3">診断のプロセス</h3>
             <p className="text-xs text-gray-500 leading-relaxed mb-6">
