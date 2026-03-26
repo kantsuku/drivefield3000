@@ -70,7 +70,7 @@ const OUTPUT_JP: Record<string, string> = {
 function buildKataDescription(rank1: string, rank2: string, rank3: string, bias: string): string {
   const n1 = neuroDict[rank1], n2 = neuroDict[rank2], n3 = neuroDict[rank3], b = BIAS_STYLE[bias];
   if (!n1 || !n2 || !n3 || !b) return '';
-  return `この型は、${n1.jp}（${n1.desc}）を最上位に持ち、${n2.jp}（${n2.desc}）が加速装置、${n3.jp}（${n3.desc}）が循環装置として機能する${b.trait}の骨格である。${b.strength}。${b.risk}。この3つの神経系の優先順位と偏りの組み合わせが、あなたの「動き方の癖」そのものを形作っている。これは性格ではなく「駆動構造」——何によって火が点き、何によって走り続け、何によって止まるかの設計図だ。`;
+  return `この型は、${n1.jp}（${n1.desc}）を最上位に持ち、${n2.jp}（${n2.desc}）が加速装置、${n3.jp}（${n3.desc}）が循環装置として機能する${b.trait}の骨格である。${b.strength}。${b.risk}。この3つの神経系の優先順位と偏りの組み合わせが、あなたの「動き方の癖」そのものを形作っている。これは性格ではなく「駆動構造」——あなたが夢中になれる条件の設計図だ。`;
 }
 
 function findPattern(coreCode: string, bias: string, ig: string | null, tm: string | null, out: string | null): PatternEntry | undefined {
@@ -669,7 +669,7 @@ export default async function ResultPage({
             発動方向は{pattern?.ignition_label}——{pattern?.ignition_desc}。時間特性は{pattern?.time_character_label}で、{pattern?.time_character_desc}。出力は{OUTPUT_JP[pattern?.output_level || ''] || pattern?.output_level}。
           </p>
           <p className="text-sm text-gray-600 leading-[1.9]">
-            この神経系の優先順位、偏り、駆動特性の組み合わせが、あなたの「動き方の癖」そのものを形作っています。これは性格ではなく「駆動構造」——何によって火が点き、何によって走り続け、何によって止まるかの設計図です。
+            この神経系の優先順位、偏り、駆動特性の組み合わせが、あなたの「動き方の癖」そのものを形作っています。これは性格ではなく「駆動構造」——あなたが何に夢中になり、何によって走り続け、何によって止まるかの設計図です。
           </p>
         </Chapter>
 
@@ -804,7 +804,7 @@ export default async function ResultPage({
         {pattern && interp && (
           <Chapter id="sec-startup" num="04" title={`${entry.kanji_name}の起動マニュアル`} en="IGNITION">
             <p className="text-sm text-gray-600 leading-[1.9] mb-6">
-              あなたの疾走領域は、{neuroDict[parts[0]]?.jp}の「{neuroDict[parts[0]]?.desc}」で点火し、{neuroDict[parts[1]]?.jp}の「{neuroDict[parts[1]]?.desc}」で加速し、{neuroDict[parts[2]]?.jp}の「{neuroDict[parts[2]]?.desc}」で持続する。この3ステップが揃ったとき、あなたの駆動は最も自然に、最も力強く回り始める。逆に言えば、どれか一つが欠けるだけで疾走領域は発動しない。
+              あなたの疾走領域は、{neuroDict[parts[0]]?.jp}の「{neuroDict[parts[0]]?.desc}」で点火し、{neuroDict[parts[1]]?.jp}の「{neuroDict[parts[1]]?.desc}」で加速し、{neuroDict[parts[2]]?.jp}の「{neuroDict[parts[2]]?.desc}」で持続する。この3ステップが揃ったとき、あなたは夢中状態に入り、駆動は最も自然に、最も力強く回り始める。逆に言えば、どれか一つが欠けるだけで夢中にはなれない。
             </p>
 
             {[
@@ -851,7 +851,7 @@ export default async function ResultPage({
             </p>
 
             <p className="text-sm text-gray-600 leading-[1.9] mb-6">
-              覚醒とは、あなたの{neuroDict[parts[0]]?.jp}・{neuroDict[parts[1]]?.jp}・{neuroDict[parts[2]]?.jp}の3つの神経系が同時に最大出力で回っている状態のことだ。この状態に入ると、あなたは普段の数倍のパフォーマンスを発揮し、時間の感覚さえ失う。問題は、この3つが同時に揃う環境を意識的に作れるかどうかだ。
+              覚醒とは、あなたが完全な夢中状態に入ること——{neuroDict[parts[0]]?.jp}・{neuroDict[parts[1]]?.jp}・{neuroDict[parts[2]]?.jp}の3つの神経系が同時に最大出力で回っている状態だ。夢中になっているとき、あなたは普段の数倍のパフォーマンスを発揮し、時間の感覚さえ失う。夢中になれる環境があれば、人は無限に成長する。問題は、その環境を意識的に作れるかどうかだ。
             </p>
 
             <p className="text-sm text-gray-600 leading-[1.9] mb-6">
@@ -898,7 +898,7 @@ export default async function ResultPage({
             </p>
 
             <p className="text-sm text-gray-600 leading-[1.9] mb-6">
-              ドレインとは、あなたの{neuroDict[parts[0]]?.jp}が求めるものが長期間得られず、駆動が空回りし続ける状態のことだ。最初は「なんとなく調子が出ない」程度だが、放置すると{neuroDict[parts[1]]?.jp}と{neuroDict[parts[2]]?.jp}の機能まで連鎖的に低下し、やがて何をしても動けなくなる。以下の兆候に心当たりがあるなら、すでにドレインが始まっている可能性がある。
+              ドレインとは、夢中になれない状態が続くこと——あなたの{neuroDict[parts[0]]?.jp}が求めるものが長期間得られず、駆動が空回りし続ける状態のことだ。最初は「なんとなく調子が出ない」程度だが、放置すると{neuroDict[parts[1]]?.jp}と{neuroDict[parts[2]]?.jp}の機能まで連鎖的に低下し、やがて何にも夢中になれなくなる。以下の兆候に心当たりがあるなら、すでにドレインが始まっている可能性がある。
             </p>
 
             <h3 className="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"><AlertTriangle size={20} className="text-gray-400" />破綻のシナリオ</h3>
@@ -938,7 +938,7 @@ export default async function ResultPage({
             </p>
 
             <p className="text-sm text-gray-600 leading-[1.9] mb-6">
-              ドレイン状態からの回復には順番がある。まず{neuroDict[parts[0]]?.jp}（{neuroDict[parts[0]]?.desc}）を回復させ、次に{neuroDict[parts[1]]?.jp}（{neuroDict[parts[1]]?.desc}）を立ち上げ、最後に{neuroDict[parts[2]]?.jp}（{neuroDict[parts[2]]?.desc}）を繋げる。この順番を間違えると回復が遅れる。2位や3位からいくら頑張っても、1位の{neuroDict[parts[0]]?.jp}が枯れたままでは駆動は再起動しない。
+              夢中を取り戻すには順番がある。まず{neuroDict[parts[0]]?.jp}（{neuroDict[parts[0]]?.desc}）を回復させ、次に{neuroDict[parts[1]]?.jp}（{neuroDict[parts[1]]?.desc}）を立ち上げ、最後に{neuroDict[parts[2]]?.jp}（{neuroDict[parts[2]]?.desc}）を繋げる。この順番を間違えると回復が遅れる。2位や3位からいくら頑張っても、1位の{neuroDict[parts[0]]?.jp}が枯れたままでは、夢中は戻ってこない。
             </p>
 
             <h3 className="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"><Wrench size={20} className="text-gray-400" />回復の起点</h3>
