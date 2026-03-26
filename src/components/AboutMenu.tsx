@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Menu, X } from 'lucide-react';
 
 type Tab = 'about' | 'neuro' | 'method' | 'thoughts' | 'company';
 
@@ -24,9 +25,7 @@ export function AboutMenu() {
         className="fixed top-4 left-4 z-50 w-10 h-10 flex flex-col items-center justify-center gap-1.5 rounded-full border border-white/20 bg-black/40 backdrop-blur-sm hover:border-white/40 transition-colors"
         aria-label="メニューを開く"
       >
-        <span className="w-4 h-px bg-white" />
-        <span className="w-4 h-px bg-white" />
-        <span className="w-4 h-px bg-white" />
+        <Menu size={18} />
       </button>
 
       {/* オーバーレイ */}
@@ -48,9 +47,9 @@ export function AboutMenu() {
           <h2 className="text-lg font-bold">疾走領域（Drive Field）</h2>
           <button
             onClick={() => setOpen(false)}
-            className="text-gray-400 hover:text-white text-2xl leading-none"
+            className="text-gray-400 hover:text-white"
           >
-            &times;
+            <X size={20} />
           </button>
         </div>
 

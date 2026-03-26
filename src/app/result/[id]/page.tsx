@@ -7,6 +7,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { AboutMenu } from '@/components/AboutMenu';
 import { ActionMenu } from '@/components/ActionMenu';
+import { Sparkles, AlertTriangle, Wrench, Briefcase, Home, RefreshCw } from 'lucide-react';
 
 // ─── Types ────────────────────────────────────────────
 
@@ -363,10 +364,13 @@ function Chapter({ id, num, title, en, children }: { id?: string; num: string; t
   );
 }
 
-function AdviceCard({ label, color, children }: { label: string; color: string; children: React.ReactNode }) {
+function AdviceCard({ icon, label, color, children }: { icon?: React.ReactNode; label: string; color: string; children: React.ReactNode }) {
   return (
     <div className="border-l-2 pl-4 mb-6" style={{ borderColor: color }}>
-      <p className="text-[10px] tracking-wider mb-2 font-bold" style={{ color }}>{label}</p>
+      <p className="text-[10px] tracking-wider mb-2 font-bold flex items-center gap-1.5" style={{ color }}>
+        {icon}
+        {label}
+      </p>
       <div className="text-sm text-gray-700 leading-[1.9]">{children}</div>
     </div>
   );
@@ -772,7 +776,7 @@ export default async function ResultPage({
             </p>
 
             <div className="border border-gray-200 bg-gray-50 rounded-lg p-4 mb-6">
-              <p className="text-base font-bold text-gray-900 mb-2">&#x2728; 全てを揃えよ</p>
+              <p className="text-base font-bold text-gray-900 mb-2 flex items-center gap-2"><Sparkles size={18} />全てを揃えよ</p>
               <p className="text-sm text-gray-600 leading-relaxed">{pattern.awakening_condition}</p>
             </div>
 
@@ -780,15 +784,15 @@ export default async function ResultPage({
               {neuroDict[parts[0]]?.jp}が求める「{neuroDict[parts[0]]?.desc}」、{neuroDict[parts[1]]?.jp}が求める「{neuroDict[parts[1]]?.desc}」、{neuroDict[parts[2]]?.jp}が求める「{neuroDict[parts[2]]?.desc}」——この3つが一つでも欠けると、駆動は最大出力に達しない。覚醒は偶然ではなく、環境設計で再現できる。
             </p>
 
-            <AdviceCard label="&#x1F4BC; 仕事で覚醒するには" color="#6b7280">
+            <AdviceCard icon={<Briefcase size={12} />} label="仕事で覚醒するには" color="#6b7280">
               <p>{awakeningAdvice.work}</p>
             </AdviceCard>
 
-            <AdviceCard label="&#x1F3E0; プライベートで覚醒するには" color="#6b7280">
+            <AdviceCard icon={<Home size={12} />} label="プライベートで覚醒するには" color="#6b7280">
               <p>{awakeningAdvice.life}</p>
             </AdviceCard>
 
-            <AdviceCard label="&#x1F504; 日常で持続させるには" color="#6b7280">
+            <AdviceCard icon={<RefreshCw size={12} />} label="日常で持続させるには" color="#6b7280">
               <p>{awakeningAdvice.daily}</p>
             </AdviceCard>
           </Chapter>
@@ -802,20 +806,20 @@ export default async function ResultPage({
             </p>
 
             <div className="border border-gray-200 bg-gray-50 rounded-lg p-4 mb-6">
-              <p className="text-base font-bold text-gray-900 mb-2">&#x26A0;&#xFE0F; これを避けよ</p>
+              <p className="text-base font-bold text-gray-900 mb-2 flex items-center gap-2"><AlertTriangle size={18} />これを避けよ</p>
               <p className="text-sm text-gray-600 leading-relaxed">{pattern.drain_condition}</p>
             </div>
 
             <h3 className="text-sm font-bold text-gray-900 mb-2">破綻のシナリオ</h3>
             <p className="text-sm text-gray-600 leading-[1.9] mb-6">{interp.breakdown}</p>
 
-            <AdviceCard label="&#x1F4BC; 仕事でのドレイン兆候と対策" color="#6b7280">
+            <AdviceCard icon={<Briefcase size={12} />} label="仕事でのドレイン兆候と対策" color="#6b7280">
               <p className="mb-3">{workAdv.drain}</p>
               <p className="text-xs text-gray-500 mb-1">こんな状態が2週間以上続いたら危険信号：</p>
               <p>朝の出勤が異常に辛い、得意だったはずの仕事に手がつかない、同僚との会話が億劫になる——これらは{neuroDict[parts[0]]?.jp}の枯渇サインだ。我慢して走り続けるのではなく、一度立ち止まって環境を見直す必要がある。</p>
             </AdviceCard>
 
-            <AdviceCard label="&#x1F3E0; プライベートでのドレイン兆候と対策" color="#6b7280">
+            <AdviceCard icon={<Home size={12} />} label="プライベートでのドレイン兆候と対策" color="#6b7280">
               <p className="mb-3">{lifeAdv.drain}</p>
               <p className="text-xs text-gray-500 mb-1">こんな状態が続いたら要注意：</p>
               <p>休日なのに何もする気が起きない、好きだったことに興味が持てない、人と会うのが面倒になる——これらは{neuroDict[parts[0]]?.jp}だけでなく、{neuroDict[parts[2]]?.jp}の循環も止まっているサインだ。次の回復マニュアルに従って、順番に回復させていく必要がある。</p>
@@ -831,7 +835,7 @@ export default async function ResultPage({
             </p>
 
             <div className="border border-gray-200 bg-gray-50 rounded-lg p-4 mb-6">
-              <p className="text-base font-bold text-gray-900 mb-2">&#x1F6E0;&#xFE0F; この順で戻せ</p>
+              <p className="text-base font-bold text-gray-900 mb-2 flex items-center gap-2"><Wrench size={18} />この順で戻せ</p>
               <p className="text-sm text-gray-600 leading-relaxed">{pattern.recovery_condition}</p>
             </div>
 
