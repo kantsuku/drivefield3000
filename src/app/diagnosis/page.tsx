@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useRef, useEffect } from 'react';
+import { Suspense, useState, useCallback, useRef, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import questionsData from '@/data/diagnosis-questions.json';
 import namesData from '@/data/names-240.json';
@@ -31,11 +31,11 @@ const NEURO_META: Record<string, { jp: string; desc: string; poetry: string; col
   E: { jp: 'エンドルフィン', desc: '快感・没入', poetry: '深淵への没入', color: '#7b5ea7', gradient: 'radial-gradient(circle, #5b3d8f, transparent 65%)', spirit: '溺れる悦楽' },
 };
 
-export default function DiagnosisPage() {
+function DiagnosisContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const previewPhase = searchParams.get('phase') as Phase | null;
-  const previewIndex = parseInt(searchParams.get('q') || '0');
+  const previewIndex = Math.max(0, parseInt(searchParams.get('q') || '0') || 0);
 
   // プレビュー用ダミー結果
   const previewResult: DiagnosisResult | null =
@@ -54,10 +54,13 @@ export default function DiagnosisPage() {
 
   const current = questions[index];
 
+  const advanceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const advance = useCallback(
     (newAnswers: Record<string, string>) => {
       setTransitioning(true);
-      setTimeout(() => {
+      if (advanceTimer.current) clearTimeout(advanceTimer.current);
+      advanceTimer.current = setTimeout(() => {
         if (index + 1 >= TOTAL) {
           const r = calculateResult(newAnswers, questions);
           setResult(r);
@@ -591,5 +594,13 @@ export default function DiagnosisPage() {
         </div>
       </div>
     </main>
+  );
+}
+
+export default function DiagnosisPage() {
+  return (
+    <Suspense fallback={<main className="flex items-center justify-center min-h-screen"><p className="text-sm text-gray-400 animate-pulse">読み込み中...</p></main>}>
+      <DiagnosisContent />
+    </Suspense>
   );
 }

@@ -516,14 +516,14 @@ export default async function ResultPage({
     </nav>
 
     {/* ═══ コンテンツゾーン（白背景） ═══ */}
-    <main className="bg-white text-gray-900 min-h-screen">
+    <main className="bg-white text-gray-900 min-h-screen pb-16 md:pb-0">
       <div className="w-full max-w-3xl mx-auto flex flex-col items-center px-6 py-12">
 
         {/* ═══ 第二章：診断結果 ═══ */}
         <Chapter id="sec-result" num="01" title="診断結果" en="DIAGNOSIS">
           {/* 神経系スコア（2カラム: 左レーダー / 右スコア） */}
           <p className="text-[10px] text-gray-400 leading-relaxed mb-4">本診断は科学的根拠に基づくものではなく、行動パターンから神経系の傾向を推測したものです。</p>
-          <div className="grid grid-cols-[auto_1fr] gap-4 mb-6 items-start">
+          <div className="flex flex-col md:grid md:grid-cols-[auto_1fr] gap-4 mb-6 items-start">
             {/* 左: レーダー */}
             <div>
               <RadarChart scores={scores} />
@@ -554,7 +554,7 @@ export default async function ResultPage({
 
           {/* 神経系優先順位カード（1st/2nd/3rd + 解説） */}
           <h3 className="text-sm font-bold text-gray-900 mb-3">あなたの神経系優先順位</h3>
-          <div className="grid grid-cols-3 gap-3 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
             {[
               { rank: '1st', code: parts[0], role: '点火', comment: 'あなたの最も強い駆動源。この衝動が全ての起点になります。' },
               { rank: '2nd', code: parts[1], role: '加速', comment: '2番目に強い神経系。点火した衝動を形にし、推進力を与えます。' },
@@ -580,11 +580,11 @@ export default async function ResultPage({
           </div>
 
           {/* 属性タグ */}
-          <h3 className="text-sm font-bold text-gray-900 mb-2">駆動特性</h3>
+          <h3 className="text-base font-bold text-gray-900 mb-3">駆動特性</h3>
           <p className="text-xs text-gray-500 mb-4">
             同じ骨格・同じ型でも、エンジンのかかり方と出力の大きさは人によって異なる。以下の3つの特性があなたの「走り方」を決定する。
           </p>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {/* 発動方向 */}
             <div className="border border-gray-200 rounded-xl p-4 bg-gray-50/50">
               <p className="text-[10px] text-gray-400 mb-2 flex items-center gap-1"><Flame size={12} />発動方向</p>
@@ -691,7 +691,7 @@ export default async function ResultPage({
 
 
             {/* 診断のプロセスフロー */}
-            <h3 className="text-sm font-bold text-gray-900 mb-2">診断のプロセス</h3>
+            <h3 className="text-base font-bold text-gray-900 mb-3">診断のプロセス</h3>
             <p className="text-xs text-gray-500 leading-relaxed mb-6">
               疾走領域（Drive Field）は、5つの神経系スコアから段階的にあなた固有の疾走領域を絞り込みます。各段階で何が決まるかを以下に示します。
             </p>
@@ -763,7 +763,7 @@ export default async function ResultPage({
                     {i < arr.length - 1 && <div className="w-px flex-1 min-h-[24px] bg-gray-200" />}
                   </div>
                   <div className="flex-1 pb-6">
-                    <p className="text-sm font-bold text-gray-900 mb-2 mt-1.5">{step.title}</p>
+                    <p className="text-base font-bold text-gray-900 mb-3 mt-1.5">{step.title}</p>
                     {step.content}
                     {step.connector && <p className="text-[10px] text-gray-400 mt-3">{step.connector}</p>}
                   </div>
@@ -780,20 +780,20 @@ export default async function ResultPage({
               {interp.awakened_vibe}
             </p>
 
-            <h3 className="text-sm font-bold text-gray-900 mb-2 flex items-center gap-2"><Activity size={20} className="text-gray-400" />あなたの駆動の特徴</h3>
+            <h3 className="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"><Activity size={20} className="text-gray-400" />あなたの駆動の特徴</h3>
             <p className="text-sm text-gray-800 leading-[1.9] mb-6">{interp.structural_interpretation}</p>
 
-            <h3 className="text-sm font-bold text-gray-900 mb-2 flex items-center gap-2"><Rocket size={20} className="text-gray-400" />発動スタイル</h3>
+            <h3 className="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"><Rocket size={20} className="text-gray-400" />発動スタイル</h3>
             <p className="text-sm text-gray-600 leading-[1.9] mb-4">{profile.ignitionStyle}</p>
             <p className="text-sm text-gray-600 leading-[1.9] mb-8">{profile.timingStyle}</p>
 
-            <h3 className="text-sm font-bold text-gray-900 mb-2 flex items-center gap-2"><Briefcase size={20} className="text-gray-400" />仕事での傾向</h3>
+            <h3 className="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"><Briefcase size={20} className="text-gray-400" />仕事での傾向</h3>
             <p className="text-sm text-gray-600 leading-[1.9] mb-8">{profile.workStyle}</p>
 
-            <h3 className="text-sm font-bold text-gray-900 mb-2 flex items-center gap-2"><Users size={20} className="text-gray-400" />人間関係の傾向</h3>
+            <h3 className="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"><Users size={20} className="text-gray-400" />人間関係の傾向</h3>
             <p className="text-sm text-gray-600 leading-[1.9] mb-8">{profile.relationship}</p>
 
-            <h3 className="text-sm font-bold text-gray-900 mb-2 flex items-center gap-2"><Coffee size={20} className="text-gray-400" />日常生活の傾向</h3>
+            <h3 className="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"><Coffee size={20} className="text-gray-400" />日常生活の傾向</h3>
             <p className="text-sm text-gray-600 leading-[1.9] mb-8">{profile.daily}</p>
 
           </Chapter>
@@ -827,7 +827,7 @@ export default async function ResultPage({
                 </p>
 
                 {/* 仕事 / プライベート 2カラム */}
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div className="bg-white rounded-lg p-3">
                     <p className="text-[10px] text-gray-400 flex items-center gap-1 mb-2"><Briefcase size={12} />仕事で{step.role}するには</p>
                     <p className="text-xs text-gray-600 leading-relaxed">{step.work}</p>
@@ -900,7 +900,7 @@ export default async function ResultPage({
               ドレインとは、あなたの{neuroDict[parts[0]]?.jp}が求めるものが長期間得られず、駆動が空回りし続ける状態のことだ。最初は「なんとなく調子が出ない」程度だが、放置すると{neuroDict[parts[1]]?.jp}と{neuroDict[parts[2]]?.jp}の機能まで連鎖的に低下し、やがて何をしても動けなくなる。以下の兆候に心当たりがあるなら、すでにドレインが始まっている可能性がある。
             </p>
 
-            <h3 className="text-sm font-bold text-gray-900 mb-2 flex items-center gap-2"><AlertTriangle size={20} className="text-gray-400" />破綻のシナリオ</h3>
+            <h3 className="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"><AlertTriangle size={20} className="text-gray-400" />破綻のシナリオ</h3>
             <p className="text-sm text-gray-600 leading-[1.9] mb-6">{interp.breakdown}</p>
 
             {[
@@ -940,7 +940,7 @@ export default async function ResultPage({
               ドレイン状態からの回復には順番がある。まず{neuroDict[parts[0]]?.jp}（{neuroDict[parts[0]]?.desc}）を回復させ、次に{neuroDict[parts[1]]?.jp}（{neuroDict[parts[1]]?.desc}）を立ち上げ、最後に{neuroDict[parts[2]]?.jp}（{neuroDict[parts[2]]?.desc}）を繋げる。この順番を間違えると回復が遅れる。2位や3位からいくら頑張っても、1位の{neuroDict[parts[0]]?.jp}が枯れたままでは駆動は再起動しない。
             </p>
 
-            <h3 className="text-sm font-bold text-gray-900 mb-2 flex items-center gap-2"><Wrench size={20} className="text-gray-400" />回復の起点</h3>
+            <h3 className="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"><Wrench size={20} className="text-gray-400" />回復の起点</h3>
             <p className="text-sm text-gray-600 leading-[1.9] mb-6">{interp.recovery}</p>
 
             {[

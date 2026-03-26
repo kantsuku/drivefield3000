@@ -29,12 +29,14 @@ export function ActionMenu(props: ActionMenuProps) {
   const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
 
   const handleShare = async () => {
-    if (navigator.share) {
-      try { await navigator.share({ title: `疾走領域「${props.kanjiName}」`, text: shareText, url: shareUrl }); } catch {}
-    } else {
-      await navigator.clipboard.writeText(`${shareText}\n${shareUrl}`);
-      flash();
-    }
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: `疾走領域「${props.kanjiName}」`, text: shareText, url: shareUrl });
+      } else {
+        await navigator.clipboard.writeText(`${shareText}\n${shareUrl}`);
+        flash();
+      }
+    } catch { /* user cancelled or clipboard unavailable */ }
   };
 
   const handleBookmark = () => {
@@ -120,8 +122,10 @@ export function ActionMenu(props: ActionMenuProps) {
 
 ではユーザーの相談を聞いてください。最初に軽く自己紹介と、この人の疾走領域の特徴を簡潔に述べてから「何についてお話しましょうか？」と聞いてください。`;
 
-    await navigator.clipboard.writeText(prompt);
-    flash();
+    try {
+      await navigator.clipboard.writeText(prompt);
+      flash();
+    } catch { /* clipboard unavailable */ }
   };
 
   const flash = () => {

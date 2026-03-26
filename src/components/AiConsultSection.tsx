@@ -11,9 +11,11 @@ export function AiConsultSection({ prompt }: Props) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(prompt);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 3000);
+    try {
+      await navigator.clipboard.writeText(prompt);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 3000);
+    } catch { /* clipboard unavailable */ }
   };
 
   return (
