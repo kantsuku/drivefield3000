@@ -523,14 +523,14 @@ export default async function ResultPage({
         <Chapter id="sec-result" num="01" title="診断結果" en="DIAGNOSIS">
           {/* 神経系スコア（2カラム: 左レーダー / 右スコア） */}
           <p className="text-[10px] text-gray-400 leading-relaxed mb-4">本診断は科学的根拠に基づくものではなく、行動パターンから神経系の傾向を推測したものです。</p>
-          <div className="flex flex-col md:grid md:grid-cols-[auto_1fr] gap-4 mb-6 items-start">
+          <div className="w-full flex flex-col md:grid md:grid-cols-[auto_1fr] gap-4 mb-6 items-start">
             {/* 左: レーダー */}
-            <div>
+            <div className="w-full md:w-auto flex justify-center">
               <RadarChart scores={scores} />
             </div>
 
             {/* 右: スコア縦並び（シンプル） */}
-            <div className="space-y-2 min-w-0">
+            <div className="w-full space-y-2 min-w-0">
               {(['D','S','O','N','E'] as const).map((k) => {
                 const maxVal = Math.max(...Object.values(scores));
                 const pct = maxVal > 0 ? (scores[k] / maxVal) * 100 : 0;
