@@ -241,23 +241,30 @@ export function AboutMenu() {
               </section>
 
               <section>
-                <SectionHead title="あなたに合わせた語り口" />
-                <p className="text-base text-gray-300 leading-[2] mb-6">
-                  この診断のもう一つの特徴は、Layer 2〜4の回答傾向から「どんな言葉が最も響くか」を判定し、結果の語り口を自動で切り替えることです。
+                <SectionHead title="1億通りを超える診断結果" />
+                <p className="text-base text-gray-300 leading-[2] mb-4">
+                  5つのレイヤーを掛け合わせた結果、理論上の診断パターンは以下のようになります。
                 </p>
-                <div className="space-y-3">
+                <div className="space-y-2 mb-4">
                   {[
-                    { type: '自己理解が深い人', desc: '構造的な解説で「直感を裏付ける」語り口。「あなたは既に気づいているかもしれないが、その背景にはこの構造がある」', icon: '🔍' },
-                    { type: '言葉にするのが苦手な人', desc: 'あなたの気持ちを代弁する語り口。「これまでうまく説明できなかったかもしれないが、あなたが夢中になれる条件にはパターンがある」', icon: '💬' },
-                    { type: '今つらい状況にいる人', desc: 'まず肯定する語り口。「動けないのはあなたが弱いからではない。エンジンに合わない場所にいるだけだ」', icon: '🤝' },
-                    { type: '好奇心で来た人', desc: '驚きと深さを見せる語り口。「ただの性格診断だと思っていたかもしれないが、ここから先は想像以上に深い」', icon: '✨' },
+                    { label: 'Layer 1: エンジン', value: '2,880通り' },
+                    { label: 'Layer 2: ブレーキ', value: '× 12通り' },
+                    { label: 'Layer 3: スキルツリー', value: '× 32通り' },
+                    { label: 'Layer 4: 才能', value: '× 32通り' },
+                    { label: 'Layer 5: 環境', value: '× 4通り' },
                   ].map((item) => (
-                    <div key={item.type} className="border border-white/5 rounded-lg p-3">
-                      <p className="text-sm font-bold text-gray-200 mb-1">{item.icon} {item.type}</p>
-                      <p className="text-xs text-gray-400 leading-relaxed">{item.desc}</p>
+                    <div key={item.label} className="flex items-center justify-between text-xs py-1 border-b border-white/5">
+                      <span className="text-gray-400">{item.label}</span>
+                      <span className="text-gray-300">{item.value}</span>
                     </div>
                   ))}
                 </div>
+                <p className="text-3xl font-bold text-white mb-4">
+                  = 141,557,760通り
+                </p>
+                <p className="text-base text-gray-300 leading-[2]">
+                  1億4千万通り。同じ診断結果になる人は、事実上存在しません。あなたの結果は、あなただけのものです。
+                </p>
               </section>
 
               <section>
