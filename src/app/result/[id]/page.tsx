@@ -837,7 +837,7 @@ export default async function ResultPage({
                   </div>
                   {/* 円の外側を黒くするマスク（中央基準） */}
                   <div className="absolute inset-0 z-[2] pointer-events-none" style={{
-                    background: 'radial-gradient(circle at 50% 50%, transparent 41%, #000 42%)',
+                    background: 'radial-gradient(circle at 50% 50%, transparent 49%, #000 50%)',
                   }} />
                   {/* 太陽系コンテンツ */}
                   <div className="absolute inset-0 z-10 flex items-center justify-center">
