@@ -899,8 +899,8 @@ export default async function ResultPage({
               {pattern?.interpretation || `${neuroDict[parts[0]]?.desc}を起点に${neuroDict[parts[1]]?.desc}で加速する${BIAS_JP[bias] || bias}ドライブ`}
             </p>
 
-            {/* 太陽系ビジュアル */}
-            {(() => {
+            {/* 太陽系ビジュアル（一時非表示） */}
+            {false && (() => {
               const orbits = [
                 { code: parts[0], role: '点火', radius: 85, speed: 20, size: 36 },
                 { code: parts[1], role: '加速', radius: 130, speed: 28, size: 36 },
