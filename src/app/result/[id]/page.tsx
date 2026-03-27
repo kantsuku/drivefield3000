@@ -835,9 +835,15 @@ export default async function ResultPage({
                       <BlobBackground blobs={bg.blobs} edges={bg.edges} baseColor={bg.baseColor} />
                     </div>
                   </div>
-                  {/* 円の外側を黒くするマスク（中央基準） */}
+                  {/* 円の外側を白くするマスク（中央基準） */}
                   <div className="absolute inset-0 z-[2] pointer-events-none" style={{
                     background: 'radial-gradient(circle at 50% 50%, transparent 56%, #fff 57%)',
+                  }} />
+                  {/* 円の内側の暗い背景 */}
+                  <div className="absolute inset-0 z-[1] pointer-events-none" style={{
+                    background: `radial-gradient(circle at 50% 50%, ${{
+                      D: '#8b2520', S: '#1a3a4a', O: '#1a3d32', N: '#3d3010', E: '#2d1f45',
+                    }[rank1] || '#1a1a1a'} 0%, #000 56%, transparent 57%)`,
                   }} />
                   {/* 太陽系コンテンツ */}
                   <div className="absolute inset-0 z-10 flex items-center justify-center">
@@ -886,9 +892,9 @@ export default async function ResultPage({
                   <div className="absolute bottom-3 right-4 z-10 flex flex-col gap-1 items-end">
                     {orbits.map((o) => (
                       <div key={o.code} className="flex items-center gap-1.5">
-                        <span className="text-[9px] text-white/50">{o.role}</span>
+                        <span className="text-[9px] text-gray-400">{o.role}</span>
                         <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: NEURO_LABELS[o.code]?.color }} />
-                        <span className="text-[9px] text-white/70">{neuroDict[o.code]?.jp}</span>
+                        <span className="text-[9px] text-gray-600">{neuroDict[o.code]?.jp}</span>
                       </div>
                     ))}
                   </div>
