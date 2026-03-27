@@ -185,11 +185,11 @@ export function AboutMenu() {
                 </p>
                 <div className="space-y-4">
                   {[
-                    { layer: 'Layer 1', title: 'エンジン（先天的）', desc: '5つの神経系の優先順位から、あなた固有の駆動構造を導出します。60の骨格、20の型、240の疾走領域、2,880の駆動パターンへと段階的に絞り込みます。', color: '#c0392b' },
-                    { layer: 'Layer 2', title: 'ブレーキ（後天的）', desc: '自己肯定感と対人基盤（愛着スタイル）を測定します。同じエンジンでもブレーキがかかっていれば力を発揮できません。行動の結果から、あなた自身も気づいていないブレーキを検出します。', color: '#b8860b' },
-                    { layer: 'Layer 3', title: 'スキルツリー（経験値）', desc: '学習・対人・体力・創作・冒険の5領域で、あなたがこれまでに積んできた経験値を把握します。エンジンとスキルの組み合わせで「何を通じて夢中になるか」が見えてきます。', color: '#27806a' },
-                    { layer: 'Layer 4', title: '才能（身体・認知）', desc: '身体能力・感覚直感・論理力・手先の器用さ・言語表現力を測定します。エンジンの力をどのチャネルで出力するかを決定する要素です。', color: '#2e6b8a' },
-                    { layer: 'Layer 5', title: '環境コンテキスト', desc: '経済的背景や健康面の制約を、行動傾向から逆推定します。同じエンジンでも環境によって最適な展開方法が変わります。', color: '#7b5ea7' },
+                    { layer: 'Layer 1', title: 'エンジン（先天的・52問）', desc: '5つの神経系（ドーパミン・セロトニン・オキシトシン・ノルアドレナリン・エンドルフィン）のスコアを算出し、骨格・型・疾走領域・駆動パターンを段階的に絞り込みます。さらに偏り（一点突破/二軸駆動/三位一体/万能拡散）、発動方向（外燃/内燃）、時間特性（瞬発/熟成）、出力レベル（低/中/高）も判定します。クロスバリデーション（同じ神経系を異なる場面で再測定）により精度を担保しています。', color: '#c0392b' },
+                    { layer: 'Layer 2', title: 'ブレーキ検出（14問）', desc: '自己肯定感を外見・能力・存在価値・行動力・回復力の観点から8問で測定。対人基盤（愛着スタイル）を初対面の態度・助けを求める力・幼少期の安心感など6問で逆推定します。同じエンジンでもブレーキがかかっていれば出力が制限されます。直接「自信がありますか？」とは聞かず、行動の結果から検出する設計です。', color: '#b8860b' },
+                    { layer: 'Layer 3', title: 'スキルツリー（5問）', desc: '学習経験（勉強の方法論）・対人経験（場を回す力）・体力経験（限界突破）・創作経験（没頭力）・冒険経験（環境変化）の5軸で、これまでに積んできた経験値を把握します。エンジンと経験値の組み合わせで「何を通じて夢中になるか」の具体提案が変わります。', color: '#27806a' },
+                    { layer: 'Layer 4', title: '才能軸（5問）', desc: '身体能力・感覚直感（右脳）・論理力（左脳）・手先の器用さ・言語表現力を測定します。エンジンの力をどのチャネルで出力するかを決定する要素です。例えばD型＋右脳強なら「アートで点火」、D型＋左脳強なら「ビジネス設計で点火」のように具体度が上がります。', color: '#2e6b8a' },
+                    { layer: 'Layer 5', title: '環境コンテキスト（4問）', desc: '経済的背景（子供の頃の自由度・現在のお金への意識）と健康面の制約を、行動傾向から逆推定します。センシティブな情報は直接聞かず、「やりたい習い事ができたか」「お金のことが最初に頭に浮かぶか」といった問いで把握します。', color: '#7b5ea7' },
                   ].map((item) => (
                     <div key={item.layer} className="border-l-2 pl-4" style={{ borderColor: item.color }}>
                       <p className="text-[10px] tracking-wider mb-1" style={{ color: item.color }}>{item.layer}</p>
@@ -242,12 +242,50 @@ export function AboutMenu() {
 
               <section>
                 <SectionHead title="あなたに合わせた語り口" />
-                <p className="text-base text-gray-300 leading-[2] mb-4">
-                  この診断のもう一つの特徴は、あなたの回答傾向から「どんな言葉が最も響くか」を判定し、結果の語り口を自動で切り替えることです。
+                <p className="text-base text-gray-300 leading-[2] mb-6">
+                  この診断のもう一つの特徴は、Layer 2〜4の回答傾向から「どんな言葉が最も響くか」を判定し、結果の語り口を自動で切り替えることです。
                 </p>
-                <p className="text-base text-gray-300 leading-[2]">
-                  自分のことを深く理解している人には構造的な解説を。言葉にするのが苦手な人にはその気持ちを代弁する語りを。今つらい状況にいる人には、まず「あなたは間違っていない」と伝えることから。同じ疾走領域でも、あなたに最も届く言葉で語りかけます。
-                </p>
+                <div className="space-y-3">
+                  {[
+                    { type: '自己理解が深い人', desc: '構造的な解説で「直感を裏付ける」語り口。「あなたは既に気づいているかもしれないが、その背景にはこの構造がある」', icon: '🔍' },
+                    { type: '言葉にするのが苦手な人', desc: 'あなたの気持ちを代弁する語り口。「これまでうまく説明できなかったかもしれないが、あなたが夢中になれる条件にはパターンがある」', icon: '💬' },
+                    { type: '今つらい状況にいる人', desc: 'まず肯定する語り口。「動けないのはあなたが弱いからではない。エンジンに合わない場所にいるだけだ」', icon: '🤝' },
+                    { type: '好奇心で来た人', desc: '驚きと深さを見せる語り口。「ただの性格診断だと思っていたかもしれないが、ここから先は想像以上に深い」', icon: '✨' },
+                  ].map((item) => (
+                    <div key={item.type} className="border border-white/5 rounded-lg p-3">
+                      <p className="text-sm font-bold text-gray-200 mb-1">{item.icon} {item.type}</p>
+                      <p className="text-xs text-gray-400 leading-relaxed">{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <section>
+                <SectionHead title="全90問の内訳" />
+                <div className="space-y-2">
+                  {[
+                    { category: 'エンジン（神経系・骨格）', count: '10問', type: '8択' },
+                    { category: '偏り・発動方向・時間特性・出力', count: '20問', type: '2択' },
+                    { category: '場面別（旅行・仕事・恋愛・食・金）', count: '18問', type: '2択' },
+                    { category: '原体験', count: '4問', type: '2択' },
+                    { category: 'クロスバリデーション', count: '6問', type: '2択' },
+                    { category: '自己肯定感', count: '8問', type: '2択' },
+                    { category: '対人基盤（愛着）', count: '6問', type: '2択' },
+                    { category: '経験値マップ', count: '5問', type: '2択' },
+                    { category: '才能軸', count: '5問', type: '2択' },
+                    { category: '環境逆推定', count: '4問', type: '2択' },
+                    { category: '未来思考', count: '4問', type: '8択+2択' },
+                  ].map((item) => (
+                    <div key={item.category} className="flex items-center justify-between text-xs py-1.5 border-b border-white/5">
+                      <span className="text-gray-300">{item.category}</span>
+                      <span className="text-gray-500">{item.count}（{item.type}）</span>
+                    </div>
+                  ))}
+                  <div className="flex items-center justify-between text-sm py-2 font-bold">
+                    <span className="text-white">合計</span>
+                    <span className="text-white">90問 / 約15〜20分</span>
+                  </div>
+                </div>
               </section>
             </div>
           )}
