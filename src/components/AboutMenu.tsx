@@ -22,7 +22,7 @@ export function AboutMenu() {
       {/* ハンバーガーボタン */}
       <button
         onClick={() => setOpen(true)}
-        className="fixed top-4 left-4 z-50 w-10 h-10 flex flex-col items-center justify-center gap-1.5 rounded-full border border-white/20 bg-black hover:border-white/40 transition-colors"
+        className="fixed top-[52px] md:top-4 left-4 z-50 w-10 h-10 flex flex-col items-center justify-center gap-1.5 rounded-full border border-white/20 bg-black hover:border-white/40 transition-colors"
         aria-label="メニューを開く"
       >
         <Menu size={18} />

@@ -705,7 +705,7 @@ export default async function ResultPage({
 
     {/* ═══ アンカーメニュー（sticky） ═══ */}
     <nav className="sticky top-0 z-40 bg-white">
-      <div className="max-w-3xl mx-auto flex items-center gap-3 pl-16 md:pl-4 pr-4 py-2.5">
+      <div className="max-w-3xl mx-auto flex items-center gap-3 px-4 py-2.5">
         <span className="text-[10px] text-gray-400 tracking-wider shrink-0 hidden md:inline">目次</span>
         <div className="overflow-x-auto flex gap-2 min-w-0">
           {[
