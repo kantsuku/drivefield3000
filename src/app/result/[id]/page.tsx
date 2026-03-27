@@ -696,8 +696,6 @@ export default async function ResultPage({
           })()}
         </p>
 
-        <p className="text-sm text-white/70 mb-4 leading-relaxed text-left">{voice.intro}</p>
-
         {entry.lead && (
           <p className="text-sm text-white mb-6 leading-[1.9] text-left">{entry.lead}</p>
         )}
@@ -734,6 +732,11 @@ export default async function ResultPage({
     {/* ═══ コンテンツゾーン（白背景） ═══ */}
     <main className="bg-white text-gray-900 min-h-screen pb-16 md:pb-0">
       <div className="w-full max-w-3xl mx-auto flex flex-col items-center px-6 py-12">
+
+        {/* セグメント別イントロ */}
+        <p className="text-base text-gray-600 leading-[2] mb-10 text-center italic">
+          {voice.intro}
+        </p>
 
         {/* ═══ 第二章：診断結果 ═══ */}
         <Chapter id="sec-result" num="01" title="診断結果" en="DIAGNOSIS">
