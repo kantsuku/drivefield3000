@@ -862,10 +862,9 @@ export default async function ResultPage({
                       ))}
                       {/* 中央: 疾走領域名 */}
                       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-                        <p className="text-3xl font-bold text-white" style={{ fontFamily: '"Noto Serif JP", "游明朝", YuMincho, serif', letterSpacing: '0.15em' }}>
+                        <p className="text-3xl font-bold text-white" style={{ writingMode: 'vertical-rl', fontFamily: '"Noto Serif JP", "游明朝", YuMincho, serif', letterSpacing: '0.3em' }}>
                           {entry.kanji_name}
                         </p>
-                        <p className="text-[10px] text-white/60 mt-1">{entry.reading}</p>
                       </div>
                     </div>
                     {/* 凡例 */}
