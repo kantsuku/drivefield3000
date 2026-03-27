@@ -832,7 +832,7 @@ export default async function ResultPage({
                   <BlobBackground blobs={bg.blobs} edges={bg.edges} baseColor={bg.baseColor} />
                   {/* 円の外側を黒くするマスク */}
                   <div className="absolute inset-0 z-[2] pointer-events-none" style={{
-                    background: 'radial-gradient(circle at center, transparent 45%, #000 52%)',
+                    background: 'radial-gradient(circle at center, transparent 46%, #000 47%)',
                   }} />
                   <div className="relative z-10 flex flex-col items-center py-12 px-4">
                     <div className="relative" style={{ width: 360, height: 360 }}>
