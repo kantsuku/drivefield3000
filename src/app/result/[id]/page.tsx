@@ -514,6 +514,25 @@ export default async function ResultPage({
   const timing = sp.tm || null;
   const output = sp.out || null;
   const segment = (sp.seg as 'meta' | 'unverbalized' | 'struggling' | 'curious') || 'unverbalized';
+
+  // Layer 2〜5 スコア受け取り
+  const layers = {
+    selfEsteem: Number(sp.se) || 0,
+    attachment: Number(sp.at) || 0,
+    expStudy: Number(sp.xs) || 0,
+    expSocial: Number(sp.xo) || 0,
+    expPhysical: Number(sp.xp) || 0,
+    expCreative: Number(sp.xc) || 0,
+    expAdventure: Number(sp.xa) || 0,
+    talentPhysical: Number(sp.tp) || 0,
+    talentIntuitive: Number(sp.ti) || 0,
+    talentLogical: Number(sp.tl) || 0,
+    talentDexterity: Number(sp.td) || 0,
+    talentVerbal: Number(sp.tv) || 0,
+    envAffluence: Number(sp.ea) || 0,
+    envHealth: Number(sp.eh) || 0,
+  };
+
   const pattern = findPattern(coreCode, bias, ignition, timing, output);
 
   // セグメント別の語り口テキスト
@@ -548,6 +567,64 @@ export default async function ResultPage({
     },
   };
   const voice = SEGMENT_VOICE[segment];
+
+  // Layer 2〜5 条件付きインサイト
+  const insights: string[] = [];
+
+  // Layer 2: ブレーキ
+  if (layers.selfEsteem >= 5) {
+    insights.push('自己肯定感が高いあなたは、エンジンにブレーキがかかりにくい。これは大きな強みだ。迷わず走れ。');
+  } else if (layers.selfEsteem <= -3) {
+    insights.push('エンジンは十分に強いが、自己肯定感というブレーキがかかっている可能性がある。動けないのは能力の問題ではなく、「自分にはムリかも」という思い込みの問題だ。');
+  }
+
+  if (layers.attachment >= 5) {
+    insights.push('対人基盤が安定している。人を信頼できるあなたは、チームや仲間との共走で疾走領域を展開しやすい。');
+  } else if (layers.attachment <= -3) {
+    insights.push('人に頼ることに抵抗があるかもしれない。それは弱さではないが、一人で全てを背負うとドレインしやすい。信頼できる一人でいいから、走りを共有できる相手を見つけてほしい。');
+  }
+
+  // Layer 3: 経験値
+  if (layers.expStudy >= 3) {
+    insights.push('学習経験が豊富なあなたは、未知の領域でも「学び方」を知っている。新しいことへのキャッチアップが速いはずだ。');
+  }
+  if (layers.expSocial >= 3) {
+    insights.push('対人経験の厚さが武器だ。場を回す力があるあなたは、チームの中で疾走領域を展開すると最大効率になる。');
+  }
+  if (layers.expPhysical >= 3) {
+    insights.push('体力・メンタルの限界を超えた経験があるあなたは、ドレイン耐性が高い。他の人より粘れる。ただし過信は禁物だ。');
+  }
+  if (layers.expCreative >= 3) {
+    insights.push('創作に没頭した経験があるあなたは、フロー状態に入るコツを体で覚えている。「作る」行為そのものが疾走領域への入口になる。');
+  }
+  if (layers.expAdventure >= 3) {
+    insights.push('環境を大きく変えた経験があるあなたは、変化への耐性が高い。新しい疾走領域に飛び込むことへの心理的ハードルが低いはずだ。');
+  }
+
+  // Layer 4: 才能
+  if (layers.talentPhysical >= 3) {
+    insights.push('体を動かすことが得意なあなたは、スポーツ・アウトドア・身体表現を通じて夢中状態に入りやすい。頭で考える前に体を動かすことが点火のスイッチになることがある。');
+  }
+  if (layers.talentIntuitive >= 3) {
+    insights.push('感覚・直感が鋭いあなたは、アート・音楽・デザインなど感性を使う活動で深い没入を得られる。論理より「感じる」方を信じていい。');
+  }
+  if (layers.talentLogical >= 3) {
+    insights.push('論理力が高いあなたは、複雑な問題を構造化する過程で夢中になれる。プログラミング・設計・分析・戦略立案が疾走領域の入口になる。');
+  }
+  if (layers.talentDexterity >= 3) {
+    insights.push('手先の器用さがあるあなたは、クラフト・料理・楽器演奏・精密な作業で没入しやすい。「手を動かしている時間」が疾走領域への最短ルートだ。');
+  }
+  if (layers.talentVerbal >= 3) {
+    insights.push('言語表現力が高いあなたは、書くこと・話すこと・教えることを通じて夢中になれる。自分の疾走領域を言葉にして人に伝える行為そのものが、さらなる加速を生む。');
+  }
+
+  // Layer 5: 環境
+  if (layers.envAffluence <= -3) {
+    insights.push('経済面の制約を感じることがあるかもしれない。しかし疾走領域の展開にお金は必須ではない。今の環境でできる「小さな夢中」から始めることが最も確実な第一歩だ。');
+  }
+  if (layers.envHealth <= -3) {
+    insights.push('体力や健康面の制約があるなら、疾走領域の展開方法を身体的な活動から知的・創造的な活動にシフトすることを検討してほしい。エンジンは変わらない。出力チャネルを変えるだけだ。');
+  }
 
   // interpretationデータ取得
   const interp = pattern ? interpMap[pattern.pattern_id] : null;
@@ -1093,6 +1170,20 @@ export default async function ResultPage({
 
             <h3 className="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"><Coffee size={20} className="text-gray-400" />日常生活の傾向</h3>
             <p className="text-sm text-gray-600 leading-[1.9] mb-8">{profile.daily}</p>
+
+            {/* Layer 2〜5 条件付きインサイト */}
+            {insights.length > 0 && (
+              <div className="border-t border-gray-200 pt-6">
+                <h3 className="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"><Sparkles size={20} className="text-gray-400" />あなただけの特徴</h3>
+                <div className="space-y-3">
+                  {insights.map((text, i) => (
+                    <p key={i} className="text-sm text-gray-700 leading-[1.9] border-l-2 pl-4" style={{ borderColor: NEURO_LABELS[rank1]?.color }}>
+                      {text}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            )}
 
           </Chapter>
         )}

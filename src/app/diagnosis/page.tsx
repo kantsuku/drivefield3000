@@ -128,10 +128,18 @@ function DiagnosisContent() {
   const navigateToResult = () => {
     if (!result) return;
     const s = result.scores;
+    const l2 = result.layer2;
+    const l3 = result.layer3;
+    const l4 = result.layer4;
+    const l5 = result.layer5;
     const params = new URLSearchParams({
       D: String(s.D), S: String(s.S), O: String(s.O), N: String(s.N), E: String(s.E),
       ig: result.ignition, tm: result.timing, out: result.output,
       seg: result.segment,
+      se: String(l2.selfEsteem), at: String(l2.attachment),
+      xs: String(l3.study), xo: String(l3.social), xp: String(l3.physical), xc: String(l3.creative), xa: String(l3.adventure),
+      tp: String(l4.physical), ti: String(l4.intuitive), tl: String(l4.logical), td: String(l4.dexterity), tv: String(l4.verbal),
+      ea: String(l5.affluence), eh: String(l5.health),
     });
     router.push(`/result/${encodeURIComponent(result.nameId)}?${params}`);
   };
