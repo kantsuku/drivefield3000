@@ -819,6 +819,68 @@ export default async function ResultPage({
               {pattern?.interpretation || `${neuroDict[parts[0]]?.desc}を起点に${neuroDict[parts[1]]?.desc}で加速する${BIAS_JP[bias] || bias}ドライブ`}
             </p>
 
+            {/* 太陽系ビジュアル */}
+            {(() => {
+              const orbits = [
+                { code: parts[0], role: '点火', radius: 90, speed: 20, size: 28 },
+                { code: parts[1], role: '加速', radius: 130, speed: 28, size: 22 },
+                { code: parts[2], role: '持続', radius: 165, speed: 36, size: 18 },
+              ];
+              const bg = generateBlobs(rank1, bias, { main: NEURO_LABELS[rank1]?.gradient, dark: NEURO_LABELS[rank1]?.gradientDark }, parts[1], parts[2]);
+              return (
+                <div className="noise-overlay relative rounded-2xl overflow-hidden mb-8" style={{ backgroundColor: {
+                  D: '#8b2520', S: '#1a3a4a', O: '#1a3d32', N: '#3d3010', E: '#2d1f45',
+                }[rank1] || '#1a1a1a' }}>
+                  <BlobBackground blobs={bg.blobs} edges={bg.edges} baseColor={bg.baseColor} />
+                  <div className="relative z-10 flex flex-col items-center py-12 px-4">
+                    <div className="relative" style={{ width: 360, height: 360 }}>
+                      {/* 軌道リング */}
+                      {orbits.map((o, i) => (
+                        <div key={i} className="absolute rounded-full border border-white/10" style={{
+                          width: o.radius * 2, height: o.radius * 2,
+                          top: '50%', left: '50%',
+                          transform: 'translate(-50%, -50%)',
+                        }} />
+                      ))}
+                      {/* 天体（神経系） */}
+                      {orbits.map((o, i) => (
+                        <div key={`planet-${i}`} className="absolute" style={{
+                          width: o.size, height: o.size,
+                          top: '50%', left: '50%',
+                          animation: `orbit-${i + 1} ${o.speed}s linear infinite`,
+                          marginTop: -o.size / 2, marginLeft: -o.size / 2,
+                        }}>
+                          <div className="w-full h-full rounded-full flex items-center justify-center text-white font-bold shadow-lg" style={{
+                            backgroundColor: NEURO_LABELS[o.code]?.color,
+                            fontSize: o.size * 0.4,
+                            animation: `orbit-${i + 1}-counter ${o.speed}s linear infinite`,
+                          }}>
+                            {o.code}
+                          </div>
+                        </div>
+                      ))}
+                      {/* 中央: 疾走領域名 */}
+                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+                        <p className="text-3xl font-bold text-white" style={{ fontFamily: '"Noto Serif JP", "游明朝", YuMincho, serif', letterSpacing: '0.15em' }}>
+                          {entry.kanji_name}
+                        </p>
+                        <p className="text-[10px] text-white/60 mt-1">{entry.reading}</p>
+                      </div>
+                    </div>
+                    {/* 凡例 */}
+                    <div className="flex gap-4 mt-4">
+                      {orbits.map((o) => (
+                        <div key={o.code} className="flex items-center gap-1.5">
+                          <span className="w-3 h-3 rounded-full" style={{ backgroundColor: NEURO_LABELS[o.code]?.color }} />
+                          <span className="text-[10px] text-white/70">{o.role}: {neuroDict[o.code]?.jp}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              );
+            })()}
+
             <p className="text-sm text-gray-600 leading-[1.9] mb-4">
               {kata.name}には12の疾走領域が存在します。同じ型でも、2位と3位に何が入るかで駆動の質が大きく変わるからです。
             </p>

@@ -215,6 +215,32 @@ html {
   50%      { transform: translateX(10%) translateY(15%) scale(1.1); }
 }
 
+/* === 太陽系軌道アニメーション === */
+@keyframes orbit-1 {
+  from { transform: translate(-50%, -50%) rotate(0deg) translateX(90px) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg) translateX(90px) rotate(-360deg); }
+}
+@keyframes orbit-1-counter {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+@keyframes orbit-2 {
+  from { transform: translate(-50%, -50%) rotate(120deg) translateX(130px) rotate(-120deg); }
+  to   { transform: translate(-50%, -50%) rotate(480deg) translateX(130px) rotate(-480deg); }
+}
+@keyframes orbit-2-counter {
+  from { transform: rotate(120deg); }
+  to   { transform: rotate(-240deg); }
+}
+@keyframes orbit-3 {
+  from { transform: translate(-50%, -50%) rotate(240deg) translateX(165px) rotate(-240deg); }
+  to   { transform: translate(-50%, -50%) rotate(600deg) translateX(165px) rotate(-600deg); }
+}
+@keyframes orbit-3-counter {
+  from { transform: rotate(240deg); }
+  to   { transform: rotate(-120deg); }
+}
+
 /* === うねるグラデーション背景 === */
 @keyframes blob-drift-1 {
   0%, 100% { transform: translate(0%, 0%) scale(1) rotate(0deg); }
