@@ -908,7 +908,9 @@ export default async function ResultPage({
               ];
               const bg = generateBlobs(rank1, bias, { main: NEURO_LABELS[rank1]?.gradient, dark: NEURO_LABELS[rank1]?.gradientDark }, parts[1], parts[2]);
               return (
-                <div className="noise-overlay relative rounded-2xl overflow-hidden mb-8" style={{ backgroundColor: '#000', aspectRatio: '1', maxWidth: 400, margin: '0 auto 2rem' }}>
+                <div className="noise-overlay relative rounded-2xl overflow-hidden mb-8" style={{ backgroundColor: {
+                  D: '#8b2520', S: '#1a3a4a', O: '#1a3d32', N: '#3d3010', E: '#2d1f45',
+                }[rank1] || '#1a1a1a', aspectRatio: '1', maxWidth: 400, margin: '0 auto 2rem' }}>
                   {/* グラデ背景（中央揃え） */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="relative" style={{ width: 330, height: 330 }}>
