@@ -836,11 +836,18 @@ export default async function ResultPage({
                     <div className="relative" style={{ width: 360, height: 360 }}>
                       {/* 軌道リング */}
                       {orbits.map((o, i) => (
-                        <div key={i} className="absolute rounded-full border border-white/10" style={{
-                          width: o.radius * 2, height: o.radius * 2,
-                          top: '50%', left: '50%',
-                          transform: 'translate(-50%, -50%)',
-                        }} />
+                        <div key={i}>
+                          <div className="absolute rounded-full border border-white/10" style={{
+                            width: o.radius * 2, height: o.radius * 2,
+                            top: '50%', left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                          }} />
+                          <div className="absolute rounded-full border border-white/5" style={{
+                            width: o.radius * 2 + 6, height: o.radius * 2 + 6,
+                            top: '50%', left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                          }} />
+                        </div>
                       ))}
                       {/* 天体（神経系） */}
                       {orbits.map((o, i) => (
