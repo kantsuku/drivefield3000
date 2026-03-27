@@ -1,5 +1,7 @@
 import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
+import { readFile } from 'fs/promises';
+import { join } from 'path';
 import namesData from '@/data/names-240.json';
 import kataData from '@/data/l4-kata.json';
 
@@ -40,6 +42,18 @@ function extractCatchphrase(namingReason: string): string {
   return match ? match[1].replace(/として表現$/, '').replace(/を象徴$/, '').trim() : raw;
 }
 
+// ─── Font cache ──────────────────────────────────────
+
+let fontBoldData: ArrayBuffer | null = null;
+
+async function getFontBold(): Promise<ArrayBuffer> {
+  if (!fontBoldData) {
+    const buf = await readFile(join(process.cwd(), 'public', 'fonts', 'NotoSerifJP-Bold.ttf'));
+    fontBoldData = buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength);
+  }
+  return fontBoldData;
+}
+
 // ─── Route handler ───────────────────────────────────
 
 export async function GET(request: NextRequest) {
@@ -63,6 +77,8 @@ export async function GET(request: NextRequest) {
     const colors = NEURO_COLOR[rank1] || NEURO_COLOR.D;
     const catchphrase = extractCatchphrase(entry.naming_reason);
 
+    const fontBold = await getFontBold();
+
     return new ImageResponse(
       (
         <div
@@ -75,35 +91,36 @@ export async function GET(request: NextRequest) {
             justifyContent: 'center',
             backgroundColor: colors.bg,
             position: 'relative',
+            fontFamily: '"Noto Serif JP"',
           }}
         >
           {/* 型名 */}
-          <div style={{ display: 'flex', fontSize: 22, color: 'rgba(255,255,255,0.7)', letterSpacing: '0.2em', marginBottom: 28 }}>
+          <div style={{ display: 'flex', fontSize: 24, color: 'rgba(255,255,255,0.7)', letterSpacing: '0.25em', marginBottom: 32 }}>
             {kata?.name || ''}
           </div>
 
           {/* 疾走領域名（漢字） */}
-          <div style={{ display: 'flex', fontSize: 120, fontWeight: 700, color: 'white', letterSpacing: '0.15em', lineHeight: 1.1, marginBottom: 8 }}>
+          <div style={{ display: 'flex', fontSize: 128, fontWeight: 700, color: 'white', letterSpacing: '0.2em', lineHeight: 1.1, marginBottom: 12 }}>
             {entry.kanji_name}
           </div>
 
           {/* reading / English */}
-          <div style={{ display: 'flex', fontSize: 18, color: 'rgba(255,255,255,0.6)', marginBottom: 32 }}>
+          <div style={{ display: 'flex', fontSize: 18, color: 'rgba(255,255,255,0.55)', marginBottom: 36, letterSpacing: '0.1em' }}>
             {entry.reading} / {entry.english_name}
           </div>
 
           {/* キャッチコピー */}
-          <div style={{ display: 'flex', fontSize: 20, color: 'rgba(255,255,255,0.85)', maxWidth: 800, textAlign: 'center', lineHeight: 1.6, marginBottom: 28 }}>
+          <div style={{ display: 'flex', fontSize: 20, color: 'rgba(255,255,255,0.8)', maxWidth: 800, textAlign: 'center', lineHeight: 1.7, marginBottom: 32 }}>
             {catchphrase}
           </div>
 
           {/* 偏りタイプ */}
-          <div style={{ display: 'flex', fontSize: 14, color: colors.accentSub, border: `1px solid ${colors.accentSub}`, borderRadius: 20, padding: '6px 18px', letterSpacing: '0.1em' }}>
+          <div style={{ display: 'flex', fontSize: 13, color: colors.accentSub, border: `1px solid ${colors.accentSub}`, borderRadius: 20, padding: '5px 20px', letterSpacing: '0.15em' }}>
             {BIAS_JP[bias] || bias}
           </div>
 
           {/* フッター */}
-          <div style={{ display: 'flex', position: 'absolute', bottom: 24, fontSize: 14, color: 'rgba(255,255,255,0.35)', letterSpacing: '0.15em' }}>
+          <div style={{ display: 'flex', position: 'absolute', bottom: 28, fontSize: 13, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.2em' }}>
             疾走領域 / Drive Field
           </div>
         </div>
@@ -111,6 +128,9 @@ export async function GET(request: NextRequest) {
       {
         width: 1200,
         height: 630,
+        fonts: [
+          { name: 'Noto Serif JP', data: fontBold, weight: 700 as const, style: 'normal' as const },
+        ],
       },
     );
   } catch (e) {

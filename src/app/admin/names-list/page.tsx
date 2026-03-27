@@ -1,7 +1,20 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import namesData from '@/data/names-240.json';
+import kataData from '@/data/l4-kata.json';
+
+// ─── Types ───────────────────────────────────────────
+
+interface ChangeLog {
+  id: string;
+  field: string;
+  oldValue: string;
+  newValue: string;
+  timestamp: string;
+}
+
+// ─── Constants ───────────────────────────────────────
 
 const NEURO: Record<string, string> = {
   D: 'ドーパミン', S: 'セロトニン', O: 'オキシトシン', N: 'ノルアドレナリン', E: 'エンドルフィン',
@@ -9,9 +22,37 @@ const NEURO: Record<string, string> = {
 const BIAS_JP: Record<string, string> = {
   Single: '一点突破', Dual: '二軸駆動', Trinity: '三極共鳴', Flat: '万能拡散',
 };
-const NEURO_COLOR: Record<string, string> = {
-  D: 'text-red-400', S: 'text-blue-400', O: 'text-green-400', N: 'text-yellow-400', E: 'text-purple-400',
+const RANK1_COLOR: Record<string, { text: string; bg: string; border: string; dot: string }> = {
+  D: { text: 'text-red-400',    bg: 'bg-red-950/20',    border: 'border-red-900/40',  dot: 'bg-red-500' },
+  S: { text: 'text-blue-400',   bg: 'bg-blue-950/20',   border: 'border-blue-900/40', dot: 'bg-blue-500' },
+  O: { text: 'text-green-400',  bg: 'bg-green-950/20',  border: 'border-green-900/40', dot: 'bg-green-500' },
+  N: { text: 'text-yellow-400', bg: 'bg-yellow-950/20', border: 'border-yellow-900/40', dot: 'bg-yellow-500' },
+  E: { text: 'text-purple-400', bg: 'bg-purple-950/20', border: 'border-purple-900/40', dot: 'bg-purple-500' },
 };
+
+const FIELD_LABELS: Record<string, string> = {
+  kanji_name: '領域名',
+  reading: '読み',
+  english_name: '英語名',
+  lead: 'リード文',
+};
+
+// ─── Lookups ─────────────────────────────────────────
+
+const kataMap: Record<string, { name: string; reading: string }> = {};
+for (const k of kataData as any[]) kataMap[k.id] = { name: k.name, reading: k.reading };
+
+function extractCatchphrase(namingReason: string): string {
+  const raw = namingReason
+    .split('。')
+    .filter((s: string) => !s.includes('優先漢字') && !s.includes('使用漢字'))
+    .map((s: string) => s.trim())
+    .filter(Boolean)[0] || '';
+  const match = raw.match(/[、。]([^、。]*$)/) || raw.match(/を[、]?(.+)/);
+  return match ? match[1].replace(/として表現$/, '').replace(/を象徴$/, '').trim() : raw;
+}
+
+// ─── Component ───────────────────────────────────────
 
 export default function NamesListPage() {
   const [entries, setEntries] = useState<any[]>((namesData as any[]).filter((d) => d.id?.includes('-')));
@@ -20,6 +61,21 @@ export default function NamesListPage() {
   const [editValue, setEditValue] = useState<string>('');
   const [saving, setSaving] = useState(false);
   const [search, setSearch] = useState('');
+  const [rank1Filter, setRank1Filter] = useState('all');
+  const [biasFilter, setBiasFilter] = useState('all');
+  const [changeLogs, setChangeLogs] = useState<ChangeLog[]>([]);
+  const [showLogs, setShowLogs] = useState(false);
+
+  // Load change logs from localStorage
+  useEffect(() => {
+    const stored = localStorage.getItem('df3000-change-logs');
+    if (stored) setChangeLogs(JSON.parse(stored));
+  }, []);
+
+  const saveLogs = (logs: ChangeLog[]) => {
+    setChangeLogs(logs);
+    localStorage.setItem('df3000-change-logs', JSON.stringify(logs));
+  };
 
   const startEdit = (id: string, field: string, value: string) => {
     setEditingId(id);
@@ -30,6 +86,8 @@ export default function NamesListPage() {
   const saveEdit = async () => {
     if (!editingId || !editField) return;
     setSaving(true);
+    const entry = entries.find((e) => e.id === editingId);
+    const oldValue = entry?.[editField] ?? '';
     try {
       const res = await fetch('/api/update-name240', {
         method: 'PATCH',
@@ -38,6 +96,15 @@ export default function NamesListPage() {
       });
       if (res.ok) {
         setEntries((prev) => prev.map((e) => e.id === editingId ? { ...e, [editField]: editValue } : e));
+        // Add to change log
+        const log: ChangeLog = {
+          id: editingId,
+          field: editField,
+          oldValue,
+          newValue: editValue,
+          timestamp: new Date().toISOString(),
+        };
+        saveLogs([log, ...changeLogs]);
       }
     } catch {} finally {
       setSaving(false);
@@ -45,130 +112,215 @@ export default function NamesListPage() {
     }
   };
 
-  const cancelEdit = () => {
-    setEditingId(null);
+  const cancelEdit = () => setEditingId(null);
+
+  const reEdit = (log: ChangeLog) => {
+    const entry = entries.find((e) => e.id === log.id);
+    if (entry) startEdit(log.id, log.field, entry[log.field] ?? '');
+    setShowLogs(false);
   };
 
-  const filtered = search
-    ? entries.filter((e) =>
-        e.id.toLowerCase().includes(search.toLowerCase()) ||
+  const filtered = entries.filter((e) => {
+    const parts = e.id.split('-');
+    if (rank1Filter !== 'all' && parts[0] !== rank1Filter) return false;
+    if (biasFilter !== 'all' && parts[3] !== biasFilter) return false;
+    if (search) {
+      const q = search.toLowerCase();
+      return e.id.toLowerCase().includes(q) ||
         e.kanji_name.includes(search) ||
         e.reading.includes(search) ||
-        (e.lead || '').includes(search)
-      )
-    : entries;
+        (e.lead || '').includes(search) ||
+        e.english_name.toLowerCase().includes(q);
+    }
+    return true;
+  });
+
+  const EditableCell = ({ id, field, value, className = '', multiline = false }: {
+    id: string; field: string; value: string; className?: string; multiline?: boolean;
+  }) => {
+    const isEditing = editingId === id && editField === field;
+    if (isEditing) {
+      return (
+        <div className="space-y-2">
+          {multiline ? (
+            <textarea
+              value={editValue}
+              onChange={(ev) => setEditValue(ev.target.value)}
+              className="w-full bg-gray-800 border border-blue-500 rounded p-2 text-xs text-gray-200 leading-relaxed resize-y min-h-[100px] focus:outline-none"
+              autoFocus
+            />
+          ) : (
+            <input
+              value={editValue}
+              onChange={(ev) => setEditValue(ev.target.value)}
+              className="w-full bg-gray-800 border border-blue-500 rounded px-2 py-1 text-sm text-gray-200 focus:outline-none"
+              autoFocus
+              onKeyDown={(ev) => { if (ev.key === 'Enter') saveEdit(); if (ev.key === 'Escape') cancelEdit(); }}
+            />
+          )}
+          <div className="flex gap-2">
+            <button onClick={saveEdit} disabled={saving} className="text-xs bg-blue-600 hover:bg-blue-500 text-white px-3 py-1 rounded disabled:opacity-50">
+              {saving ? '保存中...' : '保存'}
+            </button>
+            <button onClick={cancelEdit} className="text-xs text-gray-500 hover:text-gray-300 px-3 py-1">取消</button>
+          </div>
+        </div>
+      );
+    }
+    return (
+      <span
+        className={`cursor-pointer hover:bg-white/5 rounded px-1 py-0.5 -mx-1 transition-colors ${className}`}
+        onClick={() => startEdit(id, field, value)}
+        title="クリックで編集"
+      >
+        {value || '—'}
+      </span>
+    );
+  };
 
   return (
     <div className="h-screen flex flex-col bg-gray-950 text-white overflow-hidden">
       {/* ヘッダー */}
-      <div className="shrink-0 flex items-center justify-between px-4 py-2 border-b border-gray-800 bg-gray-900 gap-3">
-        <div className="flex items-center gap-3">
-          <a href="/admin" className="text-xs text-gray-500 hover:text-gray-300 transition-colors">← 管理画面</a>
-          <span className="text-xs text-gray-700">|</span>
-          <span className="text-sm font-bold">疾走領域 一覧表</span>
-          <span className="text-xs text-gray-600">{filtered.length}/{entries.length}件</span>
+      <div className="shrink-0 px-4 py-3 border-b border-gray-800 bg-gray-900">
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center gap-3">
+            <a href="/admin" className="text-xs text-gray-500 hover:text-gray-300">← 管理画面</a>
+            <span className="text-xs text-gray-700">|</span>
+            <span className="text-sm font-bold">疾走領域 一覧・編集</span>
+            <span className="text-xs text-gray-600">{filtered.length}/{entries.length}件</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setShowLogs(!showLogs)}
+              className={`text-xs px-3 py-1 rounded border transition-colors ${
+                showLogs ? 'border-blue-500 text-blue-400' : 'border-gray-700 text-gray-500 hover:text-gray-300'
+              }`}
+            >
+              変更履歴 {changeLogs.length > 0 && `(${changeLogs.length})`}
+            </button>
+            <a href="/admin/ogp" className="text-xs text-gray-500 hover:text-gray-300 border border-gray-700 rounded px-3 py-1">
+              OGPプレビュー
+            </a>
+          </div>
         </div>
-        <input
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="検索..."
-          className="bg-gray-800 border border-gray-700 rounded px-3 py-1 text-sm w-48 focus:outline-none focus:border-gray-500"
-        />
+        {/* フィルター */}
+        <div className="flex items-center gap-3">
+          <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="検索..."
+            className="bg-gray-800 border border-gray-700 rounded px-3 py-1 text-sm w-48 focus:outline-none focus:border-gray-500"
+          />
+          <div className="flex gap-1">
+            <button onClick={() => setRank1Filter('all')} className={`px-2 py-0.5 text-[10px] rounded-full border ${rank1Filter === 'all' ? 'border-white/40 text-white' : 'border-gray-700 text-gray-500'}`}>全て</button>
+            {['D', 'S', 'O', 'N', 'E'].map((r) => (
+              <button key={r} onClick={() => setRank1Filter(r)} className={`px-2 py-0.5 text-[10px] rounded-full border ${rank1Filter === r ? 'border-white/40 text-white' : 'border-gray-700 text-gray-500'}`}>{r}</button>
+            ))}
+          </div>
+          <div className="flex gap-1">
+            <button onClick={() => setBiasFilter('all')} className={`px-2 py-0.5 text-[10px] rounded-full border ${biasFilter === 'all' ? 'border-white/40 text-white' : 'border-gray-700 text-gray-500'}`}>全て</button>
+            {['Single', 'Dual', 'Trinity', 'Flat'].map((b) => (
+              <button key={b} onClick={() => setBiasFilter(b)} className={`px-2 py-0.5 text-[10px] rounded-full border ${biasFilter === b ? 'border-white/40 text-white' : 'border-gray-700 text-gray-500'}`}>{BIAS_JP[b]}</button>
+            ))}
+          </div>
+        </div>
       </div>
+
+      {/* 変更履歴パネル */}
+      {showLogs && (
+        <div className="shrink-0 border-b border-gray-800 bg-gray-900/50 max-h-60 overflow-y-auto">
+          <div className="px-4 py-2">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs font-bold text-gray-300">変更履歴</span>
+              {changeLogs.length > 0 && (
+                <button onClick={() => saveLogs([])} className="text-[10px] text-gray-600 hover:text-gray-400">クリア</button>
+              )}
+            </div>
+            {changeLogs.length === 0 ? (
+              <p className="text-xs text-gray-600">まだ変更履歴はありません</p>
+            ) : (
+              <div className="space-y-1">
+                {changeLogs.map((log, i) => {
+                  const parts = log.id.split('-');
+                  const rank1 = parts[0];
+                  const entry = entries.find((e) => e.id === log.id);
+                  const colors = RANK1_COLOR[rank1] || RANK1_COLOR.D;
+                  return (
+                    <div key={i} className="flex items-start gap-3 text-[10px] py-1.5 border-b border-gray-800/50">
+                      <span className="text-gray-600 shrink-0 w-32">{new Date(log.timestamp).toLocaleString('ja-JP')}</span>
+                      <span className={`shrink-0 ${colors.text}`}>{entry?.kanji_name || log.id}</span>
+                      <span className="text-gray-500 shrink-0">{FIELD_LABELS[log.field] || log.field}</span>
+                      <span className="text-gray-600 truncate max-w-[200px]">{log.oldValue || '(空)'}</span>
+                      <span className="text-gray-600">→</span>
+                      <span className="text-gray-300 truncate max-w-[200px]">{log.newValue || '(空)'}</span>
+                      <button onClick={() => reEdit(log)} className="text-blue-500 hover:text-blue-400 shrink-0 ml-auto">再編集</button>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* テーブル */}
       <div className="flex-1 overflow-auto">
-        <table className="min-w-[1200px] w-full text-sm border-collapse">
+        <table className="min-w-[1400px] w-full text-sm border-collapse">
           <thead className="sticky top-0 z-20 bg-gray-900">
             <tr className="border-b border-gray-700">
-              <th className="sticky left-0 z-30 bg-gray-900 text-left px-3 py-2 text-xs text-gray-500 font-normal w-24 border-r border-gray-700">領域名</th>
-              <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal w-32">骨格</th>
-              <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal min-w-[350px]">リード文 <span className="text-gray-700">(クリックで編集)</span></th>
-              <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal min-w-[250px]">命名理由 <span className="text-gray-700">(クリックで編集)</span></th>
+              <th className="sticky left-0 z-30 bg-gray-900 text-left px-3 py-2 text-xs text-gray-500 font-normal w-20 border-r border-gray-700">型</th>
+              <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal w-24">領域名</th>
+              <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal w-24">読み</th>
+              <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal w-28">English</th>
+              <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal min-w-[200px]">キャッチコピー</th>
+              <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal min-w-[350px]">リード文</th>
               <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal w-28">ID</th>
             </tr>
           </thead>
           <tbody>
             {filtered.map((e, i) => {
               const parts = e.id.split('-');
-              const [r1, r2, r3, bias] = parts;
-              const rowBg = i % 2 === 0 ? 'bg-gray-950' : 'bg-gray-900/40';
-              const isEditingLead = editingId === e.id && editField === 'lead';
-              const isEditingReason = editingId === e.id && editField === 'naming_reason';
+              const [r1, , , bias] = parts;
+              const kata = kataMap[`${r1}-${bias}`];
+              const colors = RANK1_COLOR[r1] || RANK1_COLOR.D;
+              const rowBg = i % 2 === 0 ? '' : 'bg-gray-900/30';
+              const catchphrase = extractCatchphrase(e.naming_reason || '');
 
               return (
-                <tr key={e.id} className={`border-b border-gray-800/50 align-top ${rowBg}`}>
-                  {/* 領域名 */}
-                  <td className={`sticky left-0 z-10 px-3 py-2 border-r border-gray-800 ${rowBg}`}>
-                    <div className="font-bold text-base leading-tight whitespace-nowrap">{e.kanji_name}</div>
-                    <div className="text-[10px] text-gray-500 mt-0.5">{e.reading}</div>
-                    <div className="text-[10px] text-gray-600 mt-0.5">{e.english_name}</div>
+                <tr key={e.id} className={`border-b border-gray-800/50 align-top ${rowBg} border-l-2 ${colors.border}`}>
+                  {/* 型 */}
+                  <td className={`sticky left-0 z-10 px-3 py-2 border-r border-gray-800 ${rowBg || 'bg-gray-950'}`}>
+                    <div className="flex items-center gap-1.5">
+                      <span className={`w-2 h-2 rounded-full shrink-0 ${colors.dot}`} />
+                      <span className={`text-[10px] font-bold ${colors.text}`}>{r1}</span>
+                    </div>
+                    {kata && <div className="text-[10px] text-gray-400 mt-0.5">{kata.name}</div>}
+                    <div className="text-[10px] text-gray-600">{BIAS_JP[bias]}</div>
                   </td>
 
-                  {/* 骨格 */}
+                  {/* 領域名 */}
                   <td className="px-3 py-2">
-                    <div className="flex flex-col gap-0.5">
-                      <span className={`text-[10px] font-mono ${NEURO_COLOR[r1]}`}>1 {r1} {NEURO[r1]}</span>
-                      <span className={`text-[10px] font-mono ${NEURO_COLOR[r2]} opacity-70`}>2 {r2} {NEURO[r2]}</span>
-                      <span className={`text-[10px] font-mono ${NEURO_COLOR[r3]} opacity-50`}>3 {r3} {NEURO[r3]}</span>
-                      <span className="text-[10px] text-gray-500 mt-0.5">{BIAS_JP[bias]}</span>
-                    </div>
+                    <EditableCell id={e.id} field="kanji_name" value={e.kanji_name} className="font-bold text-base" />
+                  </td>
+
+                  {/* 読み */}
+                  <td className="px-3 py-2">
+                    <EditableCell id={e.id} field="reading" value={e.reading} className="text-xs text-gray-400" />
+                  </td>
+
+                  {/* English */}
+                  <td className="px-3 py-2">
+                    <EditableCell id={e.id} field="english_name" value={e.english_name} className="text-xs text-gray-400" />
+                  </td>
+
+                  {/* キャッチコピー */}
+                  <td className="px-3 py-2">
+                    <span className="text-xs text-gray-300">{catchphrase || '—'}</span>
                   </td>
 
                   {/* リード文 */}
                   <td className="px-3 py-2 min-w-[350px]">
-                    {isEditingLead ? (
-                      <div className="space-y-2">
-                        <textarea
-                          value={editValue}
-                          onChange={(ev) => setEditValue(ev.target.value)}
-                          className="w-full bg-gray-800 border border-blue-500 rounded p-2 text-xs text-gray-200 leading-relaxed resize-y min-h-[120px] focus:outline-none"
-                          autoFocus
-                        />
-                        <div className="flex gap-2">
-                          <button onClick={saveEdit} disabled={saving} className="text-xs bg-blue-600 hover:bg-blue-500 text-white px-3 py-1 rounded disabled:opacity-50">
-                            {saving ? '保存中...' : '保存'}
-                          </button>
-                          <button onClick={cancelEdit} className="text-xs text-gray-500 hover:text-gray-300 px-3 py-1">キャンセル</button>
-                        </div>
-                      </div>
-                    ) : (
-                      <p
-                        className="text-xs text-gray-300 leading-relaxed cursor-pointer hover:bg-gray-800/50 rounded p-1 -m-1 transition-colors"
-                        onClick={() => startEdit(e.id, 'lead', e.lead ?? '')}
-                        title="クリックで編集"
-                      >
-                        {e.lead ?? '—'}
-                      </p>
-                    )}
-                  </td>
-
-                  {/* 命名理由 */}
-                  <td className="px-3 py-2 min-w-[250px]">
-                    {isEditingReason ? (
-                      <div className="space-y-2">
-                        <textarea
-                          value={editValue}
-                          onChange={(ev) => setEditValue(ev.target.value)}
-                          className="w-full bg-gray-800 border border-blue-500 rounded p-2 text-xs text-gray-200 leading-relaxed resize-y min-h-[80px] focus:outline-none"
-                          autoFocus
-                        />
-                        <div className="flex gap-2">
-                          <button onClick={saveEdit} disabled={saving} className="text-xs bg-blue-600 hover:bg-blue-500 text-white px-3 py-1 rounded disabled:opacity-50">
-                            {saving ? '保存中...' : '保存'}
-                          </button>
-                          <button onClick={cancelEdit} className="text-xs text-gray-500 hover:text-gray-300 px-3 py-1">キャンセル</button>
-                        </div>
-                      </div>
-                    ) : (
-                      <p
-                        className="text-[10px] text-gray-600 leading-relaxed cursor-pointer hover:bg-gray-800/50 rounded p-1 -m-1 transition-colors"
-                        onClick={() => startEdit(e.id, 'naming_reason', e.naming_reason ?? '')}
-                        title="クリックで編集"
-                      >
-                        {e.naming_reason}
-                      </p>
-                    )}
+                    <EditableCell id={e.id} field="lead" value={e.lead ?? ''} className="text-xs text-gray-300 leading-relaxed" multiline />
                   </td>
 
                   {/* ID */}
