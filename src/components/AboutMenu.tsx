@@ -168,29 +168,49 @@ export function AboutMenu() {
           {tab === 'method' && (
             <div className="space-y-10">
 
-              {/* 01 */}
               <section>
                 <SectionHead title="解析の概要" />
                 <p className="text-base text-gray-300 leading-[2] mb-4">
-                  疾走領域（Drive Field）は、52の問いに対するあなたの直感的な回答から、5つの神経系のスコアを算出します。
+                  疾走領域（Drive Field）は、90の問いに対するあなたの直感的な回答から、5つのレイヤーであなたを多面的に解析します。
                 </p>
                 <p className="text-base text-gray-300 leading-[2]">
                   考えて答えるのではなく、感じて答えることで、あなたの無意識の駆動パターンが浮かび上がります。
                 </p>
               </section>
 
-              {/* 02 */}
               <section>
-                <SectionHead title="絞り込みの4ステップ" />
+                <SectionHead title="5層の診断モデル" />
                 <p className="text-base text-gray-300 leading-[2] mb-6">
-                  52問の回答から、段階的にあなた固有の疾走領域を特定していきます。
+                  この診断は、単に「あなたは何型です」と分類するものではありません。5つの異なるレイヤーから、あなたという人間を立体的に捉えます。
+                </p>
+                <div className="space-y-4">
+                  {[
+                    { layer: 'Layer 1', title: 'エンジン（先天的）', desc: '5つの神経系の優先順位から、あなた固有の駆動構造を導出します。60の骨格、20の型、240の疾走領域、2,880の駆動パターンへと段階的に絞り込みます。', color: '#c0392b' },
+                    { layer: 'Layer 2', title: 'ブレーキ（後天的）', desc: '自己肯定感と対人基盤（愛着スタイル）を測定します。同じエンジンでもブレーキがかかっていれば力を発揮できません。行動の結果から、あなた自身も気づいていないブレーキを検出します。', color: '#b8860b' },
+                    { layer: 'Layer 3', title: 'スキルツリー（経験値）', desc: '学習・対人・体力・創作・冒険の5領域で、あなたがこれまでに積んできた経験値を把握します。エンジンとスキルの組み合わせで「何を通じて夢中になるか」が見えてきます。', color: '#27806a' },
+                    { layer: 'Layer 4', title: '才能（身体・認知）', desc: '身体能力・感覚直感・論理力・手先の器用さ・言語表現力を測定します。エンジンの力をどのチャネルで出力するかを決定する要素です。', color: '#2e6b8a' },
+                    { layer: 'Layer 5', title: '環境コンテキスト', desc: '経済的背景や健康面の制約を、行動傾向から逆推定します。同じエンジンでも環境によって最適な展開方法が変わります。', color: '#7b5ea7' },
+                  ].map((item) => (
+                    <div key={item.layer} className="border-l-2 pl-4" style={{ borderColor: item.color }}>
+                      <p className="text-[10px] tracking-wider mb-1" style={{ color: item.color }}>{item.layer}</p>
+                      <p className="text-sm font-bold text-gray-100 mb-2">{item.title}</p>
+                      <p className="text-xs text-gray-400 leading-relaxed">{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <section>
+                <SectionHead title="エンジン診断の絞り込み" />
+                <p className="text-base text-gray-300 leading-[2] mb-6">
+                  Layer 1（エンジン）は、以下の4ステップで段階的にあなた固有の疾走領域を特定します。
                 </p>
                 <div className="space-y-5">
                   {[
-                    { step: 'STEP 1', title: '5つの神経系スコアを算出', desc: '52問の回答から、D（ドーパミン）・S（セロトニン）・O（オキシトシン）・N（ノルアドレナリン）・E（エンドルフィン）の5つの神経系スコアを数値化する。' },
-                    { step: 'STEP 2', title: '上位3つの順列で60の骨格に分類', desc: 'スコア上位3つの神経系を抽出し、その順番で骨格を決定する。1位が点火装置、2位が加速装置、3位が持続装置として機能する。5つから3つを選ぶ順列で60通り。' },
-                    { step: 'STEP 3', title: 'スコアの偏りから20の型に分類', desc: '1位の神経系（5種）と、スコアの偏り方——1位に集中する一点突破型、1位と2位が突出する二軸駆動型、上位3つが均衡する三位一体型、全体が均等な万能拡散型——の4種の掛け合わせで20型。' },
-                    { step: 'STEP 4', title: '240の疾走領域を確定', desc: '60の骨格 × 4つの偏りタイプ = 240の疾走領域。2位と3位の神経系の組み合わせによって、同じ型でも走り方の質が変わる。その違いが固有の疾走領域名として表現される。' },
+                    { step: 'STEP 1', title: '5つの神経系スコアを算出', desc: '回答から、D（ドーパミン）・S（セロトニン）・O（オキシトシン）・N（ノルアドレナリン）・E（エンドルフィン）の5つの神経系スコアを数値化します。' },
+                    { step: 'STEP 2', title: '上位3つの順列で60の骨格に分類', desc: '1位が点火装置、2位が加速装置、3位が持続装置。この順番が駆動の基本構造を決定します。5つから3つを選ぶ順列で60通り。' },
+                    { step: 'STEP 3', title: 'スコアの偏りから20の型に分類', desc: '一点突破型・二軸駆動型・三位一体型・万能拡散型の4種と、1位の神経系5種の掛け合わせで20型。' },
+                    { step: 'STEP 4', title: '240の疾走領域を確定', desc: '2位と3位の神経系の組み合わせで、同じ型でも走り方の質が変わります。その違いが固有の疾走領域名として表現されます。' },
                   ].map((s) => (
                     <div key={s.step} className="border-l-2 border-white/10 pl-4">
                       <p className="text-[10px] text-gray-500 tracking-wider mb-1">{s.step}</p>
@@ -201,17 +221,16 @@ export function AboutMenu() {
                 </div>
               </section>
 
-              {/* 03 */}
               <section>
-                <SectionHead title="さらに詳細な特性" />
+                <SectionHead title="さらに詳細な駆動特性" />
                 <p className="text-base text-gray-300 leading-[2] mb-6">
-                  240の疾走領域に加え、以下の3つの特性があなたの「走り方」をさらに精密に描き出します。
+                  240の疾走領域に加え、以下の3つの特性が掛け合わさり、最終的に2,880の駆動パターンに分岐します。
                 </p>
                 <div className="space-y-3 mb-6">
                   {[
-                    { title: '発動方向', options: '外燃 / 内燃', desc: '外部の刺激で火が点くか、内側の衝動で火が点くか。エンジンの点火スイッチがどこにあるかを示す。' },
-                    { title: '時間特性', options: '瞬発 / 熟成', desc: 'すぐに動き出せる瞬発型か、じわじわ温まって回り始める熟成型か。エンジンのかかり方を示す。' },
-                    { title: '出力レベル', options: '低 / 中 / 高', desc: 'エネルギーの大きさ。安定して回す低出力か、爆発と休息を繰り返す高出力か。' },
+                    { title: '発動方向', options: '外燃 / 内燃', desc: '外部の刺激で火が点くか、内側の衝動で火が点くか。' },
+                    { title: '時間特性', options: '瞬発 / 熟成', desc: 'すぐに動き出せるか、じわじわ温まるか。' },
+                    { title: '出力レベル', options: '低 / 中 / 高', desc: '安定型か、爆発と休息を繰り返す型か。' },
                   ].map((item) => (
                     <div key={item.title} className="border border-white/5 rounded-lg p-3">
                       <p className="text-sm font-bold text-gray-200">{item.title}<span className="text-[10px] text-gray-500 font-normal ml-2">{item.options}</span></p>
@@ -221,17 +240,13 @@ export function AboutMenu() {
                 </div>
               </section>
 
-              {/* 04 */}
               <section>
-                <SectionHead title="2,880の駆動パターン" />
+                <SectionHead title="あなたに合わせた語り口" />
                 <p className="text-base text-gray-300 leading-[2] mb-4">
-                  240の疾走領域 × 発動方向（2種）× 時間特性（2種）× 出力レベル（3種）。
-                </p>
-                <p className="text-3xl font-bold text-white mb-4">
-                  = 2,880通り
+                  この診断のもう一つの特徴は、あなたの回答傾向から「どんな言葉が最も響くか」を判定し、結果の語り口を自動で切り替えることです。
                 </p>
                 <p className="text-base text-gray-300 leading-[2]">
-                  同じ疾走領域名でも、発動方向や時間特性が異なれば走り方は変わります。あなたの診断結果は、この2,880パターンの中から導き出された、あなただけの駆動マニュアルです。
+                  自分のことを深く理解している人には構造的な解説を。言葉にするのが苦手な人にはその気持ちを代弁する語りを。今つらい状況にいる人には、まず「あなたは間違っていない」と伝えることから。同じ疾走領域でも、あなたに最も届く言葉で語りかけます。
                 </p>
               </section>
             </div>
