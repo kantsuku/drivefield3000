@@ -217,28 +217,28 @@ html {
 
 /* === 太陽系軌道アニメーション === */
 @keyframes orbit-1 {
-  from { transform: translate(-50%, -50%) rotate(0deg) translateX(90px) rotate(0deg); }
-  to   { transform: translate(-50%, -50%) rotate(360deg) translateX(90px) rotate(-360deg); }
+  from { transform: translate(-50%, -50%) rotate(0deg) translateX(80px); }
+  to   { transform: translate(-50%, -50%) rotate(360deg) translateX(80px); }
 }
 @keyframes orbit-1-counter {
   from { transform: rotate(0deg); }
   to   { transform: rotate(-360deg); }
 }
 @keyframes orbit-2 {
-  from { transform: translate(-50%, -50%) rotate(120deg) translateX(130px) rotate(-120deg); }
-  to   { transform: translate(-50%, -50%) rotate(480deg) translateX(130px) rotate(-480deg); }
+  from { transform: translate(-50%, -50%) rotate(120deg) translateX(125px); }
+  to   { transform: translate(-50%, -50%) rotate(480deg) translateX(125px); }
 }
 @keyframes orbit-2-counter {
-  from { transform: rotate(120deg); }
-  to   { transform: rotate(-240deg); }
+  from { transform: rotate(-120deg); }
+  to   { transform: rotate(-480deg); }
 }
 @keyframes orbit-3 {
-  from { transform: translate(-50%, -50%) rotate(240deg) translateX(165px) rotate(-240deg); }
-  to   { transform: translate(-50%, -50%) rotate(600deg) translateX(165px) rotate(-600deg); }
+  from { transform: translate(-50%, -50%) rotate(240deg) translateX(165px); }
+  to   { transform: translate(-50%, -50%) rotate(600deg) translateX(165px); }
 }
 @keyframes orbit-3-counter {
-  from { transform: rotate(240deg); }
-  to   { transform: rotate(-120deg); }
+  from { transform: rotate(-240deg); }
+  to   { transform: rotate(-600deg); }
 }
 
 /* === うねるグラデーション背景 === */
