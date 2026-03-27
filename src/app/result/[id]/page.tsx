@@ -902,9 +902,9 @@ export default async function ResultPage({
             {/* 太陽系ビジュアル */}
             {(() => {
               const orbits = [
-                { code: parts[0], role: '点火', radius: 80, speed: 20, size: 36 },
-                { code: parts[1], role: '加速', radius: 125, speed: 28, size: 36 },
-                { code: parts[2], role: '持続', radius: 165, speed: 36, size: 36 },
+                { code: parts[0], role: '点火', radius: 85, speed: 20, size: 36 },
+                { code: parts[1], role: '加速', radius: 130, speed: 28, size: 36 },
+                { code: parts[2], role: '持続', radius: 170, speed: 36, size: 36 },
               ];
               const bg = generateBlobs(rank1, bias, { main: NEURO_LABELS[rank1]?.gradient, dark: NEURO_LABELS[rank1]?.gradientDark }, parts[1], parts[2]);
               return (

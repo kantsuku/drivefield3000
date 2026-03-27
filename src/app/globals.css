@@ -217,24 +217,24 @@ html {
 
 /* === 太陽系軌道アニメーション === */
 @keyframes orbit-1 {
-  from { transform: translate(-50%, -50%) rotate(0deg) translateX(80px); }
-  to   { transform: translate(-50%, -50%) rotate(360deg) translateX(80px); }
+  from { transform: translate(-50%, -50%) rotate(0deg) translateX(85px); }
+  to   { transform: translate(-50%, -50%) rotate(360deg) translateX(85px); }
 }
 @keyframes orbit-1-counter {
   from { transform: rotate(0deg); }
   to   { transform: rotate(-360deg); }
 }
 @keyframes orbit-2 {
-  from { transform: translate(-50%, -50%) rotate(120deg) translateX(125px); }
-  to   { transform: translate(-50%, -50%) rotate(480deg) translateX(125px); }
+  from { transform: translate(-50%, -50%) rotate(120deg) translateX(130px); }
+  to   { transform: translate(-50%, -50%) rotate(480deg) translateX(130px); }
 }
 @keyframes orbit-2-counter {
   from { transform: rotate(-120deg); }
   to   { transform: rotate(-480deg); }
 }
 @keyframes orbit-3 {
-  from { transform: translate(-50%, -50%) rotate(240deg) translateX(165px); }
-  to   { transform: translate(-50%, -50%) rotate(600deg) translateX(165px); }
+  from { transform: translate(-50%, -50%) rotate(240deg) translateX(170px); }
+  to   { transform: translate(-50%, -50%) rotate(600deg) translateX(170px); }
 }
 @keyframes orbit-3-counter {
   from { transform: rotate(-240deg); }
