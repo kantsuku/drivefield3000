@@ -15,7 +15,7 @@ const BIAS_JP: Record<string, string> = {
   Single: '一点突破', Dual: '二軸駆動', Trinity: '三極共鳴', Flat: '万能拡散',
 };
 
-type Tab = 'about' | 'neuro' | 'method' | 'catalog' | 'thoughts' | 'company';
+type Tab = 'about' | 'neuro' | 'method' | 'catalog' | 'company';
 
 function SectionHead({ title }: { title: string }) {
   return (
@@ -72,8 +72,7 @@ export function AboutMenu() {
             { key: 'neuro' as Tab, num: '02', label: '5つの神経系' },
             { key: 'method' as Tab, num: '03', label: '解析方法' },
             { key: 'catalog' as Tab, num: '04', label: '型一覧' },
-            { key: 'thoughts' as Tab, num: '05', label: '想い' },
-            { key: 'company' as Tab, num: '06', label: '運営' },
+            { key: 'company' as Tab, num: '05', label: '運営' },
           ]).map((t) => (
             <button
               key={t.key}
@@ -126,6 +125,42 @@ export function AboutMenu() {
                 </p>
                 <p className="text-base text-gray-300 leading-[2]">
                   人は努力では動きません。夢中で動きます。疾走領域（Drive Field）は、その夢中を構造として捉え、成長の方程式に変えるためのツールです。
+                </p>
+              </section>
+
+              <section>
+                <SectionHead title="このツールをつくった理由" />
+                <p className="text-base text-gray-300 leading-[2] mb-4">
+                  「人は努力で動かない。フィールドで動く。」
+                </p>
+                <p className="text-base text-gray-300 leading-[2] mb-4">
+                  この言葉が、疾走領域（Drive Field）のすべての出発点です。
+                </p>
+                <p className="text-base text-gray-300 leading-[2] mb-4">
+                  私たちが考えていたのは、適材適所のような単純な話ではありませんでした。どうすれば人から人に熱意が伝播するのか。どうすれば歓びを共有できるのか。どうすればお互いの長所を活かし合えるのか。そういうことを、ずっと考えてきました。
+                </p>
+                <p className="text-base text-gray-300 leading-[2]">
+                  自分に合ったフィールドに立ったとき、人は努力を超えた力を発揮します。夢中になり、時間を忘れ、気づいたら走っている。そしてその熱は、自然と周りにも伝わっていく。その状態に名前をつけたものが「疾走領域」です。一人でも多くの人にその場所を見つけてほしい。その想いでこのツールをつくりました。
+                </p>
+              </section>
+
+              <section>
+                <SectionHead title="分類するためのツールではありません" />
+                <p className="text-base text-gray-300 leading-[2] mb-4">
+                  これは性格診断でも、占いでも、タイプ分け遊びでもありません。私たちが本当にやりたかったのは、一人ひとりが自分の能力が最も自然に通る場所を見つけ、そこで走り続けるための具体的な方法を届けることです。
+                </p>
+                <p className="text-base text-gray-300 leading-[2]">
+                  疾走領域を知ることで、自分の力がちゃんと届く場所を理解できます。無理に自分を変える必要はありません。大切な人と互いの疾走領域を共有してみてください。「我慢して合わせる関係」が「それぞれの走り方を認め合って一緒に走る関係」に変わるきっかけになれたら、こんなに嬉しいことはありません。
+                </p>
+              </section>
+
+              <section>
+                <SectionHead title="人生を楽しみながら走ってほしい" />
+                <p className="text-base text-gray-300 leading-[2] mb-4">
+                  人生に正解はありません。でも、自分にとっての「走り方」はあると信じています。あなたにはあなたの点火条件があり、あなたの加速装置があり、あなたの持続装置があります。その組み合わせは、世界に一つだけのものです。
+                </p>
+                <p className="text-base text-gray-300 leading-[2]">
+                  この診断が、あなたの仕事に、人間関係に、そして人生に、少しでも助けになれたら。心からそう願って、このツールをつくりました。
                 </p>
               </section>
 
@@ -314,140 +349,42 @@ export function AboutMenu() {
           {tab === 'catalog' && (
             <div className="space-y-10">
               <section>
-                <SectionHead title="20の型" />
+                <SectionHead title="20の型と240の疾走領域" />
                 <p className="text-base text-gray-300 leading-[2] mb-6">
-                  5つの主神経系 × 4つの偏りタイプで構成される全20型です。
+                  5つの主神経系 × 4つの偏りタイプで全20型。各型の中に12の疾走領域が存在します。
                 </p>
-                <div className="space-y-6">
-                  {['D', 'S', 'O', 'N', 'E'].map((r) => (
-                    <div key={r}>
-                      <p className="text-sm font-bold mb-2" style={{ color: NEURO_COLOR[r] }}>{r} {NEURO_JP[r]}</p>
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                        {['Single', 'Dual', 'Trinity', 'Flat'].map((b) => {
-                          const k = (kataData as any[]).find((x: any) => x.id === `${r}-${b}`);
-                          return (
-                            <div key={b} className="border border-white/10 rounded-lg p-2 text-center">
-                              <p className="text-sm font-bold text-gray-200">{k?.name || '—'}</p>
-                              <p className="text-[9px] text-gray-500">{k?.reading}</p>
-                              <p className="text-[9px] text-gray-600 mt-1">{BIAS_JP[b]}</p>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  ))}
-                </div>
               </section>
 
-              <section>
-                <SectionHead title="240の疾走領域" />
-                <p className="text-base text-gray-300 leading-[2] mb-6">
-                  各型の中で、2位・3位の神経系の組み合わせ（12通り）によって固有の疾走領域が生まれます。
-                </p>
-                <div className="space-y-6">
-                  {['D', 'S', 'O', 'N', 'E'].map((r) => (
-                    <div key={r}>
-                      <p className="text-sm font-bold mb-2" style={{ color: NEURO_COLOR[r] }}>{r} {NEURO_JP[r]}（{(namesData as any[]).filter((n: any) => n.id.startsWith(r + '-')).length}種）</p>
-                      <div className="grid grid-cols-3 md:grid-cols-4 gap-1.5">
-                        {(namesData as any[])
-                          .filter((n: any) => n.id.startsWith(r + '-'))
-                          .map((n: any) => (
+              {['D', 'S', 'O', 'N', 'E'].map((r) => (
+                <section key={r}>
+                  <SectionHead title={`${NEURO_JP[r]}（${r}）系`} />
+                  {['Single', 'Dual', 'Trinity', 'Flat'].map((b) => {
+                    const k = (kataData as any[]).find((x: any) => x.id === `${r}-${b}`);
+                    const fieldNames = (namesData as any[]).filter((n: any) => {
+                      const p = n.id.split('-');
+                      return p[0] === r && p[3] === b;
+                    });
+                    return (
+                      <div key={b} className="mb-6">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="w-2 h-2 rounded-full" style={{ backgroundColor: NEURO_COLOR[r] }} />
+                          <p className="text-sm font-bold text-gray-200">{k?.name || '—'}</p>
+                          <span className="text-[10px] text-gray-500">{k?.reading}</span>
+                          <span className="text-[10px] text-gray-600">— {BIAS_JP[b]}</span>
+                        </div>
+                        <div className="grid grid-cols-3 md:grid-cols-4 gap-1.5 ml-4">
+                          {fieldNames.map((n: any) => (
                             <div key={n.id} className="border border-white/5 rounded px-2 py-1.5 text-center">
-                              <p className="text-sm font-bold text-gray-200">{n.kanji_name}</p>
+                              <p className="text-sm font-bold text-gray-300">{n.kanji_name}</p>
                               <p className="text-[8px] text-gray-500">{n.reading}</p>
-                              <p className="text-[8px] text-gray-600">{n.id.split('-').slice(0, 3).join('-')}</p>
                             </div>
                           ))}
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              </section>
-            </div>
-          )}
-
-          {/* ═══ 想い ═══ */}
-          {tab === 'thoughts' && (
-            <div className="space-y-10">
-
-              {/* 01 */}
-              <section>
-                <SectionHead title="このツールをつくった理由" />
-                <p className="text-base text-gray-300 leading-[2] mb-4">
-                  「人は努力で動かない。フィールドで動く。」
-                </p>
-                <p className="text-base text-gray-300 leading-[2] mb-4">
-                  この言葉が、疾走領域（Drive Field）のすべての出発点です。
-                </p>
-                <p className="text-base text-gray-300 leading-[2] mb-4">
-                  私たちが考えていたのは、適材適所のような単純な話ではありませんでした。どうすれば人から人に熱意が伝播するのか。どうすれば歓びを共有できるのか。どうすればお互いの長所を活かし合えるのか。そういうことを、ずっと考えてきました。
-                </p>
-                <p className="text-base text-gray-300 leading-[2] mb-4">
-                  苦しい環境で歯を食いしばって頑張り続けている人を、たくさん見てきました。周囲との違いに悩み、「なぜ自分はうまくいかないのか」と自分を責めている人も。でも、それはその人が弱いからではないんです。ただ、自分の駆動構造に合わない場所で走ろうとしているだけなんです。
-                </p>
-                <p className="text-base text-gray-300 leading-[2]">
-                  自分に合ったフィールドに立ったとき、人は努力を超えた力を発揮します。夢中になり、時間を忘れ、気づいたら走っている。そしてその熱は、自然と周りにも伝わっていく。その状態に名前をつけたものが「疾走領域」です。一人でも多くの人にその場所を見つけてほしい。その想いでこのツールをつくりました。
-                </p>
-              </section>
-
-              {/* 02 */}
-              <section>
-                <SectionHead title="分類するためのツールではありません" />
-                <p className="text-base text-gray-300 leading-[2] mb-4">
-                  これは性格診断でも、占いでも、タイプ分け遊びでもありません。「あなたはこういうタイプです」とラベルを貼りたいわけでもありません。
-                </p>
-                <p className="text-base text-gray-300 leading-[2] mb-4">
-                  私たちが本当にやりたかったのは、一人ひとりが自分の能力が最も自然に通る場所を見つけ、そこで走り続けるための具体的な方法を届けることです。
-                </p>
-                <p className="text-base text-gray-300 leading-[2]">
-                  「自分はこういう人間だ」という思い込みの代わりに、「自分が最も自然に走れる場所はここだ」という確信を持ってもらえたら。診断結果を読んで終わりではなく、明日からの行動が少しでも変わるものにしたい。そう考えてつくっています。
-                </p>
-              </section>
-
-              {/* 03 */}
-              <section>
-                <SectionHead title="能力を空振りさせたくない" />
-                <p className="text-base text-gray-300 leading-[2] mb-4">
-                  仕事がうまくいかないとき、多くの人が「自分の能力が足りない」と思います。でも、本当にそうでしょうか。
-                </p>
-                <p className="text-base text-gray-300 leading-[2] mb-4">
-                  自分の駆動構造に合わない環境で能力を振るうことは、空振りし続けるようなものです。バットを振る力はある。タイミングも悪くない。ただ、ボールが来ていない。そんな状態を続けていたら、誰だって「自分はダメだ」と思ってしまいます。
-                </p>
-                <p className="text-base text-gray-300 leading-[2]">
-                  疾走領域を知ることで、自分の力がちゃんと届く場所を理解できます。無理に自分を変える必要はありません。自分に合った場所で振れば、あなたの能力はちゃんと届くはずです。そのことを伝えたくて、このツールをつくりました。
-                </p>
-              </section>
-
-              {/* 04 */}
-              <section>
-                <SectionHead title="人間関係にも使ってほしい" />
-                <p className="text-base text-gray-300 leading-[2] mb-4">
-                  人間関係の摩擦の多くは、互いの駆動構造の違いから生まれます。変化を求める人と安定を求める人。一人で没頭したい人と、人と一緒に動きたい人。どちらが正しいわけでもありません。ただ、エンジンの構造が違うだけです。
-                </p>
-                <p className="text-base text-gray-300 leading-[2] mb-4">
-                  相手の疾走領域を知ると、「理解できない人」が「エンジンの違う人」に変わります。それだけで、驚くほど関係は楽になります。
-                </p>
-                <p className="text-base text-gray-300 leading-[2]">
-                  パートナー、同僚、友人、家族。大切な人と互いの疾走領域を共有してみてください。「我慢して合わせる関係」が「それぞれの走り方を認め合って一緒に走る関係」に変わるきっかけになれたら、こんなに嬉しいことはありません。
-                </p>
-              </section>
-
-              {/* 05 */}
-              <section>
-                <SectionHead title="人生を楽しみながら走ってほしい" />
-                <p className="text-base text-gray-300 leading-[2] mb-4">
-                  人生に正解はありません。でも、自分にとっての「走り方」はあると信じています。
-                </p>
-                <p className="text-base text-gray-300 leading-[2] mb-4">
-                  誰かの成功パターンを真似ても、自分のエンジンに合っていなければ空回りするだけです。あなたにはあなたの点火条件があり、あなたの加速装置があり、あなたの持続装置があります。その組み合わせは、世界に一つだけのものです。
-                </p>
-                <p className="text-base text-gray-300 leading-[2] mb-4">
-                  他人と比べて苦しむ必要はありません。自分の走り方で走っているとき、人は最も生き生きとし、最も深い充実感を得られます。疾走領域は、人生を楽しみながら走るための、あなただけの方法論です。
-                </p>
-                <p className="text-base text-gray-300 leading-[2]">
-                  この診断が、あなたの仕事に、人間関係に、そして人生に、少しでも助けになれたら。心からそう願って、このツールをつくりました。
-                </p>
-              </section>
+                    );
+                  })}
+                </section>
+              ))}
             </div>
           )}
 
