@@ -218,7 +218,7 @@ function DiagnosisContent() {
           問いに答えよ。考えるな。感じろ。
         </p>
         <p className="text-xs text-gray-500 mb-16 relative z-10">
-          全52問 / 所要時間 約10〜15分
+          全90問 / 所要時間 約15〜20分
         </p>
         <button
           onClick={handleRippleClick}
@@ -487,6 +487,31 @@ function DiagnosisContent() {
   const progress = (index / TOTAL) * 100;
   const is2択 = current.type === '2択';
 
+  // フェーズ定義（セクション区切り用）
+  const PHASE_MAP: Record<string, { phase: string; label: string }> = {
+    '原体験': { phase: '1/7', label: 'ウォームアップ' },
+    '食': { phase: '1/7', label: 'ウォームアップ' },
+    '骨格': { phase: '2/7', label: 'エンジン診断' },
+    '偏り': { phase: '3/7', label: '駆動特性' },
+    '発動方向': { phase: '3/7', label: '駆動特性' },
+    '時間特性': { phase: '3/7', label: '駆動特性' },
+    '出力': { phase: '3/7', label: '駆動特性' },
+    '旅行': { phase: '4/7', label: '場面別' },
+    'クロス検証': { phase: '4/7', label: '場面別' },
+    '仕事観': { phase: '4/7', label: '場面別' },
+    '恋愛・愛': { phase: '4/7', label: '場面別' },
+    '自己肯定': { phase: '5/7', label: 'あなた自身について' },
+    '対人基盤': { phase: '5/7', label: 'あなた自身について' },
+    '経験値': { phase: '6/7', label: '経験と才能' },
+    '才能': { phase: '6/7', label: '経験と才能' },
+    '環境逆推定': { phase: '7/7', label: '環境と未来' },
+    '未来思考': { phase: '7/7', label: '環境と未来' },
+    '金': { phase: '4/7', label: '場面別' },
+  };
+  const currentPhase = PHASE_MAP[current.domain];
+  const prevPhase = index > 0 ? PHASE_MAP[questions[index - 1]?.domain] : null;
+  const isNewPhase = !prevPhase || prevPhase.label !== currentPhase?.label;
+
   return (
     <main className="min-h-screen flex flex-col relative">
       <div className="wave-bg"><div className="blob-3" /><div className="blob-4" /><div className="blob-5" /></div>
@@ -525,9 +550,15 @@ function DiagnosisContent() {
         }`}
       >
         <div className="w-full max-w-sm">
-          <p className="text-[10px] text-gray-500 tracking-[0.25em] mb-4 text-center uppercase">
-            {current.domain}
-          </p>
+          {/* フェーズラベル */}
+          {currentPhase && (
+            <div className="text-center mb-4">
+              {isNewPhase && (
+                <p className="text-xs text-white font-bold mb-1">{currentPhase.label}</p>
+              )}
+              <p className="text-[10px] text-gray-500 tracking-wider">{currentPhase.phase}</p>
+            </div>
+          )}
 
           <h2 className="text-lg font-bold leading-relaxed mb-2 text-center text-balance">
             {current.question}
