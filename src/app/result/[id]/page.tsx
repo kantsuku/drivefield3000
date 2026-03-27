@@ -828,7 +828,7 @@ export default async function ResultPage({
               ];
               const bg = generateBlobs(rank1, bias, { main: NEURO_LABELS[rank1]?.gradient, dark: NEURO_LABELS[rank1]?.gradientDark }, parts[1], parts[2]);
               return (
-                <div className="noise-overlay relative rounded-2xl overflow-hidden mb-8" style={{ backgroundColor: '#fff', aspectRatio: '1', maxWidth: 400, margin: '0 auto 2rem' }}>
+                <div className="noise-overlay relative rounded-2xl overflow-hidden mb-8" style={{ backgroundColor: '#000', aspectRatio: '1', maxWidth: 400, margin: '0 auto 2rem' }}>
                   {/* グラデ背景（中央揃え） */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="relative" style={{ width: 330, height: 330 }}>
@@ -838,12 +838,6 @@ export default async function ResultPage({
                   {/* 円の外側を白くするマスク（中央基準） */}
                   <div className="absolute inset-0 z-[2] pointer-events-none" style={{
                     background: 'radial-gradient(circle at 50% 50%, transparent 56%, #fff 57%)',
-                  }} />
-                  {/* 円の内側の暗い背景 */}
-                  <div className="absolute inset-0 z-[1] pointer-events-none" style={{
-                    background: `radial-gradient(circle at 50% 50%, ${{
-                      D: '#8b2520', S: '#1a3a4a', O: '#1a3d32', N: '#3d3010', E: '#2d1f45',
-                    }[rank1] || '#1a1a1a'} 0%, #000 56%, transparent 57%)`,
                   }} />
                   {/* 太陽系コンテンツ */}
                   <div className="absolute inset-0 z-10 flex items-center justify-center">
