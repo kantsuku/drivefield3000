@@ -513,7 +513,41 @@ export default async function ResultPage({
   const ignition = sp.ig || null;
   const timing = sp.tm || null;
   const output = sp.out || null;
+  const segment = (sp.seg as 'meta' | 'unverbalized' | 'struggling' | 'curious') || 'unverbalized';
   const pattern = findPattern(coreCode, bias, ignition, timing, output);
+
+  // セグメント別の語り口テキスト
+  const SEGMENT_VOICE: Record<string, { intro: string; engine: string; awakening: string; drain: string; recovery: string }> = {
+    meta: {
+      intro: 'あなたは既に自分の特性に気づいているかもしれない。ここからは、その直感を構造として確認していく。',
+      engine: 'あなたが無意識に選んできた行動パターンの裏には、この駆動構造がある。',
+      awakening: 'あなたが「ゾーンに入った」と感じる瞬間を思い出してほしい。その時、以下の条件が揃っていたはずだ。',
+      drain: 'あなたは自分のドレインに既に気づいているかもしれない。ここではそのメカニズムを構造的に示す。',
+      recovery: '回復の手順を論理的に理解しておくことで、次のドレインからの復帰が早くなる。',
+    },
+    unverbalized: {
+      intro: 'これまでうまく言葉にできなかったかもしれないが、あなたが夢中になれる条件には明確なパターンがある。',
+      engine: 'なぜあの時は頑張れたのに、この時はダメだったのか。その答えがここにある。',
+      awakening: '「なんかうまくいく時」と「全然ダメな時」の違い。それはこの条件が揃っているかどうかだ。',
+      drain: '原因不明のやる気の低下、理由なき疲労感。その正体がここにある。',
+      recovery: '「なんとなく回復した」ではなく、意図的に回復する方法がある。',
+    },
+    struggling: {
+      intro: '動けないのはあなたが弱いからではない。あなたのエンジンに合わない場所にいるだけだ。',
+      engine: 'あなたの中には、確かに力強いエンジンがある。それが今、環境によって抑え込まれているだけだ。',
+      awakening: '夢中になれる環境は必ず存在する。あなたのエンジンが求めている条件はこれだ。',
+      drain: 'あなたが今感じている辛さには、明確な原因がある。それはあなたの弱さではない。',
+      recovery: '回復は可能だ。一気に全部を変える必要はない。まずここから始めればいい。',
+    },
+    curious: {
+      intro: 'ただの性格診断だと思っていたかもしれないが、ここから先は想像以上に深い。あなたの「夢中の設計図」だ。',
+      engine: '面白いことに、あなたが自然にやっていることの裏には、明確な駆動構造がある。',
+      awakening: 'あなたが「楽しい」と感じる瞬間には、実は再現可能な条件が隠れている。',
+      drain: '普段は元気なあなたでも、この条件が揃うとエネルギーが枯渇する。知っておいて損はない。',
+      recovery: '万が一ドレインした時のために、回復の手順を頭に入れておこう。',
+    },
+  };
+  const voice = SEGMENT_VOICE[segment];
 
   // interpretationデータ取得
   const interp = pattern ? interpMap[pattern.pattern_id] : null;
@@ -584,6 +618,8 @@ export default async function ResultPage({
             return match ? match[1].replace(/として表現$/, '').replace(/を象徴$/, '').trim() : raw;
           })()}
         </p>
+
+        <p className="text-sm text-white/70 mb-4 leading-relaxed text-left">{voice.intro}</p>
 
         {entry.lead && (
           <p className="text-sm text-white mb-6 leading-[1.9] text-left">{entry.lead}</p>
@@ -760,7 +796,8 @@ export default async function ResultPage({
           </div>
 
           {/* 診断結果の総括 */}
-          <h3 className="text-sm font-bold text-gray-900 mt-8 mb-3">あなたの駆動構造</h3>
+          <h3 className="text-sm font-bold text-gray-900 mt-8 mb-2">あなたの駆動構造</h3>
+          <p className="text-xs text-gray-500 mb-3">{voice.engine}</p>
           <p className="text-sm text-gray-600 leading-[1.9] mb-4">
             あなたの診断では、{neuroDict[parts[0]]?.jp}（{neuroDict[parts[0]]?.desc}）が最も高いスコアを記録しました。これがあなたの駆動の起点——点火装置です。{neuroDict[parts[1]]?.jp}（{neuroDict[parts[1]]?.desc}）が2番目に高く加速装置として機能し、{neuroDict[parts[2]]?.jp}（{neuroDict[parts[2]]?.desc}）が3番目に続いて駆動を循環させます。
           </p>
@@ -1033,6 +1070,7 @@ export default async function ResultPage({
               {pattern.awakening_condition}
             </p>
 
+            <p className="text-sm font-bold text-gray-800 mb-4">{voice.awakening}</p>
             <p className="text-sm text-gray-600 leading-[1.9] mb-6">
               覚醒とは、あなたが完全な夢中状態に入ること——{neuroDict[parts[0]]?.jp}・{neuroDict[parts[1]]?.jp}・{neuroDict[parts[2]]?.jp}の3つの神経系が同時に最大出力で回っている状態だ。夢中になっているとき、あなたは普段の数倍のパフォーマンスを発揮し、時間の感覚さえ失う。夢中になれる環境があれば、人は無限に成長する。問題は、その環境を意識的に作れるかどうかだ。
             </p>
@@ -1080,6 +1118,7 @@ export default async function ResultPage({
               {pattern.drain_condition}
             </p>
 
+            <p className="text-sm font-bold text-gray-800 mb-4">{voice.drain}</p>
             <p className="text-sm text-gray-600 leading-[1.9] mb-6">
               ドレインとは、夢中になれない状態が続くこと——あなたの{neuroDict[parts[0]]?.jp}が求めるものが長期間得られず、駆動が空回りし続ける状態のことだ。最初は「なんとなく調子が出ない」程度だが、放置すると{neuroDict[parts[1]]?.jp}と{neuroDict[parts[2]]?.jp}の機能まで連鎖的に低下し、やがて何にも夢中になれなくなる。以下の兆候に心当たりがあるなら、すでにドレインが始まっている可能性がある。
             </p>
@@ -1120,6 +1159,9 @@ export default async function ResultPage({
               {pattern.recovery_condition}
             </p>
 
+            <p className="text-sm text-gray-600 leading-[1.9] mb-6">
+            </p>
+            <p className="text-sm font-bold text-gray-800 mb-4">{voice.recovery}</p>
             <p className="text-sm text-gray-600 leading-[1.9] mb-6">
               夢中を取り戻すには順番がある。まず{neuroDict[parts[0]]?.jp}（{neuroDict[parts[0]]?.desc}）を回復させ、次に{neuroDict[parts[1]]?.jp}（{neuroDict[parts[1]]?.desc}）を立ち上げ、最後に{neuroDict[parts[2]]?.jp}（{neuroDict[parts[2]]?.desc}）を繋げる。この順番を間違えると回復が遅れる。2位や3位からいくら頑張っても、1位の{neuroDict[parts[0]]?.jp}が枯れたままでは、夢中は戻ってこない。
             </p>

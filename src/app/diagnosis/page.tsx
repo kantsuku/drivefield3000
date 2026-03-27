@@ -40,7 +40,7 @@ function DiagnosisContent() {
   // プレビュー用ダミー結果
   const previewResult: DiagnosisResult | null =
     (previewPhase === 'detected' || previewPhase === 'reveal')
-      ? { nameId: 'D-E-N-Dual', rank1: 'D', rank2: 'E', rank3: 'N', bias: 'Dual', ignition: '外燃', timing: '瞬発', output: '中', scores: { D: 10, S: 3, O: 2, N: 6, E: 8 }, layer2: { selfEsteem: 5, attachment: 3 }, layer3: { study: 2, social: 3, physical: 1, creative: 3, adventure: 2 }, layer4: { physical: 1, intuitive: 3, logical: 2, dexterity: 1, verbal: 2 }, layer5: { affluence: 0, health: 3 } }
+      ? { nameId: 'D-E-N-Dual', rank1: 'D', rank2: 'E', rank3: 'N', bias: 'Dual', ignition: '外燃', timing: '瞬発', output: '中', scores: { D: 10, S: 3, O: 2, N: 6, E: 8 }, layer2: { selfEsteem: 5, attachment: 3 }, layer3: { study: 2, social: 3, physical: 1, creative: 3, adventure: 2 }, layer4: { physical: 1, intuitive: 3, logical: 2, dexterity: 1, verbal: 2 }, layer5: { affluence: 0, health: 3 }, segment: 'meta' as const }
       : null;
 
   const [phase, setPhase] = useState<Phase>(previewPhase || 'intro');
@@ -131,6 +131,7 @@ function DiagnosisContent() {
     const params = new URLSearchParams({
       D: String(s.D), S: String(s.S), O: String(s.O), N: String(s.N), E: String(s.E),
       ig: result.ignition, tm: result.timing, out: result.output,
+      seg: result.segment,
     });
     router.push(`/result/${encodeURIComponent(result.nameId)}?${params}`);
   };

@@ -57,6 +57,8 @@ export interface Layer5Scores {
   health: number;
 }
 
+export type UserSegment = 'meta' | 'unverbalized' | 'struggling' | 'curious';
+
 export interface DiagnosisResult {
   nameId: string;
   rank1: string;
@@ -72,6 +74,8 @@ export interface DiagnosisResult {
   layer3: Layer3Scores;
   layer4: Layer4Scores;
   layer5: Layer5Scores;
+  // ユーザー層
+  segment: UserSegment;
 }
 
 export function calculateResult(
@@ -123,6 +127,23 @@ export function calculateResult(
 
   const nameId = `${rank1}-${rank2}-${rank3}-${bias}`;
 
+  // ユーザー層判定
+  const se = scores.self_esteem;
+  const at = scores.attachment;
+  const tv = scores.talent_verbal;
+  const tl = scores.talent_logical;
+
+  let segment: UserSegment;
+  if (se >= 5 && (tv >= 3 || tl >= 3)) {
+    segment = 'meta';        // メタ認知高い — 自己肯定高い＋言語化or論理力あり
+  } else if (se <= -3 || at <= -5) {
+    segment = 'struggling';  // 悩んでる — 自己肯定低いor愛着不安
+  } else if (se >= 3 && at >= 3) {
+    segment = 'curious';     // 好奇心で来た — 自己肯定もat也高い、困ってない
+  } else {
+    segment = 'unverbalized'; // 言語化できてない — 最大ボリュームゾーン
+  }
+
   return {
     nameId, rank1, rank2, rank3, bias, ignition, timing, output,
     scores: { D: scores.D, S: scores.S, O: scores.O, N: scores.N, E: scores.E },
@@ -148,5 +169,6 @@ export function calculateResult(
       affluence: scores.env_affluence,
       health: scores.env_health,
     },
+    segment,
   };
 }
