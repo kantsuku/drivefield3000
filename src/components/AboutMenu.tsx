@@ -2,8 +2,20 @@
 
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import kataData from '@/data/l4-kata.json';
+import namesData from '@/data/names-240.json';
 
-type Tab = 'about' | 'neuro' | 'method' | 'thoughts' | 'company';
+const NEURO_COLOR: Record<string, string> = {
+  D: '#c0392b', S: '#2e6b8a', O: '#27806a', N: '#b8860b', E: '#7b5ea7',
+};
+const NEURO_JP: Record<string, string> = {
+  D: 'ドーパミン', S: 'セロトニン', O: 'オキシトシン', N: 'ノルアドレナリン', E: 'エンドルフィン',
+};
+const BIAS_JP: Record<string, string> = {
+  Single: '一点突破', Dual: '二軸駆動', Trinity: '三極共鳴', Flat: '万能拡散',
+};
+
+type Tab = 'about' | 'neuro' | 'method' | 'catalog' | 'thoughts' | 'company';
 
 function SectionHead({ title }: { title: string }) {
   return (
@@ -59,8 +71,9 @@ export function AboutMenu() {
             { key: 'about' as Tab, num: '01', label: '疾走領域とは' },
             { key: 'neuro' as Tab, num: '02', label: '5つの神経系' },
             { key: 'method' as Tab, num: '03', label: '解析方法' },
-            { key: 'thoughts' as Tab, num: '04', label: '想い' },
-            { key: 'company' as Tab, num: '05', label: '運営' },
+            { key: 'catalog' as Tab, num: '04', label: '型一覧' },
+            { key: 'thoughts' as Tab, num: '05', label: '想い' },
+            { key: 'company' as Tab, num: '06', label: '運営' },
           ]).map((t) => (
             <button
               key={t.key}
@@ -292,6 +305,62 @@ export function AboutMenu() {
                     <span className="text-white">合計</span>
                     <span className="text-white">90問 / 約15〜20分</span>
                   </div>
+                </div>
+              </section>
+            </div>
+          )}
+
+          {/* ═══ 型一覧 ═══ */}
+          {tab === 'catalog' && (
+            <div className="space-y-10">
+              <section>
+                <SectionHead title="20の型" />
+                <p className="text-base text-gray-300 leading-[2] mb-6">
+                  5つの主神経系 × 4つの偏りタイプで構成される全20型です。
+                </p>
+                <div className="space-y-6">
+                  {['D', 'S', 'O', 'N', 'E'].map((r) => (
+                    <div key={r}>
+                      <p className="text-sm font-bold mb-2" style={{ color: NEURO_COLOR[r] }}>{r} {NEURO_JP[r]}</p>
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                        {['Single', 'Dual', 'Trinity', 'Flat'].map((b) => {
+                          const k = (kataData as any[]).find((x: any) => x.id === `${r}-${b}`);
+                          return (
+                            <div key={b} className="border border-white/10 rounded-lg p-2 text-center">
+                              <p className="text-sm font-bold text-gray-200">{k?.name || '—'}</p>
+                              <p className="text-[9px] text-gray-500">{k?.reading}</p>
+                              <p className="text-[9px] text-gray-600 mt-1">{BIAS_JP[b]}</p>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <section>
+                <SectionHead title="240の疾走領域" />
+                <p className="text-base text-gray-300 leading-[2] mb-6">
+                  各型の中で、2位・3位の神経系の組み合わせ（12通り）によって固有の疾走領域が生まれます。
+                </p>
+                <div className="space-y-6">
+                  {['D', 'S', 'O', 'N', 'E'].map((r) => (
+                    <div key={r}>
+                      <p className="text-sm font-bold mb-2" style={{ color: NEURO_COLOR[r] }}>{r} {NEURO_JP[r]}（{(namesData as any[]).filter((n: any) => n.id.startsWith(r + '-')).length}種）</p>
+                      <div className="grid grid-cols-3 md:grid-cols-4 gap-1.5">
+                        {(namesData as any[])
+                          .filter((n: any) => n.id.startsWith(r + '-'))
+                          .map((n: any) => (
+                            <div key={n.id} className="border border-white/5 rounded px-2 py-1.5 text-center">
+                              <p className="text-sm font-bold text-gray-200">{n.kanji_name}</p>
+                              <p className="text-[8px] text-gray-500">{n.reading}</p>
+                              <p className="text-[8px] text-gray-600">{n.id.split('-').slice(0, 3).join('-')}</p>
+                            </div>
+                          ))}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </section>
             </div>
