@@ -828,14 +828,20 @@ export default async function ResultPage({
               ];
               const bg = generateBlobs(rank1, bias, { main: NEURO_LABELS[rank1]?.gradient, dark: NEURO_LABELS[rank1]?.gradientDark }, parts[1], parts[2]);
               return (
-                <div className="noise-overlay relative rounded-2xl overflow-hidden mb-8" style={{ backgroundColor: '#000' }}>
-                  <BlobBackground blobs={bg.blobs} edges={bg.edges} baseColor={bg.baseColor} />
-                  {/* 円の外側を黒くするマスク */}
+                <div className="noise-overlay relative rounded-2xl overflow-hidden mb-8" style={{ backgroundColor: '#000', aspectRatio: '1', maxWidth: 400, margin: '0 auto 2rem' }}>
+                  {/* グラデ背景（中央揃え） */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="relative" style={{ width: 330, height: 330 }}>
+                      <BlobBackground blobs={bg.blobs} edges={bg.edges} baseColor={bg.baseColor} />
+                    </div>
+                  </div>
+                  {/* 円の外側を黒くするマスク（中央基準） */}
                   <div className="absolute inset-0 z-[2] pointer-events-none" style={{
-                    background: 'radial-gradient(circle at center, transparent 46%, #000 47%)',
+                    background: 'radial-gradient(circle at 50% 50%, transparent 41%, #000 42%)',
                   }} />
-                  <div className="relative z-10 flex flex-col items-center py-12 px-4">
-                    <div className="relative" style={{ width: 360, height: 360 }}>
+                  {/* 太陽系コンテンツ */}
+                  <div className="absolute inset-0 z-10 flex items-center justify-center">
+                    <div className="relative" style={{ width: 330, height: 330 }}>
                       {/* 軌道リング */}
                       {orbits.map((o, i) => (
                         <div key={i}>
@@ -855,9 +861,8 @@ export default async function ResultPage({
                       {orbits.map((o, i) => (
                         <div key={`planet-${i}`} className="absolute" style={{
                           width: o.size, height: o.size,
-                          top: '50%', left: '50%',
+                          top: `calc(50% - ${o.size / 2}px)`, left: `calc(50% - ${o.size / 2}px)`,
                           animation: `orbit-${i + 1} ${o.speed}s linear infinite`,
-                          marginTop: -o.size / 2, marginLeft: -o.size / 2,
                         }}>
                           <div className="w-full h-full rounded-full flex items-center justify-center font-bold shadow-lg border border-white/20" style={{
                             backgroundColor: '#000',
@@ -876,15 +881,16 @@ export default async function ResultPage({
                         </p>
                       </div>
                     </div>
-                    {/* 凡例 */}
-                    <div className="flex gap-4 mt-4">
-                      {orbits.map((o) => (
-                        <div key={o.code} className="flex items-center gap-1.5">
-                          <span className="w-3 h-3 rounded-full" style={{ backgroundColor: NEURO_LABELS[o.code]?.color }} />
-                          <span className="text-[10px] text-white/70">{o.role}: {neuroDict[o.code]?.jp}</span>
-                        </div>
-                      ))}
-                    </div>
+                  </div>
+                  {/* 凡例（右下） */}
+                  <div className="absolute bottom-3 right-4 z-10 flex flex-col gap-1 items-end">
+                    {orbits.map((o) => (
+                      <div key={o.code} className="flex items-center gap-1.5">
+                        <span className="text-[9px] text-white/50">{o.role}</span>
+                        <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: NEURO_LABELS[o.code]?.color }} />
+                        <span className="text-[9px] text-white/70">{neuroDict[o.code]?.jp}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
               );
