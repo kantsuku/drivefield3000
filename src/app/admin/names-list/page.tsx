@@ -65,6 +65,8 @@ export default function NamesListPage() {
   const [biasFilter, setBiasFilter] = useState('all');
   const [changeLogs, setChangeLogs] = useState<ChangeLog[]>([]);
   const [showLogs, setShowLogs] = useState(false);
+  const [suggestions, setSuggestions] = useState<any[]>([]);
+  const [loadingSuggestions, setLoadingSuggestions] = useState(false);
 
   // Load change logs from localStorage
   useEffect(() => {
@@ -81,7 +83,46 @@ export default function NamesListPage() {
     setEditingId(id);
     setEditField(field);
     setEditValue(value);
+    setSuggestions([]);
   };
+
+  const fetchSuggestions = async (id: string, field: string, current: string) => {
+    setLoadingSuggestions(true);
+    setSuggestions([]);
+    const entry = entries.find((e) => e.id === id);
+    try {
+      const res = await fetch('/api/suggest-names', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, field, current, kanjiName: entry?.kanji_name }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setSuggestions(data.suggestions || []);
+      }
+    } catch {} finally {
+      setLoadingSuggestions(false);
+    }
+  };
+
+  const applySuggestion = (suggestion: any) => {
+    if (editField === 'kanji_name' && suggestion.kanji_name) {
+      setEditValue(suggestion.kanji_name);
+      // Also update reading and english_name in one go
+      const entry = entries.find((e) => e.id === editingId);
+      if (entry) {
+        entry._pendingReading = suggestion.reading;
+        entry._pendingEnglish = suggestion.english_name;
+      }
+    } else if (editField === 'naming_reason' && suggestion.naming_reason) {
+      setEditValue(suggestion.naming_reason);
+    }
+  };
+
+  const [cascading, setCascading] = useState(false);
+
+  const patchField = (id: string, field: string, value: string) =>
+    fetch('/api/update-name240', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id, field, value }) });
 
   const saveEdit = async () => {
     if (!editingId || !editField) return;
@@ -89,26 +130,49 @@ export default function NamesListPage() {
     const entry = entries.find((e) => e.id === editingId);
     const oldValue = entry?.[editField] ?? '';
     try {
-      const res = await fetch('/api/update-name240', {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: editingId, field: editField, value: editValue }),
-      });
+      const res = await patchField(editingId, editField, editValue);
       if (res.ok) {
-        setEntries((prev) => prev.map((e) => e.id === editingId ? { ...e, [editField]: editValue } : e));
-        // Add to change log
-        const log: ChangeLog = {
-          id: editingId,
-          field: editField,
-          oldValue,
-          newValue: editValue,
-          timestamp: new Date().toISOString(),
-        };
+        const updates: Record<string, string> = { [editField]: editValue };
+
+        // kanji_name変更時はreading/english_nameも保存＋コピー＆リード連動生成
+        if (editField === 'kanji_name' && entry?._pendingReading) {
+          updates.reading = entry._pendingReading;
+          updates.english_name = entry._pendingEnglish;
+          await patchField(editingId, 'reading', entry._pendingReading);
+          await patchField(editingId, 'english_name', entry._pendingEnglish);
+
+          // cascade: コピー＋リード文を連動生成
+          setCascading(true);
+          try {
+            const cascadeRes = await fetch('/api/suggest-names', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ id: editingId, field: 'cascade', kanjiName: editValue }),
+            });
+            if (cascadeRes.ok) {
+              const { result } = await cascadeRes.json();
+              if (result?.naming_reason) {
+                updates.naming_reason = result.naming_reason;
+                await patchField(editingId, 'naming_reason', result.naming_reason);
+              }
+              if (result?.lead) {
+                updates.lead = result.lead;
+                await patchField(editingId, 'lead', result.lead);
+              }
+            }
+          } catch {} finally {
+            setCascading(false);
+          }
+        }
+
+        setEntries((prev) => prev.map((e) => e.id === editingId ? { ...e, ...updates, _pendingReading: undefined, _pendingEnglish: undefined } : e));
+        const log: ChangeLog = { id: editingId, field: editField, oldValue, newValue: editValue, timestamp: new Date().toISOString() };
         saveLogs([log, ...changeLogs]);
       }
     } catch {} finally {
       setSaving(false);
       setEditingId(null);
+      setSuggestions([]);
     }
   };
 
@@ -135,6 +199,8 @@ export default function NamesListPage() {
     return true;
   });
 
+  const canSuggest = (field: string) => field === 'kanji_name' || field === 'naming_reason';
+
   const EditableCell = ({ id, field, value, className = '', multiline = false }: {
     id: string; field: string; value: string; className?: string; multiline?: boolean;
   }) => {
@@ -158,12 +224,42 @@ export default function NamesListPage() {
               onKeyDown={(ev) => { if (ev.key === 'Enter') saveEdit(); if (ev.key === 'Escape') cancelEdit(); }}
             />
           )}
-          <div className="flex gap-2">
+          <div className="flex items-center gap-2">
             <button onClick={saveEdit} disabled={saving} className="text-xs bg-blue-600 hover:bg-blue-500 text-white px-3 py-1 rounded disabled:opacity-50">
               {saving ? '保存中...' : '保存'}
             </button>
             <button onClick={cancelEdit} className="text-xs text-gray-500 hover:text-gray-300 px-3 py-1">取消</button>
+            {canSuggest(field) && (
+              <button
+                onClick={() => fetchSuggestions(id, field, value)}
+                disabled={loadingSuggestions}
+                className="text-xs bg-purple-700 hover:bg-purple-600 text-white px-3 py-1 rounded disabled:opacity-50 ml-auto"
+              >
+                {loadingSuggestions ? '生成中...' : '🎲 候補を生成'}
+              </button>
+            )}
           </div>
+          {/* 候補リスト */}
+          {suggestions.length > 0 && editingId === id && editField === field && (
+            <div className="border border-purple-800/50 rounded-lg bg-purple-950/20 p-2 space-y-1">
+              <p className="text-[10px] text-purple-400 mb-1">クリックで選択:</p>
+              {suggestions.map((s: any, i: number) => (
+                <button
+                  key={i}
+                  onClick={() => applySuggestion(s)}
+                  className={`w-full text-left px-2 py-1.5 rounded text-xs transition-colors hover:bg-purple-900/30 ${
+                    editValue === (s.kanji_name || s.naming_reason) ? 'bg-purple-900/40 text-white' : 'text-gray-300'
+                  }`}
+                >
+                  {field === 'kanji_name' ? (
+                    <span><strong>{s.kanji_name}</strong> <span className="text-gray-500">({s.reading} / {s.english_name})</span></span>
+                  ) : (
+                    <span>{s.naming_reason}</span>
+                  )}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       );
     }
@@ -263,16 +359,26 @@ export default function NamesListPage() {
         </div>
       )}
 
+      {/* cascade中のオーバーレイ */}
+      {cascading && (
+        <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center">
+          <div className="bg-gray-900 border border-purple-700 rounded-xl px-6 py-4 text-center">
+            <p className="text-sm text-purple-300 mb-1">コピー＆リード文を連動生成中...</p>
+            <p className="text-[10px] text-gray-500">名称に合わせて自動生成しています</p>
+          </div>
+        </div>
+      )}
+
       {/* テーブル */}
       <div className="flex-1 overflow-auto">
         <table className="min-w-[1400px] w-full text-sm border-collapse">
           <thead className="sticky top-0 z-20 bg-gray-900">
             <tr className="border-b border-gray-700">
-              <th className="sticky left-0 z-30 bg-gray-900 text-left px-3 py-2 text-xs text-gray-500 font-normal w-20 border-r border-gray-700">型</th>
-              <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal w-24">領域名</th>
+              <th className="sticky left-0 z-30 bg-gray-900 text-left px-3 py-2 text-xs text-gray-500 font-normal w-28 border-r border-gray-700">領域名</th>
+              <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal w-20">型</th>
               <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal w-24">読み</th>
               <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal w-28">English</th>
-              <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal min-w-[200px]">キャッチコピー</th>
+              <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal min-w-[250px]">キャッチコピー</th>
               <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal min-w-[350px]">リード文</th>
               <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal w-28">ID</th>
             </tr>
@@ -288,19 +394,19 @@ export default function NamesListPage() {
 
               return (
                 <tr key={e.id} className={`border-b border-gray-800/50 align-top ${rowBg} border-l-2 ${colors.border}`}>
-                  {/* 型 */}
+                  {/* 領域名（sticky固定） */}
                   <td className={`sticky left-0 z-10 px-3 py-2 border-r border-gray-800 ${rowBg || 'bg-gray-950'}`}>
+                    <EditableCell id={e.id} field="kanji_name" value={e.kanji_name} className={`font-bold text-lg ${colors.text}`} />
+                  </td>
+
+                  {/* 型 */}
+                  <td className="px-3 py-2">
                     <div className="flex items-center gap-1.5">
                       <span className={`w-2 h-2 rounded-full shrink-0 ${colors.dot}`} />
                       <span className={`text-[10px] font-bold ${colors.text}`}>{r1}</span>
                     </div>
                     {kata && <div className="text-[10px] text-gray-400 mt-0.5">{kata.name}</div>}
                     <div className="text-[10px] text-gray-600">{BIAS_JP[bias]}</div>
-                  </td>
-
-                  {/* 領域名 */}
-                  <td className="px-3 py-2">
-                    <EditableCell id={e.id} field="kanji_name" value={e.kanji_name} className="font-bold text-base" />
                   </td>
 
                   {/* 読み */}
@@ -313,9 +419,12 @@ export default function NamesListPage() {
                     <EditableCell id={e.id} field="english_name" value={e.english_name} className="text-xs text-gray-400" />
                   </td>
 
-                  {/* キャッチコピー */}
-                  <td className="px-3 py-2">
-                    <span className="text-xs text-gray-300">{catchphrase || '—'}</span>
+                  {/* キャッチコピー（編集可能＋候補生成） */}
+                  <td className="px-3 py-2 min-w-[250px]">
+                    <EditableCell id={e.id} field="naming_reason" value={e.naming_reason || ''} className="text-xs text-gray-300" />
+                    {!(editingId === e.id && editField === 'naming_reason') && catchphrase && (
+                      <p className="text-[10px] text-gray-500 mt-1 italic">→ {catchphrase}</p>
+                    )}
                   </td>
 
                   {/* リード文 */}
