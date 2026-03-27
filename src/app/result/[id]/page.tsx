@@ -861,7 +861,7 @@ export default async function ResultPage({
                       {orbits.map((o, i) => (
                         <div key={`planet-${i}`} className="absolute" style={{
                           width: o.size, height: o.size,
-                          top: `calc(50% - ${o.size / 2}px)`, left: `calc(50% - ${o.size / 2}px)`,
+                          top: '50%', left: '50%',
                           animation: `orbit-${i + 1} ${o.speed}s linear infinite`,
                         }}>
                           <div className="w-full h-full rounded-full flex items-center justify-center font-bold shadow-lg border border-white/20" style={{
