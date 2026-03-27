@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { AboutMenu } from '@/components/AboutMenu';
 import { ActionMenu } from '@/components/ActionMenu';
 import { AiConsultSection } from '@/components/AiConsultSection';
+import { StickyHero } from '@/components/StickyHero';
 import { Sparkles, AlertTriangle, Wrench, Briefcase, Home, RefreshCw, Flame, Clock, Zap, Activity, Rocket, Users, Coffee, CheckCircle } from 'lucide-react';
 
 // ─── Types ────────────────────────────────────────────
@@ -655,79 +656,41 @@ export default async function ResultPage({
     <AboutMenu />
 
 
-    {/* ═══ ヒーローゾーン（黒+グラデ） ═══ */}
-    <section className="noise-overlay relative overflow-hidden border-b border-gray-200" style={{ backgroundColor: {
-      D: '#8b2520',
-      S: '#1a3a4a',
-      O: '#1a3d32',
-      N: '#3d3010',
-      E: '#2d1f45',
-    }[rank1] || '#8b2520' }}>
-      {/* 型カラーうねうねグラデ背景（rank1+biasで動的生成） */}
+    {/* ═══ ヒーロー + アンカーメニュー（スクロールで縮小） ═══ */}
+    <StickyHero
+      kanjiName={entry.kanji_name}
+      reading={entry.reading}
+      englishName={entry.english_name}
+      kataName={kata?.name || ''}
+      lead={entry.lead || ''}
+      copyText={(() => {
+        const raw = entry.naming_reason
+          .split('。')
+          .filter((s: string) => !s.includes('優先漢字') && !s.includes('使用漢字'))
+          .map((s: string) => s.trim())
+          .filter(Boolean)[0] || '';
+        const match = raw.match(/[、。]([^、。]*$)/) || raw.match(/を[、]?(.+)/);
+        return match ? match[1].replace(/として表現$/, '').replace(/を象徴$/, '').trim() : raw;
+      })()}
+      bgColor={{
+        D: '#8b2520', S: '#1a3a4a', O: '#1a3d32', N: '#3d3010', E: '#2d1f45',
+      }[rank1] || '#8b2520'}
+      rightLabel={`疾走領域 ${entry.kanji_name}`}
+      navItems={[
+        { href: '#sec-result', label: '診断結果' },
+        { href: '#sec-type', label: 'あなたの型' },
+        { href: '#sec-profile', label: 'あなたの人物像' },
+        { href: '#sec-startup', label: '起動マニュアル' },
+        { href: '#sec-awakening', label: '覚醒の条件' },
+        { href: '#sec-drain', label: 'ドレイン警告' },
+        { href: '#sec-recovery', label: '回復マニュアル' },
+      ]}
+    >
       {(() => {
         const bg = generateBlobs(rank1, bias, { main: NEURO_LABELS[rank1]?.gradient, dark: NEURO_LABELS[rank1]?.gradientDark }, parts[1], parts[2]);
         return <BlobBackground blobs={bg.blobs} edges={bg.edges} baseColor={bg.baseColor} />;
       })()}
-
-      <p
-        className="absolute top-8 right-6 z-10 text-sm md:text-lg text-white font-bold tracking-[0.15em] leading-loose"
-        style={{ writingMode: 'vertical-rl' }}
-      >
-        疾走領域 {entry.kanji_name}
-      </p>
-
-      <div className="relative z-10 w-full max-w-3xl mx-auto flex flex-col items-center px-6 py-16 text-center text-white">
-        {kata && <p className="text-xl text-white tracking-[0.2em] mb-4" style={serif}>{kata.name}</p>}
-        <h1 className="text-8xl font-bold tracking-wider mb-3" style={{ writingMode: 'vertical-rl', ...serif, letterSpacing: '0.3em' }}>
-          {entry.kanji_name}
-        </h1>
-        <p className="text-sm text-white mt-3 mb-10">{entry.reading} / {entry.english_name}</p>
-
-        <p className="text-xl text-white mb-8 tracking-wider leading-relaxed" style={{ fontFamily: '"Noto Serif JP", "游明朝", YuMincho, serif' }}>
-          {(() => {
-            const raw = entry.naming_reason
-              .split('。')
-              .filter((s) => !s.includes('優先漢字') && !s.includes('使用漢字'))
-              .map((s) => s.trim())
-              .filter(Boolean)[0] || '';
-            // 「〜を、〜として表現」→後半だけ抽出、なければ「〜を〜として」の後を取る
-            const match = raw.match(/[、。]([^、。]*$)/) || raw.match(/を[、]?(.+)/);
-            return match ? match[1].replace(/として表現$/, '').replace(/を象徴$/, '').trim() : raw;
-          })()}
-        </p>
-
-        {entry.lead && (
-          <p className="text-sm text-white mb-6 leading-[1.9] text-left">{entry.lead}</p>
-        )}
-
-      </div>
-    </section>
-
-    {/* ═══ アンカーメニュー（sticky） ═══ */}
-    <nav className="sticky top-0 z-40 bg-white">
-      <div className="max-w-3xl mx-auto flex items-center gap-3 pl-16 md:pl-4 pr-4 py-2.5">
-        <span className="text-[10px] text-gray-400 tracking-wider shrink-0 hidden md:inline">目次</span>
-        <div className="overflow-x-auto flex gap-2 min-w-0">
-          {[
-            { href: '#sec-result', label: '診断結果' },
-            { href: '#sec-type', label: 'あなたの型' },
-            { href: '#sec-profile', label: 'あなたの人物像' },
-            { href: '#sec-startup', label: '起動マニュアル' },
-            { href: '#sec-awakening', label: '覚醒の条件' },
-            { href: '#sec-drain', label: 'ドレイン警告' },
-            { href: '#sec-recovery', label: '回復マニュアル' },
-          ].map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="text-xs text-gray-600 hover:text-gray-900 px-3 py-1.5 rounded-full border border-gray-200 hover:border-gray-400 transition-colors whitespace-nowrap shrink-0"
-            >
-              {item.label}
-            </a>
-          ))}
-        </div>
-      </div>
-    </nav>
+    </StickyHero>
 
     {/* ═══ コンテンツゾーン（白背景） ═══ */}
     <main className="bg-white text-gray-900 min-h-screen pb-16 md:pb-0">
