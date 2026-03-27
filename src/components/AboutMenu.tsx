@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { Menu, X } from 'lucide-react';
 import kataData from '@/data/l4-kata.json';
 import namesData from '@/data/names-240.json';
@@ -19,8 +19,8 @@ type Tab = 'about' | 'neuro' | 'method' | 'catalog' | 'company';
 
 function SectionHead({ title }: { title: string }) {
   return (
-    <div className="mb-5 pb-3 border-b border-white/10">
-      <h3 className="text-xl font-bold text-gray-100">{title}</h3>
+    <div className="mb-5 pb-3 border-b border-white/30">
+      <h3 className="text-xl font-bold text-white">{title}</h3>
     </div>
   );
 }
@@ -28,13 +28,27 @@ function SectionHead({ title }: { title: string }) {
 export function AboutMenu() {
   const [open, setOpen] = useState(false);
   const [tab, setTab] = useState<Tab>('about');
+  const [fade, setFade] = useState(true);
+  const fadeTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const switchTab = useCallback((next: Tab) => {
+    if (next === tab) return;
+    setFade(false);
+    clearTimeout(fadeTimer.current);
+    fadeTimer.current = setTimeout(() => {
+      setTab(next);
+      setFade(true);
+      contentRef.current?.scrollTo(0, 0);
+    }, 150);
+  }, [tab]);
 
   return (
     <>
       {/* ハンバーガーボタン */}
       <button
         onClick={() => setOpen(true)}
-        className="fixed top-[52px] md:top-4 left-4 z-50 w-10 h-10 flex flex-col items-center justify-center gap-1.5 rounded-full border border-white/20 bg-black hover:border-white/40 transition-colors"
+        className="fixed top-4 left-4 z-50 w-10 h-10 flex flex-col items-center justify-center gap-1.5 rounded-full border border-white/20 bg-black hover:border-white/40 transition-colors"
         aria-label="メニューを開く"
       >
         <Menu size={18} />
@@ -42,7 +56,7 @@ export function AboutMenu() {
 
       {/* オーバーレイ */}
       <div
-        className={`fixed inset-0 z-50 bg-black/70 backdrop-blur-sm transition-opacity duration-300 ${
+        className={`fixed inset-0 z-50 bg-black/70 backdrop-blur-sm transition-opacity duration-500 ease-out ${
           open ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
         onClick={() => setOpen(false)}
@@ -50,23 +64,23 @@ export function AboutMenu() {
 
       {/* モーダル */}
       <div
-        className={`fixed inset-4 md:inset-8 z-50 bg-gray-950 text-white rounded-2xl overflow-hidden transition-all duration-300 ${
-          open ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
+        className={`fixed inset-4 md:inset-8 z-50 bg-gray-950 text-white rounded-2xl overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          open ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-[0.97] translate-y-3 pointer-events-none'
         }`}
       >
         {/* ヘッダー */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
-          <h2 className="text-lg font-bold">疾走領域（Drive Field）</h2>
+        <div className="flex items-center justify-between px-6 py-4 bg-gray-800">
+          <h2 className="text-lg font-bold text-white">疾走領域（Drive Field）</h2>
           <button
             onClick={() => setOpen(false)}
-            className="text-gray-400 hover:text-white"
+            className="text-gray-300 hover:text-white"
           >
             <X size={20} />
           </button>
         </div>
 
         {/* タブ */}
-        <div className="flex border-b border-white/10">
+        <div className="flex bg-gray-800">
           {([
             { key: 'about' as Tab, num: '01', label: '疾走領域とは' },
             { key: 'neuro' as Tab, num: '02', label: '5つの神経系' },
@@ -76,21 +90,27 @@ export function AboutMenu() {
           ]).map((t) => (
             <button
               key={t.key}
-              onClick={() => setTab(t.key)}
-              className={`flex-1 py-3 text-sm font-medium transition-colors flex flex-col items-center gap-0.5 ${
+              onClick={() => switchTab(t.key)}
+              className={`flex-1 py-3 text-sm font-medium transition-all duration-300 ease-out flex flex-col items-center gap-0.5 rounded-t-lg ${
                 tab === t.key
-                  ? 'text-white border-b-2 border-white'
-                  : 'text-gray-500 hover:text-gray-300'
+                  ? 'text-white bg-gray-950'
+                  : 'text-gray-300 hover:text-white'
               }`}
             >
-              <span className="text-[10px] text-gray-500">{t.num}</span>
+              <span className={`text-[10px] ${tab === t.key ? 'text-gray-400' : 'text-gray-400'}`}>{t.num}</span>
               <span>{t.label}</span>
             </button>
           ))}
         </div>
 
         {/* コンテンツ */}
-        <div className="overflow-y-auto px-6 py-8" style={{ height: 'calc(100% - 110px)' }}>
+        <div
+          ref={contentRef}
+          className={`overflow-y-auto px-6 pt-8 pb-20 transition-all duration-300 ease-out ${
+            fade ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+          }`}
+          style={{ height: 'calc(100% - 110px)' }}
+        >
           <div className="max-w-3xl mx-auto">
 
           {/* ═══ 疾走領域とは ═══ */}
@@ -100,13 +120,13 @@ export function AboutMenu() {
               {/* 01 */}
               <section>
                 <SectionHead title="疾走領域（しっそうりょういき / ドライブフィールド）とは" />
-                <p className="text-base text-gray-300 leading-[2] mb-4">
+                <p className="text-base text-gray-200 leading-[2] mb-4">
                   人は「夢中」によって開かれます。
                 </p>
-                <p className="text-base text-gray-300 leading-[2] mb-4">
+                <p className="text-base text-gray-200 leading-[2] mb-4">
                   苦しい環境で歯を食いしばって努力したり、人との違いに悩み続けたりしていませんか。それは、あなたが弱いからではありません。自分の駆動構造に合わない場所で走ろうとしているだけです。
                 </p>
-                <p className="text-base text-gray-300 leading-[2]">
+                <p className="text-base text-gray-200 leading-[2]">
                   人はみんな違います。それぞれの行動特性は、5つの神経系の優先順位とその組み合わせから成り立っています。自分の駆動パターンを理解し、それに合った環境に身を投じること——それは人生に「生きる歓び」をもたらします。
                 </p>
               </section>
@@ -114,52 +134,52 @@ export function AboutMenu() {
               {/* 02 */}
               <section>
                 <SectionHead title="夢中の領域を成長の方程式にする" />
-                <p className="text-base text-gray-300 leading-[2] mb-4">
+                <p className="text-base text-gray-200 leading-[2] mb-4">
                   疾走領域とは、あなたが夢中になれる場所であり、能力が最も自然に、最も力強く発揮される領域のことです。
                 </p>
-                <p className="text-base text-gray-300 leading-[2] mb-4">
+                <p className="text-base text-gray-200 leading-[2] mb-4">
                   ただし「夢中」は偶然ではありません。あなたの神経系がどう組み合わさり、何で点火し、何で加速し、何で持続するか——その構造を理解すれば、夢中は再現できます。再現できれば、それは成長の方程式になります。
                 </p>
-                <p className="text-base text-gray-300 leading-[2] mb-4">
+                <p className="text-base text-gray-200 leading-[2] mb-4">
                   努力で到達するのではありません。自分の駆動構造に合った環境に身を置いたとき、自然と走り出してしまう。その状態を意図的に作り出し、繰り返し、積み重ねていくこと。それが疾走領域の展開であり、人生を本気で生きるための自分だけの成長エンジンです。
                 </p>
-                <p className="text-base text-gray-300 leading-[2]">
+                <p className="text-base text-gray-200 leading-[2]">
                   人は努力では動きません。夢中で動きます。疾走領域（Drive Field）は、その夢中を構造として捉え、成長の方程式に変えるためのツールです。
                 </p>
               </section>
 
               <section>
                 <SectionHead title="このツールをつくった理由" />
-                <p className="text-base text-gray-300 leading-[2] mb-4">
+                <p className="text-base text-gray-200 leading-[2] mb-4">
                   「人は努力で動かない。フィールドで動く。」
                 </p>
-                <p className="text-base text-gray-300 leading-[2] mb-4">
+                <p className="text-base text-gray-200 leading-[2] mb-4">
                   この言葉が、疾走領域（Drive Field）のすべての出発点です。
                 </p>
-                <p className="text-base text-gray-300 leading-[2] mb-4">
+                <p className="text-base text-gray-200 leading-[2] mb-4">
                   私たちが考えていたのは、適材適所のような単純な話ではありませんでした。どうすれば人から人に熱意が伝播するのか。どうすれば歓びを共有できるのか。どうすればお互いの長所を活かし合えるのか。そういうことを、ずっと考えてきました。
                 </p>
-                <p className="text-base text-gray-300 leading-[2]">
+                <p className="text-base text-gray-200 leading-[2]">
                   自分に合ったフィールドに立ったとき、人は努力を超えた力を発揮します。夢中になり、時間を忘れ、気づいたら走っている。そしてその熱は、自然と周りにも伝わっていく。その状態に名前をつけたものが「疾走領域」です。一人でも多くの人にその場所を見つけてほしい。その想いでこのツールをつくりました。
                 </p>
               </section>
 
               <section>
                 <SectionHead title="分類するためのツールではありません" />
-                <p className="text-base text-gray-300 leading-[2] mb-4">
+                <p className="text-base text-gray-200 leading-[2] mb-4">
                   これは性格診断でも、占いでも、タイプ分け遊びでもありません。私たちが本当にやりたかったのは、一人ひとりが自分の能力が最も自然に通る場所を見つけ、そこで走り続けるための具体的な方法を届けることです。
                 </p>
-                <p className="text-base text-gray-300 leading-[2]">
+                <p className="text-base text-gray-200 leading-[2]">
                   疾走領域を知ることで、自分の力がちゃんと届く場所を理解できます。無理に自分を変える必要はありません。大切な人と互いの疾走領域を共有してみてください。「我慢して合わせる関係」が「それぞれの走り方を認め合って一緒に走る関係」に変わるきっかけになれたら、こんなに嬉しいことはありません。
                 </p>
               </section>
 
               <section>
                 <SectionHead title="人生を楽しみながら走ってほしい" />
-                <p className="text-base text-gray-300 leading-[2] mb-4">
+                <p className="text-base text-gray-200 leading-[2] mb-4">
                   人生に正解はありません。でも、自分にとっての「走り方」はあると信じています。あなたにはあなたの点火条件があり、あなたの加速装置があり、あなたの持続装置があります。その組み合わせは、世界に一つだけのものです。
                 </p>
-                <p className="text-base text-gray-300 leading-[2]">
+                <p className="text-base text-gray-200 leading-[2]">
                   この診断が、あなたの仕事に、人間関係に、そして人生に、少しでも助けになれたら。心からそう願って、このツールをつくりました。
                 </p>
               </section>
@@ -172,7 +192,7 @@ export function AboutMenu() {
             <div className="space-y-10">
               <section>
                 <SectionHead title="5つの神経系とは" />
-                <p className="text-base text-gray-300 leading-[2] mb-4">
+                <p className="text-base text-gray-200 leading-[2] mb-4">
                   人間の行動を駆動する5つの神経系。あなたの衝動の源泉であり、疾走領域を構成する根幹です。どの神経系が強いかによって、何に夢中になり、何で力を発揮し、何で消耗するかが決まります。
                 </p>
               </section>
@@ -203,10 +223,10 @@ export function AboutMenu() {
                   <SectionHead title={`${n.name}（${n.desc}）`} />
                   <div className="flex items-center gap-3 mb-4">
                     <span className="text-4xl font-bold" style={{ color: n.color }}>{n.code}</span>
-                    <p className="text-base text-gray-300">{n.detail}</p>
+                    <p className="text-base text-gray-200">{n.detail}</p>
                   </div>
-                  <p className="text-base text-gray-300 leading-[2] mb-4">{n.high}</p>
-                  <p className="text-sm text-gray-500 leading-[2]">{n.low}</p>
+                  <p className="text-base text-gray-200 leading-[2] mb-4">{n.high}</p>
+                  <p className="text-sm text-gray-400 leading-[2]">{n.low}</p>
                 </section>
               ))}
             </div>
@@ -218,17 +238,17 @@ export function AboutMenu() {
 
               <section>
                 <SectionHead title="解析の概要" />
-                <p className="text-base text-gray-300 leading-[2] mb-4">
+                <p className="text-base text-gray-200 leading-[2] mb-4">
                   疾走領域（Drive Field）は、90の問いに対するあなたの直感的な回答から、5つのレイヤーであなたを多面的に解析します。
                 </p>
-                <p className="text-base text-gray-300 leading-[2]">
+                <p className="text-base text-gray-200 leading-[2]">
                   考えて答えるのではなく、感じて答えることで、あなたの無意識の駆動パターンが浮かび上がります。
                 </p>
               </section>
 
               <section>
                 <SectionHead title="5層の診断モデル" />
-                <p className="text-base text-gray-300 leading-[2] mb-6">
+                <p className="text-base text-gray-200 leading-[2] mb-6">
                   この診断は、単に「あなたは何型です」と分類するものではありません。5つの異なるレイヤーから、あなたという人間を立体的に捉えます。
                 </p>
                 <div className="space-y-4">
@@ -239,10 +259,10 @@ export function AboutMenu() {
                     { layer: 'Layer 4', title: '才能軸（5問）', desc: '身体能力・感覚直感（右脳）・論理力（左脳）・手先の器用さ・言語表現力を測定します。エンジンの力をどのチャネルで出力するかを決定する要素です。例えばD型＋右脳強なら「アートで点火」、D型＋左脳強なら「ビジネス設計で点火」のように具体度が上がります。', color: '#2e6b8a' },
                     { layer: 'Layer 5', title: '環境コンテキスト（4問）', desc: '経済的背景（子供の頃の自由度・現在のお金への意識）と健康面の制約を、行動傾向から逆推定します。センシティブな情報は直接聞かず、「やりたい習い事ができたか」「お金のことが最初に頭に浮かぶか」といった問いで把握します。', color: '#7b5ea7' },
                   ].map((item) => (
-                    <div key={item.layer} className="border-l-2 pl-4" style={{ borderColor: item.color }}>
+                    <div key={item.layer} className="border-l-3 pl-4" style={{ borderColor: item.color }}>
                       <p className="text-[10px] tracking-wider mb-1" style={{ color: item.color }}>{item.layer}</p>
-                      <p className="text-sm font-bold text-gray-100 mb-2">{item.title}</p>
-                      <p className="text-xs text-gray-400 leading-relaxed">{item.desc}</p>
+                      <p className="text-sm font-bold text-white mb-2">{item.title}</p>
+                      <p className="text-xs text-gray-300 leading-relaxed">{item.desc}</p>
                     </div>
                   ))}
                 </div>
@@ -250,7 +270,7 @@ export function AboutMenu() {
 
               <section>
                 <SectionHead title="エンジン診断の絞り込み" />
-                <p className="text-base text-gray-300 leading-[2] mb-6">
+                <p className="text-base text-gray-200 leading-[2] mb-6">
                   Layer 1（エンジン）は、以下の4ステップで段階的にあなた固有の疾走領域を特定します。
                 </p>
                 <div className="space-y-5">
@@ -260,10 +280,10 @@ export function AboutMenu() {
                     { step: 'STEP 3', title: 'スコアの偏りから20の型に分類', desc: '一点突破型・二軸駆動型・三位一体型・万能拡散型の4種と、1位の神経系5種の掛け合わせで20型。' },
                     { step: 'STEP 4', title: '240の疾走領域を確定', desc: '2位と3位の神経系の組み合わせで、同じ型でも走り方の質が変わります。その違いが固有の疾走領域名として表現されます。' },
                   ].map((s) => (
-                    <div key={s.step} className="border-l-2 border-white/10 pl-4">
-                      <p className="text-[10px] text-gray-500 tracking-wider mb-1">{s.step}</p>
-                      <p className="text-sm font-bold text-gray-100 mb-2">{s.title}</p>
-                      <p className="text-xs text-gray-400 leading-relaxed">{s.desc}</p>
+                    <div key={s.step} className="border-l-3 border-white/30 pl-4">
+                      <p className="text-[10px] text-gray-400 tracking-wider mb-1">{s.step}</p>
+                      <p className="text-sm font-bold text-white mb-2">{s.title}</p>
+                      <p className="text-xs text-gray-300 leading-relaxed">{s.desc}</p>
                     </div>
                   ))}
                 </div>
@@ -271,7 +291,7 @@ export function AboutMenu() {
 
               <section>
                 <SectionHead title="さらに詳細な駆動特性" />
-                <p className="text-base text-gray-300 leading-[2] mb-6">
+                <p className="text-base text-gray-200 leading-[2] mb-6">
                   240の疾走領域に加え、以下の3つの特性が掛け合わさり、最終的に2,880の駆動パターンに分岐します。
                 </p>
                 <div className="space-y-3 mb-6">
@@ -280,9 +300,9 @@ export function AboutMenu() {
                     { title: '時間特性', options: '瞬発 / 熟成', desc: 'すぐに動き出せるか、じわじわ温まるか。' },
                     { title: '出力レベル', options: '低 / 中 / 高', desc: '安定型か、爆発と休息を繰り返す型か。' },
                   ].map((item) => (
-                    <div key={item.title} className="border border-white/5 rounded-lg p-3">
-                      <p className="text-sm font-bold text-gray-200">{item.title}<span className="text-[10px] text-gray-500 font-normal ml-2">{item.options}</span></p>
-                      <p className="text-xs text-gray-400 mt-1 leading-relaxed">{item.desc}</p>
+                    <div key={item.title} className="border border-white/20 rounded-lg p-3">
+                      <p className="text-sm font-bold text-white">{item.title}<span className="text-[10px] text-gray-300 font-normal ml-2">{item.options}</span></p>
+                      <p className="text-xs text-gray-300 mt-1 leading-relaxed">{item.desc}</p>
                     </div>
                   ))}
                 </div>
@@ -290,7 +310,7 @@ export function AboutMenu() {
 
               <section>
                 <SectionHead title="1億通りを超える診断結果" />
-                <p className="text-base text-gray-300 leading-[2] mb-4">
+                <p className="text-base text-gray-200 leading-[2] mb-4">
                   5つのレイヤーを掛け合わせた結果、理論上の診断パターンは以下のようになります。
                 </p>
                 <div className="space-y-2 mb-4">
@@ -301,16 +321,16 @@ export function AboutMenu() {
                     { label: 'Layer 4: 才能', value: '× 32通り' },
                     { label: 'Layer 5: 環境', value: '× 4通り' },
                   ].map((item) => (
-                    <div key={item.label} className="flex items-center justify-between text-xs py-1 border-b border-white/5">
-                      <span className="text-gray-400">{item.label}</span>
-                      <span className="text-gray-300">{item.value}</span>
+                    <div key={item.label} className="flex items-center justify-between text-xs py-1 border-b border-white/20">
+                      <span className="text-gray-300">{item.label}</span>
+                      <span className="text-gray-200">{item.value}</span>
                     </div>
                   ))}
                 </div>
                 <p className="text-3xl font-bold text-white mb-4">
                   = 141,557,760通り
                 </p>
-                <p className="text-base text-gray-300 leading-[2]">
+                <p className="text-base text-gray-200 leading-[2]">
                   1億4千万通り。同じ診断結果になる人は、事実上存在しません。あなたの結果は、あなただけのものです。
                 </p>
               </section>
@@ -331,9 +351,9 @@ export function AboutMenu() {
                     { category: '環境逆推定', count: '4問', type: '2択' },
                     { category: '未来思考', count: '4問', type: '8択+2択' },
                   ].map((item) => (
-                    <div key={item.category} className="flex items-center justify-between text-xs py-1.5 border-b border-white/5">
-                      <span className="text-gray-300">{item.category}</span>
-                      <span className="text-gray-500">{item.count}（{item.type}）</span>
+                    <div key={item.category} className="flex items-center justify-between text-xs py-1.5 border-b border-white/20">
+                      <span className="text-gray-200">{item.category}</span>
+                      <span className="text-gray-400">{item.count}（{item.type}）</span>
                     </div>
                   ))}
                   <div className="flex items-center justify-between text-sm py-2 font-bold">
@@ -350,7 +370,7 @@ export function AboutMenu() {
             <div className="space-y-10">
               <section>
                 <SectionHead title="20の型と240の疾走領域" />
-                <p className="text-base text-gray-300 leading-[2] mb-6">
+                <p className="text-base text-gray-200 leading-[2] mb-6">
                   5つの主神経系 × 4つの偏りタイプで全20型。各型の中に12の疾走領域が存在します。
                 </p>
               </section>
@@ -369,14 +389,14 @@ export function AboutMenu() {
                         <div className="flex items-center gap-2 mb-2">
                           <span className="w-2 h-2 rounded-full" style={{ backgroundColor: NEURO_COLOR[r] }} />
                           <p className="text-sm font-bold text-gray-200">{k?.name || '—'}</p>
-                          <span className="text-[10px] text-gray-500">{k?.reading}</span>
-                          <span className="text-[10px] text-gray-600">— {BIAS_JP[b]}</span>
+                          <span className="text-[10px] text-gray-400">{k?.reading}</span>
+                          <span className="text-[10px] text-gray-400">— {BIAS_JP[b]}</span>
                         </div>
                         <div className="grid grid-cols-3 md:grid-cols-4 gap-1.5 ml-4">
                           {fieldNames.map((n: any) => (
-                            <div key={n.id} className="border border-white/5 rounded px-2 py-1.5 text-center">
-                              <p className="text-sm font-bold text-gray-300">{n.kanji_name}</p>
-                              <p className="text-[8px] text-gray-500">{n.reading}</p>
+                            <div key={n.id} className="border border-white/20 rounded px-2 py-1.5 text-center">
+                              <p className="text-sm font-bold text-gray-200">{n.kanji_name}</p>
+                              <p className="text-[8px] text-gray-400">{n.reading}</p>
                             </div>
                           ))}
                         </div>
@@ -393,10 +413,10 @@ export function AboutMenu() {
             <div className="space-y-10">
               <section>
                 <SectionHead title="株式会社歓尽" />
-                <p className="text-base text-gray-300 leading-[2] mb-4">
+                <p className="text-base text-gray-200 leading-[2] mb-4">
                   歓尽は、人の心を動かす力を信じ、本質に向き合う支援を積み重ねていく会社です。
                 </p>
-                <p className="text-base text-gray-300 leading-[2]">
+                <p className="text-base text-gray-200 leading-[2]">
                   心を動かす体験や表現を通じて、人と社会の可能性をひらいていくことを目指しています。目の前の成果だけでなく、その先にある本質や価値に向き合いながら、ひとつひとつの仕事に取り組んでいます。
                 </p>
               </section>
@@ -413,9 +433,9 @@ export function AboutMenu() {
                     { label: 'メール', value: 'admin@kanjin-consulting.com' },
                     { label: '認可・受理番号', value: '13-ユ-316501（令和06年04月01日）' },
                   ].map((item) => (
-                    <div key={item.label} className="flex border-b border-white/5 pb-3">
-                      <span className="text-sm text-gray-500 w-36 shrink-0">{item.label}</span>
-                      <span className="text-sm text-gray-300">{item.value}</span>
+                    <div key={item.label} className="flex border-b border-white/20 pb-3">
+                      <span className="text-sm text-gray-400 w-36 shrink-0">{item.label}</span>
+                      <span className="text-sm text-gray-200">{item.value}</span>
                     </div>
                   ))}
                 </div>
@@ -426,7 +446,7 @@ export function AboutMenu() {
                   href="https://kanjin-consulting.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-float inline-block px-6 py-3 border border-white/20 text-white text-sm rounded-full"
+                  className="btn-float inline-block px-6 py-3 border border-white/30 text-white text-sm rounded-full"
                 >
                   会社HPを見る
                 </a>

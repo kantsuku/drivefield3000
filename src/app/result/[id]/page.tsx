@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { AboutMenu } from '@/components/AboutMenu';
 import { ActionMenu } from '@/components/ActionMenu';
 import { AiConsultSection } from '@/components/AiConsultSection';
+import { StickyNav } from '@/components/StickyNav';
 import { Sparkles, AlertTriangle, Wrench, Briefcase, Home, RefreshCw, Flame, Clock, Zap, Activity, Rocket, Users, Coffee, CheckCircle } from 'lucide-react';
 
 // ─── Types ────────────────────────────────────────────
@@ -247,7 +248,7 @@ function buildPersonProfile(rank1: string, rank2: string, rank3: string, bias: s
   };
 }
 
-// ─── 覚醒・ドレイン・回復の複合アドバイス生成 ─────────
+// ─── 覚醒・弱退化・回復の複合アドバイス生成 ─────────
 
 function buildAwakeningAdvice(r1: string, r2: string, r3: string, bias: string, ignition: string, timing: string) {
   const n1 = neuroDict[r1], n2 = neuroDict[r2], n3 = neuroDict[r3];
@@ -541,8 +542,8 @@ export default async function ResultPage({
       intro: 'あなたは既に自分の特性に気づいているかもしれない。ここからは、その直感を構造として確認していく。',
       engine: 'あなたが無意識に選んできた行動パターンの裏には、この駆動構造がある。',
       awakening: 'あなたが「ゾーンに入った」と感じる瞬間を思い出してほしい。その時、以下の条件が揃っていたはずだ。',
-      drain: 'あなたは自分のドレインに既に気づいているかもしれない。ここではそのメカニズムを構造的に示す。',
-      recovery: '回復の手順を論理的に理解しておくことで、次のドレインからの復帰が早くなる。',
+      drain: 'あなたは自分の弱退化に既に気づいているかもしれない。ここではそのメカニズムを構造的に示す。',
+      recovery: '回復の手順を論理的に理解しておくことで、次の弱退化からの復帰が早くなる。',
     },
     unverbalized: {
       intro: 'これまでうまく言葉にできなかったかもしれないが、あなたが夢中になれる条件には明確なパターンがある。',
@@ -563,7 +564,7 @@ export default async function ResultPage({
       engine: '面白いことに、あなたが自然にやっていることの裏には、明確な駆動構造がある。',
       awakening: 'あなたが「楽しい」と感じる瞬間には、実は再現可能な条件が隠れている。',
       drain: '普段は元気なあなたでも、この条件が揃うとエネルギーが枯渇する。知っておいて損はない。',
-      recovery: '万が一ドレインした時のために、回復の手順を頭に入れておこう。',
+      recovery: '万が一弱退化した時のために、回復の手順を頭に入れておこう。',
     },
   };
   const voice = SEGMENT_VOICE[segment];
@@ -581,7 +582,7 @@ export default async function ResultPage({
   if (layers.attachment >= 5) {
     insights.push('対人基盤が安定している。人を信頼できるあなたは、チームや仲間との共走で疾走領域を展開しやすい。');
   } else if (layers.attachment <= -3) {
-    insights.push('人に頼ることに抵抗があるかもしれない。それは弱さではないが、一人で全てを背負うとドレインしやすい。信頼できる一人でいいから、走りを共有できる相手を見つけてほしい。');
+    insights.push('人に頼ることに抵抗があるかもしれない。それは弱さではないが、一人で全てを背負うと弱退化しやすい。信頼できる一人でいいから、走りを共有できる相手を見つけてほしい。');
   }
 
   // Layer 3: 経験値
@@ -592,7 +593,7 @@ export default async function ResultPage({
     insights.push('対人経験の厚さが武器だ。場を回す力があるあなたは、チームの中で疾走領域を展開すると最大効率になる。');
   }
   if (layers.expPhysical >= 3) {
-    insights.push('体力・メンタルの限界を超えた経験があるあなたは、ドレイン耐性が高い。他の人より粘れる。ただし過信は禁物だ。');
+    insights.push('体力・メンタルの限界を超えた経験があるあなたは、弱退化耐性が高い。他の人より粘れる。ただし過信は禁物だ。');
   }
   if (layers.expCreative >= 3) {
     insights.push('創作に没頭した経験があるあなたは、フロー状態に入るコツを体で覚えている。「作る」行為そのものが疾走領域への入口になる。');
@@ -677,13 +678,13 @@ export default async function ResultPage({
       </p>
 
       <div className="relative z-10 w-full max-w-3xl mx-auto flex flex-col items-center px-6 py-16 text-center text-white">
-        {kata && <p className="text-xl text-white tracking-[0.2em] mb-4" style={serif}>{kata.name}</p>}
-        <h1 className="text-8xl font-bold tracking-wider mb-3" style={{ writingMode: 'vertical-rl', ...serif, letterSpacing: '0.3em' }}>
+        {kata && <p className="text-xl text-white tracking-[0.2em] mb-8" style={serif}>{kata.name}</p>}
+        <h1 className="text-8xl font-bold tracking-wider mb-1" style={{ writingMode: 'vertical-rl', ...serif, letterSpacing: '0.3em' }}>
           {entry.kanji_name}
         </h1>
-        <p className="text-sm text-white mt-3 mb-10">{entry.reading} / {entry.english_name}</p>
+        <p className="text-sm text-white mt-1 mb-10">{entry.reading} / {entry.english_name}</p>
 
-        <p className="text-xl text-white mb-8 tracking-wider leading-relaxed" style={{ fontFamily: '"Noto Serif JP", "游明朝", YuMincho, serif' }}>
+        <p className="text-xl text-white mb-3 tracking-wider leading-relaxed" style={{ fontFamily: '"Noto Serif JP", "游明朝", YuMincho, serif' }}>
           {(() => {
             const raw = entry.naming_reason
               .split('。')
@@ -697,37 +698,14 @@ export default async function ResultPage({
         </p>
 
         {entry.lead && (
-          <p className="text-sm text-white mb-6 leading-[1.9] text-left">{entry.lead}</p>
+          <p className="text-base text-white mb-6 leading-[2.1] text-left">{entry.lead}</p>
         )}
 
       </div>
     </section>
 
-    {/* ═══ アンカーメニュー（sticky） ═══ */}
-    <nav className="sticky top-0 z-40 bg-white">
-      <div className="max-w-3xl mx-auto flex items-center gap-3 px-4 py-2.5">
-        <span className="text-[10px] text-gray-400 tracking-wider shrink-0 hidden md:inline">目次</span>
-        <div className="overflow-x-auto flex gap-2 min-w-0">
-          {[
-            { href: '#sec-result', label: '診断結果' },
-            { href: '#sec-type', label: 'あなたの型' },
-            { href: '#sec-profile', label: 'あなたの人物像' },
-            { href: '#sec-startup', label: '起動マニュアル' },
-            { href: '#sec-awakening', label: '覚醒の条件' },
-            { href: '#sec-drain', label: 'ドレイン警告' },
-            { href: '#sec-recovery', label: '回復マニュアル' },
-          ].map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="text-xs text-gray-600 hover:text-gray-900 px-3 py-1.5 rounded-full border border-gray-200 hover:border-gray-400 transition-colors whitespace-nowrap shrink-0"
-            >
-              {item.label}
-            </a>
-          ))}
-        </div>
-      </div>
-    </nav>
+    {/* ═══ アンカーメニュー（sticky・2段） ═══ */}
+    <StickyNav />
 
     {/* ═══ コンテンツゾーン（白背景） ═══ */}
     <main className="bg-white text-gray-900 min-h-screen pb-16 md:pb-0">
@@ -866,7 +844,7 @@ export default async function ResultPage({
                       level === 'Light'
                         ? '小さく起動しやすく安定。爆発力より持続性に優れる。' :
                       level === 'Over'
-                        ? 'ハマると圧倒的だがドレインも大きい。エネルギー管理が重要。'
+                        ? 'ハマると圧倒的だが弱退化も大きい。エネルギー管理が重要。'
                         : '再現性と推進力のバランスが良い。最もコントロールしやすい。'
                     }</p>
                   </>
@@ -1282,16 +1260,16 @@ export default async function ResultPage({
           </Chapter>
         )}
 
-        {/* ═══ 第七章：ドレイン条件 ═══ */}
+        {/* ═══ 第七章：弱退化条件 ═══ */}
         {pattern && interp && workAdv && lifeAdv && (
-          <Chapter id="sec-drain" num="06" title={`${entry.kanji_name}のドレイン条件`} en="DRAIN">
+          <Chapter id="sec-drain" num="06" title={`${entry.kanji_name}の弱退化条件`} en="DRAIN">
             <p className="text-lg font-bold text-gray-800 leading-relaxed mb-6 border-l-4 pl-4" style={{ borderColor: NEURO_LABELS[rank1]?.color }}>
               {pattern.drain_condition}
             </p>
 
             <p className="text-sm font-bold text-gray-800 mb-4">{voice.drain}</p>
             <p className="text-sm text-gray-600 leading-[1.9] mb-6">
-              ドレインとは、夢中になれない状態が続くこと——あなたの{neuroDict[parts[0]]?.jp}が求めるものが長期間得られず、駆動が空回りし続ける状態のことだ。最初は「なんとなく調子が出ない」程度だが、放置すると{neuroDict[parts[1]]?.jp}と{neuroDict[parts[2]]?.jp}の機能まで連鎖的に低下し、やがて何にも夢中になれなくなる。以下の兆候に心当たりがあるなら、すでにドレインが始まっている可能性がある。
+              弱退化とは、夢中になれない状態が続くこと——あなたの{neuroDict[parts[0]]?.jp}が求めるものが長期間得られず、駆動が空回りし続ける状態のことだ。最初は「なんとなく調子が出ない」程度だが、放置すると{neuroDict[parts[1]]?.jp}と{neuroDict[parts[2]]?.jp}の機能まで連鎖的に低下し、やがて何にも夢中になれなくなる。以下の兆候に心当たりがあるなら、すでに弱退化が始まっている可能性がある。
             </p>
 
             <h3 className="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"><AlertTriangle size={20} className="text-gray-400" />破綻のシナリオ</h3>
@@ -1300,13 +1278,13 @@ export default async function ResultPage({
             {[
               {
                 icon: <Briefcase size={20} className="text-gray-400" />,
-                title: '仕事でのドレイン兆候と対策',
+                title: '仕事での弱退化兆候と対策',
                 summary: `${neuroDict[parts[0]]?.jp}の枯渇が最初のサイン——我慢せず環境を見直せ`,
                 body: <><p className="mb-3">{workAdv.drain}</p><p className="text-xs text-gray-500 mb-1">こんな状態が2週間以上続いたら危険信号：</p><p>朝の出勤が異常に辛い、得意だったはずの仕事に手がつかない、同僚との会話が億劫になる——これらは{neuroDict[parts[0]]?.jp}の枯渇サインだ。</p></>,
               },
               {
                 icon: <Home size={20} className="text-gray-400" />,
-                title: 'プライベートでのドレイン兆候と対策',
+                title: 'プライベートでの弱退化兆候と対策',
                 summary: `休日に何もできない状態は${neuroDict[parts[2]]?.jp}の循環停止のサイン`,
                 body: <><p className="mb-3">{lifeAdv.drain}</p><p className="text-xs text-gray-500 mb-1">こんな状態が続いたら要注意：</p><p>休日なのに何もする気が起きない、好きだったことに興味が持てない、人と会うのが面倒になる——これらは{neuroDict[parts[0]]?.jp}だけでなく、{neuroDict[parts[2]]?.jp}の循環も止まっているサインだ。</p></>,
               },
@@ -1365,7 +1343,7 @@ export default async function ResultPage({
                 summary: `${neuroDict[parts[2]]?.desc}を加えて駆動を完全循環させる`,
                 body: <p>1位と2位が回復してきたら、最後に{neuroDict[parts[2]]?.jp}の「{neuroDict[parts[2]]?.desc}」を加えることで駆動が循環を始める。{
                   parts[2] === 'D' ? '新しい目標や次のチャレンジを設定すること。「次はこれをやりたい」というワクワクが循環の最後のピースになる。' :
-                  parts[2] === 'S' ? '回復の過程を振り返り、学びを整理すること。「なぜドレインしたか」が理解できると、次はもっと早く気づける。' :
+                  parts[2] === 'S' ? '回復の過程を振り返り、学びを整理すること。「なぜ弱退化したか」が理解できると、次はもっと早く気づける。' :
                   parts[2] === 'O' ? '回復の過程を誰かと共有すること。「実はこんな状態だった」と話せる関係があれば、循環は自然に始まる。' :
                   parts[2] === 'N' ? '次の目標を明確にすること。「何に向かって動くか」が定まると、集中力が戻り、駆動が安定する。' :
                   '日常の中に「味わう時間」を意識的に作ること。回復を急がず、今の状態を楽しむ余裕が循環の起点になる。'
@@ -1428,7 +1406,7 @@ export default async function ResultPage({
 
 起動条件: ${pattern.trigger_core}
 覚醒条件: ${pattern.awakening_condition}
-ドレイン条件: ${pattern.drain_condition}
+弱退化条件: ${pattern.drain_condition}
 回復条件: ${pattern.recovery_condition}
 ---
 

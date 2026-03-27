@@ -109,7 +109,7 @@ export function ActionMenu(props: ActionMenuProps) {
 
 起動条件: ${props.triggerCore}
 覚醒条件: ${props.awakeningCondition}
-ドレイン条件: ${props.drainCondition}
+弱退化条件: ${props.drainCondition}
 回復条件: ${props.recoveryCondition}
 ---
 
