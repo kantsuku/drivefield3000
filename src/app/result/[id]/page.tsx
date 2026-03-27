@@ -828,10 +828,12 @@ export default async function ResultPage({
               ];
               const bg = generateBlobs(rank1, bias, { main: NEURO_LABELS[rank1]?.gradient, dark: NEURO_LABELS[rank1]?.gradientDark }, parts[1], parts[2]);
               return (
-                <div className="noise-overlay relative rounded-2xl overflow-hidden mb-8" style={{ backgroundColor: {
-                  D: '#8b2520', S: '#1a3a4a', O: '#1a3d32', N: '#3d3010', E: '#2d1f45',
-                }[rank1] || '#1a1a1a' }}>
+                <div className="noise-overlay relative rounded-2xl overflow-hidden mb-8" style={{ backgroundColor: '#000' }}>
                   <BlobBackground blobs={bg.blobs} edges={bg.edges} baseColor={bg.baseColor} />
+                  {/* 円の外側を黒くするマスク */}
+                  <div className="absolute inset-0 z-[2] pointer-events-none" style={{
+                    background: 'radial-gradient(circle at center, transparent 45%, #000 52%)',
+                  }} />
                   <div className="relative z-10 flex flex-col items-center py-12 px-4">
                     <div className="relative" style={{ width: 360, height: 360 }}>
                       {/* 軌道リング */}
