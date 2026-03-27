@@ -837,12 +837,12 @@ export default async function ResultPage({
                       {/* 軌道リング */}
                       {orbits.map((o, i) => (
                         <div key={i}>
-                          <div className="absolute rounded-full border border-white/10" style={{
+                          <div className="absolute rounded-full border border-white/20" style={{
                             width: o.radius * 2, height: o.radius * 2,
                             top: '50%', left: '50%',
                             transform: 'translate(-50%, -50%)',
                           }} />
-                          <div className="absolute rounded-full border border-white/5" style={{
+                          <div className="absolute rounded-full border border-white/15" style={{
                             width: o.radius * 2 + 6, height: o.radius * 2 + 6,
                             top: '50%', left: '50%',
                             transform: 'translate(-50%, -50%)',
@@ -857,7 +857,7 @@ export default async function ResultPage({
                           animation: `orbit-${i + 1} ${o.speed}s linear infinite`,
                           marginTop: -o.size / 2, marginLeft: -o.size / 2,
                         }}>
-                          <div className="w-full h-full rounded-full flex items-center justify-center font-bold shadow-lg border border-white/10" style={{
+                          <div className="w-full h-full rounded-full flex items-center justify-center font-bold shadow-lg border border-white/20" style={{
                             backgroundColor: '#000',
                             color: NEURO_LABELS[o.code]?.color,
                             fontSize: o.size * 0.4,
