@@ -822,9 +822,9 @@ export default async function ResultPage({
             {/* 太陽系ビジュアル */}
             {(() => {
               const orbits = [
-                { code: parts[0], role: '点火', radius: 90, speed: 20, size: 28 },
-                { code: parts[1], role: '加速', radius: 130, speed: 28, size: 22 },
-                { code: parts[2], role: '持続', radius: 165, speed: 36, size: 18 },
+                { code: parts[0], role: '点火', radius: 80, speed: 20, size: 44 },
+                { code: parts[1], role: '加速', radius: 125, speed: 28, size: 38 },
+                { code: parts[2], role: '持続', radius: 165, speed: 36, size: 32 },
               ];
               const bg = generateBlobs(rank1, bias, { main: NEURO_LABELS[rank1]?.gradient, dark: NEURO_LABELS[rank1]?.gradientDark }, parts[1], parts[2]);
               return (
@@ -850,8 +850,9 @@ export default async function ResultPage({
                           animation: `orbit-${i + 1} ${o.speed}s linear infinite`,
                           marginTop: -o.size / 2, marginLeft: -o.size / 2,
                         }}>
-                          <div className="w-full h-full rounded-full flex items-center justify-center text-white font-bold shadow-lg" style={{
-                            backgroundColor: NEURO_LABELS[o.code]?.color,
+                          <div className="w-full h-full rounded-full flex items-center justify-center font-bold shadow-lg border border-white/10" style={{
+                            backgroundColor: '#000',
+                            color: NEURO_LABELS[o.code]?.color,
                             fontSize: o.size * 0.4,
                             animation: `orbit-${i + 1}-counter ${o.speed}s linear infinite`,
                           }}>
