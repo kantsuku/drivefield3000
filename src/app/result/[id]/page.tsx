@@ -4,6 +4,7 @@ import patternsData from '@/data/patterns-2880.json';
 import interpData from '@/data/interpretations-2880.json';
 import dictionariesData from '@/data/dictionaries.json';
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { AboutMenu } from '@/components/AboutMenu';
 import { ActionMenu } from '@/components/ActionMenu';
@@ -474,6 +475,44 @@ function AdviceCard({ icon, label, color, children }: { icon?: React.ReactNode; 
       <div className="text-sm text-gray-700 leading-[1.9]">{children}</div>
     </div>
   );
+}
+
+// ─── Metadata (OGP) ──────────────────────────────────
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const decodedId = decodeURIComponent(id);
+  const entry = namesMap[decodedId];
+  if (!entry) return {};
+
+  const parts = decodedId.split('-');
+  const rank1 = parts[0];
+  const bias = parts[3] ?? '';
+  const kata = kataMap[`${rank1}-${bias}`];
+
+  const title = `${entry.kanji_name}（${entry.reading}）— ${kata?.name || '疾走領域'}`;
+  const description = `あなたの疾走領域は「${entry.kanji_name}」。${BIAS_JP[bias] || bias}の駆動構造が導く、あなただけの夢中の領域。`;
+  const ogImageUrl = `/api/og?id=${encodeURIComponent(decodedId)}`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: [{ url: ogImageUrl, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [ogImageUrl],
+    },
+  };
 }
 
 // ─── Page ─────────────────────────────────────────────
