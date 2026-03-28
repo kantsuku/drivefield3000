@@ -264,13 +264,13 @@ export default function NamesListPage() {
       );
     }
     return (
-      <span
+      <div
         className={`cursor-pointer hover:bg-white/5 rounded px-1 py-0.5 -mx-1 transition-colors ${className}`}
         onClick={() => startEdit(id, field, value)}
         title="クリックで編集"
       >
         {value || '—'}
-      </span>
+      </div>
     );
   };
 
@@ -371,15 +371,12 @@ export default function NamesListPage() {
 
       {/* テーブル */}
       <div className="flex-1 overflow-auto">
-        <table className="min-w-[1400px] w-full text-sm border-collapse">
+        <table className="min-w-[500px] w-full text-sm border-collapse">
           <thead className="sticky top-0 z-20 bg-gray-900">
             <tr className="border-b border-gray-700">
-              <th className="sticky left-0 z-30 bg-gray-900 text-left px-3 py-2 text-xs text-gray-500 font-normal w-28 border-r border-gray-700">領域名</th>
-              <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal w-20">型</th>
-              <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal w-24">読み</th>
-              <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal w-28">English</th>
-              <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal min-w-[250px]">キャッチコピー</th>
-              <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal min-w-[350px]">リード文</th>
+              <th className="sticky left-0 z-30 bg-gray-900 text-left px-3 py-2 text-xs text-gray-500 font-normal w-[60px] border-r border-gray-700">領域名</th>
+              <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal w-[100px]">キャッチコピー</th>
+              <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal w-[150px]">リード文</th>
               <th className="text-left px-3 py-2 text-xs text-gray-500 font-normal w-28">ID</th>
             </tr>
           </thead>
@@ -397,30 +394,18 @@ export default function NamesListPage() {
                   {/* 領域名（sticky固定） */}
                   <td className={`sticky left-0 z-10 px-3 py-2 border-r border-gray-800 ${rowBg || 'bg-gray-950'}`}>
                     <EditableCell id={e.id} field="kanji_name" value={e.kanji_name} className={`font-bold text-lg ${colors.text}`} />
-                  </td>
-
-                  {/* 型 */}
-                  <td className="px-3 py-2">
-                    <div className="flex items-center gap-1.5">
+                    <div className="flex items-center gap-1.5 mt-0.5">
                       <span className={`w-2 h-2 rounded-full shrink-0 ${colors.dot}`} />
                       <span className={`text-[10px] font-bold ${colors.text}`}>{r1}</span>
+                      {kata && <span className="text-[10px] text-gray-400">{kata.name}</span>}
+                      <span className="text-[10px] text-gray-600">{BIAS_JP[bias]}</span>
                     </div>
-                    {kata && <div className="text-[10px] text-gray-400 mt-0.5">{kata.name}</div>}
-                    <div className="text-[10px] text-gray-600">{BIAS_JP[bias]}</div>
-                  </td>
-
-                  {/* 読み */}
-                  <td className="px-3 py-2">
-                    <EditableCell id={e.id} field="reading" value={e.reading} className="text-xs text-gray-400" />
-                  </td>
-
-                  {/* English */}
-                  <td className="px-3 py-2">
-                    <EditableCell id={e.id} field="english_name" value={e.english_name} className="text-xs text-gray-400" />
+                    <EditableCell id={e.id} field="reading" value={e.reading} className="text-[10px] text-gray-400 mt-0.5" />
+                    <EditableCell id={e.id} field="english_name" value={e.english_name} className="text-[10px] text-gray-500" />
                   </td>
 
                   {/* キャッチコピー（編集可能＋候補生成） */}
-                  <td className="px-3 py-2 min-w-[250px]">
+                  <td className="px-3 py-2 w-[100px]">
                     <EditableCell id={e.id} field="naming_reason" value={e.naming_reason || ''} className="text-xs text-gray-300" />
                     {!(editingId === e.id && editField === 'naming_reason') && catchphrase && (
                       <p className="text-[10px] text-gray-500 mt-1 italic">→ {catchphrase}</p>
@@ -428,7 +413,7 @@ export default function NamesListPage() {
                   </td>
 
                   {/* リード文 */}
-                  <td className="px-3 py-2 min-w-[350px]">
+                  <td className="px-3 py-2 w-[150px]">
                     <EditableCell id={e.id} field="lead" value={e.lead ?? ''} className="text-xs text-gray-300 leading-relaxed" multiline />
                   </td>
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 
 const ITEMS = [
   { href: '#sec-result', label: '診断結果' },
@@ -14,8 +14,11 @@ const ITEMS = [
 
 export function StickyNav() {
   const navRef = useRef<HTMLElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const [stuck, setStuck] = useState(false);
+  const [activeId, setActiveId] = useState<string>('');
 
+  // sticky検知
   useEffect(() => {
     const el = navRef.current;
     if (!el) return;
@@ -26,6 +29,46 @@ export function StickyNav() {
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
+
+  // スクロールスパイ：各セクションを監視
+  useEffect(() => {
+    const ids = ITEMS.map((item) => item.href.replace('#', ''));
+    const elements = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    if (elements.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // 画面内に見えているセクションのうち、最も上にあるものをactiveにする
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+        if (visible.length > 0) {
+          setActiveId(visible[0].target.id);
+        }
+      },
+      { rootMargin: '-10% 0px -60% 0px', threshold: 0 },
+    );
+
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  // activeなボタンを自動スクロールで見える位置に
+  const scrollToActive = useCallback((id: string) => {
+    if (!scrollRef.current) return;
+    const activeBtn = scrollRef.current.querySelector(`[data-section="${id}"]`) as HTMLElement | null;
+    if (activeBtn) {
+      activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (activeId) scrollToActive(activeId);
+  }, [activeId, scrollToActive]);
 
   return (
     <nav
@@ -45,19 +88,29 @@ export function StickyNav() {
           目次
         </p>
         <div
+          ref={scrollRef}
           className={`overflow-x-auto flex gap-2 transition-all duration-300 ${
             stuck ? 'justify-start' : 'justify-center'
           }`}
         >
-          {ITEMS.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="text-xs text-gray-600 hover:text-gray-900 px-3 py-1.5 rounded-full border border-gray-200 hover:border-gray-400 transition-colors whitespace-nowrap shrink-0"
-            >
-              {item.label}
-            </a>
-          ))}
+          {ITEMS.map((item) => {
+            const sectionId = item.href.replace('#', '');
+            const isActive = activeId === sectionId;
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                data-section={sectionId}
+                className={`text-xs px-3 py-1.5 rounded-full border transition-colors whitespace-nowrap shrink-0 ${
+                  isActive
+                    ? 'text-white bg-gray-900 border-gray-900'
+                    : 'text-gray-600 hover:text-gray-900 border-gray-200 hover:border-gray-400'
+                }`}
+              >
+                {item.label}
+              </a>
+            );
+          })}
         </div>
       </div>
     </nav>
