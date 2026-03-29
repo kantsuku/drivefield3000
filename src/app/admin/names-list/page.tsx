@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import namesData from '@/data/names-240.json';
 import kataData from '@/data/l4-kata.json';
 
@@ -59,6 +59,7 @@ export default function NamesListPage() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editField, setEditField] = useState<string>('');
   const [editValue, setEditValue] = useState<string>('');
+  const editRef = useRef<HTMLTextAreaElement | HTMLInputElement | null>(null);
   const [saving, setSaving] = useState(false);
   const [search, setSearch] = useState('');
   const [rank1Filter, setRank1Filter] = useState('all');
@@ -108,7 +109,7 @@ export default function NamesListPage() {
   const applySuggestion = (suggestion: any) => {
     if (editField === 'kanji_name' && suggestion.kanji_name) {
       setEditValue(suggestion.kanji_name);
-      // Also update reading and english_name in one go
+      if (editRef.current) editRef.current.value = suggestion.kanji_name;
       const entry = entries.find((e) => e.id === editingId);
       if (entry) {
         entry._pendingReading = suggestion.reading;
@@ -116,23 +117,55 @@ export default function NamesListPage() {
       }
     } else if (editField === 'naming_reason' && suggestion.naming_reason) {
       setEditValue(suggestion.naming_reason);
+      if (editRef.current) editRef.current.value = suggestion.naming_reason;
     }
   };
 
   const [cascading, setCascading] = useState(false);
+  const [cascadingId, setCascadingId] = useState<string | null>(null);
+
+  const runCascade = async (id: string) => {
+    const entry = entries.find((e) => e.id === id);
+    if (!entry) return;
+    setCascadingId(id);
+    setCascading(true);
+    try {
+      const res = await fetch('/api/suggest-names', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, field: 'cascade', kanjiName: entry.kanji_name }),
+      });
+      if (res.ok) {
+        const { result } = await res.json();
+        const updates: Record<string, string> = {};
+        const fields = ['reading', 'english_name', 'naming_reason', 'lead'] as const;
+        for (const f of fields) {
+          if (result?.[f]) {
+            updates[f] = result[f];
+            await patchField(id, f, result[f]);
+          }
+        }
+        setEntries((prev) => prev.map((e) => e.id === id ? { ...e, ...updates } : e));
+      }
+    } catch {} finally {
+      setCascading(false);
+      setCascadingId(null);
+    }
+  };
 
   const patchField = (id: string, field: string, value: string) =>
     fetch('/api/update-name240', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id, field, value }) });
 
   const saveEdit = async () => {
     if (!editingId || !editField) return;
+    const currentValue = editRef.current?.value ?? editValue;
     setSaving(true);
     const entry = entries.find((e) => e.id === editingId);
     const oldValue = entry?.[editField] ?? '';
     try {
-      const res = await patchField(editingId, editField, editValue);
+      const res = await patchField(editingId, editField, currentValue);
       if (res.ok) {
-        const updates: Record<string, string> = { [editField]: editValue };
+        const updates: Record<string, string> = { [editField]: currentValue };
 
         // kanji_name変更時はreading/english_nameも保存＋コピー＆リード連動生成
         if (editField === 'kanji_name' && entry?._pendingReading) {
@@ -147,7 +180,7 @@ export default function NamesListPage() {
             const cascadeRes = await fetch('/api/suggest-names', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ id: editingId, field: 'cascade', kanjiName: editValue }),
+              body: JSON.stringify({ id: editingId, field: 'cascade', kanjiName: currentValue }),
             });
             if (cascadeRes.ok) {
               const { result } = await cascadeRes.json();
@@ -166,7 +199,7 @@ export default function NamesListPage() {
         }
 
         setEntries((prev) => prev.map((e) => e.id === editingId ? { ...e, ...updates, _pendingReading: undefined, _pendingEnglish: undefined } : e));
-        const log: ChangeLog = { id: editingId, field: editField, oldValue, newValue: editValue, timestamp: new Date().toISOString() };
+        const log: ChangeLog = { id: editingId, field: editField, oldValue, newValue: currentValue, timestamp: new Date().toISOString() };
         saveLogs([log, ...changeLogs]);
       }
     } catch {} finally {
@@ -201,24 +234,22 @@ export default function NamesListPage() {
 
   const canSuggest = (field: string) => field === 'kanji_name' || field === 'naming_reason';
 
-  const EditableCell = ({ id, field, value, className = '', multiline = false }: {
-    id: string; field: string; value: string; className?: string; multiline?: boolean;
-  }) => {
+  const renderEditableCell = (id: string, field: string, value: string, className = '', multiline = false) => {
     const isEditing = editingId === id && editField === field;
     if (isEditing) {
       return (
         <div className="space-y-2">
           {multiline ? (
             <textarea
-              value={editValue}
-              onChange={(ev) => setEditValue(ev.target.value)}
+              ref={editRef as React.RefObject<HTMLTextAreaElement>}
+              defaultValue={editValue}
               className="w-full bg-gray-800 border border-blue-500 rounded p-2 text-xs text-gray-200 leading-relaxed resize-y min-h-[100px] focus:outline-none"
               autoFocus
             />
           ) : (
             <input
-              value={editValue}
-              onChange={(ev) => setEditValue(ev.target.value)}
+              ref={editRef as React.RefObject<HTMLInputElement>}
+              defaultValue={editValue}
               className="w-full bg-gray-800 border border-blue-500 rounded px-2 py-1 text-sm text-gray-200 focus:outline-none"
               autoFocus
               onKeyDown={(ev) => { if (ev.key === 'Enter') saveEdit(); if (ev.key === 'Escape') cancelEdit(); }}
@@ -248,7 +279,7 @@ export default function NamesListPage() {
                   key={i}
                   onClick={() => applySuggestion(s)}
                   className={`w-full text-left px-2 py-1.5 rounded text-xs transition-colors hover:bg-purple-900/30 ${
-                    editValue === (s.kanji_name || s.naming_reason) ? 'bg-purple-900/40 text-white' : 'text-gray-300'
+                    (editRef.current?.value ?? editValue) === (s.kanji_name || s.naming_reason) ? 'bg-purple-900/40 text-white' : 'text-gray-300'
                   }`}
                 >
                   {field === 'kanji_name' ? (
@@ -393,20 +424,27 @@ export default function NamesListPage() {
                 <tr key={e.id} className={`border-b border-gray-800/50 align-top ${rowBg} border-l-2 ${colors.border}`}>
                   {/* 領域名（sticky固定） */}
                   <td className={`sticky left-0 z-10 px-3 py-2 border-r border-gray-800 ${rowBg || 'bg-gray-950'}`}>
-                    <EditableCell id={e.id} field="kanji_name" value={e.kanji_name} className={`font-bold text-lg ${colors.text}`} />
+                    {renderEditableCell(e.id, 'kanji_name', e.kanji_name, `font-bold text-lg ${colors.text}`)}
                     <div className="flex items-center gap-1.5 mt-0.5">
                       <span className={`w-2 h-2 rounded-full shrink-0 ${colors.dot}`} />
                       <span className={`text-[10px] font-bold ${colors.text}`}>{r1}</span>
                       {kata && <span className="text-[10px] text-gray-400">{kata.name}</span>}
                       <span className="text-[10px] text-gray-600">{BIAS_JP[bias]}</span>
                     </div>
-                    <EditableCell id={e.id} field="reading" value={e.reading} className="text-[10px] text-gray-400 mt-0.5" />
-                    <EditableCell id={e.id} field="english_name" value={e.english_name} className="text-[10px] text-gray-500" />
+                    {renderEditableCell(e.id, 'reading', e.reading, 'text-[10px] text-gray-400 mt-0.5')}
+                    {renderEditableCell(e.id, 'english_name', e.english_name, 'text-[10px] text-gray-500')}
+                    <button
+                      onClick={() => runCascade(e.id)}
+                      disabled={cascading}
+                      className="mt-1 text-[9px] bg-purple-800 hover:bg-purple-700 text-purple-200 px-2 py-0.5 rounded disabled:opacity-50"
+                    >
+                      {cascadingId === e.id ? '生成中...' : '🔄 他項目を生成'}
+                    </button>
                   </td>
 
                   {/* キャッチコピー（編集可能＋候補生成） */}
                   <td className="px-3 py-2 w-[100px]">
-                    <EditableCell id={e.id} field="naming_reason" value={e.naming_reason || ''} className="text-xs text-gray-300" />
+                    {renderEditableCell(e.id, 'naming_reason', e.naming_reason || '', 'text-xs text-gray-300')}
                     {!(editingId === e.id && editField === 'naming_reason') && catchphrase && (
                       <p className="text-[10px] text-gray-500 mt-1 italic">→ {catchphrase}</p>
                     )}
@@ -414,7 +452,7 @@ export default function NamesListPage() {
 
                   {/* リード文 */}
                   <td className="px-3 py-2 w-[150px]">
-                    <EditableCell id={e.id} field="lead" value={e.lead ?? ''} className="text-xs text-gray-300 leading-relaxed" multiline />
+                    {renderEditableCell(e.id, 'lead', e.lead ?? '', 'text-xs text-gray-300 leading-relaxed', true)}
                   </td>
 
                   {/* ID */}
