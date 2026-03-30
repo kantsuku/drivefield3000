@@ -1,3 +1,4 @@
+import { validateAdminKey, unauthorizedResponse } from "@/lib/auth";
 import { NextRequest, NextResponse } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
 import * as dotenv from 'dotenv';
@@ -26,6 +27,7 @@ const BIAS: Record<string, string> = {
 };
 
 export async function POST(req: NextRequest) {
+  if (!validateAdminKey(req)) return unauthorizedResponse();
   try {
     const { id, field, current, kanjiName } = await req.json();
     const parts = id.split('-');

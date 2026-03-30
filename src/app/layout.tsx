@@ -9,6 +9,8 @@ export const metadata: Metadata = {
     title: "疾走領域 / Drive Field",
     description: "あなたの能力が最も通る疾走領域を開眼せよ。",
     type: "website",
+    locale: "ja_JP",
+    siteName: "疾走領域 / Drive Field",
   },
   twitter: {
     card: "summary_large_image",

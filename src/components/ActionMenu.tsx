@@ -156,7 +156,7 @@ export function ActionMenu(props: ActionMenuProps) {
           <button
             key={i}
             onClick={a.onClick}
-            className="flex flex-col items-center gap-0.5 py-1 px-2 text-gray-400 hover:text-white transition-colors"
+            className="flex flex-col items-center gap-0.5 py-1.5 px-2 text-gray-300 hover:text-white transition-colors"
           >
             <span>{a.icon}</span>
             <span className="text-[9px]">{a.label}</span>

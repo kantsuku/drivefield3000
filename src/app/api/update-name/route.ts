@@ -1,8 +1,10 @@
+import { validateAdminKey, unauthorizedResponse } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 import * as fs from "fs";
 import * as path from "path";
 
 export async function PATCH(req: NextRequest) {
+  if (!validateAdminKey(req)) return unauthorizedResponse();
   try {
     const { pattern_id, field, value } = await req.json();
     if (!pattern_id || !field || value === undefined) {

@@ -1,8 +1,10 @@
+import { validateAdminKey, unauthorizedResponse } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 import * as fs from "fs";
 import * as path from "path";
 
 export async function PATCH(req: NextRequest) {
+  if (!validateAdminKey(req)) return unauthorizedResponse();
   try {
     const { id, field, value } = await req.json();
     if (!id || !field || value === undefined) {
@@ -21,6 +23,7 @@ export async function PATCH(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
+  if (!validateAdminKey(req)) return unauthorizedResponse();
   // 再生成リクエスト: 対象IDを削除
   try {
     const { ids } = await req.json();

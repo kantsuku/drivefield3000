@@ -1,4 +1,5 @@
-import { NextResponse } from "next/server";
+import { validateAdminKey, unauthorizedResponse } from "@/lib/auth";
+import { NextRequest, NextResponse } from "next/server";
 import { exec } from "child_process";
 import * as path from "path";
 
@@ -11,7 +12,8 @@ function run(cmd: string, cwd: string): Promise<string> {
   });
 }
 
-export async function POST() {
+export async function POST(req: NextRequest) {
+  if (!validateAdminKey(req)) return unauthorizedResponse();
   const root = process.cwd();
   const tsx = path.resolve(root, "node_modules/.bin/tsx");
 

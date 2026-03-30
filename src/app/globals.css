@@ -4,6 +4,16 @@ html {
   scroll-behavior: smooth;
 }
 
+/* === 明朝体共通 === */
+.serif-jp {
+  font-family: 'Noto Serif JP', '游明朝', YuMincho, serif;
+}
+
+/* === 本文行間 === */
+.leading-body {
+  line-height: 1.9;
+}
+
 /* === 波紋ボタン === */
 @keyframes ripple-idle {
   0%, 100% { transform: scale(1); border-color: rgba(255, 255, 255, 0.25); }
@@ -124,7 +134,7 @@ html {
   inset: -50%;
   width: 200%;
   height: 200%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 128px 128px;
   opacity: 1.0;
   z-index: 5;
@@ -267,6 +277,7 @@ html {
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
+  contain: layout style paint;
 }
 
 /* ノイズテクスチャ */
@@ -276,7 +287,7 @@ html {
   inset: -50%;
   width: 200%;
   height: 200%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 128px 128px;
   opacity: 0.18;
   z-index: 1;
@@ -293,6 +304,7 @@ html {
   border-radius: 50%;
   filter: blur(90px);
   opacity: 0.45;
+  will-change: transform;
 }
 
 .wave-bg::after {
@@ -330,4 +342,35 @@ html {
   background: radial-gradient(circle, #db2777, transparent 65%);
   animation: blob-drift-1 24s ease-in-out infinite reverse;
   opacity: 0.3;
+}
+
+/* === フォーカスインジケータ === */
+:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+}
+.bg-white :focus-visible,
+main.bg-white :focus-visible {
+  outline-color: rgba(0, 0, 0, 0.8);
+}
+
+/* === モバイル最適化 === */
+@media (max-width: 768px) {
+  .wave-bg .blob-5 {
+    display: none;
+  }
+  .wave-bg::after,
+  .wave-bg .blob-3,
+  .wave-bg .blob-4 {
+    animation-duration: 30s;
+  }
+}
+
+/* === Reduced motion support === */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

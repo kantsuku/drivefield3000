@@ -2,6 +2,12 @@
 
 import { useState, useEffect } from "react";
 import coreData from "@/data/core-60.json";
+
+function getAdminHeaders(): Record<string, string> {
+  const key = typeof window !== 'undefined' ? (sessionStorage.getItem('df3000-admin-key') || '') : '';
+  return { 'Content-Type': 'application/json', 'x-admin-key': key };
+}
+const adminHeaders = typeof window !== 'undefined' ? getAdminHeaders() : { 'Content-Type': 'application/json' };
 import patternsData from "@/data/patterns-2880.json";
 import interpData from "@/data/interpretations-2880.json";
 import kanjiData from "@/data/kanji-dictionary.json";
@@ -78,6 +84,34 @@ function getKata(coreCode: string, biasType: string) {
 
 export default function AdminPage() {
   const [mounted, setMounted] = useState(false);
+  const [authed, setAuthed] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && sessionStorage.getItem('df3000-admin-key')) {
+      setAuthed(true);
+    }
+  }, []);
+
+  if (!authed) {
+    return (
+      <div className="h-screen flex items-center justify-center bg-gray-950 text-white">
+        <div className="text-center">
+          <p className="text-sm text-gray-400 mb-4">管理キーを入力してください</p>
+          <input
+            type="password"
+            autoFocus
+            className="bg-gray-800 border border-gray-600 rounded px-4 py-2 text-sm text-white focus:outline-none focus:border-blue-500"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                sessionStorage.setItem('df3000-admin-key', (e.target as HTMLInputElement).value);
+                setAuthed(true);
+              }
+            }}
+          />
+        </div>
+      </div>
+    );
+  }
   const [tab, setTab] = useState<Tab>("overview");
   const [coreFilter, setCoreFilter] = useState("");
   const [biasFilter, setBiasFilter] = useState("");
@@ -125,7 +159,7 @@ export default function AdminPage() {
     const saved240 = localStorage.getItem("df3000-names240-flagged");
     if (saved240) setNames240FlaggedIds(new Set(JSON.parse(saved240)));
     // ページロード時に生成中なら自動でポーリング再開
-    fetch("/api/fix-names-status")
+    fetch("/api/fix-names-status", { headers: adminHeaders })
       .then((r) => r.json())
       .then((d) => { if (d.status === "running") setRegenPolling(true); })
       .catch(() => {});
@@ -135,7 +169,7 @@ export default function AdminPage() {
     if (!regenPolling) return;
     const interval = setInterval(async () => {
       try {
-        const res = await fetch("/api/fix-names-status");
+        const res = await fetch("/api/fix-names-status", { headers: adminHeaders });
         const data = await res.json();
         if (data.status === "done") {
           setRegenStatus("✅ 生成完了！ページをリロードして確認してください。");
@@ -171,14 +205,14 @@ export default function AdminPage() {
     try {
       const res = await fetch("/api/regenerate", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: adminHeaders,
         body: JSON.stringify({ patternIds: ids }),
       });
       const data = await res.json();
       if (data.success) {
         setFlaggedIds(new Set());
         localStorage.removeItem("df3000-flagged");
-        await fetch("/api/run-fix-names", { method: "POST" });
+        await fetch("/api/run-fix-names", { method: "POST", headers: adminHeaders });
         setRegenStatus(`⏳ ${data.removed}件の再生成中...`);
         setRegenPolling(true);
       } else {
@@ -193,7 +227,7 @@ export default function AdminPage() {
     setDeploying(true);
     setDeployStatus("同期・デプロイ中...");
     try {
-      const res = await fetch("/api/sync-deploy", { method: "POST" });
+      const res = await fetch("/api/sync-deploy", { method: "POST", headers: adminHeaders });
       const data = await res.json();
       if (data.success) {
         setDeployStatus(`✅ ${data.message}`);
@@ -223,7 +257,7 @@ export default function AdminPage() {
     try {
       const res = await fetch("/api/update-l4type", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: adminHeaders,
         body: JSON.stringify({ ids }),
       });
       const data = await res.json();
@@ -231,7 +265,7 @@ export default function AdminPage() {
         setL4RegenStatus(`⏳ ${data.removed}件削除完了。再生成中...`);
         setL4FlaggedIds(new Set());
         localStorage.removeItem("df3000-l4-flagged");
-        await fetch("/api/run-fix-l4types", { method: "POST" });
+        await fetch("/api/run-fix-l4types", { method: "POST", headers: adminHeaders });
         setL4RegenStatus(`✅ ${data.removed}件の再生成を開始しました。数分後にリロードしてください。`);
       } else setL4RegenStatus("❌ " + data.error);
     } catch { setL4RegenStatus("❌ API接続エラー（ローカルのみ）"); }
@@ -252,7 +286,7 @@ export default function AdminPage() {
     try {
       const res = await fetch("/api/update-name240", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: adminHeaders,
         body: JSON.stringify({ ids }),
       });
       const data = await res.json();
@@ -260,7 +294,7 @@ export default function AdminPage() {
         setNames240RegenStatus(`⏳ ${data.removed}件削除完了。再選定中...`);
         setNames240FlaggedIds(new Set());
         localStorage.removeItem("df3000-names240-flagged");
-        await fetch("/api/run-fix-names240", { method: "POST" });
+        await fetch("/api/run-fix-names240", { method: "POST", headers: adminHeaders });
         setNames240RegenStatus(`✅ ${data.removed}件の差し替えを開始しました。数分後にリロードしてください。`);
       } else setNames240RegenStatus("❌ " + data.error);
     } catch { setNames240RegenStatus("❌ API接続エラー"); }
@@ -274,7 +308,7 @@ export default function AdminPage() {
     try {
       await fetch("/api/update-l4type", {
         method: "PATCH",
-        headers: { "Content-Type": "application/json" },
+        headers: adminHeaders,
         body: JSON.stringify({ id, field: "reading", value: newVal }),
       });
     } catch {}
@@ -288,7 +322,7 @@ export default function AdminPage() {
     try {
       await fetch("/api/update-l4type", {
         method: "PATCH",
-        headers: { "Content-Type": "application/json" },
+        headers: adminHeaders,
         body: JSON.stringify({ id, field: "name", value: newVal }),
       });
     } catch {}
@@ -302,7 +336,7 @@ export default function AdminPage() {
     try {
       await fetch("/api/update-name", {
         method: "PATCH",
-        headers: { "Content-Type": "application/json" },
+        headers: adminHeaders,
         body: JSON.stringify({ pattern_id: patternId, field: "reading", value: newVal }),
       });
     } catch {}

@@ -4,6 +4,12 @@ import { useState, useEffect, useRef } from 'react';
 import namesData from '@/data/names-240.json';
 import kataData from '@/data/l4-kata.json';
 
+function getAdminHeaders(): Record<string, string> {
+  const key = typeof window !== 'undefined' ? (sessionStorage.getItem('df3000-admin-key') || '') : '';
+  return { 'Content-Type': 'application/json', 'x-admin-key': key };
+}
+const adminHeaders = typeof window !== 'undefined' ? getAdminHeaders() : { 'Content-Type': 'application/json' };
+
 // ─── Types ───────────────────────────────────────────
 
 interface ChangeLog {
@@ -72,7 +78,7 @@ export default function NamesListPage() {
   // Load change logs from localStorage
   useEffect(() => {
     const stored = localStorage.getItem('df3000-change-logs');
-    if (stored) setChangeLogs(JSON.parse(stored));
+    if (stored) try { setChangeLogs(JSON.parse(stored)); } catch {}
   }, []);
 
   const saveLogs = (logs: ChangeLog[]) => {
@@ -94,7 +100,7 @@ export default function NamesListPage() {
     try {
       const res = await fetch('/api/suggest-names', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: adminHeaders,
         body: JSON.stringify({ id, field, current, kanjiName: entry?.kanji_name }),
       });
       if (res.ok) {
@@ -132,7 +138,7 @@ export default function NamesListPage() {
     try {
       const res = await fetch('/api/suggest-names', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: adminHeaders,
         body: JSON.stringify({ id, field: 'cascade', kanjiName: entry.kanji_name }),
       });
       if (res.ok) {
@@ -154,7 +160,7 @@ export default function NamesListPage() {
   };
 
   const patchField = (id: string, field: string, value: string) =>
-    fetch('/api/update-name240', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id, field, value }) });
+    fetch('/api/update-name240', { method: 'PATCH', headers: adminHeaders, body: JSON.stringify({ id, field, value }) });
 
   const saveEdit = async () => {
     if (!editingId || !editField) return;
@@ -179,7 +185,7 @@ export default function NamesListPage() {
           try {
             const cascadeRes = await fetch('/api/suggest-names', {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
+              headers: adminHeaders,
               body: JSON.stringify({ id: editingId, field: 'cascade', kanjiName: currentValue }),
             });
             if (cascadeRes.ok) {

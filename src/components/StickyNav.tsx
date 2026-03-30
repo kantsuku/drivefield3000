@@ -73,6 +73,7 @@ export function StickyNav() {
   return (
     <nav
       ref={navRef}
+      aria-label="目次ナビゲーション"
       className="sticky top-0 z-40 bg-white transition-all duration-300"
     >
       <div
@@ -89,7 +90,7 @@ export function StickyNav() {
         </p>
         <div
           ref={scrollRef}
-          className={`overflow-x-auto flex gap-2 transition-all duration-300 ${
+          className={`overflow-x-auto flex gap-1 md:gap-2 transition-all duration-300 ${
             stuck ? 'justify-start' : 'justify-center'
           }`}
         >
@@ -101,6 +102,7 @@ export function StickyNav() {
                 key={item.href}
                 href={item.href}
                 data-section={sectionId}
+                {...(isActive ? { 'aria-current': 'true' as const } : {})}
                 className={`text-xs px-3 py-1.5 rounded-full border transition-colors whitespace-nowrap shrink-0 ${
                   isActive
                     ? 'text-white bg-gray-900 border-gray-900'

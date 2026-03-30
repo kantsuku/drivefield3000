@@ -43,6 +43,8 @@ function DiagnosisContent() {
       ? { nameId: 'D-E-N-Dual', rank1: 'D', rank2: 'E', rank3: 'N', bias: 'Dual', ignition: '外燃', timing: '瞬発', output: '中', scores: { D: 10, S: 3, O: 2, N: 6, E: 8 }, layer2: { selfEsteem: 5, attachment: 3 }, layer3: { study: 2, social: 3, physical: 1, creative: 3, adventure: 2 }, layer4: { physical: 1, intuitive: 3, logical: 2, dexterity: 1, verbal: 2 }, layer5: { affluence: 0, health: 3 }, segment: 'meta' as const }
       : null;
 
+  const LS_KEY = 'drivefield-diagnosis-state';
+
   const [phase, setPhase] = useState<Phase>(previewPhase || 'intro');
   const [index, setIndex] = useState(previewPhase === 'questions' ? Math.min(previewIndex, TOTAL - 1) : 0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
@@ -51,8 +53,30 @@ function DiagnosisContent() {
   const [result, setResult] = useState<DiagnosisResult | null>(previewResult);
   const [revealStep, setRevealStep] = useState(0);
   const [revealFading, setRevealFading] = useState(false);
+  const [showResume, setShowResume] = useState(false);
+  const [savedState, setSavedState] = useState<{ answers: Record<string, string>; index: number } | null>(null);
+
+  // 前回の診断データを復元チェック
+  useEffect(() => {
+    if (previewPhase) return;
+    try {
+      const saved = localStorage.getItem(LS_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Date.now() - parsed.timestamp < 86400000) {
+          setSavedState({ answers: parsed.answers, index: parsed.index });
+          setShowResume(true);
+        } else {
+          localStorage.removeItem(LS_KEY);
+        }
+      }
+    } catch {}
+  }, [previewPhase]);
 
   const current = questions[index];
+  if (!current && phase === 'questions') {
+    return <main className="flex items-center justify-center min-h-screen"><p className="text-sm text-red-400">診断データの読み込みに失敗しました。</p></main>;
+  }
 
   const advanceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -62,6 +86,7 @@ function DiagnosisContent() {
       if (advanceTimer.current) clearTimeout(advanceTimer.current);
       advanceTimer.current = setTimeout(() => {
         if (index + 1 >= TOTAL) {
+          localStorage.removeItem(LS_KEY);
           const r = calculateResult(newAnswers, questions);
           setResult(r);
           setPhase('detected');
@@ -80,6 +105,7 @@ function DiagnosisContent() {
     setSelected(choiceId);
     const newAnswers = { ...answers, [current.id]: choiceId };
     setAnswers(newAnswers);
+    try { localStorage.setItem(LS_KEY, JSON.stringify({ answers: newAnswers, index, timestamp: Date.now() })); } catch {}
     if (current.type === '2択') {
       advance(newAnswers);
     }
@@ -127,6 +153,7 @@ function DiagnosisContent() {
 
   const navigateToResult = () => {
     if (!result) return;
+    localStorage.removeItem(LS_KEY);
     const s = result.scores;
     const l2 = result.layer2;
     const l3 = result.layer3;
@@ -180,17 +207,28 @@ function DiagnosisContent() {
   };
   const [detectedFading, setDetectedFading] = useState(false);
 
+  const detectedFadeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const detectedRevealTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const handleDetectedClick = () => {
     const id = Date.now();
     setDetectedRipples((prev) => [...prev, id]);
     // 波紋 → フェードアウト → reveal
-    setTimeout(() => setDetectedFading(true), 400);
-    setTimeout(() => {
+    detectedFadeTimer.current = setTimeout(() => setDetectedFading(true), 400);
+    detectedRevealTimer.current = setTimeout(() => {
       setRevealStep(0);
       setRevealFading(false);
       setPhase('reveal');
     }, 1800);
   };
+
+  // クリーンアップ
+  useEffect(() => {
+    return () => {
+      if (detectedFadeTimer.current) clearTimeout(detectedFadeTimer.current);
+      if (detectedRevealTimer.current) clearTimeout(detectedRevealTimer.current);
+    };
+  }, []);
 
   // Final screen ripple button
   const [finalBtnState, setFinalBtnState] = useState<'idle' | 'hover' | 'leave'>('idle');
@@ -233,6 +271,7 @@ function DiagnosisContent() {
           onClick={handleRippleClick}
           onMouseEnter={handleEnter}
           onMouseLeave={handleLeave}
+          aria-label="診断を開始する"
           className={`ripple-btn is-${btnState} relative z-10`}
         >
           {ripples.map((id) => (
@@ -240,6 +279,40 @@ function DiagnosisContent() {
           ))}
           <span className="text-white font-bold text-sm tracking-wider leading-relaxed text-center">波紋に<br />触れる</span>
         </button>
+
+        {/* 復元ダイアログ */}
+        {showResume && savedState && (
+          <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center px-6">
+            <div className="border border-white/20 rounded-2xl p-8 max-w-sm w-full text-center bg-black/80 backdrop-blur">
+              <p className="text-lg font-bold mb-2">前回の診断の続きがあります</p>
+              <p className="text-sm text-gray-400 mb-6">Q{savedState.index + 1} / {TOTAL} まで回答済み</p>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => {
+                    setAnswers(savedState.answers);
+                    setIndex(savedState.index);
+                    setSelected(savedState.answers[questions[savedState.index]?.id] || null);
+                    setShowResume(false);
+                    setPhase('questions');
+                  }}
+                  className="flex-1 py-3 bg-white text-black font-bold rounded-full text-sm"
+                >
+                  続きから
+                </button>
+                <button
+                  onClick={() => {
+                    localStorage.removeItem(LS_KEY);
+                    setShowResume(false);
+                    setSavedState(null);
+                  }}
+                  className="flex-1 py-3 border border-white/20 text-white rounded-full text-sm"
+                >
+                  最初から
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
     );
   }
@@ -265,6 +338,7 @@ function DiagnosisContent() {
           onClick={handleDetectedClick}
           onMouseEnter={handleDetectedEnter}
           onMouseLeave={handleDetectedLeave}
+          aria-label="解析を開始する"
           className={`ripple-btn is-${detectedBtnState} relative z-10`}
         >
           {detectedRipples.map((id) => (
@@ -467,6 +541,7 @@ function DiagnosisContent() {
               onClick={handleFinalClick}
               onMouseEnter={handleFinalEnter}
               onMouseLeave={handleFinalLeave}
+              aria-label="結果を見る"
               className={`ripple-btn is-${finalBtnState}`}
               style={{ background: '#fff' }}
             >
@@ -535,12 +610,13 @@ function DiagnosisContent() {
               }
             }}
             disabled={index === 0}
+            aria-label="前の質問に戻る"
             className="btn-float w-10 h-10 rounded-full border border-white/20 flex flex-col items-center justify-center text-gray-400 hover:text-white hover:border-white/50 disabled:text-gray-700 disabled:border-white/5 disabled:cursor-not-allowed disabled:hover:transform-none shrink-0"
           >
             <span className="text-[9px] leading-none">戻る</span>
             <span className="text-xs leading-none">&larr;</span>
           </button>
-          <div className="flex-1 h-2 bg-black rounded-full overflow-hidden border border-white/10">
+          <div className="flex-1 h-2 bg-black rounded-full overflow-hidden border border-white/10" role="progressbar" aria-valuenow={index + 1} aria-valuemin={1} aria-valuemax={TOTAL} aria-label="診断の進捗">
             <div
               className="h-full bg-white rounded-full transition-all duration-300"
               style={{ width: `${progress}%` }}

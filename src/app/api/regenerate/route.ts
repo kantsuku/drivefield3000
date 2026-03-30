@@ -1,8 +1,10 @@
+import { validateAdminKey, unauthorizedResponse } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 import * as fs from "fs";
 import * as path from "path";
 
 export async function POST(req: NextRequest) {
+  if (!validateAdminKey(req)) return unauthorizedResponse();
   try {
     const { patternIds } = await req.json();
     if (!Array.isArray(patternIds) || patternIds.length === 0) {

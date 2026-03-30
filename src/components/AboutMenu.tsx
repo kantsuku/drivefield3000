@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import kataData from '@/data/l4-kata.json';
 import namesData from '@/data/names-240.json';
@@ -42,6 +42,11 @@ export function AboutMenu() {
       contentRef.current?.scrollTo(0, 0);
     }, 150);
   }, [tab]);
+
+  // タイマークリーンアップ
+  useEffect(() => {
+    return () => { clearTimeout(fadeTimer.current); };
+  }, []);
 
   return (
     <>

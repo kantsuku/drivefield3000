@@ -1,8 +1,8 @@
 import namesData from '@/data/names-240.json';
 import kataData from '@/data/l4-kata.json';
-import patternsData from '@/data/patterns-2880.json';
-import interpData from '@/data/interpretations-2880.json';
 import dictionariesData from '@/data/dictionaries.json';
+import { findPattern as findPatternByParams, getInterpretation } from '@/lib/data';
+import type { NameEntry, PatternEntry, InterpEntry, KataEntry } from '@/lib/data';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -12,13 +12,6 @@ import { AiConsultSection } from '@/components/AiConsultSection';
 import { StickyNav } from '@/components/StickyNav';
 import { Sparkles, AlertTriangle, Wrench, Briefcase, Home, RefreshCw, Flame, Clock, Zap, Activity, Rocket, Users, Coffee, CheckCircle } from 'lucide-react';
 
-// ─── Types ────────────────────────────────────────────
-
-interface NameEntry { id: string; pattern_id: number; kanji_name: string; reading: string; english_name: string; naming_reason: string; lead?: string; }
-interface PatternEntry { pattern_id: number; core_code: string; rank1: string; rank2: string; rank3: string; bias_type: string; output_level: string; ignition: string; ignition_label: string; ignition_desc: string; time_character: string; time_character_label: string; time_character_desc: string; drive_structure: string; trigger_core: string; accelerator_core: string; sustain_core: string; bias_interpretation: string; output_interpretation: string; awakening_condition: string; drain_condition: string; recovery_condition: string; field_name_kanji: string; field_name_reading: string; field_name_en: string; interpretation: string; }
-interface InterpEntry { pattern_id: number; structural_interpretation: string; symbolic_image: string; texture_keywords: string[]; trigger: string; accelerator: string; sustain: string; breakdown: string; recovery: string; awakened_vibe: string; }
-interface KataEntry { id: string; rank1: string; bias: string; name: string; reading: string; }
-
 // ─── Lookups ──────────────────────────────────────────
 
 const namesMap: Record<string, NameEntry> = {};
@@ -26,11 +19,6 @@ for (const n of namesData as NameEntry[]) namesMap[n.id] = n;
 
 const kataMap: Record<string, KataEntry> = {};
 for (const k of kataData as KataEntry[]) kataMap[k.id] = k;
-
-const patterns = patternsData as PatternEntry[];
-
-const interpMap: Record<number, InterpEntry> = {};
-for (const r of interpData as InterpEntry[]) interpMap[r.pattern_id] = r;
 
 const neuroDict: Record<string, { jp: string; desc: string }> = {};
 const biasDict: Record<string, string> = {};
@@ -80,9 +68,10 @@ function findPattern(coreCode: string, bias: string, ig: string | null, tm: stri
   const timingMap: Record<string, string> = { '瞬発': 'burst', '熟成': 'mature' };
   const outputMap: Record<string, string> = { '低': 'Light', '中': 'Middle', '高': 'Over' };
   if (ig && tm && out) {
-    return patterns.find((p) => p.core_code === coreCode && p.bias_type === bias && p.ignition === (ignitionMap[ig] || ig) && p.time_character === (timingMap[tm] || tm) && p.output_level === (outputMap[out] || out));
+    return findPatternByParams(coreCode, bias, ignitionMap[ig] || ig, timingMap[tm] || tm, outputMap[out] || out);
   }
-  return patterns.find((p) => p.core_code === coreCode && p.bias_type === bias);
+  // Fallback: find first matching pattern for this core+bias
+  return findPatternByParams(coreCode, bias, 'external', 'burst', 'Middle');
 }
 
 // ─── アドバイス生成 ──────────────────────────────────
@@ -472,7 +461,7 @@ function AdviceCard({ icon, label, color, children }: { icon?: React.ReactNode; 
         {icon}
         {label}
       </p>
-      <div className="text-sm text-gray-700 leading-[1.9]">{children}</div>
+      <div className="text-sm text-gray-700 leading-body">{children}</div>
     </div>
   );
 }
@@ -505,6 +494,8 @@ export async function generateMetadata({
       title,
       description,
       images: [{ url: ogImageUrl, width: 1200, height: 630 }],
+      locale: "ja_JP",
+      siteName: "疾走領域 / Drive Field",
     },
     twitter: {
       card: 'summary_large_image',
@@ -530,6 +521,7 @@ export default async function ResultPage({
   if (!entry) notFound();
 
   const parts = decodedId.split('-');
+  if (parts.length < 4) notFound();
   const rank1 = parts[0];
   const bias = parts[3] ?? '';
   const coreCode = parts.slice(0, 3).join('-');
@@ -667,7 +659,7 @@ export default async function ResultPage({
   }
 
   // interpretationデータ取得
-  const interp = pattern ? interpMap[pattern.pattern_id] : null;
+  const interp = pattern ? getInterpretation(pattern.pattern_id) ?? null : null;
 
   // 人物像データ
   const profile = buildPersonProfile(
@@ -716,9 +708,9 @@ export default async function ResultPage({
         疾走領域 {entry.kanji_name}
       </p>
 
-      <div className="relative z-10 w-full max-w-3xl mx-auto flex flex-col items-center px-6 py-16 text-center text-white">
+      <div className="relative z-10 w-full max-w-3xl mx-auto flex flex-col items-center px-4 md:px-6 py-16 text-center text-white">
         {kata && <p className="text-xl text-white tracking-[0.2em] mb-8" style={serif}>{kata.name}</p>}
-        <h1 className="text-8xl font-bold tracking-wider mb-1" style={{ writingMode: 'vertical-rl', ...serif, letterSpacing: '0.3em' }}>
+        <h1 className="text-6xl md:text-8xl font-bold tracking-wider mb-1" style={{ writingMode: 'vertical-rl', ...serif, letterSpacing: '0.3em' }}>
           {entry.kanji_name}
         </h1>
         <p className="text-sm text-white mt-1 mb-10">{entry.reading} / {entry.english_name}</p>
@@ -737,7 +729,7 @@ export default async function ResultPage({
         </p>
 
         {entry.lead && (
-          <p className="text-base text-white mb-6 leading-[2.1] text-left">{entry.lead}</p>
+          <p className="text-base text-white mb-6 leading-loose text-left">{entry.lead}</p>
         )}
 
       </div>
@@ -748,10 +740,10 @@ export default async function ResultPage({
 
     {/* ═══ コンテンツゾーン（白背景） ═══ */}
     <main className="bg-white text-gray-900 min-h-screen pb-16 md:pb-0">
-      <div className="w-full max-w-3xl mx-auto flex flex-col items-center px-6 py-12">
+      <div className="w-full max-w-3xl mx-auto flex flex-col items-center px-4 md:px-6 py-12">
 
         {/* セグメント別イントロ */}
-        <p className="text-base text-gray-600 leading-[2] mb-10 text-center italic">
+        <p className="text-base text-gray-600 leading-loose mb-8 text-center italic">
           {voice.intro}
         </p>
 
@@ -895,16 +887,16 @@ export default async function ResultPage({
           {/* 診断結果の総括 */}
           <h3 className="text-sm font-bold text-gray-900 mt-8 mb-2">あなたの駆動構造</h3>
           <p className="text-xs text-gray-500 mb-3">{voice.engine}</p>
-          <p className="text-sm text-gray-600 leading-[1.9] mb-4">
+          <p className="text-sm text-gray-600 leading-body mb-4">
             あなたの診断では、{neuroDict[parts[0]]?.jp}（{neuroDict[parts[0]]?.desc}）が最も高いスコアを記録しました。これがあなたの駆動の起点——点火装置です。{neuroDict[parts[1]]?.jp}（{neuroDict[parts[1]]?.desc}）が2番目に高く加速装置として機能し、{neuroDict[parts[2]]?.jp}（{neuroDict[parts[2]]?.desc}）が3番目に続いて駆動を循環させます。
           </p>
-          <p className="text-sm text-gray-600 leading-[1.9] mb-4">
+          <p className="text-sm text-gray-600 leading-body mb-4">
             偏りは「{BIAS_JP[bias] || bias}」。{BIAS_STYLE[bias]?.strength}。一方で、{BIAS_STYLE[bias]?.risk}。
           </p>
-          <p className="text-sm text-gray-600 leading-[1.9] mb-4">
+          <p className="text-sm text-gray-600 leading-body mb-4">
             発動方向は{pattern?.ignition_label}——{pattern?.ignition_desc}。時間特性は{pattern?.time_character_label}で、{pattern?.time_character_desc}。出力は{OUTPUT_JP[pattern?.output_level || ''] || pattern?.output_level}。
           </p>
-          <p className="text-sm text-gray-600 leading-[1.9]">
+          <p className="text-sm text-gray-600 leading-body">
             この神経系の優先順位、偏り、駆動特性の組み合わせが、あなたの「動き方の癖」そのものを形作っています。これは性格ではなく「駆動構造」——あなたが何に夢中になり、何によって走り続け、何によって止まるかの設計図です。
           </p>
         </Chapter>
@@ -993,13 +985,13 @@ export default async function ResultPage({
               );
             })()}
 
-            <p className="text-sm text-gray-600 leading-[1.9] mb-4">
+            <p className="text-sm text-gray-600 leading-body mb-4">
               {kata.name}には12の疾走領域が存在します。同じ型でも、2位と3位に何が入るかで駆動の質が大きく変わるからです。
             </p>
-            <p className="text-sm text-gray-600 leading-[1.9] mb-4">
+            <p className="text-sm text-gray-600 leading-body mb-4">
               あなたの場合、加速装置に<span className="font-bold" style={{ color: NEURO_LABELS[parts[1]]?.color }}>{neuroDict[parts[1]]?.jp}（{neuroDict[parts[1]]?.desc}）</span>、持続装置に<span className="font-bold" style={{ color: NEURO_LABELS[parts[2]]?.color }}>{neuroDict[parts[2]]?.jp}（{neuroDict[parts[2]]?.desc}）</span>が入ります。{neuroDict[parts[0]]?.jp}で点火した衝動を、{neuroDict[parts[1]]?.jp}が形にし、{neuroDict[parts[2]]?.jp}が回し続ける——この固有の駆動サイクルが「{entry.kanji_name}」という疾走領域を生み出しています。
             </p>
-            <p className="text-sm text-gray-600 leading-[1.9] mb-8">
+            <p className="text-sm text-gray-600 leading-body mb-8">
               もし2位が{neuroDict[parts[1]]?.jp}ではなく別の神経系だったなら、加速の仕方が変わり、全く異なる疾走領域になっていました。同様に、3位が{neuroDict[parts[2]]?.jp}でなければ、持続の仕組みが変わり、走り方の質そのものが違っていたはずです。
             </p>
 
@@ -1176,20 +1168,20 @@ export default async function ResultPage({
             </p>
 
             <h3 className="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"><Activity size={20} className="text-gray-400" />あなたの駆動の特徴</h3>
-            <p className="text-sm text-gray-800 leading-[1.9] mb-6">{interp.structural_interpretation}</p>
+            <p className="text-sm text-gray-800 leading-body mb-6">{interp.structural_interpretation}</p>
 
             <h3 className="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"><Rocket size={20} className="text-gray-400" />発動スタイル</h3>
-            <p className="text-sm text-gray-600 leading-[1.9] mb-4">{profile.ignitionStyle}</p>
-            <p className="text-sm text-gray-600 leading-[1.9] mb-8">{profile.timingStyle}</p>
+            <p className="text-sm text-gray-600 leading-body mb-4">{profile.ignitionStyle}</p>
+            <p className="text-sm text-gray-600 leading-body mb-8">{profile.timingStyle}</p>
 
             <h3 className="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"><Briefcase size={20} className="text-gray-400" />仕事での傾向</h3>
-            <p className="text-sm text-gray-600 leading-[1.9] mb-8">{profile.workStyle}</p>
+            <p className="text-sm text-gray-600 leading-body mb-8">{profile.workStyle}</p>
 
             <h3 className="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"><Users size={20} className="text-gray-400" />人間関係の傾向</h3>
-            <p className="text-sm text-gray-600 leading-[1.9] mb-8">{profile.relationship}</p>
+            <p className="text-sm text-gray-600 leading-body mb-8">{profile.relationship}</p>
 
             <h3 className="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"><Coffee size={20} className="text-gray-400" />日常生活の傾向</h3>
-            <p className="text-sm text-gray-600 leading-[1.9] mb-8">{profile.daily}</p>
+            <p className="text-sm text-gray-600 leading-body mb-8">{profile.daily}</p>
 
             {/* Layer 2〜5 条件付きインサイト */}
             {insights.length > 0 && (
@@ -1197,7 +1189,7 @@ export default async function ResultPage({
                 <h3 className="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"><Sparkles size={20} className="text-gray-400" />あなただけの特徴</h3>
                 <div className="space-y-3">
                   {insights.map((text, i) => (
-                    <p key={i} className="text-sm text-gray-700 leading-[1.9] border-l-2 pl-4" style={{ borderColor: NEURO_LABELS[rank1]?.color }}>
+                    <p key={i} className="text-sm text-gray-700 leading-body border-l-2 pl-4" style={{ borderColor: NEURO_LABELS[rank1]?.color }}>
                       {text}
                     </p>
                   ))}
@@ -1211,7 +1203,7 @@ export default async function ResultPage({
         {/* ═══ 第五章：起動マニュアル ═══ */}
         {pattern && interp && (
           <Chapter id="sec-startup" num="04" title={`${entry.kanji_name}の起動マニュアル`} en="IGNITION">
-            <p className="text-sm text-gray-600 leading-[1.9] mb-6">
+            <p className="text-sm text-gray-600 leading-body mb-6">
               あなたの疾走領域は、{neuroDict[parts[0]]?.jp}の「{neuroDict[parts[0]]?.desc}」で点火し、{neuroDict[parts[1]]?.jp}の「{neuroDict[parts[1]]?.desc}」で加速し、{neuroDict[parts[2]]?.jp}の「{neuroDict[parts[2]]?.desc}」で持続する。この3ステップが揃ったとき、あなたは夢中状態に入り、駆動は最も自然に、最も力強く回り始める。逆に言えば、どれか一つが欠けるだけで夢中にはなれない。
             </p>
 
@@ -1228,7 +1220,7 @@ export default async function ResultPage({
                 </div>
 
                 {/* 概要 */}
-                <p className="text-sm text-gray-700 leading-[1.9] mb-4">{step.core}</p>
+                <p className="text-sm text-gray-700 leading-body mb-4">{step.core}</p>
 
                 {/* 具体例 */}
                 <p className="text-xs text-gray-500 leading-relaxed mb-4 border-l-2 pl-3" style={{ borderColor: NEURO_LABELS[step.neuro]?.color }}>
@@ -1259,11 +1251,11 @@ export default async function ResultPage({
             </p>
 
             <p className="text-sm font-bold text-gray-800 mb-4">{voice.awakening}</p>
-            <p className="text-sm text-gray-600 leading-[1.9] mb-6">
+            <p className="text-sm text-gray-600 leading-body mb-6">
               覚醒とは、あなたが完全な夢中状態に入ること——{neuroDict[parts[0]]?.jp}・{neuroDict[parts[1]]?.jp}・{neuroDict[parts[2]]?.jp}の3つの神経系が同時に最大出力で回っている状態だ。夢中になっているとき、あなたは普段の数倍のパフォーマンスを発揮し、時間の感覚さえ失う。夢中になれる環境があれば、人は無限に成長する。問題は、その環境を意識的に作れるかどうかだ。
             </p>
 
-            <p className="text-sm text-gray-600 leading-[1.9] mb-6">
+            <p className="text-sm text-gray-600 leading-body mb-6">
               {neuroDict[parts[0]]?.jp}が求める「{neuroDict[parts[0]]?.desc}」、{neuroDict[parts[1]]?.jp}が求める「{neuroDict[parts[1]]?.desc}」、{neuroDict[parts[2]]?.jp}が求める「{neuroDict[parts[2]]?.desc}」——この3つが一つでも欠けると、駆動は最大出力に達しない。覚醒は偶然ではなく、環境設計で再現できる。
             </p>
 
@@ -1293,7 +1285,7 @@ export default async function ResultPage({
                   <p className="text-sm font-bold text-gray-900">{item.title}</p>
                 </div>
                 <p className="text-xs font-bold mb-3" style={{ color: NEURO_LABELS[rank1]?.color }}>{item.summary}</p>
-                <p className="text-sm text-gray-700 leading-[1.9]">{item.body}</p>
+                <p className="text-sm text-gray-700 leading-body">{item.body}</p>
               </div>
             ))}
           </Chapter>
@@ -1307,12 +1299,12 @@ export default async function ResultPage({
             </p>
 
             <p className="text-sm font-bold text-gray-800 mb-4">{voice.drain}</p>
-            <p className="text-sm text-gray-600 leading-[1.9] mb-6">
+            <p className="text-sm text-gray-600 leading-body mb-6">
               弱退化とは、夢中になれない状態が続くこと——あなたの{neuroDict[parts[0]]?.jp}が求めるものが長期間得られず、駆動が空回りし続ける状態のことだ。最初は「なんとなく調子が出ない」程度だが、放置すると{neuroDict[parts[1]]?.jp}と{neuroDict[parts[2]]?.jp}の機能まで連鎖的に低下し、やがて何にも夢中になれなくなる。以下の兆候に心当たりがあるなら、すでに弱退化が始まっている可能性がある。
             </p>
 
             <h3 className="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"><AlertTriangle size={20} className="text-gray-400" />破綻のシナリオ</h3>
-            <p className="text-sm text-gray-600 leading-[1.9] mb-6">{interp.breakdown}</p>
+            <p className="text-sm text-gray-600 leading-body mb-6">{interp.breakdown}</p>
 
             {[
               {
@@ -1334,7 +1326,7 @@ export default async function ResultPage({
                   <p className="text-sm font-bold text-gray-900">{item.title}</p>
                 </div>
                 <p className="text-xs font-bold mb-3" style={{ color: NEURO_LABELS[rank1]?.color }}>{item.summary}</p>
-                <div className="text-sm text-gray-700 leading-[1.9]">{item.body}</div>
+                <div className="text-sm text-gray-700 leading-body">{item.body}</div>
               </div>
             ))}
           </Chapter>
@@ -1347,15 +1339,15 @@ export default async function ResultPage({
               {pattern.recovery_condition}
             </p>
 
-            <p className="text-sm text-gray-600 leading-[1.9] mb-6">
+            <p className="text-sm text-gray-600 leading-body mb-6">
             </p>
             <p className="text-sm font-bold text-gray-800 mb-4">{voice.recovery}</p>
-            <p className="text-sm text-gray-600 leading-[1.9] mb-6">
+            <p className="text-sm text-gray-600 leading-body mb-6">
               夢中を取り戻すには順番がある。まず{neuroDict[parts[0]]?.jp}（{neuroDict[parts[0]]?.desc}）を回復させ、次に{neuroDict[parts[1]]?.jp}（{neuroDict[parts[1]]?.desc}）を立ち上げ、最後に{neuroDict[parts[2]]?.jp}（{neuroDict[parts[2]]?.desc}）を繋げる。この順番を間違えると回復が遅れる。2位や3位からいくら頑張っても、1位の{neuroDict[parts[0]]?.jp}が枯れたままでは、夢中は戻ってこない。
             </p>
 
             <h3 className="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"><Wrench size={20} className="text-gray-400" />回復の起点</h3>
-            <p className="text-sm text-gray-600 leading-[1.9] mb-6">{interp.recovery}</p>
+            <p className="text-sm text-gray-600 leading-body mb-6">{interp.recovery}</p>
 
             {[
               {
@@ -1395,7 +1387,7 @@ export default async function ResultPage({
                   <p className="text-sm font-bold text-gray-900">{item.title}</p>
                 </div>
                 <p className="text-xs font-bold mb-3" style={{ color: NEURO_LABELS[rank1]?.color }}>{item.summary}</p>
-                <div className="text-sm text-gray-700 leading-[1.9]">{item.body}</div>
+                <div className="text-sm text-gray-700 leading-body">{item.body}</div>
               </div>
             ))}
           </Chapter>

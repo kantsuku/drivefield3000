@@ -1,11 +1,13 @@
-import { NextResponse } from "next/server";
+import { validateAdminKey, unauthorizedResponse } from "@/lib/auth";
+import { NextRequest, NextResponse } from "next/server";
 import { exec } from "child_process";
 import * as fs from "fs";
 import * as path from "path";
 
 const STATUS_FILE = path.resolve(process.cwd(), ".fix-names-status.json");
 
-export async function POST() {
+export async function POST(req: NextRequest) {
+  if (!validateAdminKey(req)) return unauthorizedResponse();
   const root = process.cwd();
   const script = path.resolve(root, "scripts/fix-names.ts");
   const tsx = path.resolve(root, "node_modules/.bin/tsx");

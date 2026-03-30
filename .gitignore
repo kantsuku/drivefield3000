@@ -34,3 +34,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# backup data files
+src/data/names-240-backup-*.json
+
+# temp files
+tmp/

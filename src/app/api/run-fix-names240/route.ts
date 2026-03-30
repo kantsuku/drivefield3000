@@ -1,8 +1,10 @@
-import { NextResponse } from "next/server";
+import { validateAdminKey, unauthorizedResponse } from "@/lib/auth";
+import { NextRequest, NextResponse } from "next/server";
 import { exec } from "child_process";
 import * as path from "path";
 
-export async function POST() {
+export async function POST(req: NextRequest) {
+  if (!validateAdminKey(req)) return unauthorizedResponse();
   const root = process.cwd();
   const script = path.resolve(root, "scripts/fix-names240-missing.ts");
   const tsx = path.resolve(root, "node_modules/.bin/tsx");
